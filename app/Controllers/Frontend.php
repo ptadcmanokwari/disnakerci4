@@ -12,7 +12,7 @@ class Frontend extends BaseController
     {
         $data['title'] = 'Galeri';
 
-        return $this->loadView('frontend/home', $data);
+        return $this->loadView('frontend/template', $data);
     }
 
     private function loadView(string $viewName, array $data = []): string

@@ -27,7 +27,7 @@
         integrity="sha256-Qsx5lrStHZyR9REqhUF8iQt73X06c8LGIUPzpOhwRrI=" crossorigin="anonymous">
     <!--end::Third Party Plugin(Bootstrap Icons)-->
     <!--begin::Required Plugin(AdminLTE)-->
-    <link rel="stylesheet" href="<?=base_url();?>adminlte/dist/css/adminlte.css">
+    <link rel="stylesheet" href="../../../dist/css/adminlte.css">
     <!--end::Required Plugin(AdminLTE)-->
 </head>
 <!--end::Head-->
@@ -41,8 +41,8 @@
             <!--begin::Sidebar Brand-->
             <div class="sidebar-brand">
                 <!--begin::Brand Link--> <a href="../index.html" class="brand-link">
-                    <!--begin::Brand Image--> <img src="<?=base_url();?>adminlte/dist/assets/img/AdminLTELogo.png"
-                        alt="AdminLTE Logo" class="brand-image opacity-75 shadow">
+                    <!--begin::Brand Image--> <img src="../../../dist/assets/img/AdminLTELogo.png" alt="AdminLTE Logo"
+                        class="brand-image opacity-75 shadow">
                     <!--end::Brand Image-->
                     <!--begin::Brand Text--> <span class="brand-text fw-light">AdminLTE 4</span>
                     <!--end::Brand Text-->
@@ -385,8 +385,8 @@
                                     <!--begin::Message-->
                                     <div class="d-flex">
                                         <div class="flex-shrink-0"> <img
-                                                src="<?=base_url();?>adminlte/dist/assets/img/user1-128x128.jpg"
-                                                alt="User Avatar" class="img-size-50 rounded-circle me-3"> </div>
+                                                src="../../../dist/assets/img/user1-128x128.jpg" alt="User Avatar"
+                                                class="img-size-50 rounded-circle me-3"> </div>
                                         <div class="flex-grow-1">
                                             <h3 class="dropdown-item-title">
                                                 Brad Diesel
@@ -405,8 +405,8 @@
                                     <!--begin::Message-->
                                     <div class="d-flex">
                                         <div class="flex-shrink-0"> <img
-                                                src="<?=base_url();?>adminlte/dist/assets/img/user8-128x128.jpg"
-                                                alt="User Avatar" class="img-size-50 rounded-circle me-3"> </div>
+                                                src="../../../dist/assets/img/user8-128x128.jpg" alt="User Avatar"
+                                                class="img-size-50 rounded-circle me-3"> </div>
                                         <div class="flex-grow-1">
                                             <h3 class="dropdown-item-title">
                                                 John Pierce
@@ -425,8 +425,8 @@
                                     <!--begin::Message-->
                                     <div class="d-flex">
                                         <div class="flex-shrink-0"> <img
-                                                src="<?=base_url();?>adminlte/dist/assets/img/user3-128x128.jpg"
-                                                alt="User Avatar" class="img-size-50 rounded-circle me-3"> </div>
+                                                src="../../../dist/assets/img/user3-128x128.jpg" alt="User Avatar"
+                                                class="img-size-50 rounded-circle me-3"> </div>
                                         <div class="flex-grow-1">
                                             <h3 class="dropdown-item-title">
                                                 Nora Silvester
@@ -475,15 +475,14 @@
                         <!--end::Fullscreen Toggle-->
                         <!--begin::User Menu Dropdown-->
                         <li class="nav-item dropdown user-menu"> <a href="#" class="nav-link dropdown-toggle"
-                                data-bs-toggle="dropdown"> <img
-                                    src="<?=base_url();?>adminlte/dist/assets/img/user2-160x160.jpg"
+                                data-bs-toggle="dropdown"> <img src="../../../dist/assets/img/user2-160x160.jpg"
                                     class="user-image rounded-circle shadow" alt="User Image"> <span
                                     class="d-none d-md-inline">Alexander Pierce</span> </a>
                             <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
                                 <!--begin::User Image-->
                                 <li class="user-header text-bg-primary"> <img
-                                        src="<?=base_url();?>adminlte/dist/assets/img/user2-160x160.jpg"
-                                        class="rounded-circle shadow" alt="User Image">
+                                        src="../../../dist/assets/img/user2-160x160.jpg" class="rounded-circle shadow"
+                                        alt="User Image">
                                     <p>
                                         Alexander Pierce - Web Developer
                                         <small>Member since Nov. 2023</small>
@@ -555,8 +554,7 @@
                                                     data-lte-icon="expand" class="bi bi-plus-lg"></i> <i
                                                     data-lte-icon="collapse" class="bi bi-dash-lg"></i> </button>
                                             <button type="button" class="btn btn-tool" data-lte-toggle="card-remove"
-                                                title="Remove"> <i class="bi bi-x-lg"></i> </button>
-                                        </div>
+                                                title="Remove"> <i class="bi bi-x-lg"></i> </button> </div>
                                     </div>
                                     <div class="card-body">
                                         <p>
@@ -762,7 +760,7 @@
         integrity="sha256-YMa+wAM6QkVyz999odX7lPRxkoYAan8suedu4k2Zur8=" crossorigin="anonymous"></script>
     <!--end::Required Plugin(Bootstrap 5)-->
     <!--begin::Required Plugin(AdminLTE)-->
-    <script src="<?=base_url();?>adminlte/dist/js/adminlte.js"></script>
+    <script src="../../../dist/js/adminlte.js"></script>
     <!--end::Required Plugin(AdminLTE)-->
     <!--begin::OverlayScrollbars Configure-->
     <script>
