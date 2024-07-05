@@ -75,10 +75,19 @@ in SYSTEMPATH\HTTP\URI.php on line 565.
  3 APPPATH\Controllers\Frontend.php(11): App\Controllers\Frontend->loadView('frontend/home', [...])
  4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Frontend->index()
  5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+CRITICAL - 2024-07-04 21:45:40 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "backdend/coba1.php"
+[Method: GET, Route: admin]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('backdend/coba1.php')
+ 2 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('backdend/coba1', [], true)
+ 3 APPPATH\Controllers\Admin.php(12): view('backdend/coba1')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->index()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
  6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
  7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
  8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
  9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+<<<<<<< HEAD
 CRITICAL - 2024-07-04 23:55:06 --> CodeIgniter\HTTP\Exceptions\HTTPException: Request URI segment is out of range: "2"
 [Method: GET, Route: /]
 in SYSTEMPATH\HTTP\URI.php on line 565.
@@ -227,3 +236,5 @@ in APPPATH\Views\frontend\template.php on line 53.
 11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
 12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
 13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+=======
+>>>>>>> a687e5ab6b9145f6067456711bc2ff23f5aff6e6

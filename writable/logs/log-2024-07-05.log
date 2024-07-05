@@ -139,6 +139,56 @@ in APPPATH\Views\frontend\transmigrasi.php on line 294.
  6 APPPATH\Controllers\Frontend.php(24): App\Controllers\Frontend->loadView('frontend/transmigrasi', [...])
  7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Frontend->transmigrasi()
  8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+CRITICAL - 2024-07-05 09:09:06 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "backend/layout.php"
+[Method: GET, Route: admin]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('backend/layout.php')
+ 2 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('backend/layout', [], true)
+ 3 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('be_admin/dashboard', [], true)
+ 4 APPPATH\Controllers\Admin.php(13): view('be_admin/dashboard')
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->index()
+ 6 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 7 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-05 09:09:20 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "backend/layout.php"
+[Method: GET, Route: admin]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('backend/layout.php')
+ 2 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('backend/layout', [], true)
+ 3 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('be_admin/dashboard', [], true)
+ 4 APPPATH\Controllers\Admin.php(13): view('be_admin/dashboard')
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->index()
+ 6 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 7 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-05 10:09:21 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "backend/layout.php"
+[Method: GET, Route: admin/pencaker]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('backend/layout.php')
+ 2 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('backend/layout', [], true)
+ 3 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('be_admin/pencaker', [], true)
+ 4 APPPATH\Controllers\Admin.php(18): view('be_admin/pencaker')
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->pencaker()
+ 6 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 7 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-05 10:36:44 --> ErrorException: Undefined variable $current_uri
+[Method: GET, Route: admin/dashboard]
+in APPPATH\Views\be_admin\layout.php on line 64.
+ 1 APPPATH\Views\be_admin\layout.php(64): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $current_uri', 'C:\\laragon\\www\\disnakerci4\\app\\Views\\be_admin\\layout.php', 64)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\disnakerci4\\app\\Views\\be_admin\\layout.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('be_admin/layout', [], true)
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('be_admin/dashboard', [], true)
+ 6 APPPATH\Controllers\Admin.php(18): view('be_admin/dashboard')
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->dashboard()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
  9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
 10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
 11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
