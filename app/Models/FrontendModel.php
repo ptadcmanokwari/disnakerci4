@@ -25,4 +25,25 @@ class FrontendModel extends Model
         return $this->orderBy('tgl_publikasi', 'DESC')
             ->findAll($limit);
     }
+
+
+    public function getInformasiByKategori($kategori, $limit, $offset)
+    {
+        return $this->where('kategori', $kategori)
+            ->orderBy('tgl_publikasi', 'DESC')
+            ->findAll($limit, $offset);
+    }
+
+    public function countInformasiByKategori($kategori)
+    {
+        return $this->where('kategori', $kategori)
+            ->countAllResults();
+    }
+
+    public function getRecentPostsByKategori($kategori, $limit = 5)
+    {
+        return $this->where('kategori', $kategori)
+            ->orderBy('tgl_publikasi', 'DESC')
+            ->findAll($limit);
+    }
 }

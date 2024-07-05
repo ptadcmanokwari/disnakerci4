@@ -58,21 +58,14 @@
                 <?php endforeach; ?>
 
                 <div class="blog-pagination d-flex justify-content-center">
-                    <?= $pager->links() ?>
+                    <?php if ($pager) : ?>
+                        <?= $pager->links() ?>
+                    <?php endif; ?>
                 </div>
             </div>
 
             <div class="col-lg-4 py-0">
                 <div class="sidebar py-0">
-                    <h3 class="sidebar-title">Kategori Berita</h3>
-                    <div class="sidebar-item categories">
-                        <ul>
-                            <?php foreach ($kategori as $kat) : ?>
-                                <li><a href="#"><?= $kat['kategori']; ?> <span>(<?= $kat['count']; ?>)</span></a></li>
-                            <?php endforeach; ?>
-                        </ul>
-                    </div><!-- End sidebar categories-->
-
                     <h3 class="sidebar-title">Berita Terbaru</h3>
                     <div class="sidebar-item recent-posts">
                         <?php foreach ($recentPosts as $post) : ?>
@@ -87,18 +80,13 @@
                     <h3 class="sidebar-title">Tags</h3>
                     <div class="sidebar-item tags">
                         <ul>
-                            <?php
-                            $tagsArray = [];
-                            foreach ($informasi as $info) {
-                                $tagsArray = array_merge($tagsArray, explode(',', $info['tags']));
-                            }
-                            $uniqueTags = array_unique($tagsArray);
-                            ?>
-                            <?php foreach ($uniqueTags as $tag) : ?>
-                                <li><a href="#"><?= trim($tag); ?></a></li>
-                            <?php endforeach; ?>
+                            <?php if (isset($uniqueTags)) : ?>
+                                <?php foreach ($uniqueTags as $tag) : ?>
+                                    <li><a href="#"><?= trim($tag); ?></a></li>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
                         </ul>
-                    </div><!-- End sidebar tags-->
+                    </div><!-- End sidebar tags -->
                 </div><!-- End sidebar -->
             </div>
         </div>

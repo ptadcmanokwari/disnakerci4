@@ -36,28 +36,111 @@ class Frontend extends BaseController
     {
         $informasiModel = new FrontendModel();
 
-        $perPage = 2;
+        // Pagination configuration
+        $perPage = 3;
         $currentPage = $this->request->getVar('page') ? (int)$this->request->getVar('page') : 1;
 
-        $data['informasi'] = $informasiModel->paginate($perPage, 'default', $currentPage);
-        $data['pager'] = $informasiModel->pager;
+        // Ambil data informasi berita
+        $kategori = 'berita'; // Kategori yang ingin ditampilkan
+        $totalRows = $informasiModel->countInformasiByKategori($kategori);
+
+        // Pagination setup
+        $data['informasi'] = $informasiModel->getInformasiByKategori($kategori, $perPage, ($currentPage - 1) * $perPage);
         $data['kategori'] = $informasiModel->getKategoriCount();
-        $data['recentPosts'] = $informasiModel->getRecentPosts();
+
+        // Ambil berita terbaru berdasarkan kategori
+        $data['recentPosts'] = $informasiModel->getRecentPostsByKategori($kategori);
+
+        // Ambil daftar tags dari semua informasi
+        $tagsArray = [];
+        foreach ($data['informasi'] as $info) {
+            $tagsArray = array_merge($tagsArray, explode(',', $info['tags']));
+        }
+        $data['uniqueTags'] = array_unique($tagsArray);
+
         $data['title'] = 'Urusan Tenaga Kerja - Disnakertrans Manokwari';
+
+        // Set pager jika ada data
+        if (!empty($data['informasi'])) {
+            $data['pager'] = $informasiModel->pager;
+        }
+
         return $this->loadView('frontend/berita', $data);
     }
 
+
     public function pengumuman(): string
     {
+        $informasiModel = new FrontendModel();
+
+        // Pagination configuration
+        $perPage = 3;
+        $currentPage = $this->request->getVar('page') ? (int)$this->request->getVar('page') : 1;
+
+        // Ambil data informasi berita
+        $kategori = 'pengumuman'; // Kategori yang ingin ditampilkan
+        $totalRows = $informasiModel->countInformasiByKategori($kategori);
+
+        // Pagination setup
+        $data['informasi'] = $informasiModel->getInformasiByKategori($kategori, $perPage, ($currentPage - 1) * $perPage);
+        $data['kategori'] = $informasiModel->getKategoriCount();
+
+        // Ambil berita terbaru berdasarkan kategori
+        $data['recentPosts'] = $informasiModel->getRecentPostsByKategori($kategori);
+
+        // Ambil daftar tags dari semua informasi
+        $tagsArray = [];
+        foreach ($data['informasi'] as $info) {
+            $tagsArray = array_merge($tagsArray, explode(',', $info['tags']));
+        }
+        $data['uniqueTags'] = array_unique($tagsArray);
+
         $data['title'] = 'Urusan Tenaga Kerja - Disnakertrans Manokwari';
+
+        // Set pager jika ada data
+        if (!empty($data['informasi'])) {
+            $data['pager'] = $informasiModel->pager;
+        }
         return $this->loadView('frontend/pengumuman', $data);
     }
 
     public function pelatihan(): string
     {
+
+        $informasiModel = new FrontendModel();
+
+        // Pagination configuration
+        $perPage = 3;
+        $currentPage = $this->request->getVar('page') ? (int)$this->request->getVar('page') : 1;
+
+        // Ambil data informasi berita
+        $kategori = 'pelatihan'; // Kategori yang ingin ditampilkan
+        $totalRows = $informasiModel->countInformasiByKategori($kategori);
+
+        // Pagination setup
+        $data['informasi'] = $informasiModel->getInformasiByKategori($kategori, $perPage, ($currentPage - 1) * $perPage);
+        $data['kategori'] = $informasiModel->getKategoriCount();
+
+        // Ambil berita terbaru berdasarkan kategori
+        $data['recentPosts'] = $informasiModel->getRecentPostsByKategori($kategori);
+
+        // Ambil daftar tags dari semua informasi
+        $tagsArray = [];
+        foreach ($data['informasi'] as $info) {
+            $tagsArray = array_merge($tagsArray, explode(',', $info['tags']));
+        }
+        $data['uniqueTags'] = array_unique($tagsArray);
+
         $data['title'] = 'Urusan Tenaga Kerja - Disnakertrans Manokwari';
+
+        // Set pager jika ada data
+        if (!empty($data['informasi'])) {
+            $data['pager'] = $informasiModel->pager;
+        }
+
         return $this->loadView('frontend/pelatihan', $data);
     }
+
     public function kartu_ak1(): string
     {
         $data['title'] = 'Urusan Tenaga Kerja - Disnakertrans Manokwari';

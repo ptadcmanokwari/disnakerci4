@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Company Bootstrap Template - Index</title>
+    <title><?= $title; ?></title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -50,7 +50,7 @@
 
             <nav id="navbar" class="navbar order-last order-lg-0">
                 <ul>
-                    <li><a <?= ($current_uris['segment_1'] == '' || ($current_uris['segment_1'] == 'home')) ? 'class="active"' : '' ?> href="<?= base_url('/'); ?>">Beranda</a></li>
+                    <li><a <?= ($current_uris['segment_1'] == 'beranda') ? 'class="active"' : '' ?> href="<?= base_url('/'); ?>">Beranda</a></li>
                     <li><a <?= ($current_uris['segment_1'] == 'profil') ? 'class="active"' : '' ?> href="<?= base_url('profil'); ?>">Profil</a></li>
 
                     <li class="dropdown">

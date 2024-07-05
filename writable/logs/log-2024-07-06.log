@@ -7,3 +7,308 @@ in APPPATH\Controllers\Frontend.php on line 37.
  4 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
  5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
  6 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-06 06:36:06 --> CodeIgniter\Pager\Exceptions\PagerException: "default" is not a valid Pager template.
+[Method: GET, Route: berita]
+in SYSTEMPATH\Pager\Pager.php on line 124.
+ 1 SYSTEMPATH\Pager\Pager.php(124): CodeIgniter\Pager\Exceptions\PagerException::forInvalidTemplate('default')
+ 2 SYSTEMPATH\Pager\Pager.php(114): CodeIgniter\Pager\Pager->displayLinks('default', 'default')
+ 3 APPPATH\Controllers\Frontend.php(46): CodeIgniter\Pager\Pager->makeLinks(1, 2, 1, 'default')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Frontend->berita()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-06 06:36:58 --> CodeIgniter\Pager\Exceptions\PagerException: "default" is not a valid Pager template.
+[Method: GET, Route: berita]
+in SYSTEMPATH\Pager\Pager.php on line 124.
+ 1 SYSTEMPATH\Pager\Pager.php(124): CodeIgniter\Pager\Exceptions\PagerException::forInvalidTemplate('default')
+ 2 SYSTEMPATH\Pager\Pager.php(114): CodeIgniter\Pager\Pager->displayLinks('default', 'default')
+ 3 APPPATH\Controllers\Frontend.php(46): CodeIgniter\Pager\Pager->makeLinks(1, 2, 1, 'default')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Frontend->berita()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-06 06:36:59 --> CodeIgniter\Pager\Exceptions\PagerException: "default" is not a valid Pager template.
+[Method: GET, Route: berita]
+in SYSTEMPATH\Pager\Pager.php on line 124.
+ 1 SYSTEMPATH\Pager\Pager.php(124): CodeIgniter\Pager\Exceptions\PagerException::forInvalidTemplate('default')
+ 2 SYSTEMPATH\Pager\Pager.php(114): CodeIgniter\Pager\Pager->displayLinks('default', 'default')
+ 3 APPPATH\Controllers\Frontend.php(46): CodeIgniter\Pager\Pager->makeLinks(1, 2, 1, 'default')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Frontend->berita()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-06 06:37:15 --> CodeIgniter\Pager\Exceptions\PagerException: "default" is not a valid Pager template.
+[Method: GET, Route: berita]
+in SYSTEMPATH\Pager\Pager.php on line 124.
+ 1 SYSTEMPATH\Pager\Pager.php(124): CodeIgniter\Pager\Exceptions\PagerException::forInvalidTemplate('default')
+ 2 SYSTEMPATH\Pager\Pager.php(114): CodeIgniter\Pager\Pager->displayLinks('default', 'default')
+ 3 APPPATH\Controllers\Frontend.php(46): CodeIgniter\Pager\Pager->makeLinks(1, 2, 1, 'default')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Frontend->berita()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-06 06:37:16 --> CodeIgniter\Pager\Exceptions\PagerException: "default" is not a valid Pager template.
+[Method: GET, Route: berita]
+in SYSTEMPATH\Pager\Pager.php on line 124.
+ 1 SYSTEMPATH\Pager\Pager.php(124): CodeIgniter\Pager\Exceptions\PagerException::forInvalidTemplate('default')
+ 2 SYSTEMPATH\Pager\Pager.php(114): CodeIgniter\Pager\Pager->displayLinks('default', 'default')
+ 3 APPPATH\Controllers\Frontend.php(46): CodeIgniter\Pager\Pager->makeLinks(1, 2, 1, 'default')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Frontend->berita()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-06 06:39:27 --> CodeIgniter\Pager\Exceptions\PagerException: "default" is not a valid Pager template.
+[Method: GET, Route: berita]
+in SYSTEMPATH\Pager\Pager.php on line 124.
+ 1 SYSTEMPATH\Pager\Pager.php(124): CodeIgniter\Pager\Exceptions\PagerException::forInvalidTemplate('default')
+ 2 SYSTEMPATH\Pager\Pager.php(114): CodeIgniter\Pager\Pager->displayLinks('default', 'default')
+ 3 APPPATH\Controllers\Frontend.php(46): CodeIgniter\Pager\Pager->makeLinks(1, 2, 1, 'default')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Frontend->berita()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-06 06:41:30 --> ErrorException: Undefined variable $current_uris
+[Method: GET, Route: berita]
+in APPPATH\Views\frontend\template.php on line 53.
+ 1 APPPATH\Views\frontend\template.php(53): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $current_uris', 'G:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\template.php', 53)
+ 2 SYSTEMPATH\View\View.php(234): include('G:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\template.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('frontend/template', [], true)
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('frontend/berita', [], true)
+ 6 APPPATH\Controllers\Frontend.php(51): view('frontend/berita', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Frontend->berita()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-06 06:45:47 --> ErrorException: Undefined variable $current_uris
+[Method: GET, Route: berita]
+in APPPATH\Views\frontend\template.php on line 53.
+ 1 APPPATH\Views\frontend\template.php(53): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $current_uris', 'G:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\template.php', 53)
+ 2 SYSTEMPATH\View\View.php(234): include('G:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\template.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('frontend/template', [], true)
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('frontend/berita', [], true)
+ 6 APPPATH\Controllers\Frontend.php(51): view('frontend/berita', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Frontend->berita()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-06 06:47:41 --> ErrorException: Undefined variable $current_uris
+[Method: GET, Route: berita]
+in APPPATH\Views\frontend\template.php on line 53.
+ 1 APPPATH\Views\frontend\template.php(53): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $current_uris', 'G:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\template.php', 53)
+ 2 SYSTEMPATH\View\View.php(234): include('G:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\template.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('frontend/template', [], true)
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('frontend/berita', [], true)
+ 6 APPPATH\Controllers\Frontend.php(51): view('frontend/berita', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Frontend->berita()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-06 06:51:31 --> ErrorException: Undefined variable $current_uris
+[Method: GET, Route: berita]
+in APPPATH\Views\frontend\template.php on line 53.
+ 1 APPPATH\Views\frontend\template.php(53): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $current_uris', 'G:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\template.php', 53)
+ 2 SYSTEMPATH\View\View.php(234): include('G:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\template.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('frontend/template', [], true)
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('frontend/berita', [], true)
+ 6 APPPATH\Controllers\Frontend.php(51): view('frontend/berita', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Frontend->berita()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-06 06:53:13 --> ErrorException: Undefined variable $current_uris
+[Method: GET, Route: berita]
+in APPPATH\Views\frontend\template.php on line 53.
+ 1 APPPATH\Views\frontend\template.php(53): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $current_uris', 'G:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\template.php', 53)
+ 2 SYSTEMPATH\View\View.php(234): include('G:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\template.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('frontend/template', [], true)
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('frontend/berita', [], true)
+ 6 APPPATH\Controllers\Frontend.php(51): view('frontend/berita', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Frontend->berita()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-06 06:53:16 --> ErrorException: Undefined variable $current_uris
+[Method: GET, Route: berita]
+in APPPATH\Views\frontend\template.php on line 53.
+ 1 APPPATH\Views\frontend\template.php(53): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $current_uris', 'G:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\template.php', 53)
+ 2 SYSTEMPATH\View\View.php(234): include('G:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\template.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('frontend/template', [], true)
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('frontend/berita', [], true)
+ 6 APPPATH\Controllers\Frontend.php(51): view('frontend/berita', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Frontend->berita()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-06 06:53:16 --> ErrorException: Undefined variable $current_uris
+[Method: GET, Route: berita]
+in APPPATH\Views\frontend\template.php on line 53.
+ 1 APPPATH\Views\frontend\template.php(53): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $current_uris', 'G:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\template.php', 53)
+ 2 SYSTEMPATH\View\View.php(234): include('G:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\template.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('frontend/template', [], true)
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('frontend/berita', [], true)
+ 6 APPPATH\Controllers\Frontend.php(51): view('frontend/berita', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Frontend->berita()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-06 06:53:39 --> ErrorException: Undefined variable $current_uris
+[Method: GET, Route: berita]
+in APPPATH\Views\frontend\template.php on line 53.
+ 1 APPPATH\Views\frontend\template.php(53): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $current_uris', 'G:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\template.php', 53)
+ 2 SYSTEMPATH\View\View.php(234): include('G:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\template.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('frontend/template', [], true)
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('frontend/berita', [], true)
+ 6 APPPATH\Controllers\Frontend.php(53): view('frontend/berita', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Frontend->berita()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-06 06:55:19 --> TypeError: Cannot access offset of type string on string
+[Method: GET, Route: berita]
+in APPPATH\Views\frontend\template.php on line 53.
+ 1 SYSTEMPATH\View\View.php(234): include()
+ 2 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('frontend/template', [], true)
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('frontend/berita', [], true)
+ 5 APPPATH\Controllers\Frontend.php(54): view('frontend/berita', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Frontend->berita()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-06 06:55:28 --> TypeError: Cannot access offset of type string on string
+[Method: GET, Route: berita]
+in APPPATH\Views\frontend\template.php on line 53.
+ 1 SYSTEMPATH\View\View.php(234): include()
+ 2 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('frontend/template', [], true)
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('frontend/berita', [], true)
+ 5 APPPATH\Controllers\Frontend.php(54): view('frontend/berita', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Frontend->berita()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-06 06:55:29 --> TypeError: Cannot access offset of type string on string
+[Method: GET, Route: berita]
+in APPPATH\Views\frontend\template.php on line 53.
+ 1 SYSTEMPATH\View\View.php(234): include()
+ 2 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('frontend/template', [], true)
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('frontend/berita', [], true)
+ 5 APPPATH\Controllers\Frontend.php(54): view('frontend/berita', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Frontend->berita()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-06 07:07:15 --> Error: Call to a member function links() on null
+[Method: GET, Route: berita]
+in APPPATH\Views\frontend\berita.php on line 61.
+ 1 SYSTEMPATH\View\View.php(234): include()
+ 2 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('frontend/berita', [], true)
+ 4 APPPATH\Controllers\Frontend.php(102): view('frontend/berita', [...])
+ 5 APPPATH\Controllers\Frontend.php(54): App\Controllers\Frontend->loadView('frontend/berita', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Frontend->berita()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-06 07:08:35 --> Error: Call to a member function links() on null
+[Method: GET, Route: berita]
+in APPPATH\Views\frontend\berita.php on line 61.
+ 1 SYSTEMPATH\View\View.php(234): include()
+ 2 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('frontend/berita', [], true)
+ 4 APPPATH\Controllers\Frontend.php(107): view('frontend/berita', [...])
+ 5 APPPATH\Controllers\Frontend.php(58): App\Controllers\Frontend->loadView('frontend/berita', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Frontend->berita()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-06 07:08:40 --> Error: Call to a member function links() on null
+[Method: GET, Route: berita]
+in APPPATH\Views\frontend\berita.php on line 61.
+ 1 SYSTEMPATH\View\View.php(234): include()
+ 2 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('frontend/berita', [], true)
+ 4 APPPATH\Controllers\Frontend.php(107): view('frontend/berita', [...])
+ 5 APPPATH\Controllers\Frontend.php(58): App\Controllers\Frontend->loadView('frontend/berita', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Frontend->berita()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-06 07:08:40 --> Error: Call to a member function links() on null
+[Method: GET, Route: berita]
+in APPPATH\Views\frontend\berita.php on line 61.
+ 1 SYSTEMPATH\View\View.php(234): include()
+ 2 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('frontend/berita', [], true)
+ 4 APPPATH\Controllers\Frontend.php(107): view('frontend/berita', [...])
+ 5 APPPATH\Controllers\Frontend.php(58): App\Controllers\Frontend->loadView('frontend/berita', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Frontend->berita()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-06 07:19:09 --> ErrorException: Undefined variable $uniqueTags
+[Method: GET, Route: berita]
+in APPPATH\Views\frontend\berita.php on line 83.
+ 1 APPPATH\Views\frontend\berita.php(83): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $uniqueTags', 'G:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\berita.php', 83)
+ 2 SYSTEMPATH\View\View.php(234): include('G:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\berita.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('frontend/berita', [], true)
+ 5 APPPATH\Controllers\Frontend.php(151): view('frontend/berita', [...])
+ 6 APPPATH\Controllers\Frontend.php(61): App\Controllers\Frontend->loadView('frontend/berita', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Frontend->berita()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
