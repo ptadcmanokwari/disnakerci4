@@ -17,6 +17,7 @@ $routes->get('/berita', 'Frontend::berita');
 $routes->get('/pengumuman', 'Frontend::pengumuman');
 $routes->get('/pelatihan', 'Frontend::pelatihan');
 $routes->get('/kartu_ak1', 'Frontend::kartu_ak1');
+$routes->get('/registrasi_pencaker', 'Frontend::registrasi_pencaker');
 $routes->get('/kontak', 'Frontend::kontak');
 $routes->get('/masuk', 'Frontend::masuk');
 

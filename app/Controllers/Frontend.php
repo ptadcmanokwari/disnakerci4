@@ -50,12 +50,19 @@ class Frontend extends BaseController
     public function kartu_ak1(): string
     {
         $data['title'] = 'Urusan Tenaga Kerja - Disnakertrans Manokwari';
-        return $this->loadView('frontend/pelatihan', $data);
+        return $this->loadView('frontend/kartu_ak1', $data);
     }
+
+    public function registrasi_pencaker(): string
+    {
+        $data['title'] = 'Urusan Tenaga Kerja - Disnakertrans Manokwari';
+        return $this->loadView('frontend/registrasi_pencaker', $data);
+    }
+
     public function kontak(): string
     {
         $data['title'] = 'Urusan Tenaga Kerja - Disnakertrans Manokwari';
-        return $this->loadView('frontend/pelatihan', $data);
+        return $this->loadView('frontend/kontak', $data);
     }
 
     private function loadView(string $viewName, array $data = []): string
