@@ -1,18 +1,37 @@
 <?= $this->extend('frontend/template') ?>
 
 <?= $this->section('content') ?>
+
+<style>
+    .cta {
+        background: linear-gradient(rgba(40, 58, 90, 0.9), rgba(40, 58, 90, 0.9)), url(../img/cta-bg.jpg) fixed center center;
+        background-size: cover;
+        padding: 120px 0;
+    }
+
+    .cta * {
+        color: #fff;
+    }
+
+    .cta-btn {
+        border: 2px solid #fff;
+        background: #116db6;
+        padding: 10px 24px;
+        color: #fff;
+        transition: 0.4s;
+        border-radius: 10px;
+    }
+</style>
 <section id="hero">
     <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
-
         <div class="carousel-inner" role="listbox">
-
             <!-- Slide 1 -->
             <div class="carousel-item active" style="background-image: url(<?= base_url(); ?>frontend/assets/img/slide/slide-1.jpg);">
                 <div class="carousel-container">
                     <div class="carousel-content animate__animated animate__fadeInUp">
-                        <h2>Welcome to <span>Company</span></h2>
-                        <p>Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
-                        <div class="text-center"><a href="" class="btn-get-started">Read More</a></div>
+                        <h2>Selamat Datang</h2>
+                        <p>Website Resmi Dinas Tenaga Kerja dan Transmigrasi Kabupaten Manokwari</p>
+                        <div class="text-center"><a href="" class="btn-get-started">SELENGKAPNYA</a></div>
                     </div>
                 </div>
             </div>
@@ -52,43 +71,135 @@
         <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
 
     </div>
-</section><!-- End Hero -->
-<!-- ======= About Us Section ======= -->
+</section>
+
+
 <section id="about-us" class="about-us">
     <div class="container" data-aos="fade-up">
-
         <div class="row content">
             <div class="col-lg-6" data-aos="fade-right">
-                <h2>Eum ipsam laborum deleniti velitena</h2>
-                <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assum perenda sruen jonee trave</h3>
+                <img class="w-100" src="<?= base_url() ?>/uploads/tujuan.png" alt="Tujuan">
             </div>
             <div class="col-lg-6 pt-4 pt-lg-0" data-aos="fade-left">
+                <h4>Tujuan</h4>
                 <p>
-                    Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                    velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                    culpa qui officia deserunt mollit anim id est laborum
+                    Dengan berpedoman pada Visi dan Misi tersebut di atas maka Tujuan Dinas Tenaga Kerja dan Transmigrasi Kabupaten Manokwari dapat dirumuskan sebagai berikut:
                 </p>
                 <ul>
-                    <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequa</li>
-                    <li><i class="ri-check-double-line"></i> Duis aute irure dolor in reprehenderit in voluptate velit</li>
-                    <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in</li>
+                    <li><i class="ri-check-double-line"></i> Meningkatkan perluasan dan kesempatan kerja;</li>
+                    <li><i class="ri-check-double-line"></i> Meningkatkan kerjasama hubungan industrial dan Perlindungn tenaga kerja dengan pihak terkait;</li>
+                    <li><i class="ri-check-double-line"></i> Terbangunnya rumah layak huni bagi transmigrasi lokal;</li>
+                    <li><i class="ri-check-double-line"></i> Meningkatkan infrastruktur lokasi transmigrasi;</li>
+                    <li><i class="ri-check-double-line"></i> Meingkatkan profesionalisme aparatur;</li>
+                    <li><i class="ri-check-double-line"></i> Meningkatkan sarana dan prasarana aparat;</li>
+                    <li><i class="ri-check-double-line"></i> Meningkatkan kualitas administrasi keuangan, teknis perencanaan dan pelaporan.</li>
                 </ul>
-                <p class="fst-italic">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                    magna aliqua.
-                </p>
             </div>
         </div>
 
     </div>
-</section><!-- End About Us Section -->
+</section>
 
-<!-- ======= Services Section ======= -->
-<section id="services" class="services section-bg">
+<section id="about-us" class="about-us">
     <div class="container" data-aos="fade-up">
+        <div class="row content">
+            <div class="col-lg-6 pt-4 pt-lg-0" data-aos="fade-left">
+                <h4>Sasaran Strategis</h4>
+                <p>
+                    Dinas Tenaga Kerja dan Transmigrasi Kabupaten Manokwari telah merumuskan tujuan yang merupakan bagian integral dalam proses Rencana Strategis Dinas Tenaga Kerja Dan Transmigrasi Kabupaten Manokwari Tahun 2021 – 2025 untuk mencapai visi.
+                </p>
+                <ul>
+                    <li><i class="ri-check-double-line"></i> Mendidik dan melatih para pencari kerja agar dapat mencari nafkahnya sendiri sehingga dapat mengurangi angka pengangguran dan mengurangi </li> kemiskinan;
+                    <li><i class="ri-check-double-line"></i> Meningkatkan kerja sama hubungan industrial dan perlindungan Tenaga Kerja dengan pihak terkait;</li>
+                    <li><i class="ri-check-double-line"></i> Meningkatnya Kualitas pemukiman yang layak huni, layak usaha, layak berkembang serta layak lingkungan;</li>
+                    <li><i class="ri-check-double-line"></i> Meningkatkan kualitas Aparatur Dinas Nakertrans;</li>
+                    <li><i class="ri-check-double-line"></i> Meningkatkan kualitas dan Kuantitas administrasi keuangan, perencanaan serta pelaporan Program dan Data.</li>
+                </ul>
+            </div>
+            <div class="col-lg-6" data-aos="fade-right">
+                <img class="w-100" src="<?= base_url() ?>/uploads/sasaran.webp" alt="Sasaran">
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section id="cta" class="cta">
+    <div class="container aos-init aos-animate" data-aos="zoom-in">
 
         <div class="row">
-            <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+            <div class="col-lg-9 text-center text-lg-start">
+                <h3>Kartu Pencari Kerja (Kartu Ak/1)</h3>
+                <p>Proses pembuatan kartu kuning dimulai dengan pendaftaran akun untuk selanjutnya mengisi formulir Ak/1 dan mengunggah dokumen. Adapun dokumen yang dibutuhkan diantaranya: Pas Foto, KTP, Ijazah Terakhir, Transkrip Nilai, Riwayat Hidup, SKCK dan Suket. Sehat</p>
+            </div>
+            <div class="col-lg-3 cta-btn-container text-center d-flex align-items-center justify-content-end">
+                <a class="cta-btn text-center btn btn-secondary" href="<?php base_url(); ?>registrasi_pencaker">Buat Akun Sekarang</a>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section id="skills" class="skills">
+    <div class="container">
+
+        <div class="section-title" data-aos="fade-up">
+            <h2>STATISTIK PENCARI KERJA</h2>
+            <p>Berikut ini ditampilkan statistik pencari kerja di Kab. Manokwari berdasarkan jenjang pendidikan terakhir dan umur.</p>
+        </div>
+        <div class="row skills-content">
+            <div class="col-lg-6" data-aos="fade-up">
+                <div class="progress">
+                    <span class="skill">HTML <i class="val">100%</i></span>
+                    <div class="progress-bar-wrap">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+                <div class="progress">
+                    <span class="skill">CSS <i class="val">90%</i></span>
+                    <div class="progress-bar-wrap">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+                <div class="progress">
+                    <span class="skill">JavaScript <i class="val">75%</i></span>
+                    <div class="progress-bar-wrap">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="progress">
+                    <span class="skill">PHP <i class="val">80%</i></span>
+                    <div class="progress-bar-wrap">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+                <div class="progress">
+                    <span class="skill">WordPress/CMS <i class="val">90%</i></span>
+                    <div class="progress-bar-wrap">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+                <div class="progress">
+                    <span class="skill">Photoshop <i class="val">55%</i></span>
+                    <div class="progress-bar-wrap">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="services" class="services section-bg bg-dark">
+    <div class="container" data-aos="fade-up">
+        <div class="section-title text-white">
+            <h2>Layanan</h2>
+            <p>Layanan Kartu Pencari Kerja, Pengaduan, Pemagangan, Pelatihan & Sertifikasi</p>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
                 <div class="icon-box iconbox-blue">
                     <div class="icon">
                         <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
@@ -96,12 +207,12 @@
                         </svg>
                         <i class="bx bxl-dribbble"></i>
                     </div>
-                    <h4><a href="">Lorem Ipsum</a></h4>
-                    <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
+                    <h4><a href="">Kartu Pencari Kerja</a></h4>
+                    <p>Kartu Ak/1 adalah kartu tanda pencari kerja yang sering disebut pula dengan kartu kuning. Kartu ini dikeluarkan oleh lembaga pemerintah, Dinas Ketenagakerjaan atau Disnaker, yang dibuat dengan tujuan untuk pendataan para pencari kerja.</p>
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
+            <div class="col-lg-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
                 <div class="icon-box iconbox-orange ">
                     <div class="icon">
                         <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
@@ -109,12 +220,12 @@
                         </svg>
                         <i class="bx bx-file"></i>
                     </div>
-                    <h4><a href="">Sed Perspiciatis</a></h4>
-                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
+                    <h4><a href="">Pengaduan</a></h4>
+                    <p>Layanan ini diperuntukkan bagi anda pekerja/buruh/karyawan yang mendapati terjadinya pelanggaran terkait masalah ketenagakerjaan, seperti Upah, Pesangon, Jaminan Kesehatan, PHK dan masalah terkait lainnya di instansi/perusahaan tempat bekerja.</p>
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="300">
+            <div class="col-lg-3 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="300">
                 <div class="icon-box iconbox-pink">
                     <div class="icon">
                         <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
@@ -122,12 +233,12 @@
                         </svg>
                         <i class="bx bx-tachometer"></i>
                     </div>
-                    <h4><a href="">Magni Dolores</a></h4>
-                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
+                    <h4><a href="">Pemagangan</a></h4>
+                    <p>Melalui program pemagangan, pemerintah berupaya agar angkatan kerja bisa memiliki keterampilan dan mudah terserap dunia kerja.</p>
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="100">
+            <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
                 <div class="icon-box iconbox-yellow">
                     <div class="icon">
                         <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
@@ -135,37 +246,10 @@
                         </svg>
                         <i class="bx bx-layer"></i>
                     </div>
-                    <h4><a href="">Nemo Enim</a></h4>
-                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
+                    <h4><a href="">Pelatihan & Sertifikasi</a></h4>
+                    <p>Layanan ini diharapkan dapat memberikan bekal keterampilan profesional bagi angkatan kerja sehingga dapat membuka peluang kerja sendiri dan berwirausaha secara mandiri.</p>
                 </div>
             </div>
-
-            <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="200">
-                <div class="icon-box iconbox-red">
-                    <div class="icon">
-                        <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke="none" stroke-width="0" fill="#f5f5f5" d="M300,532.3542879108572C369.38199826031484,532.3153073249985,429.10787420159085,491.63046689027357,474.5244479745417,439.17860296908856C522.8885846962883,383.3225815378663,569.1668002868075,314.3205725914397,550.7432151929288,242.7694973846089C532.6665558377875,172.5657663291529,456.2379748765914,142.6223662098291,390.3689995646985,112.34683881706744C326.66090330228417,83.06452184765237,258.84405631176094,53.51806209861945,193.32584062364296,78.48882559362697C121.61183558270385,105.82097193414197,62.805066853699245,167.19869350419734,48.57481801355237,242.6138429142374C34.843463184063346,315.3850353017275,76.69343916112496,383.4422959591041,125.22947124332185,439.3748458443577C170.7312796277747,491.8107796887764,230.57421082200815,532.3932930995766,300,532.3542879108572"></path>
-                        </svg>
-                        <i class="bx bx-slideshow"></i>
-                    </div>
-                    <h4><a href="">Dele Cardo</a></h4>
-                    <p>Quis consequatur saepe eligendi voluptatem consequatur dolor consequuntur</p>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
-                <div class="icon-box iconbox-teal">
-                    <div class="icon">
-                        <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke="none" stroke-width="0" fill="#f5f5f5" d="M300,566.797414625762C385.7384707136149,576.1784315230908,478.7894351017131,552.8928747891023,531.9192734346935,484.94944893311C584.6109503024035,417.5663521118492,582.489472248146,322.67544863468447,553.9536738515405,242.03673114598146C529.1557734026468,171.96086150256528,465.24506316201064,127.66468636344209,395.9583748389544,100.7403814666027C334.2173773831606,76.7482773500951,269.4350130405921,84.62216499799875,207.1952322260088,107.2889140133804C132.92018162631612,134.33871894543012,41.79353780512637,160.00259165414826,22.644507872594943,236.69541883565114C3.319112789854554,314.0945973066697,72.72355303640163,379.243833228382,124.04198916343866,440.3218312028393C172.9286146004772,498.5055451809895,224.45579914871206,558.5317968840102,300,566.797414625762"></path>
-                        </svg>
-                        <i class="bx bx-arch"></i>
-                    </div>
-                    <h4><a href="">Divera Don</a></h4>
-                    <p>Modi nostrum vel laborum. Porro fugit error sit minus sapiente sit aspernatur</p>
-                </div>
-            </div>
-
         </div>
 
     </div>
@@ -174,14 +258,16 @@
 <!-- ======= Portfolio Section ======= -->
 <section id="portfolio" class="portfolio">
     <div class="container">
-
+        <div class="section-title">
+            <h2>Galeri</h2>
+            <p>Galeri Kegiatan Bidang Transmigrasi dan Tenaga Kerja</p>
+        </div>
         <div class="row" data-aos="fade-up">
             <div class="col-lg-12 d-flex justify-content-center">
                 <ul id="portfolio-flters">
-                    <li data-filter="*" class="filter-active">All</li>
-                    <li data-filter=".filter-app">App</li>
-                    <li data-filter=".filter-card">Card</li>
-                    <li data-filter=".filter-web">Web</li>
+                    <li data-filter="*" class="filter-active">Semua</li>
+                    <li data-filter=".filter-app">Tenaga Kerja</li>
+                    <li data-filter=".filter-card">Transmigrasi</li>
                 </ul>
             </div>
         </div>
@@ -198,15 +284,6 @@
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-                <img src="<?= base_url(); ?>frontend/assets/img/portfolio/portfolio-2.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                    <h4>Web 3</h4>
-                    <p>Web</p>
-                    <a href="<?= base_url(); ?>frontend/assets/img/portfolio/portfolio-2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Web 3"><i class="bx bx-plus"></i></a>
-                    <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-            </div>
 
             <div class="col-lg-4 col-md-6 portfolio-item filter-app">
                 <img src="<?= base_url(); ?>frontend/assets/img/portfolio/portfolio-3.jpg" class="img-fluid" alt="">
@@ -228,15 +305,6 @@
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-                <img src="<?= base_url(); ?>frontend/assets/img/portfolio/portfolio-5.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                    <h4>Web 2</h4>
-                    <p>Web</p>
-                    <a href="<?= base_url(); ?>frontend/assets/img/portfolio/portfolio-5.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Web 2"><i class="bx bx-plus"></i></a>
-                    <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-            </div>
 
             <div class="col-lg-4 col-md-6 portfolio-item filter-app">
                 <img src="<?= base_url(); ?>frontend/assets/img/portfolio/portfolio-6.jpg" class="img-fluid" alt="">
@@ -268,81 +336,208 @@
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-                <img src="<?= base_url(); ?>frontend/assets/img/portfolio/portfolio-9.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                    <h4>Web 3</h4>
-                    <p>Web</p>
-                    <a href="<?= base_url(); ?>frontend/assets/img/portfolio/portfolio-9.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Web 3"><i class="bx bx-plus"></i></a>
-                    <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+
+        </div>
+
+    </div>
+</section>
+<section id="team" class="team section-bg bg-dark bg-gradient">
+    <div class="container">
+
+        <div class="section-title text-white" data-aos="fade-up">
+            <h2>Tim <strong>Kerja</strong></h2>
+            <p>Orang-orang hebat yang siap melayani Anda.</p>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                <div class="member" data-aos="fade-up">
+                    <div class="member-img">
+                        <img src="<?= base_url(); ?>frontend/assets/img/team/team-1.jpg" class="img-fluid" alt="">
+                        <div class="social">
+                            <a href=""><i class="bi bi-twitter"></i></a>
+                            <a href=""><i class="bi bi-facebook"></i></a>
+                            <a href=""><i class="bi bi-instagram"></i></a>
+                            <a href=""><i class="bi bi-linkedin"></i></a>
+                        </div>
+                    </div>
+                    <div class="member-info">
+                        <h4>Walter White</h4>
+                        <span>Chief Executive Officer</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                <div class="member" data-aos="fade-up" data-aos-delay="100">
+                    <div class="member-img">
+                        <img src="<?= base_url(); ?>frontend/assets/img/team/team-2.jpg" class="img-fluid" alt="">
+                        <div class="social">
+                            <a href=""><i class="bi bi-twitter"></i></a>
+                            <a href=""><i class="bi bi-facebook"></i></a>
+                            <a href=""><i class="bi bi-instagram"></i></a>
+                            <a href=""><i class="bi bi-linkedin"></i></a>
+                        </div>
+                    </div>
+                    <div class="member-info">
+                        <h4>Sarah Jhonson</h4>
+                        <span>Product Manager</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                <div class="member" data-aos="fade-up" data-aos-delay="200">
+                    <div class="member-img">
+                        <img src="<?= base_url(); ?>frontend/assets/img/team/team-3.jpg" class="img-fluid" alt="">
+                        <div class="social">
+                            <a href=""><i class="bi bi-twitter"></i></a>
+                            <a href=""><i class="bi bi-facebook"></i></a>
+                            <a href=""><i class="bi bi-instagram"></i></a>
+                            <a href=""><i class="bi bi-linkedin"></i></a>
+                        </div>
+                    </div>
+                    <div class="member-info">
+                        <h4>William Anderson</h4>
+                        <span>CTO</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                <div class="member" data-aos="fade-up" data-aos-delay="300">
+                    <div class="member-img">
+                        <img src="<?= base_url(); ?>frontend/assets/img/team/team-4.jpg" class="img-fluid" alt="">
+                        <div class="social">
+                            <a href=""><i class="bi bi-twitter"></i></a>
+                            <a href=""><i class="bi bi-facebook"></i></a>
+                            <a href=""><i class="bi bi-instagram"></i></a>
+                            <a href=""><i class="bi bi-linkedin"></i></a>
+                        </div>
+                    </div>
+                    <div class="member-info">
+                        <h4>Amanda Jepson</h4>
+                        <span>Accountant</span>
+                    </div>
                 </div>
             </div>
 
         </div>
 
     </div>
-</section><!-- End Portfolio Section -->
+</section>
 
-<!-- ======= Our Clients Section ======= -->
-<section id="clients" class="clients">
+<section id="faq" class="faq section-bg">
     <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-            <h2>Clients</h2>
+            <h2>PALING SERING DITANYAKAN</h2>
+            <p>Berikut kami himpun beberapa pertanyaan yang paling sering ditanyakan ke kantor Disnakertrans Kab. Manokwari</p>
         </div>
 
-        <div class="row no-gutters clients-wrap clearfix" data-aos="fade-up">
+        <div class="faq-list">
+            <ul>
+                <li data-aos="fade-up">
+                    <a data-bs-toggle="collapse" class="collapse px-0" data-bs-target="#faq-list-1">Bagaimana caranya membuat kartu pencari kerja (Kartu Ak/1)? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                    <div id="faq-list-1" class="collapse show" data-bs-parent=".faq-list">
+                        <p>
+                            Pada website disnakertransmkw.com, pilih menu Layanan - Kartu Pencari Kerja (Kartu Ak/1), kemudian membuat akun dan menyiapkan berkas berupa file Ijazah terakhir, KTP, Riwayat Hidup, SKCK, Surat Keterangan Kesehatan.
+                        </p>
+                    </div>
+                </li>
 
-            <div class="col-lg-3 col-md-4 col-6">
-                <div class="client-logo">
-                    <img src="<?= base_url(); ?>frontend/assets/img/clients/client-1.png" class="img-fluid" alt="">
-                </div>
-            </div>
+                <li data-aos="fade-up" data-aos-delay="100">
+                    <a data-bs-toggle="collapse" data-bs-target="#faq-list-2" class="collapsed px-0">Bagaimana cara memperoleh informasi terkait lowongan pekerjaan di wilayah Kab. Manokwari? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                    <div id="faq-list-2" class="collapse" data-bs-parent=".faq-list">
+                        <p>
+                            Cari sendiri lah
+                        </p>
+                    </div>
+                </li>
 
-            <div class="col-lg-3 col-md-4 col-6">
-                <div class="client-logo">
-                    <img src="<?= base_url(); ?>frontend/assets/img/clients/client-2.png" class="img-fluid" alt="">
-                </div>
-            </div>
+                <li data-aos="fade-up" data-aos-delay="200">
+                    <a data-bs-toggle="collapse" data-bs-target="#faq-list-3" class="collapsed px-0">Apakah setelah mendapatkan pekerjaan, harus melapor ke Disnakertrans? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                    <div id="faq-list-3" class="collapse" data-bs-parent=".faq-list">
+                        <p>
+                            Mmbetullll sekali.
+                        </p>
+                    </div>
+                </li>
 
-            <div class="col-lg-3 col-md-4 col-6">
-                <div class="client-logo">
-                    <img src="<?= base_url(); ?>frontend/assets/img/clients/client-3.png" class="img-fluid" alt="">
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-4 col-6">
-                <div class="client-logo">
-                    <img src="<?= base_url(); ?>frontend/assets/img/clients/client-4.png" class="img-fluid" alt="">
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-4 col-6">
-                <div class="client-logo">
-                    <img src="<?= base_url(); ?>frontend/assets/img/clients/client-5.png" class="img-fluid" alt="">
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-4 col-6">
-                <div class="client-logo">
-                    <img src="<?= base_url(); ?>frontend/assets/img/clients/client-6.png" class="img-fluid" alt="">
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-4 col-6">
-                <div class="client-logo">
-                    <img src="<?= base_url(); ?>frontend/assets/img/clients/client-7.png" class="img-fluid" alt="">
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-4 col-6">
-                <div class="client-logo">
-                    <img src="<?= base_url(); ?>frontend/assets/img/clients/client-8.png" class="img-fluid" alt="">
-                </div>
-            </div>
-
+                <li data-aos="fade-up" data-aos-delay="300">
+                    <a data-bs-toggle="collapse" data-bs-target="#faq-list-4" class="collapsed px-0">Apakah ada program pelatihan/magang yang diselenggarakan Disnakertrans? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                    <div id="faq-list-4" class="collapse" data-bs-parent=".faq-list">
+                        <p>
+                            Kayaknya tidak ada deh.
+                        </p>
+                    </div>
+                </li>
+            </ul>
         </div>
 
     </div>
-</section><!-- End Our Clients Section -->
+</section>
+
+
+<section id="contact" class="contact">
+    <div class="container">
+        <div class="section-title">
+            <h2>Kontak Kami</h2>
+            <p>Silakan gunakan informasi kontak di bawah ini untuk menghubungi kami. Kami siap membantu Anda!</p>
+        </div>
+        <div class="row justify-content-center" data-aos="fade-up">
+            <div class="col-lg-10">
+
+                <div class="info-wrap">
+                    <div class="row">
+                        <div class="col-lg-4 info">
+                            <i class="bi bi-geo-alt"></i>
+                            <h4>Lokasi:</h4>
+                            <p>Jl. Percetakan Negara, Manokwari <br>Papua Barat, 98312</p>
+                        </div>
+
+                        <div class="col-lg-4 info mt-4 mt-lg-0">
+                            <i class="bi bi-envelope"></i>
+                            <h4>Email:</h4>
+                            <p>info@disnakertransmkw.com</p>
+                        </div>
+
+                        <div class="col-lg-4 info mt-4 mt-lg-0">
+                            <i class="bi bi-phone"></i>
+                            <h4>Telepon:</h4>
+                            <p>0986-211934, 0986-211738</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5 justify-content-center" data-aos="fade-up">
+            <div class="col-lg-10">
+                <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <input type="text" name="name" class="form-control" id="name" placeholder="Nama Lengkap" required>
+                        </div>
+                        <div class="col-md-6 form-group mt-3 mt-md-0">
+                            <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
+                        </div>
+                    </div>
+                    <div class="form-group mt-3">
+                        <input type="text" class="form-control" name="subject" id="subject" placeholder="Judul Pesan" required>
+                    </div>
+                    <div class="form-group mt-3">
+                        <textarea class="form-control" name="message" rows="5" placeholder="Isi Pesan" required></textarea>
+                    </div>
+                    <div class="my-3">
+                        <div class="loading">Loading</div>
+                        <div class="error-message"></div>
+                        <div class="sent-message">Pesan Anda telah dikirim!</div>
+                    </div>
+                    <div class="text-center"><button type="submit">Kirim Pesan</button></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
 <?= $this->endSection() ?>

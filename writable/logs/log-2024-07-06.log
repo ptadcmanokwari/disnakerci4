@@ -1,0 +1,9 @@
+CRITICAL - 2024-07-06 06:02:55 --> Error: Class "App\Models\FrontendModel" not found
+[Method: GET, Route: berita]
+in APPPATH\Controllers\Frontend.php on line 37.
+ 1 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Frontend->berita()
+ 2 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 3 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

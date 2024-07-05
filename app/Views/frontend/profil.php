@@ -47,7 +47,7 @@
     </div>
 </section><!-- End About Us Section -->
 
-<section id="about-us" class="about-us section-bg">
+<section id="about-us" class="about-us section-bg bg-dark text-white">
     <div class="container" data-aos="fade-up">
 
         <div class="section-title">

@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Models\FrontendModel;
+
 class Frontend extends BaseController
 {
     public function index(): string
@@ -32,6 +34,15 @@ class Frontend extends BaseController
 
     public function berita(): string
     {
+        $informasiModel = new FrontendModel();
+
+        $perPage = 2;
+        $currentPage = $this->request->getVar('page') ? (int)$this->request->getVar('page') : 1;
+
+        $data['informasi'] = $informasiModel->paginate($perPage, 'default', $currentPage);
+        $data['pager'] = $informasiModel->pager;
+        $data['kategori'] = $informasiModel->getKategoriCount();
+        $data['recentPosts'] = $informasiModel->getRecentPosts();
         $data['title'] = 'Urusan Tenaga Kerja - Disnakertrans Manokwari';
         return $this->loadView('frontend/berita', $data);
     }
