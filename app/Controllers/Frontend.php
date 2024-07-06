@@ -3,15 +3,77 @@
 namespace App\Controllers;
 
 use App\Models\FrontendModel;
+use App\Models\PencakerModel;
+use App\Models\PendidikanModel;
+use App\Models\JenjangPendidikanModel;
 
 class Frontend extends BaseController
 {
     public function index(): string
     {
+        // $model = new FrontendModel();
+
+
+        $pencakerModel = new PencakerModel();
+        $pendidikanModel = new PendidikanModel();
+
+        $q_umur = $pencakerModel->getUmurStatistik();
+
+        $q_pendidikan_terakhir = $pendidikanModel->getPendidikanStatistik();
+
+        $pencaker_count = $pencakerModel->countPencaker();
+
+        // Prepare data for view
+        $data['c_umur'] = $q_umur;
+        $data['c_pendidikan_terakhir'] = $q_pendidikan_terakhir;
+        $data['max_umur'] = $pencaker_count;
+
+        $data['sliders'] = $this->getSliders();
+        $data['galleries'] = $this->getHomeGalleries();
         $data['title'] = 'Beranda - Disnakertrans Manokwari';
 
         return $this->loadView('frontend/home', $data);
     }
+
+    // Ambil data galeri dinamis dari folder uploads
+    private function getHomeGalleries(): array
+    {
+        $path = WRITEPATH . '../public/uploads/tenagakerja/';
+        $directories = array_filter(glob($path . '*'), 'is_dir');
+        $galleries = [];
+
+        foreach ($directories as $directory) {
+            $category = basename($directory);
+            $images = array_filter(glob($directory . '/*'), 'is_file');
+
+            foreach ($images as $image) {
+                $galleries[$category][] = [
+                    'url' => base_url('uploads/tenagakerja/' . $category . '/' . basename($image)),
+                    'name' => pathinfo($image, PATHINFO_FILENAME)
+                ];
+            }
+        }
+
+        return $galleries;
+    }
+
+    // Dinamiskan SLider
+    private function getSliders(): array
+    {
+        $path = WRITEPATH . '../public/uploads/sliders/';
+        $images = array_filter(glob($path . '*'), 'is_file');
+        $sliders = [];
+
+        foreach ($images as $image) {
+            $sliders[] = [
+                'url' => base_url('uploads/sliders/' . basename($image)),
+                'name' => pathinfo($image, PATHINFO_FILENAME)
+            ];
+        }
+
+        return $sliders;
+    }
+
 
     public function profil(): string
     {
@@ -22,14 +84,58 @@ class Frontend extends BaseController
 
     public function transmigrasi(): string
     {
+        $data['galleries'] = $this->getTransmigrasiGalleries();
         $data['title'] = 'Urusan Transmigrasi - Disnakertrans Manokwari';
         return $this->loadView('frontend/transmigrasi', $data);
     }
 
+    private function getTransmigrasiGalleries(): array
+    {
+        $path = WRITEPATH . '../public/uploads/transmigrasi/';
+        $directories = array_filter(glob($path . '*'), 'is_dir');
+        $galleries = [];
+
+        foreach ($directories as $directory) {
+            $category = basename($directory);
+            $images = array_filter(glob($directory . '/*'), 'is_file');
+
+            foreach ($images as $image) {
+                $galleries[$category][] = [
+                    'url' => base_url('uploads/transmigrasi/' . $category . '/' . basename($image)),
+                    'name' => pathinfo($image, PATHINFO_FILENAME)
+                ];
+            }
+        }
+
+        return $galleries;
+    }
+
     public function tenaga_kerja(): string
     {
+        $data['galleries'] = $this->getTenagakerjaGalleries();
         $data['title'] = 'Urusan Tenaga Kerja - Disnakertrans Manokwari';
         return $this->loadView('frontend/tenaga_kerja', $data);
+    }
+
+    private function getTenagakerjaGalleries(): array
+    {
+        $path = WRITEPATH . '../public/uploads/tenagakerja/';
+        $directories = array_filter(glob($path . '*'), 'is_dir');
+        $galleries = [];
+
+        foreach ($directories as $directory) {
+            $category = basename($directory);
+            $images = array_filter(glob($directory . '/*'), 'is_file');
+
+            foreach ($images as $image) {
+                $galleries[$category][] = [
+                    'url' => base_url('uploads/tenagakerja/' . $category . '/' . basename($image)),
+                    'name' => pathinfo($image, PATHINFO_FILENAME)
+                ];
+            }
+        }
+
+        return $galleries;
     }
 
     public function berita(): string
@@ -58,7 +164,7 @@ class Frontend extends BaseController
         }
         $data['uniqueTags'] = array_unique($tagsArray);
 
-        $data['title'] = 'Urusan Tenaga Kerja - Disnakertrans Manokwari';
+        $data['title'] = 'Berita - Disnakertrans Manokwari';
 
         // Set pager jika ada data
         if (!empty($data['informasi'])) {
@@ -67,7 +173,6 @@ class Frontend extends BaseController
 
         return $this->loadView('frontend/berita', $data);
     }
-
 
     public function pengumuman(): string
     {
@@ -95,7 +200,7 @@ class Frontend extends BaseController
         }
         $data['uniqueTags'] = array_unique($tagsArray);
 
-        $data['title'] = 'Urusan Tenaga Kerja - Disnakertrans Manokwari';
+        $data['title'] = 'Pengumuman- Disnakertrans Manokwari';
 
         // Set pager jika ada data
         if (!empty($data['informasi'])) {
@@ -131,7 +236,7 @@ class Frontend extends BaseController
         }
         $data['uniqueTags'] = array_unique($tagsArray);
 
-        $data['title'] = 'Urusan Tenaga Kerja - Disnakertrans Manokwari';
+        $data['title'] = 'Pelatihan - Disnakertrans Manokwari';
 
         // Set pager jika ada data
         if (!empty($data['informasi'])) {
@@ -143,19 +248,19 @@ class Frontend extends BaseController
 
     public function kartu_ak1(): string
     {
-        $data['title'] = 'Urusan Tenaga Kerja - Disnakertrans Manokwari';
+        $data['title'] = 'Kartu Pencaker - Disnakertrans Manokwari';
         return $this->loadView('frontend/kartu_ak1', $data);
     }
 
     public function registrasi_pencaker(): string
     {
-        $data['title'] = 'Urusan Tenaga Kerja - Disnakertrans Manokwari';
+        $data['title'] = 'Registrasi Pencaker - Disnakertrans Manokwari';
         return $this->loadView('frontend/registrasi_pencaker', $data);
     }
 
     public function kontak(): string
     {
-        $data['title'] = 'Urusan Tenaga Kerja - Disnakertrans Manokwari';
+        $data['title'] = 'Kontak - Disnakertrans Manokwari';
         return $this->loadView('frontend/kontak', $data);
     }
 

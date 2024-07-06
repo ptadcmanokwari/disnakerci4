@@ -6,6 +6,17 @@
         border: 1px solid #116db6;
         border-radius: 10px;
     }
+
+    #newsPage .img-fluid {
+        max-width: 100%;
+        height: auto;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    #newsPage .entry-img {
+        height: 100% !important;
+    }
 </style>
 <section id="breadcrumbs" class="breadcrumbs">
     <div class="container">
@@ -20,7 +31,7 @@
 
     </div>
 </section>
-<section id="blog" class="blog">
+<section id="newsPage" class="blog">
     <div class="container" data-aos="fade-up">
         <div class="section-title">
             <h2>Berita</h2>
@@ -49,9 +60,6 @@
                                 <p>
                                     <?= character_limiter($info['isi'], 150); ?>
                                 </p>
-                                <div class="read-more">
-                                    <a href="<?= base_url('informasi/' . $info['slug']); ?>">Read More</a>
-                                </div>
                             </div>
                         </article>
                     </div>

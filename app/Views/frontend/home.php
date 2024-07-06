@@ -25,39 +25,17 @@
 <section id="hero">
     <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
         <div class="carousel-inner" role="listbox">
-            <!-- Slide 1 -->
-            <div class="carousel-item active" style="background-image: url(<?= base_url(); ?>frontend/assets/img/slide/slide-1.jpg);">
-                <div class="carousel-container">
-                    <div class="carousel-content animate__animated animate__fadeInUp">
-                        <h2>Selamat Datang</h2>
-                        <p>Website Resmi Dinas Tenaga Kerja dan Transmigrasi Kabupaten Manokwari</p>
-                        <div class="text-center"><a href="" class="btn-get-started">SELENGKAPNYA</a></div>
+            <?php foreach ($sliders as $index => $slide) : ?>
+                <div class="carousel-item <?= $index === 0 ? 'active' : ''; ?>" style="background-image: url(<?= $slide['url']; ?>);">
+                    <div class="carousel-container">
+                        <div class="carousel-content animate__animated animate__fadeInUp">
+                            <h2><?= $slide['name']; ?></h2>
+                            <p>Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+                            <div class="text-center"><a href="" class="btn-get-started">Read More</a></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Slide 2 -->
-            <div class="carousel-item" style="background-image: url(<?= base_url(); ?>frontend/assets/img/slide/slide-2.jpg);">
-                <div class="carousel-container">
-                    <div class="carousel-content animate__animated animate__fadeInUp">
-                        <h2>Lorem Ipsum Dolor</h2>
-                        <p>Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
-                        <div class="text-center"><a href="" class="btn-get-started">Read More</a></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Slide 3 -->
-            <div class="carousel-item" style="background-image: url(<?= base_url(); ?>frontend/assets/img/slide/slide-3.jpg);">
-                <div class="carousel-container">
-                    <div class="carousel-content animate__animated animate__fadeInUp">
-                        <h2>Sequi ea ut et est quaerat</h2>
-                        <p>Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
-                        <div class="text-center"><a href="" class="btn-get-started">Read More</a></div>
-                    </div>
-                </div>
-            </div>
-
+            <?php endforeach; ?>
         </div>
 
         <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
@@ -68,8 +46,11 @@
             <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
         </a>
 
-        <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
-
+        <ol class="carousel-indicators" id="hero-carousel-indicators">
+            <?php foreach ($sliders as $index => $slide) : ?>
+                <li data-bs-target="#heroCarousel" data-bs-slide-to="<?= $index; ?>" class="<?= $index === 0 ? 'active' : ''; ?>"></li>
+            <?php endforeach; ?>
+        </ol>
     </div>
 </section>
 
@@ -141,56 +122,109 @@
 </section>
 
 <section id="skills" class="skills">
-    <div class="container">
-
-        <div class="section-title" data-aos="fade-up">
-            <h2>STATISTIK PENCARI KERJA</h2>
-            <p>Berikut ini ditampilkan statistik pencari kerja di Kab. Manokwari berdasarkan jenjang pendidikan terakhir dan umur.</p>
+    <div class="container" data-aos="fade-up">
+        <div class="section-title">
+            <h2>Statistik Pencari Kerja</h2>
+            <p class="fst-italic">
+                Berikut ini ditampilkan statistik pencari kerja di Kab. Manokwari.
+            </p>
         </div>
-        <div class="row skills-content">
-            <div class="col-lg-6" data-aos="fade-up">
-                <div class="progress">
-                    <span class="skill">HTML <i class="val">100%</i></span>
-                    <div class="progress-bar-wrap">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                </div>
-                <div class="progress">
-                    <span class="skill">CSS <i class="val">90%</i></span>
-                    <div class="progress-bar-wrap">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                </div>
-                <div class="progress">
-                    <span class="skill">JavaScript <i class="val">75%</i></span>
-                    <div class="progress-bar-wrap">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
+        <div class="row">
+            <div class="col-lg-6 pt-4 pt-lg-0 content" data-aos="fade-left" data-aos-delay="100">
+                <div class="skills-content">
+                    <h4>Berdasarkan Jenjang Pendidikan Terakhir</h4>
+                    <?php foreach ($c_pendidikan_terakhir as $pt) : ?>
+                        <div class="progress">
+                            <span class="skill"><?= $pt->jenjang; ?> <i class="val"><?= $pt->total; ?> orang</i></span>
+                            <div class="progress-bar-wrap">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="<?= $pt->total; ?>" aria-valuemin="0" aria-valuemax="<?= $max_umur; ?>"></div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
-            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-                <div class="progress">
-                    <span class="skill">PHP <i class="val">80%</i></span>
-                    <div class="progress-bar-wrap">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+            <div class="col-lg-6 pt-4 pt-lg-0 content" data-aos="fade-left" data-aos-delay="100">
+                <div class="skills-content">
+                    <h4>Berdasarkan rentang umur</h4>
+                    <?php
+                    $u1 = 0;
+                    $u2 = 0;
+                    $u3 = 0;
+                    $u4 = 0;
+                    $u5 = 0;
+                    $u6 = 0;
+                    foreach ($c_umur as $u) :
+                        if ($u->umur < 15) {
+                            $u1 += $u->jumlah;
+                        }
+                        if ($u->umur >= 15 && $u->umur < 24) {
+                            $u2 += $u->jumlah;
+                        }
+                        if ($u->umur >= 25 && $u->umur < 34) {
+                            $u3 += $u->jumlah;
+                        }
+                        if ($u->umur >= 35 && $u->umur < 44) {
+                            $u4 += $u->jumlah;
+                        }
+                        if ($u->umur >= 45 && $u->umur < 54) {
+                            $u5 += $u->jumlah;
+                        }
+                        if ($u->umur > 54) {
+                            $u6 += $u->jumlah;
+                        }
+                    endforeach;
+                    ?>
+
+                    <div class="progress">
+                        <span class="skill">
+                            < 15 th <i class="val"><?= $u1; ?> orang</i>
+                        </span>
+                        <div class="progress-bar-wrap">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="<?= $u1; ?>" aria-valuemin="0" aria-valuemax="<?= $max_umur; ?>"></div>
+                        </div>
                     </div>
-                </div>
-                <div class="progress">
-                    <span class="skill">WordPress/CMS <i class="val">90%</i></span>
-                    <div class="progress-bar-wrap">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+
+                    <div class="progress">
+                        <span class="skill">15 - 24 th <i class="val"><?= $u2; ?> orang</i></span>
+                        <div class="progress-bar-wrap">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="<?= $u2; ?>" aria-valuemin="0" aria-valuemax="<?= $max_umur; ?>"></div>
+                        </div>
                     </div>
-                </div>
-                <div class="progress">
-                    <span class="skill">Photoshop <i class="val">55%</i></span>
-                    <div class="progress-bar-wrap">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
+
+                    <div class="progress">
+                        <span class="skill">25 - 34 th<i class="val"><?= $u3; ?> orang</i></span>
+                        <div class="progress-bar-wrap">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="<?= $u3; ?>" aria-valuemin="0" aria-valuemax="<?= $max_umur; ?>"></div>
+                        </div>
                     </div>
+
+                    <div class="progress">
+                        <span class="skill">35 - 44 th<i class="val"><?= $u4; ?> orang</i></span>
+                        <div class="progress-bar-wrap">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="<?= $u4; ?>" aria-valuemin="0" aria-valuemax="<?= $max_umur; ?>"></div>
+                        </div>
+                    </div>
+
+                    <div class="progress">
+                        <span class="skill">45 - 54 th <i class="val"><?= $u5; ?> orang</i></span>
+                        <div class="progress-bar-wrap">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="<?= $u5; ?>" aria-valuemin="0" aria-valuemax="<?= $max_umur; ?>"></div>
+                        </div>
+                    </div>
+
+                    <div class="progress">
+                        <span class="skill">> 54 th<i class="val"><?= $u6; ?> orang</i></span>
+                        <div class="progress-bar-wrap">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="<?= $u6; ?>" aria-valuemin="0" aria-valuemax="<?= $max_umur; ?>"></div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
-</section>
+</section><!-- End Skills Section -->
+
 
 <section id="services" class="services section-bg bg-dark">
     <div class="container" data-aos="fade-up">
@@ -266,84 +300,34 @@
             <div class="col-lg-12 d-flex justify-content-center">
                 <ul id="portfolio-flters">
                     <li data-filter="*" class="filter-active">Semua</li>
-                    <li data-filter=".filter-app">Tenaga Kerja</li>
-                    <li data-filter=".filter-card">Transmigrasi</li>
+                    <?php foreach ($galleries as $category => $images) : ?>
+                        <li data-filter=".filter-<?= $category; ?>"><?= ucfirst($category); ?></li>
+                    <?php endforeach; ?>
                 </ul>
             </div>
         </div>
 
         <div class="row portfolio-container" data-aos="fade-up">
-
-            <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                <img src="<?= base_url(); ?>frontend/assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                    <h4>App 1</h4>
-                    <p>App</p>
-                    <a href="<?= base_url(); ?>frontend/assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="App 1"><i class="bx bx-plus"></i></a>
-                    <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-            </div>
-
-
-            <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                <img src="<?= base_url(); ?>frontend/assets/img/portfolio/portfolio-3.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                    <h4>App 2</h4>
-                    <p>App</p>
-                    <a href="<?= base_url(); ?>frontend/assets/img/portfolio/portfolio-3.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="App 2"><i class="bx bx-plus"></i></a>
-                    <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-                <img src="<?= base_url(); ?>frontend/assets/img/portfolio/portfolio-4.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                    <h4>Card 2</h4>
-                    <p>Card</p>
-                    <a href="<?= base_url(); ?>frontend/assets/img/portfolio/portfolio-4.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Card 2"><i class="bx bx-plus"></i></a>
-                    <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-            </div>
-
-
-            <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                <img src="<?= base_url(); ?>frontend/assets/img/portfolio/portfolio-6.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                    <h4>App 3</h4>
-                    <p>App</p>
-                    <a href="<?= base_url(); ?>frontend/assets/img/portfolio/portfolio-6.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="App 3"><i class="bx bx-plus"></i></a>
-                    <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-                <img src="<?= base_url(); ?>frontend/assets/img/portfolio/portfolio-7.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                    <h4>Card 1</h4>
-                    <p>Card</p>
-                    <a href="<?= base_url(); ?>frontend/assets/img/portfolio/portfolio-7.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Card 1"><i class="bx bx-plus"></i></a>
-                    <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-                <img src="<?= base_url(); ?>frontend/assets/img/portfolio/portfolio-8.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                    <h4>Card 3</h4>
-                    <p>Card</p>
-                    <a href="<?= base_url(); ?>frontend/assets/img/portfolio/portfolio-8.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Card 3"><i class="bx bx-plus"></i></a>
-                    <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-            </div>
-
-
+            <?php foreach ($galleries as $category => $images) : ?>
+                <?php foreach ($images as $image) : ?>
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-<?= $category; ?>">
+                        <img src="<?= $image['url']; ?>" class="img-fluid" alt="">
+                        <div class="portfolio-info">
+                            <h4><?= $image['name']; ?></h4>
+                            <p><?= ucfirst($category); ?></p>
+                            <a href="<?= $image['url']; ?>" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="<?= $image['name']; ?>"><i class="bx bx-plus"></i></a>
+                            <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php endforeach; ?>
         </div>
-
     </div>
 </section>
+
+
 <section id="team" class="team section-bg bg-dark bg-gradient">
     <div class="container">
-
         <div class="section-title text-white" data-aos="fade-up">
             <h2>Tim <strong>Kerja</strong></h2>
             <p>Orang-orang hebat yang siap melayani Anda.</p>
@@ -420,15 +404,12 @@
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div>
 </section>
 
 <section id="faq" class="faq section-bg">
     <div class="container" data-aos="fade-up">
-
         <div class="section-title">
             <h2>PALING SERING DITANYAKAN</h2>
             <p>Berikut kami himpun beberapa pertanyaan yang paling sering ditanyakan ke kantor Disnakertrans Kab. Manokwari</p>
@@ -539,5 +520,4 @@
         </div>
     </div>
 </section>
-
 <?= $this->endSection() ?>

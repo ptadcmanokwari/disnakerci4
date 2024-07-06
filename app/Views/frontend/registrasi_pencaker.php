@@ -34,22 +34,22 @@
                     <div class="row">
                         <div class="mb-3 col-md-12">
                             <label for="namalengkap" class="form-label">Nama Lengkap </label>
-                            <input type="text" class="form-control w-100" id="namalengkap" required="" name="namalengkap">
+                            <input type="text" class="form-control" id="namalengkap" required="" name="namalengkap">
                         </div>
                         <div class="mb-3 col-md-12">
                             <label for="nik" class="form-label">NIK</label>
-                            <input type="number" class="form-control w-100" id="nik" required="" name="nik">
+                            <input type="number" class="form-control" id="nik" required="" name="nik">
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="mb-3 col-md-12">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control w-100" id="email" required="" name="email">
+                            <input type="email" class="form-control" id="email" required="" name="email">
                         </div>
                         <div class="mb-3 col-md-12">
                             <label for="nohp" class="form-label">Nomor HP (WhatsApp)</label>
-                            <input type="number" class="form-control w-100" id="nohp" required="" name="nohp">
+                            <input type="number" class="form-control" id="nohp" required="" name="nohp">
                         </div>
                     </div>
 
@@ -57,13 +57,13 @@
                         <div class="mb-3 col-md-12">
                             <label for="password" class="form-label">Kata Sandi</label>
                             <div class="input-group" id="katasandi">
-                                <input class="form-control w-100" id="password" type="password" required="" name="password">
+                                <input class="form-control" id="password" type="password" required="" name="password">
                             </div>
                         </div>
                         <div class="mb-3 col-md-12">
                             <label for="password_confirm" class="form-label">Konfirmasi Kata Sandi </label>
                             <div class="input-group" id="katasandi_konfir">
-                                <input type="password" class="form-control w-100" id="password_confirm" required="" name="password_confirm">
+                                <input type="password" class="form-control" id="password_confirm" required="" name="password_confirm">
 
                             </div>
                             <span id="error-password_confirm" class="errormsg"></span>
@@ -91,3 +91,31 @@
     </div>
 </section>
 <?= $this->endSection() ?>
+
+<div class="row mt-5 justify-content-center" data-aos="fade-up">
+    <div class="col-lg-10">
+        <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <input type="text" name="name" class="form-control" id="name" placeholder="Nama Lengkap" required>
+                </div>
+                <div class="col-md-6 form-group mt-3 mt-md-0">
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
+                </div>
+            </div>
+            <div class="form-group mt-3">
+                <input type="text" class="form-control" name="subject" id="subject" placeholder="Judul Pesan" required>
+            </div>
+            <div class="form-group mt-3">
+                <textarea class="form-control" name="message" rows="5" placeholder="Isi Pesan" required></textarea>
+            </div>
+            <div class="my-3">
+                <div class="loading">Loading</div>
+                <div class="error-message"></div>
+                <div class="sent-message">Pesan Anda telah dikirim!</div>
+            </div>
+            <div class="text-center"><button type="submit">Kirim Pesan</button></div>
+        </form>
+    </div>
+
+</div>

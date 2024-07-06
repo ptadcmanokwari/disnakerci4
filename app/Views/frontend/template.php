@@ -50,7 +50,7 @@
 
             <nav id="navbar" class="navbar order-last order-lg-0">
                 <ul>
-                    <li><a <?= ($current_uris['segment_1'] == 'beranda') ? 'class="active"' : '' ?> href="<?= base_url('/'); ?>">Beranda</a></li>
+                    <li><a <?= ($current_uris['segment_1'] == '' || ($current_uris['segment_1'] == 'home')) ? 'class="active"' : '' ?> href="<?= base_url('/'); ?>">Beranda</a></li>
                     <li><a <?= ($current_uris['segment_1'] == 'profil') ? 'class="active"' : '' ?> href="<?= base_url('profil'); ?>">Profil</a></li>
 
                     <li class="dropdown">

@@ -312,3 +312,18 @@ in APPPATH\Views\frontend\berita.php on line 83.
 10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
 11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
 12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-06 20:02:18 --> ErrorException: Undefined variable $max_2umur
+[Method: GET, Route: /]
+in APPPATH\Views\frontend\home.php on line 197.
+ 1 APPPATH\Views\frontend\home.php(197): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $max_2umur', 'G:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\home.php', 197)
+ 2 SYSTEMPATH\View\View.php(234): include('G:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\home.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('frontend/home', [], true)
+ 5 APPPATH\Controllers\Frontend.php(283): view('frontend/home', [...])
+ 6 APPPATH\Controllers\Frontend.php(35): App\Controllers\Frontend->loadView('frontend/home', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Frontend->index()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
