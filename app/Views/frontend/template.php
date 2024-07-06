@@ -26,9 +26,12 @@
     <link href="<?= base_url(); ?>frontend/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
     <link href="<?= base_url(); ?>frontend/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
+    <link href="<?= base_url(); ?>frontend/sweetalert2/sweetalert2.min.css" rel="stylesheet">
+
     <!-- Template Main CSS File -->
     <link href="<?= base_url(); ?>frontend/assets/css/style.css" rel="stylesheet">
 
+    <script src="<?= base_url('frontend/jquery/jquery.min.js') ?>"></script>
     <!-- =======================================================
   * Template Name: Company
   * Template URL: https://bootstrapmade.com/company-free-html-bootstrap-template/
@@ -178,6 +181,7 @@
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
+
     <script src="<?= base_url(); ?>frontend/assets/vendor/aos/aos.js"></script>
     <script src="<?= base_url(); ?>frontend/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="<?= base_url(); ?>frontend/assets/vendor/glightbox/js/glightbox.min.js"></script>
@@ -185,6 +189,8 @@
     <script src="<?= base_url(); ?>frontend/assets/vendor/swiper/swiper-bundle.min.js"></script>
     <script src="<?= base_url(); ?>frontend/assets/vendor/waypoints/noframework.waypoints.js"></script>
     <script src="<?= base_url(); ?>frontend/assets/vendor/php-email-form/validate.js"></script>
+
+    <script src="<?= base_url(); ?>frontend/sweetalert2/sweetalert2.min.js"></script>
 
     <!-- Template Main JS File -->
     <script src="<?= base_url(); ?>frontend/assets/js/main.js"></script>
