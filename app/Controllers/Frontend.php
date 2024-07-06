@@ -5,7 +5,7 @@ namespace App\Controllers;
 use App\Models\FrontendModel;
 use App\Models\PencakerModel;
 use App\Models\PendidikanModel;
-use App\Models\JenjangPendidikanModel;
+use App\Models\UsersModel;
 
 class Frontend extends BaseController
 {
@@ -257,6 +257,48 @@ class Frontend extends BaseController
         $data['title'] = 'Registrasi Pencaker - Disnakertrans Manokwari';
         return $this->loadView('frontend/registrasi_pencaker', $data);
     }
+
+    public function save_pencaker_data()
+    {
+        $request = service('request');
+
+        // Ambil data dari form
+        $nama_lengkap = $request->getPost('namalengkap');
+        $nik = $request->getPost('nik');
+        $email = $request->getPost('email');
+        $no_hp = $request->getPost('nohp');
+        $password = $request->getPost('password');
+
+        // Simpan data ke tabel users
+        $usersModel = new UsersModel();
+        $usersData = [
+            'name' => $nama_lengkap, // sesuaikan dengan field yang sesuai
+            'email' => $email,
+            'password' => password_hash($password, PASSWORD_DEFAULT),
+            'phone' => $no_hp, // sesuaikan dengan field yang sesuai
+            // tambahkan field lainnya yang sesuai dengan form registrasi
+        ];
+        $userId = $usersModel->saveUser($usersData); // Simpan data user dan ambil ID-nya
+
+        // Simpan data ke tabel pencaker
+        $pencakerModel = new PencakerModel();
+        $pencakerData = [
+            'namalengkap' => $nama_lengkap,
+            'nik' => $nik,
+            'no_hp' => $no_hp,
+            'users_id' => $userId // Gunakan ID pengguna yang baru saja disimpan
+        ];
+        $pencakerModel->savePencaker($pencakerData);
+
+        // Response
+        $response = [
+            'status' => 'success',
+            'message' => 'Data berhasil disimpan.'
+        ];
+        return $this->response->setJSON($response);
+    }
+
+
 
     public function kontak(): string
     {

@@ -1,7 +1,16 @@
 <?= $this->extend('frontend/template') ?>
 
 <?= $this->section('content') ?>
-
+<style>
+    a.btn-buy.btn.btn-primary.text-center {
+        background: #116db6;
+        border: 0;
+        padding: 10px 24px;
+        color: #fff;
+        transition: 0.4s;
+        border-radius: 4px;
+    }
+</style>
 <section id="breadcrumbs" class="breadcrumbs">
     <div class="container">
 
