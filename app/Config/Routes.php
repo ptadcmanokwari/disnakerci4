@@ -19,8 +19,6 @@ $routes->get('/pelatihan', 'Frontend::pelatihan');
 $routes->get('/kartu_ak1', 'Frontend::kartu_ak1');
 $routes->get('/registrasi_pencaker', 'Frontend::registrasi_pencaker');
 $routes->post('/registrasi_pencaker', 'Frontend::registrasi_pencaker');
-
-$routes->get('registrasi_pencaker', 'Frontend::registrasi_pencaker');
 $routes->post('frontend/save_pencaker_data', 'Frontend::save_pencaker_data');
 
 $routes->get('/kontak', 'Frontend::kontak');

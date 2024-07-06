@@ -1,6 +1,15 @@
 <?= $this->extend('frontend/template') ?>
 <?= $this->section('content') ?>
-
+<style>
+    #btnRegistrasiPencaker {
+        background: #116db6;
+        border: 0;
+        padding: 10px 24px;
+        color: #fff;
+        transition: 0.4s;
+        border-radius: 4px;
+    }
+</style>
 <section id="breadcrumbs" class="breadcrumbs">
     <div class="container">
 
@@ -79,7 +88,7 @@
 
                     </div>
                     <div class="d-flex mt-4">
-                        <button type="submit" id="btnRegistrasiPencaker" class="btn btn-primary w-50">Daftar</button>
+                        <button type="submit" id="btnRegistrasiPencaker" class="btn btn-primary w-50">Buat Akun</button>
                     </div>
                 </form>
 
