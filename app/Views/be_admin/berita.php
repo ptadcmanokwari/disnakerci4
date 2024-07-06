@@ -2,12 +2,21 @@
 
 <?= $this->section('content') ?>
 
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+<style>
+    table.dataTable {
+        width: 100%;
+        margin: 13px auto;
+        border-collapse: collapse;
+    }
+
+    div#newsTable_length {
+        margin-bottom: 10px;
+    }
+</style>
 <main class="app-main">
-    <!--begin::App Content Header-->
     <div class="app-content-header">
-        <!--begin::Container-->
         <div class="container-fluid">
-            <!--begin::Row-->
             <div class="row">
                 <div class="col-sm-8">
                     <h3 class="mb-0">Berita</h3>
@@ -15,99 +24,90 @@
                 <div class="col-sm-4">
                     <ol class="breadcrumb float-sm-end">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">
-                            Fixed Layout
-                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">Fixed Layout</li>
                     </ol>
                 </div>
             </div>
-            <!--end::Row-->
         </div>
-        <!--end::Container-->
     </div>
-    <!--end::App Content Header-->
-    <!--begin::App Content-->
     <div class="app-content">
-        <!--begin::Container-->
         <div class="container-fluid">
-            <!--begin::Row-->
             <div class="row">
                 <div class="col-12">
-                    <!-- Default box -->
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Title</h3>
-                            <div class="card-tools"> <button type="button" class="btn btn-tool" data-lte-toggle="card-collapse" title="Collapse"> <i data-lte-icon="expand" class="bi bi-plus-lg"></i> <i data-lte-icon="collapse" class="bi bi-dash-lg"></i> </button>
-                                <button type="button" class="btn btn-tool" data-lte-toggle="card-remove" title="Remove">
-                                    <i class="bi bi-x-lg"></i> </button>
+                            <h3 class="card-title">Tabel Daftar Berita</h3>
+                            <div class="col-12 text-end">
+                                <button type="submit" class="btn btn-primary" name="save" value="create">Tambah Berita Baru</button>
                             </div>
                         </div>
                         <div class="card-body">
-                            <p>
-                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-                                eirmod tempor invidunt ut
-                                labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
-                                accusam et justo duo dolores
-                                et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-                                ipsum dolor sit amet.
-                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-                                eirmod tempor invidunt ut
-                                labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
-                                accusam et justo duo dolores
-                                et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-                                ipsum dolor sit amet.
-                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-                                eirmod tempor invidunt ut
-                                labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
-                                accusam et justo duo dolores
-                                et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-                                ipsum dolor sit amet.
-                            </p>
-
-                            <p>
-                                Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper
-                                suscipit lobortis nisl ut
-                                aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in
-                                hendrerit in vulputate velit
-                                esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero
-                                eros et accumsan et
-                                iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis
-                                dolore te feugait nulla
-                                facilisi.
-                            </p>
-                            <p>
-                                Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet
-                                doming id quod mazim
-                                placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer
-                                adipiscing elit, sed diam
-                                nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
-                                volutpat. Ut wisi enim ad minim
-                                veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut
-                                aliquip ex ea commodo
-                                consequat.
-                            </p>
-                            <p>
-                                Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
-                                molestie consequat, vel illum
-                                dolore eu feugiat nulla facilisis.
-                            </p>
+                            <table id="newsTable" class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th class="w-5">No.</th>
+                                        <th class="w-25">Judul Berita</th>
+                                        <th class="w-20">Kategori</th>
+                                        <th class="w-50">Isi Berita</th>
+                                        <th class="w-10">Gambar</th>
+                                        <th class="w-5">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
                         </div>
-                        <div class="card-footer">Footer</div>
                     </div>
                 </div>
             </div>
-            <!--end::Row-->
         </div>
-        <!--end::Container-->
     </div>
-    <!--end::App Content-->
 </main>
-<div class="app-content-bottom-area">
-    <div class="row">
-        <div class="col-12 text-end"> <button type="submit" class="btn btn-primary" name="save" value="create">Create
-                Admin</button> </div>
-    </div>
-</div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready(function() {
+        var table = $('#newsTable').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url: '<?= base_url('admin/berita_ajax') ?>',
+                type: 'POST'
+            },
+            columns: [{
+                    data: null
+                },
+                {
+                    data: 'judul'
+                },
+                {
+                    data: 'kategori'
+                },
+                {
+                    data: 'isi'
+                },
+                {
+                    data: 'gambar',
+                    render: function(data) {
+                        return `<img src="<?= base_url('uploads/berita/') ?>${data}" class="img-thumbnail" width="100">`;
+                    }
+                },
+                {
+                    data: 'id',
+                    render: function(data) {
+                        return `<button class="btn btn-secondary btn-sm delete-berita" data-id="${data}">Hapus</button>`;
+                    }
+                }
+            ],
+            columnDefs: [{
+                targets: 0,
+                render: function(data, type, row, meta) {
+                    return meta.row + 1;
+                }
+            }]
+        });
+    });
+</script>
 
 <?= $this->endSection() ?>

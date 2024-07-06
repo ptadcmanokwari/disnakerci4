@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
+use App\Models\FrontendModel;
 
 // Controller untuk admin (org Disnakertrans)
 class Admin extends BaseController
@@ -27,6 +28,54 @@ class Admin extends BaseController
     {
         return $this->loadView('be_admin/berita');
     }
+
+    public function berita_ajax()
+    {
+        $model = new FrontendModel();
+
+        $request = \Config\Services::request();
+        $draw = $request->getPost('draw') ?? 1;
+        $start = (int) $request->getPost('start') ?? 0;
+        $length = (int) $request->getPost('length') ?? 10;
+        $searchValue = $request->getPost('search')['value'] ?? '';
+
+        // Total records
+        $totalRecords = $model->countAllResults();
+
+        // Filtered records
+        if (!empty($searchValue)) {
+            $model->like('judul', $searchValue)
+                ->orLike('isi', $searchValue);
+        }
+        $totalFiltered = $model->countAllResults(false);
+
+        // Fetch data
+        if (!empty($searchValue)) {
+            $model->like('judul', $searchValue)
+                ->orLike('isi', $searchValue);
+        }
+        $model->limit($length, $start);
+        $berita = $model->find();
+
+        $data = [];
+        foreach ($berita as $row) {
+            $data[] = [
+                'judul' => $row['judul'],
+                'isi' => $row['isi'],
+                'kategori' => $row['kategori'],
+                'gambar' => $row['gambar'],
+                'id' => $row['id'],
+            ];
+        }
+
+        return $this->response->setJSON([
+            'draw' => intval($draw),
+            'recordsTotal' => $totalRecords,
+            'recordsFiltered' => $totalFiltered,
+            'data' => $data
+        ]);
+    }
+
 
     public function pengumuman()
     {

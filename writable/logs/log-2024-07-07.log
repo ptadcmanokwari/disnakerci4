@@ -1,0 +1,132 @@
+CRITICAL - 2024-07-07 03:07:49 --> BadMethodCallException: Call to undefined method App\Models\FrontendModel::getInformasiByKategoriServerSide
+[Method: POST, Route: admin/ajax_listberita]
+in SYSTEMPATH\Model.php on line 932.
+ 1 APPPATH\Controllers\Admin.php(42): CodeIgniter\Model->__call('getInformasiByKategoriServerSide', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->ajax_listberita()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-07 03:09:12 --> BadMethodCallException: Call to undefined method App\Models\FrontendModel::getInformasiByKategoriServerSide
+[Method: POST, Route: admin/ajax_listberita]
+in SYSTEMPATH\Model.php on line 932.
+ 1 APPPATH\Controllers\Admin.php(42): CodeIgniter\Model->__call('getInformasiByKategoriServerSide', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->ajax_listberita()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-07 03:09:26 --> ErrorException: Trying to access array offset on value of type null
+[Method: GET, Route: admin/ajax_listberita]
+in APPPATH\Controllers\Admin.php on line 38.
+ 1 APPPATH\Controllers\Admin.php(38): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to access array offset on value of type null', 'G:\\laragon\\www\\disnakerci4\\app\\Controllers\\Admin.php', 38)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->ajax_listberita()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-07 03:10:55 --> BadMethodCallException: Call to undefined method App\Models\FrontendModel::getInformasiByKategoriServerSide
+[Method: GET, Route: admin/ajax_listberita]
+in SYSTEMPATH\Model.php on line 932.
+ 1 APPPATH\Controllers\Admin.php(43): CodeIgniter\Model->__call('getInformasiByKategoriServerSide', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->ajax_listberita()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-07 03:12:19 --> TypeError: CodeIgniter\BaseModel::findAll(): Argument #2 ($offset) must be of type int, null given, called in G:\laragon\www\disnakerci4\app\Models\FrontendModel.php on line 55
+[Method: GET, Route: admin/ajax_listberita]
+in SYSTEMPATH\BaseModel.php on line 654.
+ 1 APPPATH\Models\FrontendModel.php(55): CodeIgniter\BaseModel->findAll(null, null)
+ 2 APPPATH\Controllers\Admin.php(43): App\Models\FrontendModel->getInformasiByKategoriServerSide('berita', null, null, '')
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->ajax_listberita()
+ 4 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 5 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-07 04:03:40 --> ErrorException: Trying to access array offset on value of type null
+[Method: GET, Route: admin/ajax_listberita]
+in APPPATH\Controllers\Admin.php on line 38.
+ 1 APPPATH\Controllers\Admin.php(38): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to access array offset on value of type null', 'G:\\laragon\\www\\disnakerci4\\app\\Controllers\\Admin.php', 38)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->ajax_listberita()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-07 04:03:50 --> ErrorException: Trying to access array offset on value of type null
+[Method: GET, Route: admin/ajax_listberita]
+in APPPATH\Controllers\Admin.php on line 38.
+ 1 APPPATH\Controllers\Admin.php(38): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to access array offset on value of type null', 'G:\\laragon\\www\\disnakerci4\\app\\Controllers\\Admin.php', 38)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->ajax_listberita()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-07 04:09:01 --> ArgumentCountError: Too few arguments to function App\Models\FrontendModel::getInformasiByKategori(), 0 passed in G:\laragon\www\disnakerci4\app\Controllers\Admin.php on line 35 and exactly 3 expected
+[Method: GET, Route: admin/berita_ajax]
+in APPPATH\Models\FrontendModel.php on line 30.
+ 1 APPPATH\Controllers\Admin.php(35): App\Models\FrontendModel->getInformasiByKategori()
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->berita_ajax()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-07 04:10:46 --> ArgumentCountError: Too few arguments to function App\Models\FrontendModel::getInformasiByKategori(), 0 passed in G:\laragon\www\disnakerci4\app\Controllers\Admin.php on line 35 and exactly 3 expected
+[Method: GET, Route: admin/berita_ajax]
+in APPPATH\Models\FrontendModel.php on line 30.
+ 1 APPPATH\Controllers\Admin.php(35): App\Models\FrontendModel->getInformasiByKategori()
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->berita_ajax()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-07 04:14:14 --> ErrorException: Trying to access array offset on value of type null
+[Method: GET, Route: admin/berita_ajax]
+in APPPATH\Controllers\Admin.php on line 40.
+ 1 APPPATH\Controllers\Admin.php(40): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to access array offset on value of type null', 'G:\\laragon\\www\\disnakerci4\\app\\Controllers\\Admin.php', 40)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->berita_ajax()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-07 04:17:15 --> ErrorException: Trying to access array offset on value of type null
+[Method: GET, Route: admin/berita_ajax]
+in APPPATH\Controllers\Admin.php on line 40.
+ 1 APPPATH\Controllers\Admin.php(40): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to access array offset on value of type null', 'G:\\laragon\\www\\disnakerci4\\app\\Controllers\\Admin.php', 40)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->berita_ajax()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-07 04:17:20 --> ErrorException: Trying to access array offset on value of type null
+[Method: GET, Route: admin/berita_ajax]
+in APPPATH\Controllers\Admin.php on line 40.
+ 1 APPPATH\Controllers\Admin.php(40): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to access array offset on value of type null', 'G:\\laragon\\www\\disnakerci4\\app\\Controllers\\Admin.php', 40)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->berita_ajax()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-07 04:19:04 --> TypeError: CodeIgniter\Database\BaseBuilder::limit(): Argument #1 ($value) must be of type ?int, string given, called in G:\laragon\www\disnakerci4\vendor\codeigniter4\framework\system\Model.php on line 930
+[Method: POST, Route: admin/berita_ajax]
+in SYSTEMPATH\Database\BaseBuilder.php on line 1501.
+ 1 SYSTEMPATH\Model.php(930): CodeIgniter\Database\BaseBuilder->limit('10', '0')
+ 2 APPPATH\Controllers\Admin.php(57): CodeIgniter\Model->__call('limit', [...])
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->berita_ajax()
+ 4 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 5 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

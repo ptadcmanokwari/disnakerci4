@@ -27,7 +27,12 @@ $routes->get('/masuk', 'Frontend::masuk');
 
 $routes->get('admin/dashboard', 'Admin::dashboard');
 $routes->get('admin/pencaker', 'Admin::pencaker');
-$routes->get('admin/berita', 'Admin::berita');
+// $routes->get('admin/berita', 'Admin::berita');
+
+$routes->get('/admin/berita', 'Admin::berita');
+$routes->post('/admin/berita_ajax', 'Admin::berita_ajax');
+$routes->get('/admin/berita_ajax', 'Admin::berita_ajax');
+
 $routes->get('admin/pengumuman', 'Admin::pengumuman');
 $routes->get('admin/pelatihan', 'Admin::pelatihan');
 $routes->get('admin/userslog', 'Admin::userslog');
