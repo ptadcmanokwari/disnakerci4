@@ -298,12 +298,16 @@ class Frontend extends BaseController
         return $this->response->setJSON($response);
     }
 
-
-
     public function kontak(): string
     {
         $data['title'] = 'Kontak - Disnakertrans Manokwari';
         return $this->loadView('frontend/kontak', $data);
+    }
+
+    public function login(): string
+    {
+        $data['title'] = 'Kontak - Disnakertrans Manokwari';
+        return $this->loadView('frontend/login', $data);
     }
 
     private function loadView(string $viewName, array $data = []): string

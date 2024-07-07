@@ -1,7 +1,9 @@
 <?= $this->extend('be_admin/layout') ?>
 
 <?= $this->section('content') ?>
+<link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css" />
 
+<script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
 <main class="app-main">
     <!--begin::App Content Header-->
     <div class="app-content-header">
@@ -46,54 +48,24 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <p>
-                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-                                eirmod tempor invidunt ut
-                                labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
-                                accusam et justo duo dolores
-                                et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-                                ipsum dolor sit amet.
-                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-                                eirmod tempor invidunt ut
-                                labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
-                                accusam et justo duo dolores
-                                et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-                                ipsum dolor sit amet.
-                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-                                eirmod tempor invidunt ut
-                                labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
-                                accusam et justo duo dolores
-                                et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-                                ipsum dolor sit amet.
-                            </p>
-
-                            <p>
-                                Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper
-                                suscipit lobortis nisl ut
-                                aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in
-                                hendrerit in vulputate velit
-                                esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero
-                                eros et accumsan et
-                                iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis
-                                dolore te feugait nulla
-                                facilisi.
-                            </p>
-                            <p>
-                                Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet
-                                doming id quod mazim
-                                placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer
-                                adipiscing elit, sed diam
-                                nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
-                                volutpat. Ut wisi enim ad minim
-                                veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut
-                                aliquip ex ea commodo
-                                consequat.
-                            </p>
-                            <p>
-                                Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
-                                molestie consequat, vel illum
-                                dolore eu feugiat nulla facilisis.
-                            </p>
+                            <table id="myTable" class="display">
+                                <thead>
+                                    <tr>
+                                        <th>Column 1</th>
+                                        <th>Column 2</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Row 1 Data 1</td>
+                                        <td>Row 1 Data 2</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Row 2 Data 1</td>
+                                        <td>Row 2 Data 2</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                         <div class="card-footer">Footer</div>
                     </div>
@@ -112,5 +84,10 @@
     </div>
 </div>
 
+<script>
+$(document).ready(function() {
+    $('#myTable').DataTable();
+});
+</script>
 
 <?= $this->endSection() ?>

@@ -10,8 +10,10 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="<?= base_url(); ?>frontend/assets/img/favicon.png" rel="icon">
-    <link href="<?= base_url(); ?>frontend/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="<?= base_url(); ?>frontend/assets/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="<?= base_url(); ?>frontend/assets/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url(); ?>frontend/assets/img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="<?= base_url(); ?>frontend/assets/img/favicon/site.webmanifest">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -57,10 +59,10 @@
                     <li><a <?= ($current_uris['segment_1'] == 'profil') ? 'class="active"' : '' ?> href="<?= base_url('profil'); ?>">Profil</a></li>
 
                     <li class="dropdown">
-                        <a <?= in_array($current_uris['segment_1'], ['transmigrasi', 'tenaga_kerja']) ? 'class="active"' : '' ?> href="#"><span>Urusan-Urusan</span> <i class="bi bi-chevron-down"></i></a>
+                        <a <?= in_array($current_uris['segment_1'], ['urusan_transmigrasi', 'urusan_tenaga_kerja']) ? 'class="active"' : '' ?> href="#"><span>Urusan-Urusan</span> <i class="bi bi-chevron-down"></i></a>
                         <ul>
-                            <li><a <?= ($current_uris['segment_1'] == 'transmigrasi') ? 'class="active"' : '' ?> href="<?= base_url('transmigrasi'); ?>">Urusan Transmigrasi</a></li>
-                            <li><a <?= ($current_uris['segment_1'] == 'tenaga_kerja') ? 'class="active"' : '' ?> href="<?= base_url('tenaga_kerja'); ?>">Urusan Tenaga Kerja</a></li>
+                            <li><a <?= ($current_uris['segment_1'] == 'urusan_transmigrasi') ? 'class="active"' : '' ?> href="<?= base_url('urusan_transmigrasi'); ?>">Urusan Transmigrasi</a></li>
+                            <li><a <?= ($current_uris['segment_1'] == 'urusan_tenaga_kerja') ? 'class="active"' : '' ?> href="<?= base_url('urusan_tenaga_kerja'); ?>">Urusan Tenaga Kerja</a></li>
                         </ul>
                     </li>
 

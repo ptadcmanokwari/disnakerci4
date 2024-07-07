@@ -130,6 +130,7 @@ in SYSTEMPATH\Database\BaseBuilder.php on line 1501.
  6 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
  7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
  8 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+<<<<<<< Updated upstream
 CRITICAL - 2024-07-07 11:42:50 --> Error: Call to a member function isValid() on null
 [Method: POST, Route: admin/update_berita]
 in APPPATH\Controllers\Admin.php on line 105.
@@ -588,3 +589,167 @@ in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
 11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
 INFO - 2024-07-07 17:57:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 INFO - 2024-07-07 17:58:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+=======
+CRITICAL - 2024-07-07 19:13:21 --> ErrorException: Undefined variable $pager
+[Method: GET, Route: berita]
+in APPPATH\Views\frontend\berita.php on line 69.
+ 1 APPPATH\Views\frontend\berita.php(69): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $pager', 'C:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\berita.php', 69)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\berita.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('frontend/berita', [], true)
+ 5 APPPATH\Controllers\Frontend.php(325): view('frontend/berita', [...])
+ 6 APPPATH\Controllers\Frontend.php(174): App\Controllers\Frontend->loadView('frontend/berita', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Frontend->berita()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+>>>>>>> Stashed changes
+CRITICAL - 2024-07-07 19:26:12 --> ErrorException: include(C:\laragon\www\disnakerci4\vendor\composer/../../app/Controllers/Home.php): Failed to open stream: No such file or directory
+[Method: GET, Route: transmigrasi]
+in VENDORPATH\composer\ClassLoader.php on line 576.
+ 1 VENDORPATH\composer\ClassLoader.php(576): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(C:\\laragon\\www\\disnakerci4\\vendor\\composer/../../app/Controllers/Home.php): Failed to open stream: No such file or directory', 'C:\\laragon\\www\\disnakerci4\\vendor\\composer\\ClassLoader.php', 576)
+ 2 VENDORPATH\composer\ClassLoader.php(576): include()
+ 3 VENDORPATH\composer\ClassLoader.php(427): Composer\Autoload\{closure}('C:\\laragon\\www\\disnakerci4\\vendor\\composer/../../app/Controllers/Home.php')
+ 4 [internal function]: Composer\Autoload\ClassLoader->loadClass('App\\Controllers\\Home')
+ 5 SYSTEMPATH\Router\AutoRouterImproved.php(239): class_exists('\\App\\Controllers\\Home')
+ 6 SYSTEMPATH\Router\AutoRouterImproved.php(294): CodeIgniter\Router\AutoRouterImproved->searchLastDefaultController()
+ 7 SYSTEMPATH\Router\Router.php(563): CodeIgniter\Router\AutoRouterImproved->getRoute('transmigrasi', 'get')
+ 8 SYSTEMPATH\Router\Router.php(228): CodeIgniter\Router\Router->autoRoute('transmigrasi')
+ 9 SYSTEMPATH\CodeIgniter.php(834): CodeIgniter\Router\Router->handle('transmigrasi')
+10 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+11 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-07 19:27:28 --> ErrorException: Undefined variable $pager
+[Method: GET, Route: berita]
+in APPPATH\Views\frontend\berita.php on line 69.
+ 1 APPPATH\Views\frontend\berita.php(69): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $pager', 'C:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\berita.php', 69)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\berita.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('frontend/berita', [], true)
+ 5 APPPATH\Controllers\Frontend.php(325): view('frontend/berita', [...])
+ 6 APPPATH\Controllers\Frontend.php(174): App\Controllers\Frontend->loadView('frontend/berita', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Frontend->berita()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-07 19:30:27 --> ErrorException: Undefined variable $pager
+[Method: GET, Route: pengumuman]
+in APPPATH\Views\frontend\pengumuman.php on line 61.
+ 1 APPPATH\Views\frontend\pengumuman.php(61): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $pager', 'C:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\pengumuman.php', 61)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\pengumuman.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('frontend/pengumuman', [], true)
+ 5 APPPATH\Controllers\Frontend.php(325): view('frontend/pengumuman', [...])
+ 6 APPPATH\Controllers\Frontend.php(209): App\Controllers\Frontend->loadView('frontend/pengumuman', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Frontend->pengumuman()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-07 19:30:51 --> ErrorException: Undefined variable $pager
+[Method: GET, Route: pelatihan]
+in APPPATH\Views\frontend\pelatihan.php on line 61.
+ 1 APPPATH\Views\frontend\pelatihan.php(61): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $pager', 'C:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\pelatihan.php', 61)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\pelatihan.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('frontend/pelatihan', [], true)
+ 5 APPPATH\Controllers\Frontend.php(325): view('frontend/pelatihan', [...])
+ 6 APPPATH\Controllers\Frontend.php(246): App\Controllers\Frontend->loadView('frontend/pelatihan', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Frontend->pelatihan()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-07 19:37:27 --> ErrorException: include(C:\laragon\www\disnakerci4\vendor\composer/../../app/Controllers/Home.php): Failed to open stream: No such file or directory
+[Method: GET, Route: dist/css/adminlte.css]
+in VENDORPATH\composer\ClassLoader.php on line 576.
+ 1 VENDORPATH\composer\ClassLoader.php(576): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(C:\\laragon\\www\\disnakerci4\\vendor\\composer/../../app/Controllers/Home.php): Failed to open stream: No such file or directory', 'C:\\laragon\\www\\disnakerci4\\vendor\\composer\\ClassLoader.php', 576)
+ 2 VENDORPATH\composer\ClassLoader.php(576): include()
+ 3 VENDORPATH\composer\ClassLoader.php(427): Composer\Autoload\{closure}('C:\\laragon\\www\\disnakerci4\\vendor\\composer/../../app/Controllers/Home.php')
+ 4 [internal function]: Composer\Autoload\ClassLoader->loadClass('App\\Controllers\\Home')
+ 5 SYSTEMPATH\Router\AutoRouterImproved.php(239): class_exists('\\App\\Controllers\\Home')
+ 6 SYSTEMPATH\Router\AutoRouterImproved.php(294): CodeIgniter\Router\AutoRouterImproved->searchLastDefaultController()
+ 7 SYSTEMPATH\Router\Router.php(563): CodeIgniter\Router\AutoRouterImproved->getRoute('dist/css/adminlte.css', 'get')
+ 8 SYSTEMPATH\Router\Router.php(228): CodeIgniter\Router\Router->autoRoute('dist/css/adminlte.css')
+ 9 SYSTEMPATH\CodeIgniter.php(834): CodeIgniter\Router\Router->handle('dist/css/adminlte.css')
+10 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+11 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-07 19:37:28 --> ErrorException: include(C:\laragon\www\disnakerci4\vendor\composer/../../app/Controllers/Home.php): Failed to open stream: No such file or directory
+[Method: GET, Route: dist/js/adminlte.js]
+in VENDORPATH\composer\ClassLoader.php on line 576.
+ 1 VENDORPATH\composer\ClassLoader.php(576): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(C:\\laragon\\www\\disnakerci4\\vendor\\composer/../../app/Controllers/Home.php): Failed to open stream: No such file or directory', 'C:\\laragon\\www\\disnakerci4\\vendor\\composer\\ClassLoader.php', 576)
+ 2 VENDORPATH\composer\ClassLoader.php(576): include()
+ 3 VENDORPATH\composer\ClassLoader.php(427): Composer\Autoload\{closure}('C:\\laragon\\www\\disnakerci4\\vendor\\composer/../../app/Controllers/Home.php')
+ 4 [internal function]: Composer\Autoload\ClassLoader->loadClass('App\\Controllers\\Home')
+ 5 SYSTEMPATH\Router\AutoRouterImproved.php(239): class_exists('\\App\\Controllers\\Home')
+ 6 SYSTEMPATH\Router\AutoRouterImproved.php(294): CodeIgniter\Router\AutoRouterImproved->searchLastDefaultController()
+ 7 SYSTEMPATH\Router\Router.php(563): CodeIgniter\Router\AutoRouterImproved->getRoute('dist/js/adminlte.js', 'get')
+ 8 SYSTEMPATH\Router\Router.php(228): CodeIgniter\Router\Router->autoRoute('dist/js/adminlte.js')
+ 9 SYSTEMPATH\CodeIgniter.php(834): CodeIgniter\Router\Router->handle('dist/js/adminlte.js')
+10 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+11 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-07 19:37:29 --> ErrorException: include(C:\laragon\www\disnakerci4\vendor\composer/../../app/Controllers/Home.php): Failed to open stream: No such file or directory
+[Method: GET, Route: dist/css/adminlte.css]
+in VENDORPATH\composer\ClassLoader.php on line 576.
+ 1 VENDORPATH\composer\ClassLoader.php(576): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(C:\\laragon\\www\\disnakerci4\\vendor\\composer/../../app/Controllers/Home.php): Failed to open stream: No such file or directory', 'C:\\laragon\\www\\disnakerci4\\vendor\\composer\\ClassLoader.php', 576)
+ 2 VENDORPATH\composer\ClassLoader.php(576): include()
+ 3 VENDORPATH\composer\ClassLoader.php(427): Composer\Autoload\{closure}('C:\\laragon\\www\\disnakerci4\\vendor\\composer/../../app/Controllers/Home.php')
+ 4 [internal function]: Composer\Autoload\ClassLoader->loadClass('App\\Controllers\\Home')
+ 5 SYSTEMPATH\Router\AutoRouterImproved.php(239): class_exists('\\App\\Controllers\\Home')
+ 6 SYSTEMPATH\Router\AutoRouterImproved.php(294): CodeIgniter\Router\AutoRouterImproved->searchLastDefaultController()
+ 7 SYSTEMPATH\Router\Router.php(563): CodeIgniter\Router\AutoRouterImproved->getRoute('dist/css/adminlte.css', 'get')
+ 8 SYSTEMPATH\Router\Router.php(228): CodeIgniter\Router\Router->autoRoute('dist/css/adminlte.css')
+ 9 SYSTEMPATH\CodeIgniter.php(834): CodeIgniter\Router\Router->handle('dist/css/adminlte.css')
+10 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+11 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-07 19:37:29 --> ErrorException: include(C:\laragon\www\disnakerci4\vendor\composer/../../app/Controllers/Home.php): Failed to open stream: No such file or directory
+[Method: GET, Route: dist/js/adminlte.js]
+in VENDORPATH\composer\ClassLoader.php on line 576.
+ 1 VENDORPATH\composer\ClassLoader.php(576): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(C:\\laragon\\www\\disnakerci4\\vendor\\composer/../../app/Controllers/Home.php): Failed to open stream: No such file or directory', 'C:\\laragon\\www\\disnakerci4\\vendor\\composer\\ClassLoader.php', 576)
+ 2 VENDORPATH\composer\ClassLoader.php(576): include()
+ 3 VENDORPATH\composer\ClassLoader.php(427): Composer\Autoload\{closure}('C:\\laragon\\www\\disnakerci4\\vendor\\composer/../../app/Controllers/Home.php')
+ 4 [internal function]: Composer\Autoload\ClassLoader->loadClass('App\\Controllers\\Home')
+ 5 SYSTEMPATH\Router\AutoRouterImproved.php(239): class_exists('\\App\\Controllers\\Home')
+ 6 SYSTEMPATH\Router\AutoRouterImproved.php(294): CodeIgniter\Router\AutoRouterImproved->searchLastDefaultController()
+ 7 SYSTEMPATH\Router\Router.php(563): CodeIgniter\Router\AutoRouterImproved->getRoute('dist/js/adminlte.js', 'get')
+ 8 SYSTEMPATH\Router\Router.php(228): CodeIgniter\Router\Router->autoRoute('dist/js/adminlte.js')
+ 9 SYSTEMPATH\CodeIgniter.php(834): CodeIgniter\Router\Router->handle('dist/js/adminlte.js')
+10 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+11 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-07 19:50:50 --> ErrorException: include(C:\laragon\www\disnakerci4\vendor\composer/../../app/Controllers/Home.php): Failed to open stream: No such file or directory
+[Method: GET, Route: img/cta-bg.jpg]
+in VENDORPATH\composer\ClassLoader.php on line 576.
+ 1 VENDORPATH\composer\ClassLoader.php(576): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(C:\\laragon\\www\\disnakerci4\\vendor\\composer/../../app/Controllers/Home.php): Failed to open stream: No such file or directory', 'C:\\laragon\\www\\disnakerci4\\vendor\\composer\\ClassLoader.php', 576)
+ 2 VENDORPATH\composer\ClassLoader.php(576): include()
+ 3 VENDORPATH\composer\ClassLoader.php(427): Composer\Autoload\{closure}('C:\\laragon\\www\\disnakerci4\\vendor\\composer/../../app/Controllers/Home.php')
+ 4 [internal function]: Composer\Autoload\ClassLoader->loadClass('App\\Controllers\\Home')
+ 5 SYSTEMPATH\Router\AutoRouterImproved.php(239): class_exists('\\App\\Controllers\\Home')
+ 6 SYSTEMPATH\Router\AutoRouterImproved.php(294): CodeIgniter\Router\AutoRouterImproved->searchLastDefaultController()
+ 7 SYSTEMPATH\Router\Router.php(563): CodeIgniter\Router\AutoRouterImproved->getRoute('img/cta-bg.jpg', 'get')
+ 8 SYSTEMPATH\Router\Router.php(228): CodeIgniter\Router\Router->autoRoute('img/cta-bg.jpg')
+ 9 SYSTEMPATH\CodeIgniter.php(834): CodeIgniter\Router\Router->handle('img/cta-bg.jpg')
+10 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+11 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
