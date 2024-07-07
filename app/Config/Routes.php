@@ -32,6 +32,17 @@ $routes->get('admin/pencaker', 'Admin::pencaker');
 $routes->get('/admin/berita', 'Admin::berita');
 $routes->post('/admin/berita_ajax', 'Admin::berita_ajax');
 $routes->get('/admin/berita_ajax', 'Admin::berita_ajax');
+$routes->post('admin/hapus_berita', 'Admin::hapus_berita');
+$routes->post('admin/upload_berita', 'Admin::upload_berita');
+$routes->get('admin/upload_berita', 'Admin::upload_berita');
+
+$routes->get('admin/get_berita/(:num)', 'Admin::get_berita/$1');
+$routes->get('admin/update_berita', 'Admin::update_berita');
+$routes->post('admin/update_berita', 'Admin::update_berita');
+$routes->post('admin/upload_gambar', 'Admin::upload_gambar');
+$routes->post('/admin/upload_berita', 'Admin::upload_berita');
+$routes->get('/admin/upload_berita', 'Admin::upload_berita');
+
 
 $routes->get('admin/pengumuman', 'Admin::pengumuman');
 $routes->get('admin/pelatihan', 'Admin::pelatihan');

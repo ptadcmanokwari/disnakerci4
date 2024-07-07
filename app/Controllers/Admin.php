@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\FrontendModel;
+use App\Models\BeritaModel;
 
 // Controller untuk admin (org Disnakertrans)
 class Admin extends BaseController
@@ -40,19 +41,25 @@ class Admin extends BaseController
         $searchValue = $request->getPost('search')['value'] ?? '';
 
         // Total records
-        $totalRecords = $model->countAllResults();
+        $totalRecords = $model->countInformasiByKategori('berita');
 
         // Filtered records
         if (!empty($searchValue)) {
             $model->like('judul', $searchValue)
-                ->orLike('isi', $searchValue);
+                ->orLike('isi', $searchValue)
+                ->where('kategori', 'berita');
+        } else {
+            $model->where('kategori', 'berita');
         }
         $totalFiltered = $model->countAllResults(false);
 
         // Fetch data
         if (!empty($searchValue)) {
             $model->like('judul', $searchValue)
-                ->orLike('isi', $searchValue);
+                ->orLike('isi', $searchValue)
+                ->where('kategori', 'berita');
+        } else {
+            $model->where('kategori', 'berita');
         }
         $model->limit($length, $start);
         $berita = $model->find();
@@ -62,8 +69,8 @@ class Admin extends BaseController
             $data[] = [
                 'judul' => $row['judul'],
                 'isi' => $row['isi'],
-                'kategori' => $row['kategori'],
                 'gambar' => $row['gambar'],
+                'status' => $row['status'],
                 'id' => $row['id'],
             ];
         }
@@ -75,6 +82,138 @@ class Admin extends BaseController
             'data' => $data
         ]);
     }
+
+    public function uploadBerita()
+    {
+        // Validasi input jika diperlukan
+        $request = service('request');
+
+        // Menggunakan dependency injection untuk memanggil model
+        $model = new BeritaModel();
+
+        $data = [
+            'kategori' => $request->getVar('kategori'),
+            'judul' => $request->getVar('judul'),
+            'isi' => $request->getVar('isi'),
+            'tags' => $request->getVar('tags'),
+            'tgl_publikasi' => date('Y-m-d H:i:s'), // Misalnya tanggal saat ini
+            'status' => $request->getVar('status'),
+            'users_id' => $request->getVar('users_id'),
+            'gambar' => $request->getVar('gambar') // File gambar akan di-handle terpisah
+        ];
+
+        // Insert data berita ke database
+        $insertedId = $model->insert($data);
+
+        if ($insertedId) {
+            echo json_encode(['status' => 'success', 'message' => 'Berita berhasil diunggah!']);
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Gagal mengunggah berita.']);
+        }
+    }
+
+
+    public function get_berita($id)
+    {
+        $model = new FrontendModel();
+        $berita = $model->find($id);
+
+        if (!$berita) {
+            return $this->response->setJSON(['error' => 'Berita tidak ditemukan.']);
+        }
+
+        return $this->response->setJSON($berita);
+    }
+    // $users_id = $this->session->get('id'); 
+
+    private function slugify($str)
+    {
+        $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $str)));
+        return $slug;
+    }
+
+    public function upload_gambar()
+    {
+        if ($this->request->getFile('file')->isValid()) {
+            $file = $this->request->getFile('file');
+            $fileName = $file->getRandomName();
+            $file->move('uploads/berita/', $fileName);
+
+            return $this->response->setJSON([
+                'success' => true,
+                'filename' => $fileName,
+                'filepath' => base_url('uploads/berita/' . $fileName)
+            ]);
+        } else {
+            return $this->response->setJSON(['success' => false]);
+        }
+    }
+
+    public function update_berita()
+    {
+        $model = new FrontendModel();
+        $id = $this->request->getPost('id');
+        $kategori = $this->request->getPost('kategori');
+        $judul = $this->request->getPost('judul');
+        $isi = $this->request->getPost('isi');
+        $tags = $this->request->getPost('tags');
+        $status = $this->request->getPost('status');
+        $users_id = $this->request->getPost('users_id');
+
+        // Fungsi untuk membuat slug dari judul
+        $slug = $this->slugify($judul);
+
+        // Buat array data berdasarkan input dari form
+        $data = [
+            'kategori' => $kategori,
+            'judul' => $judul,
+            'isi' => $isi,
+            'tags' => $tags,
+            'status' => $status,
+            'tgl_publikasi' => date("Y-m-d H:i:s"), // Tanggal publikasi diupdate saat ini
+            'users_id' => $users_id,
+            'slug' => $slug
+        ];
+
+        // Pengecekan apakah file gambar diunggah
+        $gambar = $this->request->getPost('gambar');
+        if ($gambar) {
+            // Hapus gambar lama jika ada
+            $oldImagePath = 'uploads/berita/' . $gambar;
+            if (file_exists($oldImagePath)) {
+                unlink($oldImagePath);
+            }
+
+            $data['gambar'] = $this->request->getPost('gambar'); // Masukkan nama file ke dalam data untuk disimpan di database
+        }
+
+        // Panggil model untuk melakukan update berita
+        if ($model->update($id, $data)) {
+            return $this->response->setJSON(['success' => true]);
+        } else {
+            return $this->response->setJSON(['success' => false]);
+        }
+    }
+
+
+    public function hapus_berita()
+    {
+        $response = ['success' => false];
+
+        $request = \Config\Services::request();
+        $id = $request->getPost('id');
+
+        if ($id) {
+            $model = new FrontendModel();
+            if ($model->delete($id)) {
+                $response['success'] = true;
+            }
+        }
+
+        return $this->response->setJSON($response);
+    }
+
+
 
 
     public function pengumuman()

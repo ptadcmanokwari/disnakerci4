@@ -42,9 +42,7 @@
                         <div class="card-header">
                             <h3 class="card-title">Tabel Daftar Berita</h3>
                             <div class="col-12 text-end">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addBeritaBaruModal">
-                                    Tambah Berita Baru
-                                </button>
+                                <button type="submit" class="btn btn-primary" name="save" value="create">Tambah Berita Baru</button>
                             </div>
                         </div>
                         <div class="card-body">
@@ -69,53 +67,12 @@
     </div>
 </main>
 
-<!-- Modal Unggah Berita Baru-->
-<div class="modal fade" id="addBeritaBaruModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addBeritaBaruModalLabel" aria-hidden="true">
+<!-- Bootstrap Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addBeritaBaruModalLabel">Modal Tambah Berita Baru</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form id="editForm">
-                <div class="modal-body">
-                    <input type="hidden" class="form-control" name="kategori" id="kategori" value="berita">
-                    <div class="mb-3">
-                        <label for="judul" class="form-label">Judul</label>
-                        <input type="text" class="form-control" id="judul" name="judul" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="isi" class="form-label">Isi</label>
-                        <textarea class="form-control" id="isi" name="isi" required></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="tags">Tags</label>
-                        <input type="text" class="form-control" name="tags" id="tags" required autofocus />
-                    </div>
-
-                    <input type="hidden" class="form-control" name="status" id="status" value="1">
-                    <input type="hidden" class="form-control" name="users_id" id="users-id" value="1">
-
-                    <div class="mb-3">
-                        <span>Gambar</span>
-                        <div id="unggahGambarBaru" class="dropzone"></div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                    <button type="submit" class="btn btn-primary">Unggah Berita Baru</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<!-- Modal Edit Berita-->
-<div class="modal fade" id="addBeritaBaruModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addBeritaBaruModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addBeritaBaruModalLabel">Modal Tambah Berita Baru</h5>
+                <h5 class="modal-title" id="editModalLabel">Edit Berita</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -145,132 +102,16 @@
                     <button type="submit" class="btn btn-primary">Update</button>
                 </form>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Unggah Berita Baru</button>
-            </div>
         </div>
     </div>
 </div>
+
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/dropzone.min.js"></script>
-<script>
-    $(document).ready(function() {
-        // Initialize Dropzone
-        Dropzone.autoDiscover = false;
-        var myDropzone = new Dropzone("#unggahGambarBaru", {
-            url: "<?php echo base_url('berita/uploadBerita'); ?>",
-            autoProcessQueue: false,
-            uploadMultiple: false,
-            parallelUploads: 1,
-            maxFiles: 1,
-            acceptedFiles: 'image/*',
-            addRemoveLinks: true,
-            dictDefaultMessage: "Seret gambar atau klik di sini untuk mengunggah",
-            dictRemoveFile: "Hapus",
-            init: function() {
-                this.on("addedfile", function(file) {
-                    // Tambahkan file gambar sebagai input tersembunyi
-                    $('#unggahGambarBaru').append('<input type="hidden" name="gambar" value="' + file.name + '">');
-                });
-
-                this.on("removedfile", function(file) {
-                    // Hapus input tersembunyi jika file dihapus dari Dropzone
-                    $('input[name="gambar"]').remove();
-                });
-
-                $('#editForm').submit(function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    if (myDropzone.getQueuedFiles().length > 0) {
-                        myDropzone.processQueue();
-                    } else {
-                        submitForm();
-                    }
-                });
-            },
-            success: function(file, response) {
-                // Tampilkan pesan sukses
-                var jsonResponse = JSON.parse(response);
-                if (jsonResponse.status === 'success') {
-                    // Reset Dropzone setelah berhasil diunggah
-                    myDropzone.removeAllFiles(true);
-                    // Tampilkan pesan sukses dengan SweetAlert2
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Berhasil!',
-                        text: jsonResponse.message,
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                    // Tambahkan logika redirect atau update halaman jika perlu
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: jsonResponse.message
-                    });
-                }
-            },
-            error: function(file, response) {
-                // Tampilkan pesan error jika terjadi masalah
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Terjadi kesalahan saat mengunggah gambar.'
-                });
-            }
-        });
-
-        function submitForm() {
-            // Lakukan pengiriman form secara langsung jika tidak ada gambar yang diunggah
-            $.ajax({
-                url: "<?php echo base_url('berita/uploadBerita'); ?>",
-                type: "POST",
-                data: $('#editForm').serialize(),
-                success: function(response) {
-                    var jsonResponse = JSON.parse(response);
-                    if (jsonResponse.status === 'success') {
-                        // Tampilkan pesan sukses dengan SweetAlert2
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Berhasil!',
-                            text: jsonResponse.message,
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
-                        // Tambahkan logika redirect atau update halaman jika perlu
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: jsonResponse.message
-                        });
-                    }
-                },
-                error: function() {
-                    // Tampilkan pesan error jika terjadi masalah
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Terjadi kesalahan saat mengirim data.'
-                    });
-                }
-            });
-        }
-    });
-</script>
-
-
-<script>
-    $(document).ready(function() {
-        $('#isi').summernote();
-    });
-</script>
 <script>
     Dropzone.autoDiscover = false;
     $(document).ready(function() {
