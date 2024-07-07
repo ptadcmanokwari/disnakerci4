@@ -5,6 +5,7 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
+$routes->get('admin', 'Admin::index');
 
 //route untuk frontend
 $routes->get('/', 'Frontend::index');
