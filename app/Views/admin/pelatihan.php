@@ -163,11 +163,11 @@
     $(document).ready(function() {
         var tabelPelatihan = $('#tabelPelatihan').DataTable({
             "processing": true,
-            "serverSide": true,
+            "serverSide": false,
             "paging": true,
             "lengthChange": false,
             "searching": false,
-            "ordering": true,
+            "ordering": false,
             "info": true,
             "autoWidth": false,
             "responsive": true,

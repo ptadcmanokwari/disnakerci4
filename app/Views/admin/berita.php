@@ -163,11 +163,11 @@
     $(document).ready(function() {
         var tableBerita = $('#tabelBerita').DataTable({
             "processing": true,
-            "serverSide": true,
+            "serverSide": false,
             "paging": true,
             "lengthChange": false,
             "searching": false,
-            "ordering": true,
+            "ordering": false,
             "info": true,
             "autoWidth": false,
             "responsive": true,

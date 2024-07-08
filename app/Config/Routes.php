@@ -26,7 +26,15 @@ $routes->get('/masuk', 'Frontend::login');
 
 // Routes untuk backend
 $routes->get('admin/dashboard', 'Admin::index');
+
 $routes->get('admin/pencaker', 'Admin::pencaker');
+$routes->get('admin/pencakerajax', 'Admin::pencakerajax');
+$routes->post('admin/pencakerajax', 'Admin::pencakerajax');
+$routes->post('admin/update_status_pencaker', 'Admin::update_status_pencaker');
+$routes->post('admin/hapus_pencaker', 'Admin::hapus_pencaker');
+$routes->get('admin/hapus_pencaker', 'Admin::hapus_pencaker');
+
+
 
 // Routes Berita
 $routes->get('admin/berita', 'Admin::berita');
@@ -57,6 +65,17 @@ $routes->post('admin/hapus_pelatihan', 'Admin::hapus_pelatihan');
 
 
 $routes->get('admin/userslog', 'Admin::userslog');
+
+
+// Users
 $routes->get('admin/users', 'Admin::users');
+$routes->get('admin/usersajax', 'Admin::usersajax');
+$routes->post('admin/usersajax', 'Admin::usersajax');
+$routes->post('admin/update_status_user', 'Admin::update_status_user');
+$routes->post('admin/hapus_user', 'Admin::hapus_user');
+$routes->get('admin/hapus_user', 'Admin::hapus_user');
+
+
+
 $routes->get('admin/settings', 'Admin::settings');
 $routes->get('admin/backup', 'Admin::backup');

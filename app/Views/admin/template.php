@@ -34,9 +34,10 @@
             vertical-align: middle !important;
         }
 
-        a.btn.btn-info.btn-sm,
-        button.btn.btn-warning.btn-sm.btn-edit,
-        button.btn.btn-danger.btn-sm.btn-delete {
+        a.btn.btn-info,
+        button.btn.btn-warning,
+        button.btn.btn-danger,
+        button.btn.btn-success {
             border-radius: 5px !important;
             margin: 2px !important;
         }
