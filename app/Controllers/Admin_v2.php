@@ -30,8 +30,9 @@ class Admin_v2 extends BaseController
 
         // Mendefinisikan variabel $current_uri
         $uri = new URI(current_url());
+        $data['current_uri'] = $uri->getPath();
 
-        return $this->loadView('admin/beritama', $data);
+        return view('admin/beritama', $data);
     }
 
     public function beritaajax()
