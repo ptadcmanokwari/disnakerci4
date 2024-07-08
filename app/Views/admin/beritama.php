@@ -101,7 +101,7 @@
 
 <!-- Modal Edit Berita-->
 <div class="modal fade" id="ubahBeritaBaruModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="ubahBeritaBaruModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="ubahBeritaBaruModalLabel">Modal Sunting Berita</h5>
@@ -109,17 +109,17 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form id="editForm" enctype="multipart/form-data" method="post">
+            <form id="editBeritaForm" enctype="multipart/form-data" method="post">
                 <div class="modal-body">
                     <input type="text" name="edit_id" id="edit_id">
-                    <input type="hidden" class="form-control" name="edit_kategori" id="edit_kategori" value="">
+                    <!-- <input type="hidden" class="form-control" name="edit_kategori" id="edit_kategori" value="berita"> -->
                     <div class="mb-3">
                         <label for="edit_judul" class="form-label">Ubah Judul Berita</label>
                         <input type="text" class="form-control" id="edit_judul" name="edit_judul">
                     </div>
                     <div class="mb-3">
-                        <label for="edit_isi" class="form-label">Ubah Isi Berita</label>
-                        <textarea class="form-control" id="edit_isi" name="edit_isi"></textarea>
+                        <span>Ubah Isi Berita</span>
+                        <textarea id="edit_isi" name="edit_isi"></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="edit_tags">Ubah Tags Berita</label>
@@ -128,10 +128,11 @@
 
                     <input type="hidden" class="form-control" name="edit_status" id="edit_status" value="1">
                     <input type="hidden" class="form-control" name="edit_users-id" id="edit_users-id" value="1">
+
                     <div class="mb-3">
-                        <span>Gambar</span>
-                        <div id="edit_dropzone" class="dropzone"></div>
-                        <img id="edit_gambar-preview" class="img-thumbnail mt-2" width="100">
+                        <span>Ubah Gambar</span>
+                        <div id="edit_agambar_dropzone" class="dropzone"></div>
+                        <img id="edit-gambar-preview" class="img-thumbnail mt-2" width="100">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -152,7 +153,8 @@
 
 <script>
     $(function() {
-        $('#isi').summernote()
+        $('#isi').summernote();
+        $('#edit_isi').summernote();
     })
 </script>
 
@@ -374,25 +376,34 @@
             }
         });
 
-        $('.btn-edit').on('click', function() {
+        $(document).on('click', '.btn-edit', function() {
             var edit_id = $(this).data('edit_id');
             var edit_judul = $(this).data('edit_judul');
             var edit_isi = $(this).data('edit_isi');
             var edit_tags = $(this).data('edit_tags');
-            // var gambar = $(this).data('edit_gambar');
+            var edit_gambar = $(this).data('edit_gambar');
 
             // Set data ke dalam modal
             $('#edit_id').val(edit_id);
             $('#edit_judul').val(edit_judul);
-            $('#edit_isi').val(edit_isi);
+            // Set nilai Summernote dengan .code() untuk konten isi
+            $('#edit_isi').summernote('code', edit_isi);
             $('#edit_tags').val(edit_tags);
-            // $('#edit-gambar-preview').attr('src', 'uploads/berita/' + gambar);
+
+            // Pastikan edit_gambar tidak null atau undefined sebelum menetapkan src
+            if (edit_gambar) {
+                $('#edit-gambar-preview').attr('src', '<?php echo base_url(); ?>uploads/berita/' + edit_gambar);
+            } else {
+                $('#edit-gambar-preview').attr('src', ''); // Kosongkan src jika edit_gambar tidak ada
+            }
 
             // Tampilkan modal
             $('#ubahBeritaBaruModal').modal('show');
         });
 
-        const editDropzone = new Dropzone("#edit-dropzone", {
+
+
+        const editDropzone = new Dropzone("#edit_agambar_dropzone", {
             url: "<?= base_url('admin/update_berita') ?>",
             autoProcessQueue: false,
             uploadMultiple: false,
@@ -402,7 +413,7 @@
             addRemoveLinks: true,
             init: function() {
                 var editDropzone = this;
-                document.querySelector("#editForm").addEventListener("submit", function(e) {
+                document.querySelector("#editBeritaForm").addEventListener("submit", function(e) {
                     e.preventDefault();
                     e.stopPropagation();
                     if (editDropzone.getQueuedFiles().length > 0) {
@@ -413,13 +424,13 @@
                     }
                 });
                 this.on("sending", function(file, xhr, formData) {
-                    formData.append("id", document.querySelector("#edit-id").value);
-                    formData.append("kategori", document.querySelector("#edit-kategori").value);
-                    formData.append("judul", document.querySelector("#edit-judul").value);
-                    formData.append("isi", document.querySelector("#edit-isi").value);
-                    formData.append("tags", document.querySelector("#edit-tags").value);
-                    formData.append("status", document.querySelector("#edit-status").value);
-                    formData.append("users_id", document.querySelector("#edit-users-id").value);
+                    formData.append("id", document.querySelector("#edit_id").value);
+                    // formData.append("kategori", document.querySelector("#edit_kategori").value);
+                    formData.append("judul", document.querySelector("#edit_judul").value);
+                    formData.append("isi", document.querySelector("#edit_isi").value);
+                    formData.append("tags", document.querySelector("#edit_tags").value);
+                    formData.append("status", document.querySelector("#edit_status").value);
+                    formData.append("users_id", document.querySelector("#edit_users-id").value);
                 });
                 this.on("success", function(file, response) {
                     if (response.success) {
@@ -455,7 +466,7 @@
             $.ajax({
                 url: "<?= base_url('admin/update_berita_without_image') ?>",
                 method: "POST",
-                data: $('#editForm').serialize(),
+                data: $('#editBeritaForm').serialize(),
                 success: function(response) {
                     if (response.success) {
                         Swal.fire({
@@ -486,7 +497,7 @@
         }
 
         function resetEditModal() {
-            document.querySelector("#editForm").reset();
+            document.querySelector("#editBeritaForm").reset();
             editDropzone.removeAllFiles();
             $('#edit-gambar-preview').attr('src', '');
         }

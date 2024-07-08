@@ -43,7 +43,7 @@ class Admin_v2 extends BaseController
         $data = [];
         $no = 1;
         foreach ($berita as $item) {
-            $gambar = '<img src="' . base_url('uploads/berita/' . esc($item['gambar'])) . '" alt="' . esc($item['judul']) . '" width="100">';
+            $gambar = '<img src="' . base_url('/public/uploads/berita/' . esc($item['gambar'])) . '" alt="' . esc($item['judul']) . '" width="100">';
             $gambar = htmlspecialchars_decode($gambar);
 
             $data[] = [
@@ -76,17 +76,6 @@ class Admin_v2 extends BaseController
 
         echo json_encode(["data" => $data]);
     }
-
-    //     <button class="btn btn-warning btn-sm btn-edit mx-1" 
-    //     data-edit_id="' . $item['id'] . '" 
-    //     data-edit_judul="' . htmlspecialchars($item['judul']) . '" 
-    //     data-edit_isi="' . htmlspecialchars($item['isi']) . '" 
-    //     data-edit_tags="' . $item['tags'] . '" 
-    //     data-edit_gambar="' . $item['gambar'] . '" 
-    //     data-toggle="modal"  data-toggle="modal" 
-    //     data-target="#ubahBeritaBaruModal">
-    // <i class="bi bi-pencil-square px-2"></i>
-    // </button>
 
     public function update_status_berita()
     {
@@ -149,13 +138,16 @@ class Admin_v2 extends BaseController
 
     public function update_berita()
     {
+        $model = new FrontendModel(); // Pastikan menggunakan namespace yang benar
+
         $id = $this->request->getPost('id');
         $judul = $this->request->getPost('judul');
         $isi = $this->request->getPost('isi');
         $tags = $this->request->getPost('tags');
-        $kategori = $this->request->getPost('kategori');
+        // $kategori = $this->request->getPost('kategori');
         $status = $this->request->getPost('status');
         $users_id = $this->request->getPost('users_id');
+        $kategori = 'berita';
 
         $validation = \Config\Services::validation();
         $validation->setRules([
@@ -171,7 +163,7 @@ class Admin_v2 extends BaseController
         $file = $this->request->getFile('file');
         if ($file->isValid() && !$file->hasMoved()) {
             $newName = $file->getRandomName();
-            $file->move(WRITEPATH . 'uploads', $newName);
+            $file->move(WRITEPATH . '/public/uploads/berita/', $newName);
 
             // Update with new image
             $data = [
@@ -187,9 +179,12 @@ class Admin_v2 extends BaseController
             return $this->response->setJSON(['success' => false, 'errors' => ['Gambar tidak valid']]);
         }
 
-        $this->frontendModel->update($id, $data);
+        // Panggil metode update pada model yang sudah dibuat
+        $model->update($id, $data);
+
         return $this->response->setJSON(['success' => true]);
     }
+
 
     public function update_berita_without_image()
     {

@@ -73,6 +73,9 @@ $routes->get('admin/beritaajax', 'Admin_v2::beritaajax');
 
 // Update Status Berita
 $routes->post('admin/update_status_berita', 'Admin_v2::update_status_berita');
+$routes->get('admin/update_berita_without_image', 'Admin_v2::update_berita_without_image');
+$routes->post('admin/update_berita', 'Admin_v2::update_berita');
+$routes->post('admin/update_berita_without_image', 'Admin_v2::update_berita_without_image');
 
 
 $routes->get('admin/pengumuman', 'Admin_v2::pengumuman');
