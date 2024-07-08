@@ -4,20 +4,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | DataTables</title>
+    <title><?php echo $title; ?> - Panel Admin</title>
 
-    <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="<?php echo base_url('adminltev31/plugins/fontawesome-free/css/all.min.css'); ?>">
-    <!-- DataTables -->
     <link rel="stylesheet" href="<?php echo base_url('adminltev31/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('adminltev31/plugins/datatables-responsive/css/responsive.bootstrap4.min.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('adminltev31/plugins/datatables-buttons/css/buttons.bootstrap4.min.css'); ?>">
-    <!-- Theme style -->
     <link rel="stylesheet" href="<?php echo base_url('adminltev31/dist/css/adminlte.min.css'); ?>">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
     <link rel="stylesheet" href="<?php echo base_url('adminltev31//plugins/summernote/summernote-bs4.min.css'); ?>">
     <style>
         ul.nav.nav-treeview a.nav-link {
@@ -39,10 +34,11 @@
             vertical-align: middle !important;
         }
 
-        a.btn.btn-info.btn-sm.mx-1,
-        button.btn.btn-warning.btn-sm.btn-edit.mx-1,
-        button.btn.btn-danger.btn-sm.btn-delete.mx-1 {
-            border-radius: 5px;
+        a.btn.btn-info.btn-sm,
+        button.btn.btn-warning.btn-sm.btn-edit,
+        button.btn.btn-danger.btn-sm.btn-delete {
+            border-radius: 5px !important;
+            margin: 2px !important;
         }
 
         label:not(.form-check-label):not(.custom-file-label) {

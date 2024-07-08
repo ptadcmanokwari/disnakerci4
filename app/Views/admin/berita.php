@@ -9,12 +9,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Pelatihan</h1>
+                    <h1>Berita</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Pelatihan</li>
+                        <li class="breadcrumb-item active">Berita</li>
                     </ol>
                 </div>
             </div>
@@ -27,18 +27,18 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Tabel Daftar Pelatihan</h3>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addPelatihanBaruModal">
-                                Tambah Pelatihan Baru
+                            <h3 class="card-title">Tabel Daftar Berita</h3>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addBeritaBaruModal">
+                                Tambah Berita Baru
                             </button>
                         </div>
                         <div class="card-body">
-                            <table id="tabelPelatihan" class="table table-bordered table-hover">
+                            <table id="tabelBerita" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
                                         <th>No.</th>
-                                        <th>Judul Pelatihan</th>
-                                        <th>Isi Pelatihan</th>
+                                        <th>Judul Berita</th>
+                                        <th>Isi Berita</th>
                                         <th>Gambar</th>
                                         <th>Status</th>
                                         <th>Aksi</th>
@@ -56,29 +56,29 @@
 </div>
 
 
-<!-- Modal Tambah Pelatihan -->
-<div class="modal fade" id="addPelatihanBaruModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="addPelatihanBaruModalLabel" aria-hidden="true">
+<!-- Modal Tambah Berita -->
+<div class="modal fade" id="addBeritaBaruModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="addBeritaBaruModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addPelatihanBaruModalLabel">Modal Tambah Pelatihan Baru</h5>
+                <h5 class="modal-title" id="addBeritaBaruModalLabel">Modal Tambah Berita Baru</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form id="uploadPelatihanForm" enctype="multipart/form-data" method="post">
+            <form id="uploadBeritaForm" enctype="multipart/form-data" method="post">
                 <div class="modal-body">
-                    <input type="hidden" class="form-control" name="kategori" id="kategori" value="pelatihan">
+                    <input type="hidden" class="form-control" name="kategori" id="kategori" value="berita">
                     <div class="mb-3">
-                        <label for="judul" class="form-label">Judul Pelatihan</label>
+                        <label for="judul" class="form-label">Judul Berita</label>
                         <input type="text" class="form-control" id="judul" name="judul" required>
                     </div>
                     <div class="mb-3">
-                        <span>Isi Pelatihan</span>
+                        <span>Isi Berita</span>
                         <textarea id="isi" name="isi"></textarea>
                     </div>
                     <div class="mb-3">
-                        <label for="tags">Tags Pelatihan</label>
+                        <label for="tags">Tags Berita</label>
                         <input type="text" class="form-control" name="tags" id="tags" required>
                     </div>
 
@@ -86,43 +86,43 @@
                     <input type="hidden" class="form-control" name="users_id" id="users-id" value="1">
 
                     <div class="mb-3">
-                        <span>Gambar Pelatihan</span>
+                        <span>Gambar Berita</span>
                         <div id="unggahGambarBaru" class="dropzone"></div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                    <button type="submit" class="btn btn-primary" id="btnUnggahPelatihan">Unggah Pelatihan Baru</button>
+                    <button type="submit" class="btn btn-primary" id="btnUnggahBerita">Unggah Berita Baru</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
 
-<!-- Modal Edit Pelatihan-->
-<div class="modal fade" id="ubahPelatihanModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="ubahPelatihanModalLabel" aria-hidden="true">
+<!-- Modal Edit Berita-->
+<div class="modal fade" id="ubahBeritaBaruModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="ubahBeritaBaruModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="ubahPelatihanModalLabel">Modal Sunting Pelatihan</h5>
+                <h5 class="modal-title" id="ubahBeritaBaruModalLabel">Modal Sunting Berita</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form id="editPelatihanForm" enctype="multipart/form-data" method="post">
+            <form id="editBeritaForm" enctype="multipart/form-data" method="post">
                 <div class="modal-body">
                     <input type="hidden" name="edit_id" id="edit_id">
-                    <input type="hidden" class="form-control" name="edit_kategori" id="edit_kategori" value="pelatihan">
+                    <input type="hidden" class="form-control" name="edit_kategori" id="edit_kategori" value="berita">
                     <div class="mb-3">
-                        <label for="edit_judul" class="form-label">Ubah Judul Pelatihan</label>
+                        <label for="edit_judul" class="form-label">Ubah Judul Berita</label>
                         <input type="text" class="form-control" id="edit_judul" name="edit_judul">
                     </div>
                     <div class="mb-3">
-                        <span>Ubah Isi Pelatihan</span>
+                        <span>Ubah Isi Berita</span>
                         <textarea id="edit_isi" name="edit_isi"></textarea>
                     </div>
                     <div class="mb-3">
-                        <label for="edit_tags">Ubah Tags Pelatihan</label>
+                        <label for="edit_tags">Ubah Tags Berita</label>
                         <input type="text" class="form-control" name="edit_tags" id="edit_tags">
                     </div>
 
@@ -137,7 +137,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                    <button type="submit" class="btn btn-primary">Perbarui Pelatihan</button>
+                    <button type="submit" class="btn btn-primary">Perbarui Berita</button>
                 </div>
             </form>
 
@@ -161,7 +161,7 @@
 <script>
     Dropzone.autoDiscover = false;
     $(document).ready(function() {
-        var tabelPelatihan = $('#tabelPelatihan').DataTable({
+        var tableBerita = $('#tabelBerita').DataTable({
             "processing": true,
             "serverSide": true,
             "paging": true,
@@ -172,7 +172,7 @@
             "autoWidth": false,
             "responsive": true,
             "ajax": {
-                "url": "<?php echo base_url('admin/pelatihanajax'); ?>", // Sesuaikan dengan route yang benar di CodeIgniter
+                "url": "<?php echo base_url('admin/beritaajax'); ?>", // Sesuaikan dengan route yang benar di CodeIgniter
                 "type": "POST"
             },
             "columns": [{
@@ -201,7 +201,7 @@
                         var switchery = new Switchery(html, {
                             size: 'small'
                         });
-                        html.switchery = switchery; // attach switchery instance to html element
+                        html.switchery = switchery;
                     }
 
                     html.onchange = function() {
@@ -209,7 +209,7 @@
                         var id = this.getAttribute('data-id');
 
                         // Kirim AJAX request untuk memperbarui status di server
-                        fetch('<?= base_url('admin/update_status_pelatihan') ?>', {
+                        fetch('<?= base_url('admin/update_status_berita') ?>', {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json',
@@ -250,40 +250,37 @@
 
 
         // Event listener untuk tombol hapus
-        $('#tabelPelatihan').on('click', '.btn-delete', function() {
+        $('#tabelBerita').on('click', '.btn-delete', function() {
             var id = $(this).data('id');
             var row = $(this).closest('tr');
 
-            // Tampilkan SweetAlert untuk konfirmasi
             Swal.fire({
                 title: 'Konfirmasi',
-                text: 'Apakah Anda yakin ingin menghapus pelatihan ini?',
+                text: 'Apakah Anda yakin ingin menghapus berita ini?',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonText: 'Ya, Hapus!',
                 cancelButtonText: 'Batal'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // Jika user mengonfirmasi, lakukan proses hapus via AJAX
                     $.ajax({
-                        url: '<?= base_url('admin/hapus_pelatihan') ?>',
+                        url: '<?= base_url('admin/hapus_berita') ?>',
                         type: 'POST',
                         data: {
                             id: id
                         },
                         success: function(response) {
-                            // Tidak perlu JSON.parse di sini, karena respons sudah berupa JSON
                             if (response.status === 'success') {
-                                tabelPelatihan.ajax.reload(); // Reload tabel setelah hapus
+                                tableBerita.ajax.reload();
                                 Swal.fire(
                                     'Sukses!',
-                                    'Pelatihan berhasil dihapus.',
+                                    'Berita berhasil dihapus.',
                                     'success'
                                 );
                             } else {
                                 Swal.fire(
                                     'Gagal!',
-                                    'Terjadi kesalahan saat menghapus pelatihan.',
+                                    'Terjadi kesalahan saat menghapus berita.',
                                     'error'
                                 );
                             }
@@ -291,7 +288,7 @@
                         error: function() {
                             Swal.fire(
                                 'Gagal!',
-                                'Terjadi kesalahan saat menghapus pelatihan.',
+                                'Terjadi kesalahan saat menghapus berita.',
                                 'error'
                             );
                         }
@@ -340,7 +337,7 @@
 
 
         const addDropzone = new Dropzone("#unggahGambarBaru", {
-            url: "<?= base_url('admin/save_pelatihan') ?>",
+            url: "<?= base_url('admin/save_berita') ?>",
             autoProcessQueue: false,
             uploadMultiple: false,
             maxFiles: 1,
@@ -349,13 +346,13 @@
             addRemoveLinks: true,
             init: function() {
                 var addDropzone = this;
-                document.querySelector("#uploadPelatihanForm").addEventListener("submit", function(e) {
+                document.querySelector("#uploadBeritaForm").addEventListener("submit", function(e) {
                     e.preventDefault();
                     e.stopPropagation();
                     if (addDropzone.getQueuedFiles().length > 0) {
                         addDropzone.processQueue();
                     } else {
-                        Swal.fire('Error', 'Gambar pelatihan belum diunggah.', 'error');
+                        Swal.fire('Error', 'Gambar berita belum diunggah.', 'error');
                     }
                 });
                 this.on("sending", function(file, xhr, formData) {
@@ -371,18 +368,18 @@
                         Swal.fire({
                             icon: 'success',
                             title: 'Berhasil',
-                            text: 'Pelatihan baru telah diunggah.',
+                            text: 'Berita baru telah diunggah.',
                         }).then((result) => {
-                            $('#addPelatihanBaruModal').modal('hide');
+                            $('#addBeritaBaruModal').modal('hide');
                             resetModal();
-                            $('#tabelPelatihan').DataTable().ajax.reload();
+                            $('#tabelBerita').DataTable().ajax.reload();
                         });
 
                     } else {
                         Swal.fire({
                             icon: 'error',
                             title: 'Error',
-                            text: response.errors ? response.errors.join("<br>") : 'Gagal unggah pelatihan baru.',
+                            text: response.errors ? response.errors.join("<br>") : 'Gagal unggah berita baru.',
                         });
                     }
                 });
@@ -390,7 +387,7 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',
-                        text: 'Gagal unggah pelatihan baru.',
+                        text: 'Gagal unggah berita baru.',
                     });
                 });
             }
@@ -410,16 +407,16 @@
             $('#edit_tags').val(edit_tags);
 
             if (edit_gambar) {
-                $('#edit-gambar-preview').attr('src', '<?= base_url('uploads/pelatihan/') ?>' + edit_gambar);
+                $('#edit-gambar-preview').attr('src', '<?= base_url('uploads/berita/') ?>' + edit_gambar);
             } else {
                 $('#edit-gambar-preview').attr('src', '');
             }
 
-            $('#ubahPelatihanModal').modal('show');
+            $('#ubahBeritaBaruModal').modal('show');
         });
 
         const editDropzone = new Dropzone("#edit_gambar_dropzone", {
-            url: "<?= base_url('admin/update_pelatihan') ?>",
+            url: "<?= base_url('admin/update_berita') ?>",
             autoProcessQueue: false,
             uploadMultiple: false,
             maxFiles: 1,
@@ -428,13 +425,13 @@
             addRemoveLinks: true,
             init: function() {
                 var editDropzone = this;
-                document.querySelector("#editPelatihanForm").addEventListener("submit", function(e) {
+                document.querySelector("#editBeritaForm").addEventListener("submit", function(e) {
                     e.preventDefault();
                     e.stopPropagation();
                     if (editDropzone.getQueuedFiles().length > 0) {
                         editDropzone.processQueue();
                     } else {
-                        updatePelatihanWithoutImage();
+                        updateBeritaWithoutImage();
                     }
                 });
                 this.on("sending", function(file, xhr, formData) {
@@ -448,18 +445,18 @@
                         Swal.fire({
                             icon: 'success',
                             title: 'Berhasil',
-                            text: 'Pelatihan telah diperbarui.',
+                            text: 'Berita telah diperbarui.',
                         }).then((result) => {
-                            $('#ubahPelatihanModal').modal('hide');
+                            $('#ubahBeritaBaruModal').modal('hide');
                             resetModal();
-                            $('#tabelPelatihan').DataTable().ajax.reload();
+                            $('#tabelBerita').DataTable().ajax.reload();
                         });
 
                     } else {
                         Swal.fire({
                             icon: 'error',
                             title: 'Error',
-                            text: response.errors ? response.errors.join("<br>") : 'Gagal memperbarui pelatihan.',
+                            text: response.errors ? response.errors.join("<br>") : 'Gagal memperbarui berita.',
                         });
                     }
                 });
@@ -467,15 +464,15 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',
-                        text: 'Gagal memperbarui pelatihan.',
+                        text: 'Gagal memperbarui berita.',
                     });
                 });
             }
         });
 
-        function updatePelatihanWithoutImage() {
+        function updateBeritaWithoutImage() {
             $.ajax({
-                url: "<?= base_url('admin/update_pelatihan') ?>",
+                url: "<?= base_url('admin/update_berita') ?>",
                 type: 'POST',
                 data: {
                     id: document.querySelector("#edit_id").value,
@@ -488,17 +485,17 @@
                         Swal.fire({
                             icon: 'success',
                             title: 'Berhasil',
-                            text: 'Pelatihan telah diperbarui.',
+                            text: 'Berita telah diperbarui.',
                         }).then((result) => {
-                            $('#ubahPelatihanModal').modal('hide');
+                            $('#ubahBeritaBaruModal').modal('hide');
                             resetModal();
-                            $('#tabelPelatihan').DataTable().ajax.reload();
+                            $('#tabelBerita').DataTable().ajax.reload();
                         });
                     } else {
                         Swal.fire({
                             icon: 'error',
                             title: 'Error',
-                            text: response.errors ? response.errors.join("<br>") : 'Gagal memperbarui pelatihan.',
+                            text: response.errors ? response.errors.join("<br>") : 'Gagal memperbarui berita.',
                         });
                     }
                 },
@@ -506,7 +503,7 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',
-                        text: 'Gagal memperbarui pelatihan.',
+                        text: 'Gagal memperbarui berita.',
                     });
                 }
             });

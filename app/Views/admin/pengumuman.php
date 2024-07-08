@@ -1,478 +1,516 @@
 <?= $this->extend('admin/template') ?>
 <?= $this->section('content') ?>
 
-<!-- Content Wrapper. Contains page content -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/dropzone.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.css">
+
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>DataTables</h1>
+                    <h1>Pengumuman</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">DataTables</li>
+                        <li class="breadcrumb-item active">Pengumuman</li>
                     </ol>
                 </div>
             </div>
-        </div><!-- /.container-fluid -->
+        </div>
     </section>
 
-    <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">DataTable with minimal features & hover style</h3>
+                            <h3 class="card-title">Tabel Daftar Pengumuman</h3>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addPengumumanBaruModal">
+                                Tambah Pengumuman Baru
+                            </button>
                         </div>
-                        <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="example2" class="table table-bordered table-hover">
+                            <table id="tabelPengumuman" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Rendering engine</th>
-                                        <th>Browser</th>
-                                        <th>Platform(s)</th>
-                                        <th>Engine version</th>
-                                        <th>CSS grade</th>
+                                        <th>No.</th>
+                                        <th>Judul Pengumuman</th>
+                                        <th>Isi Pengumuman</th>
+                                        <th>Gambar</th>
+                                        <th>Status</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Trident</td>
-                                        <td>Internet
-                                            Explorer 4.0
-                                        </td>
-                                        <td>Win 95+</td>
-                                        <td> 4</td>
-                                        <td>X</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Trident</td>
-                                        <td>Internet
-                                            Explorer 5.0
-                                        </td>
-                                        <td>Win 95+</td>
-                                        <td>5</td>
-                                        <td>C</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Trident</td>
-                                        <td>Internet
-                                            Explorer 5.5
-                                        </td>
-                                        <td>Win 95+</td>
-                                        <td>5.5</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Trident</td>
-                                        <td>Internet
-                                            Explorer 6
-                                        </td>
-                                        <td>Win 98+</td>
-                                        <td>6</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Trident</td>
-                                        <td>Internet Explorer 7</td>
-                                        <td>Win XP SP2+</td>
-                                        <td>7</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Trident</td>
-                                        <td>AOL browser (AOL desktop)</td>
-                                        <td>Win XP</td>
-                                        <td>6</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Gecko</td>
-                                        <td>Firefox 1.0</td>
-                                        <td>Win 98+ / OSX.2+</td>
-                                        <td>1.7</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Gecko</td>
-                                        <td>Firefox 1.5</td>
-                                        <td>Win 98+ / OSX.2+</td>
-                                        <td>1.8</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Gecko</td>
-                                        <td>Firefox 2.0</td>
-                                        <td>Win 98+ / OSX.2+</td>
-                                        <td>1.8</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Gecko</td>
-                                        <td>Firefox 3.0</td>
-                                        <td>Win 2k+ / OSX.3+</td>
-                                        <td>1.9</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Gecko</td>
-                                        <td>Camino 1.0</td>
-                                        <td>OSX.2+</td>
-                                        <td>1.8</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Gecko</td>
-                                        <td>Camino 1.5</td>
-                                        <td>OSX.3+</td>
-                                        <td>1.8</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Gecko</td>
-                                        <td>Netscape 7.2</td>
-                                        <td>Win 95+ / Mac OS 8.6-9.2</td>
-                                        <td>1.7</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Gecko</td>
-                                        <td>Netscape Browser 8</td>
-                                        <td>Win 98SE+</td>
-                                        <td>1.7</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Gecko</td>
-                                        <td>Netscape Navigator 9</td>
-                                        <td>Win 98+ / OSX.2+</td>
-                                        <td>1.8</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Gecko</td>
-                                        <td>Mozilla 1.0</td>
-                                        <td>Win 95+ / OSX.1+</td>
-                                        <td>1</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Gecko</td>
-                                        <td>Mozilla 1.1</td>
-                                        <td>Win 95+ / OSX.1+</td>
-                                        <td>1.1</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Gecko</td>
-                                        <td>Mozilla 1.2</td>
-                                        <td>Win 95+ / OSX.1+</td>
-                                        <td>1.2</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Gecko</td>
-                                        <td>Mozilla 1.3</td>
-                                        <td>Win 95+ / OSX.1+</td>
-                                        <td>1.3</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Gecko</td>
-                                        <td>Mozilla 1.4</td>
-                                        <td>Win 95+ / OSX.1+</td>
-                                        <td>1.4</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Gecko</td>
-                                        <td>Mozilla 1.5</td>
-                                        <td>Win 95+ / OSX.1+</td>
-                                        <td>1.5</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Gecko</td>
-                                        <td>Mozilla 1.6</td>
-                                        <td>Win 95+ / OSX.1+</td>
-                                        <td>1.6</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Gecko</td>
-                                        <td>Mozilla 1.7</td>
-                                        <td>Win 98+ / OSX.1+</td>
-                                        <td>1.7</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Gecko</td>
-                                        <td>Mozilla 1.8</td>
-                                        <td>Win 98+ / OSX.1+</td>
-                                        <td>1.8</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Gecko</td>
-                                        <td>Seamonkey 1.1</td>
-                                        <td>Win 98+ / OSX.2+</td>
-                                        <td>1.8</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Gecko</td>
-                                        <td>Epiphany 2.20</td>
-                                        <td>Gnome</td>
-                                        <td>1.8</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Webkit</td>
-                                        <td>Safari 1.2</td>
-                                        <td>OSX.3</td>
-                                        <td>125.5</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Webkit</td>
-                                        <td>Safari 1.3</td>
-                                        <td>OSX.3</td>
-                                        <td>312.8</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Webkit</td>
-                                        <td>Safari 2.0</td>
-                                        <td>OSX.4+</td>
-                                        <td>419.3</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Webkit</td>
-                                        <td>Safari 3.0</td>
-                                        <td>OSX.4+</td>
-                                        <td>522.1</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Webkit</td>
-                                        <td>OmniWeb 5.5</td>
-                                        <td>OSX.4+</td>
-                                        <td>420</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Webkit</td>
-                                        <td>iPod Touch / iPhone</td>
-                                        <td>iPod</td>
-                                        <td>420.1</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Webkit</td>
-                                        <td>S60</td>
-                                        <td>S60</td>
-                                        <td>413</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Presto</td>
-                                        <td>Opera 7.0</td>
-                                        <td>Win 95+ / OSX.1+</td>
-                                        <td>-</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Presto</td>
-                                        <td>Opera 7.5</td>
-                                        <td>Win 95+ / OSX.2+</td>
-                                        <td>-</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Presto</td>
-                                        <td>Opera 8.0</td>
-                                        <td>Win 95+ / OSX.2+</td>
-                                        <td>-</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Presto</td>
-                                        <td>Opera 8.5</td>
-                                        <td>Win 95+ / OSX.2+</td>
-                                        <td>-</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Presto</td>
-                                        <td>Opera 9.0</td>
-                                        <td>Win 95+ / OSX.3+</td>
-                                        <td>-</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Presto</td>
-                                        <td>Opera 9.2</td>
-                                        <td>Win 88+ / OSX.3+</td>
-                                        <td>-</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Presto</td>
-                                        <td>Opera 9.5</td>
-                                        <td>Win 88+ / OSX.3+</td>
-                                        <td>-</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Presto</td>
-                                        <td>Opera for Wii</td>
-                                        <td>Wii</td>
-                                        <td>-</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Presto</td>
-                                        <td>Nokia N800</td>
-                                        <td>N800</td>
-                                        <td>-</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Presto</td>
-                                        <td>Nintendo DS browser</td>
-                                        <td>Nintendo DS</td>
-                                        <td>8.5</td>
-                                        <td>C/A<sup>1</sup></td>
-                                    </tr>
-                                    <tr>
-                                        <td>KHTML</td>
-                                        <td>Konqureror 3.1</td>
-                                        <td>KDE 3.1</td>
-                                        <td>3.1</td>
-                                        <td>C</td>
-                                    </tr>
-                                    <tr>
-                                        <td>KHTML</td>
-                                        <td>Konqureror 3.3</td>
-                                        <td>KDE 3.3</td>
-                                        <td>3.3</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr>
-                                        <td>KHTML</td>
-                                        <td>Konqureror 3.5</td>
-                                        <td>KDE 3.5</td>
-                                        <td>3.5</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Tasman</td>
-                                        <td>Internet Explorer 4.5</td>
-                                        <td>Mac OS 8-9</td>
-                                        <td>-</td>
-                                        <td>X</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Tasman</td>
-                                        <td>Internet Explorer 5.1</td>
-                                        <td>Mac OS 7.6-9</td>
-                                        <td>1</td>
-                                        <td>C</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Tasman</td>
-                                        <td>Internet Explorer 5.2</td>
-                                        <td>Mac OS 8-X</td>
-                                        <td>1</td>
-                                        <td>C</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Misc</td>
-                                        <td>NetFront 3.1</td>
-                                        <td>Embedded devices</td>
-                                        <td>-</td>
-                                        <td>C</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Misc</td>
-                                        <td>NetFront 3.4</td>
-                                        <td>Embedded devices</td>
-                                        <td>-</td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Misc</td>
-                                        <td>Dillo 0.8</td>
-                                        <td>Embedded devices</td>
-                                        <td>-</td>
-                                        <td>X</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Misc</td>
-                                        <td>Links</td>
-                                        <td>Text only</td>
-                                        <td>-</td>
-                                        <td>X</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Misc</td>
-                                        <td>Lynx</td>
-                                        <td>Text only</td>
-                                        <td>-</td>
-                                        <td>X</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Misc</td>
-                                        <td>IE Mobile</td>
-                                        <td>Windows Mobile 6</td>
-                                        <td>-</td>
-                                        <td>C</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Misc</td>
-                                        <td>PSP browser</td>
-                                        <td>PSP</td>
-                                        <td>-</td>
-                                        <td>C</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Other browsers</td>
-                                        <td>All others</td>
-                                        <td>-</td>
-                                        <td>-</td>
-                                        <td>U</td>
-                                    </tr>
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>Rendering engine</th>
-                                        <th>Browser</th>
-                                        <th>Platform(s)</th>
-                                        <th>Engine version</th>
-                                        <th>CSS grade</th>
-                                    </tr>
-                                </tfoot>
                             </table>
                         </div>
-                        <!-- /.card-body -->
                     </div>
-                    <!-- /.card -->
-                    <!-- /.card -->
                 </div>
-                <!-- /.col -->
             </div>
-            <!-- /.row -->
         </div>
-        <!-- /.container-fluid -->
     </section>
-    <!-- /.content -->
 </div>
-<!-- /.content-wrapper -->
+
+
+<!-- Modal Tambah Pengumuman -->
+<div class="modal fade" id="addPengumumanBaruModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="addPengumumanBaruModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addPengumumanBaruModalLabel">Modal Tambah Pengumuman Baru</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="uploadPengumumanForm" enctype="multipart/form-data" method="post">
+                <div class="modal-body">
+                    <input type="hidden" class="form-control" name="kategori" id="kategori" value="pengumuman">
+                    <div class="mb-3">
+                        <label for="judul" class="form-label">Judul Pengumuman</label>
+                        <input type="text" class="form-control" id="judul" name="judul" required>
+                    </div>
+                    <div class="mb-3">
+                        <span>Isi Pengumuman</span>
+                        <textarea id="isi" name="isi"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="tags">Tags Pengumuman</label>
+                        <input type="text" class="form-control" name="tags" id="tags" required>
+                    </div>
+
+                    <input type="hidden" class="form-control" name="status" id="status" value="1">
+                    <input type="hidden" class="form-control" name="users_id" id="users-id" value="1">
+
+                    <div class="mb-3">
+                        <span>Gambar Pengumuman</span>
+                        <div id="unggahGambarBaru" class="dropzone"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary" id="btnUnggahPengumuman">Unggah Pengumuman Baru</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Edit Pengumuman-->
+<div class="modal fade" id="ubahPengumumanModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="ubahPengumumanModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ubahPengumumanModalLabel">Modal Sunting Pengumuman</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="editPengumumanForm" enctype="multipart/form-data" method="post">
+                <div class="modal-body">
+                    <input type="hidden" name="edit_id" id="edit_id">
+                    <input type="hidden" class="form-control" name="edit_kategori" id="edit_kategori" value="pengumuman">
+                    <div class="mb-3">
+                        <label for="edit_judul" class="form-label">Ubah Judul Pengumuman</label>
+                        <input type="text" class="form-control" id="edit_judul" name="edit_judul">
+                    </div>
+                    <div class="mb-3">
+                        <span>Ubah Isi Pengumuman</span>
+                        <textarea id="edit_isi" name="edit_isi"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_tags">Ubah Tags Pengumuman</label>
+                        <input type="text" class="form-control" name="edit_tags" id="edit_tags">
+                    </div>
+
+                    <input type="hidden" class="form-control" name="edit_status" id="edit_status" value="1">
+                    <input type="hidden" class="form-control" name="edit_users-id" id="edit_users-id" value="1">
+
+                    <div class="mb-3">
+                        <span>Ubah Gambar</span>
+                        <div id="edit_gambar_dropzone" class="dropzone"></div>
+                        <img id="edit-gambar-preview" class="img-thumbnail mt-2" width="100">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary">Perbarui Pengumuman</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/dropzone.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.js"></script>
+
+<script>
+    $(function() {
+        $('#isi').summernote();
+        $('#edit_isi').summernote();
+    })
+</script>
+
+<script>
+    Dropzone.autoDiscover = false;
+    $(document).ready(function() {
+        var tabelPengumuman = $('#tabelPengumuman').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+            "ajax": {
+                "url": "<?php echo base_url('admin/pengumumanajax'); ?>", // Sesuaikan dengan route yang benar di CodeIgniter
+                "type": "POST"
+            },
+            "columns": [{
+                    "data": "no"
+                },
+                {
+                    "data": "judul"
+                },
+                {
+                    "data": "isi"
+                },
+                {
+                    "data": "gambar"
+                },
+                {
+                    "data": "status"
+                },
+                {
+                    "data": "aksi"
+                }
+            ],
+            "drawCallback": function(settings) {
+                var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+                elems.forEach(function(html) {
+                    if (!html.switchery) {
+                        var switchery = new Switchery(html, {
+                            size: 'small'
+                        });
+                        html.switchery = switchery; // attach switchery instance to html element
+                    }
+
+                    html.onchange = function() {
+                        var status = this.checked ? 1 : 0;
+                        var id = this.getAttribute('data-id');
+
+                        // Kirim AJAX request untuk memperbarui status di server
+                        fetch('<?= base_url('admin/update_status_pengumuman') ?>', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'X-CSRF-TOKEN': '<?= csrf_token() ?>'
+                                },
+                                body: JSON.stringify({
+                                    id: id,
+                                    status: status
+                                })
+                            }).then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Berhasil',
+                                        text: 'Status berhasil diperbarui.',
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Gagal',
+                                        text: 'Gagal memperbarui status.',
+                                    });
+                                }
+                            }).catch(error => {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: 'Terjadi kesalahan saat memperbarui status.',
+                                });
+                            });
+                    };
+                });
+            }
+        });
+
+
+
+
+        // Event listener untuk tombol hapus
+        $('#tabelPengumuman').on('click', '.btn-delete', function() {
+            var id = $(this).data('id');
+            var row = $(this).closest('tr');
+
+            // Tampilkan SweetAlert untuk konfirmasi
+            Swal.fire({
+                title: 'Konfirmasi',
+                text: 'Apakah Anda yakin ingin menghapus pengumuman ini?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Ya, Hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Jika user mengonfirmasi, lakukan proses hapus via AJAX
+                    $.ajax({
+                        url: '<?= base_url('admin/hapus_pengumuman') ?>',
+                        type: 'POST',
+                        data: {
+                            id: id
+                        },
+                        success: function(response) {
+                            // Tidak perlu JSON.parse di sini, karena respons sudah berupa JSON
+                            if (response.status === 'success') {
+                                tabelPengumuman.ajax.reload(); // Reload tabel setelah hapus
+                                Swal.fire(
+                                    'Sukses!',
+                                    'Pengumuman berhasil dihapus.',
+                                    'success'
+                                );
+                            } else {
+                                Swal.fire(
+                                    'Gagal!',
+                                    'Terjadi kesalahan saat menghapus pengumuman.',
+                                    'error'
+                                );
+                            }
+                        },
+                        error: function() {
+                            Swal.fire(
+                                'Gagal!',
+                                'Terjadi kesalahan saat menghapus pengumuman.',
+                                'error'
+                            );
+                        }
+                    });
+                }
+            });
+        });
+
+
+        // Reset Modal setelah upload dan update data
+        function resetModal() {
+            var judul = document.getElementById('judul');
+            var edit_judul = document.getElementById('edit_judul');
+            var isi = $('#isi');
+            var edit_isi = $('#edit_isi');
+            var tags = document.getElementById('tags');
+            var edit_tags = document.getElementById('edit_tags');
+
+            if (judul) {
+                judul.value = '';
+            }
+            if (edit_judul) {
+                edit_judul.value = '';
+            }
+            if (isi) {
+                isi.summernote('code', '');
+            }
+            if (edit_isi) {
+                edit_isi.summernote('code', '');
+            }
+            if (tags) {
+                tags.value = '';
+            }
+            if (edit_tags) {
+                edit_tags.value = '';
+            }
+            if (addDropzone) {
+                addDropzone.removeAllFiles();
+            }
+            if (editDropzone) {
+                editDropzone.removeAllFiles();
+            }
+
+            $('#edit-gambar-preview').attr('src', '');
+        }
+
+
+        const addDropzone = new Dropzone("#unggahGambarBaru", {
+            url: "<?= base_url('admin/save_pengumuman') ?>",
+            autoProcessQueue: false,
+            uploadMultiple: false,
+            maxFiles: 1,
+            dictDefaultMessage: "Seret gambar ke sini untuk unggah",
+            acceptedFiles: 'image/*',
+            addRemoveLinks: true,
+            init: function() {
+                var addDropzone = this;
+                document.querySelector("#uploadPengumumanForm").addEventListener("submit", function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (addDropzone.getQueuedFiles().length > 0) {
+                        addDropzone.processQueue();
+                    } else {
+                        Swal.fire('Error', 'Gambar pengumuman belum diunggah.', 'error');
+                    }
+                });
+                this.on("sending", function(file, xhr, formData) {
+                    formData.append("kategori", document.querySelector("#kategori").value);
+                    formData.append("judul", document.querySelector("#judul").value);
+                    formData.append("isi", document.querySelector("#isi").value);
+                    formData.append("tags", document.querySelector("#tags").value);
+                    formData.append("status", document.querySelector("#status").value);
+                    formData.append("users_id", document.querySelector("#users-id").value);
+                });
+                this.on("success", function(file, response) {
+                    if (response.success) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Berhasil',
+                            text: 'Pengumuman baru telah diunggah.',
+                        }).then((result) => {
+                            $('#addPengumumanBaruModal').modal('hide');
+                            resetModal();
+                            $('#tabelPengumuman').DataTable().ajax.reload();
+                        });
+
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: response.errors ? response.errors.join("<br>") : 'Gagal unggah pengumuman baru.',
+                        });
+                    }
+                });
+                this.on("error", function(file, response) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Gagal unggah pengumuman baru.',
+                    });
+                });
+            }
+        });
+
+        $(document).on('click', '.btn-edit', function() {
+            var edit_id = $(this).data('edit_id');
+            var edit_judul = $(this).data('edit_judul');
+            var edit_isi = $(this).data('edit_isi');
+            var edit_tags = $(this).data('edit_tags');
+            var edit_gambar = $(this).data('edit_gambar');
+
+            // Set data ke dalam modal
+            $('#edit_id').val(edit_id);
+            $('#edit_judul').val(edit_judul);
+            $('#edit_isi').summernote('code', edit_isi);
+            $('#edit_tags').val(edit_tags);
+
+            if (edit_gambar) {
+                $('#edit-gambar-preview').attr('src', '<?= base_url('uploads/pengumuman/') ?>' + edit_gambar);
+            } else {
+                $('#edit-gambar-preview').attr('src', '');
+            }
+
+            $('#ubahPengumumanModal').modal('show');
+        });
+
+        const editDropzone = new Dropzone("#edit_gambar_dropzone", {
+            url: "<?= base_url('admin/update_pengumuman') ?>",
+            autoProcessQueue: false,
+            uploadMultiple: false,
+            maxFiles: 1,
+            dictDefaultMessage: "Seret gambar ke sini untuk unggah",
+            acceptedFiles: 'image/*',
+            addRemoveLinks: true,
+            init: function() {
+                var editDropzone = this;
+                document.querySelector("#editPengumumanForm").addEventListener("submit", function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (editDropzone.getQueuedFiles().length > 0) {
+                        editDropzone.processQueue();
+                    } else {
+                        updatePengumumanWithoutImage();
+                    }
+                });
+                this.on("sending", function(file, xhr, formData) {
+                    formData.append("id", document.querySelector("#edit_id").value);
+                    formData.append("judul", document.querySelector("#edit_judul").value);
+                    formData.append("isi", document.querySelector("#edit_isi").value);
+                    formData.append("tags", document.querySelector("#edit_tags").value);
+                });
+                this.on("success", function(file, response) {
+                    if (response.success) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Berhasil',
+                            text: 'Pengumuman telah diperbarui.',
+                        }).then((result) => {
+                            $('#ubahPengumumanModal').modal('hide');
+                            resetModal();
+                            $('#tabelPengumuman').DataTable().ajax.reload();
+                        });
+
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: response.errors ? response.errors.join("<br>") : 'Gagal memperbarui pengumuman.',
+                        });
+                    }
+                });
+                this.on("error", function(file, response) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Gagal memperbarui pengumuman.',
+                    });
+                });
+            }
+        });
+
+        function updatePengumumanWithoutImage() {
+            $.ajax({
+                url: "<?= base_url('admin/update_pengumuman') ?>",
+                type: 'POST',
+                data: {
+                    id: document.querySelector("#edit_id").value,
+                    judul: document.querySelector("#edit_judul").value,
+                    isi: document.querySelector("#edit_isi").value,
+                    tags: document.querySelector("#edit_tags").value
+                },
+                success: function(response) {
+                    if (response.success) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Berhasil',
+                            text: 'Pengumuman telah diperbarui.',
+                        }).then((result) => {
+                            $('#ubahPengumumanModal').modal('hide');
+                            resetModal();
+                            $('#tabelPengumuman').DataTable().ajax.reload();
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: response.errors ? response.errors.join("<br>") : 'Gagal memperbarui pengumuman.',
+                        });
+                    }
+                },
+                error: function() {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Gagal memperbarui pengumuman.',
+                    });
+                }
+            });
+        }
+    });
+</script>
 <?= $this->endSection() ?>

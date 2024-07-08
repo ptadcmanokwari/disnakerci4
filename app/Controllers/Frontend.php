@@ -171,7 +171,7 @@ class Frontend extends BaseController
             $data['pager'] = $informasiModel->pager;
         }
 
-        return $this->loadView('frontend/berita', $data);
+        return $this->loadView('frontend/beritama', $data);
     }
 
     public function pengumuman(): string
