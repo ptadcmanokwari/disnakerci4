@@ -6,15 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Dinas Tenaga Kerja</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <link rel="stylesheet" href="<?php base_url(); ?>adminltev31/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="<?php echo base_url('adminltev31/plugins/fontawesome-free/css/all.min.css'); ?>">
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <link rel="stylesheet" href="<?php base_url(); ?>adminltev31/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-    <link rel="stylesheet" href="<?php base_url(); ?>adminltev31/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-    <link rel="stylesheet" href="<?php base_url(); ?>adminltev31/plugins/jqvmap/jqvmap.min.css">
-    <link rel="stylesheet" href="<?php base_url(); ?>adminltev31/dist/css/adminlte.min.css">
-    <link rel="stylesheet" href="<?php base_url(); ?>adminltev31/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-    <link rel="stylesheet" href="<?php base_url(); ?>adminltev31/plugins/daterangepicker/daterangepicker.css">
-    <link rel="stylesheet" href="<?php base_url(); ?>adminltev31/plugins/summernote/summernote-bs4.min.css">
+    <link rel="stylesheet" href="<?php echo base_url('adminltev31/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('adminltev31/plugins/icheck-bootstrap/icheck-bootstrap.min.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('adminltev31/plugins/jqvmap/jqvmap.min.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('adminltev31/dist/css/adminlte.min.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('adminltev31/plugins/overlayScrollbars/css/OverlayScrollbars.min.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('adminltev31/plugins/daterangepicker/daterangepicker.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('adminltev31/plugins/summernote/summernote-bs4.min.css'); ?>">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/css/adminlte.min.css">
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -23,7 +26,7 @@
             <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
                 <div class="sidebar-brand">
                     <a href="<?= base_url('admin'); ?>" class="brand-link">
-                        <img src="<?= base_url(); ?>adminltev31/dist/assets/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image opacity-75 shadow">
+                        <img src="<?= base_url('dist/img/AdminLTELogo.png'); ?>" alt="AdminLTE Logo" class="brand-image opacity-75 shadow">
 
                         <span class="brand-text fw-light">PANEL ADMIN</span>
                     </a>
@@ -87,9 +90,9 @@
                         <ul class="navbar-nav ms-auto">
                             <li class="nav-item"> <a class="nav-link" href="#" data-lte-toggle="fullscreen"> <i data-lte-icon="maximize" class="bi bi-arrows-fullscreen"></i> <i data-lte-icon="minimize" class="bi bi-fullscreen-exit" style="display: none;"></i>
                                 </a> </li>
-                            <li class="nav-item dropdown user-menu"> <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"> <img src="<?= base_url(); ?>adminltev31/dist/assets/img/user2-160x160.jpg" class="user-image rounded-circle shadow" alt="User Image"> <span class="d-none d-md-inline">Alexander Pierce</span> </a>
+                            <li class="nav-item dropdown user-menu"> <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"> <img src="<?= base_url('dist/assets/img/user2-160x160.jpg'); ?>" class="user-image rounded-circle shadow" alt="User Image"> <span class="d-none d-md-inline">Alexander Pierce</span> </a>
                                 <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
-                                    <li class="user-header text-bg-primary"> <img src="<?= base_url(); ?>adminltev31/dist/assets/img/user2-160x160.jpg" class="rounded-circle shadow" alt="User Image">
+                                    <li class="user-header text-bg-primary"> <img src="<?= base_url('dist/img/user2-160x160.jpg'); ?>" class="rounded-circle shadow" alt="User Image">
                                         <p>
                                             Alexander Pierce - Web Developer
                                             <small>Member since Nov. 2023</small>
@@ -119,25 +122,28 @@
                 </footer>
             </div>
         </div>
-        <script src="<?php base_url(); ?>adminltev31/plugins/jquery/jquery.min.js"></script>
-        <script src="<?php base_url(); ?>adminltev31/plugins/jquery-ui/jquery-ui.min.js"></script>
+
+        <script src="<?php echo base_url('adminltev31/plugins/jquery/jquery.min.js'); ?>"></script>
+        <script src="<?php echo base_url('adminltev31/plugins/jquery-ui/jquery-ui.min.js'); ?>"></script>
         <script>
             $.widget.bridge('uibutton', $.ui.button)
         </script>
-        <script src="<?php base_url(); ?>adminltev31/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="<?php base_url(); ?>adminltev31/plugins/chart.js/Chart.min.js"></script>
-        <script src="<?php base_url(); ?>adminltev31/plugins/sparklines/sparkline.js"></script>
-        <script src="<?php base_url(); ?>adminltev31/plugins/jqvmap/jquery.vmap.min.js"></script>
-        <script src="<?php base_url(); ?>adminltev31/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-        <script src="<?php base_url(); ?>adminltev31/plugins/jquery-knob/jquery.knob.min.js"></script>
-        <script src="<?php base_url(); ?>adminltev31/plugins/moment/moment.min.js"></script>
-        <script src="<?php base_url(); ?>adminltev31/plugins/daterangepicker/daterangepicker.js"></script>
-        <script src="<?php base_url(); ?>adminltev31/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-        <script src="<?php base_url(); ?>adminltev31/plugins/summernote/summernote-bs4.min.js"></script>
-        <script src="<?php base_url(); ?>adminltev31/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-        <script src="<?php base_url(); ?>adminltev31/dist/js/adminlte.js"></script>
-        <script src="<?php base_url(); ?>adminltev31/dist/js/demo.js"></script>
-        <script src="<?php base_url(); ?>adminltev31/dist/js/pages/dashboard.js"></script>
+        <script src="<?php echo base_url('adminltev31/plugins/bootstrap/js/bootstrap.bundle.min.js'); ?>"></script>
+        <script src="<?php echo base_url('adminltev31/plugins/chart.js/Chart.min.js'); ?>"></script>
+        <script src="<?php echo base_url('adminltev31/plugins/sparklines/sparkline.js'); ?>"></script>
+        <script src="<?php echo base_url('adminltev31/plugins/jqvmap/jquery.vmap.min.js'); ?>"></script>
+        <script src="<?php echo base_url('adminltev31/plugins/jqvmap/maps/jquery.vmap.usa.js'); ?>"></script>
+        <script src="<?php echo base_url('adminltev31/plugins/jquery-knob/jquery.knob.min.js'); ?>"></script>
+        <script src="<?php echo base_url('adminltev31/plugins/moment/moment.min.js'); ?>"></script>
+        <script src="<?php echo base_url('adminltev31/plugins/daterangepicker/daterangepicker.js'); ?>"></script>
+        <script src="<?php echo base_url('adminltev31/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js'); ?>"></script>
+        <script src="<?php echo base_url('adminltev31/plugins/summernote/summernote-bs4.min.js'); ?>"></script>
+        <script src="<?php echo base_url('adminltev31/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js'); ?>"></script>
+        <script src="<?php echo base_url('adminltev31/dist/js/adminlte.js'); ?>"></script>
+        <script src="<?php echo base_url('adminltev31/dist/js/demo.js'); ?>"></script>
+        <script src="<?php echo base_url('adminltev31/dist/js/pages/dashboard.js'); ?>"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/js/adminlte.min.js"></script>
 </body>
 
 </html>

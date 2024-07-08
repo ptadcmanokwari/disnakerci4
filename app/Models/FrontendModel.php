@@ -32,16 +32,30 @@ class FrontendModel extends Model
             ->findAll($limit);
     }
 
+    // public function getInformasiByKategori($kategori, $limit, $offset)
+    // {
+    //     return $this->where('kategori', $kategori)
+    //         ->orderBy('tgl_publikasi', 'DESC')
+    //         ->findAll($limit, $offset);
+    // }
+
     public function getInformasiByKategori($kategori, $limit, $offset)
     {
-        return $this->where('kategori', $kategori)
-            ->orderBy('tgl_publikasi', 'DESC')
-            ->findAll($limit, $offset);
+        return $this->db->table('informasi')
+            ->where('kategori', $kategori)
+            ->limit($limit, $offset)
+            ->get()
+            ->getResultArray();
     }
 
     public function countInformasiByKategori($kategori)
     {
         return $this->where('kategori', $kategori)
             ->countAllResults();
+    }
+
+    public function update($id = null, $data = null): bool
+    {
+        return $this->db->table('informasi')->where('id', $id)->update($data);
     }
 }

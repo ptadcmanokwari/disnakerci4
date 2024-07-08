@@ -882,3 +882,47 @@ in APPPATH\Views\be_admin\layout.php on line 7.
  9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
 10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
 11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2024-07-07 23:42:02 --> Error connecting to the database: mysqli_sql_exception: No connection could be made because the target machine actively refused it in G:\laragon\www\disnakerci4\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php:187
+Stack trace:
+#0 G:\laragon\www\disnakerci4\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php(187): mysqli->real_connect('localhost', 'root', '', 'db_disnakerci4', 3306, '', 0)
+#1 G:\laragon\www\disnakerci4\vendor\codeigniter4\framework\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 G:\laragon\www\disnakerci4\vendor\codeigniter4\framework\system\Database\BaseConnection.php(616): CodeIgniter\Database\BaseConnection->initialize()
+#3 G:\laragon\www\disnakerci4\app\Models\PencakerModel.php(27): CodeIgniter\Database\BaseConnection->query('SELECT (YEAR(CU...')
+#4 G:\laragon\www\disnakerci4\app\Controllers\Frontend.php(20): App\Models\PencakerModel->getUmurStatistik()
+#5 G:\laragon\www\disnakerci4\vendor\codeigniter4\framework\system\CodeIgniter.php(933): App\Controllers\Frontend->index()
+#6 G:\laragon\www\disnakerci4\vendor\codeigniter4\framework\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+#7 G:\laragon\www\disnakerci4\vendor\codeigniter4\framework\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 G:\laragon\www\disnakerci4\vendor\codeigniter4\framework\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#9 G:\laragon\www\disnakerci4\vendor\codeigniter4\framework\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 G:\laragon\www\disnakerci4\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 G:\laragon\www\disnakerci4\vendor\codeigniter4\framework\system\rewrite.php(44): require_once('G:\\laragon\\www\\...')
+#12 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No connection could be made because the target machine actively refused it in G:\laragon\www\disnakerci4\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php:231
+Stack trace:
+#0 G:\laragon\www\disnakerci4\vendor\codeigniter4\framework\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 G:\laragon\www\disnakerci4\vendor\codeigniter4\framework\system\Database\BaseConnection.php(616): CodeIgniter\Database\BaseConnection->initialize()
+#2 G:\laragon\www\disnakerci4\app\Models\PencakerModel.php(27): CodeIgniter\Database\BaseConnection->query('SELECT (YEAR(CU...')
+#3 G:\laragon\www\disnakerci4\app\Controllers\Frontend.php(20): App\Models\PencakerModel->getUmurStatistik()
+#4 G:\laragon\www\disnakerci4\vendor\codeigniter4\framework\system\CodeIgniter.php(933): App\Controllers\Frontend->index()
+#5 G:\laragon\www\disnakerci4\vendor\codeigniter4\framework\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+#6 G:\laragon\www\disnakerci4\vendor\codeigniter4\framework\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 G:\laragon\www\disnakerci4\vendor\codeigniter4\framework\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#8 G:\laragon\www\disnakerci4\vendor\codeigniter4\framework\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#9 G:\laragon\www\disnakerci4\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#10 G:\laragon\www\disnakerci4\vendor\codeigniter4\framework\system\rewrite.php(44): require_once('G:\\laragon\\www\\...')
+#11 {main}
+CRITICAL - 2024-07-07 23:42:02 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: No connection could be made because the target machine actively refused it
+[Method: GET, Route: /]
+in SYSTEMPATH\Database\BaseConnection.php on line 467.
+ 1 SYSTEMPATH\Database\BaseConnection.php(616): CodeIgniter\Database\BaseConnection->initialize()
+ 2 APPPATH\Models\PencakerModel.php(27): CodeIgniter\Database\BaseConnection->query('SELECT (YEAR(CURDATE())-YEAR(tgllahir)) AS umur, COUNT((YEAR(CURDATE())-YEAR(tgllahir))) AS jumlah FROM pencaker GROUP BY umur ORDER BY umur ASC')
+ 3 APPPATH\Controllers\Frontend.php(20): App\Models\PencakerModel->getUmurStatistik()
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Frontend->index()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\rewrite.php(44): require_once('G:\\laragon\\www\\disnakerci4\\public\\index.php')

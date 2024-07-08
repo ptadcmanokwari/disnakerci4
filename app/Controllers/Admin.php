@@ -213,9 +213,6 @@ class Admin extends BaseController
         return $this->response->setJSON($response);
     }
 
-
-
-
     public function pengumuman()
     {
         return $this->loadView('be_admin/pengumuman');
