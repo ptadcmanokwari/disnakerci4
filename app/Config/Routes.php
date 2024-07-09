@@ -25,7 +25,6 @@ $routes->get('/masuk', 'Frontend::login');
 
 
 // Routes untuk backend
-$routes->get('admin', 'Admin::index');
 $routes->get('admin/dashboard', 'Admin::index');
 
 $routes->get('admin/pencaker', 'Admin::pencaker');
@@ -65,8 +64,11 @@ $routes->post('admin/update_status_pelatihan', 'Admin::update_status_pelatihan')
 $routes->post('admin/hapus_pelatihan', 'Admin::hapus_pelatihan');
 
 
-$routes->get('admin/userslog', 'Admin::userslog');
-
+// $routes->get('admin/userslog', 'Admin::userslog');
+$routes->get('admin/activitylogs', 'Admin::activitylogs');
+$routes->get('admin/activitylogsajax', 'Admin::activitylogsajax');
+$routes->post('admin/activitylogsajax', 'Admin::activitylogsajax');
+$routes->get('admin/getUsers', 'Admin::getUsers');
 
 // Users
 $routes->get('admin/users', 'Admin::users');
@@ -80,3 +82,8 @@ $routes->get('admin/hapus_user', 'Admin::hapus_user');
 
 $routes->get('admin/settings', 'Admin::settings');
 $routes->get('admin/backup', 'Admin::backup');
+
+
+// Export Data
+$routes->get('admin/downloadexcel', 'Admin::exportExcel');
+$routes->get('admin/downloadpdf', 'Admin::exportPDF');

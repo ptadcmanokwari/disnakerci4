@@ -6,82 +6,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?php echo $title; ?> - Panel Admin</title>
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="<?php echo base_url('adminltev31/plugins/fontawesome-free/css/all.min.css'); ?>">
-    <link rel="stylesheet" href="<?php echo base_url('adminltev31/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css'); ?>">
-    <link rel="stylesheet" href="<?php echo base_url('adminltev31/plugins/datatables-responsive/css/responsive.bootstrap4.min.css'); ?>">
-    <link rel="stylesheet" href="<?php echo base_url('adminltev31/plugins/datatables-buttons/css/buttons.bootstrap4.min.css'); ?>">
-
-    <link rel="stylesheet" href="<?php echo base_url('adminltev31/plugins/select2-bootstrap4-theme/select2-bootstrap4.css'); ?>">
-    <link rel="stylesheet" href="<?php echo base_url('adminltev31/plugins/select2/css/select2.css'); ?>">
-
-    <!-- G:\laragon\www\disnakerci4\public\adminltev31\plugins\select2-bootstrap4-theme -->
+    <link rel="stylesheet"
+        href="<?php echo base_url('adminltev31/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css'); ?>">
+    <link rel="stylesheet"
+        href="<?php echo base_url('adminltev31/plugins/datatables-responsive/css/responsive.bootstrap4.min.css'); ?>">
+    <link rel="stylesheet"
+        href="<?php echo base_url('adminltev31/plugins/datatables-buttons/css/buttons.bootstrap4.min.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('adminltev31/dist/css/adminlte.min.css'); ?>">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="<?php echo base_url('adminltev31/plugins/summernote/summernote-bs4.min.css'); ?>">
     <style>
-        ul.nav.nav-treeview a.nav-link {
-            padding-left: 40px;
-        }
+    ul.nav.nav-treeview a.nav-link {
+        padding-left: 40px;
+    }
 
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
-        .card-header:after {
-            display: none;
-        }
+    .card-header:after {
+        display: none;
+    }
 
-        .table td,
-        .table th {
-            vertical-align: middle !important;
-        }
+    .table td,
+    .table th {
+        vertical-align: middle !important;
+    }
 
-        .btn.btn-info,
-        .btn.btn-warning,
-        .btn.btn-danger,
-        .btn.btn-success {
-            border-radius: 5px !important;
-            margin: 2px !important;
-        }
+    a.btn.btn-info,
+    button.btn.btn-warning,
+    button.btn.btn-danger,
+    button.btn.btn-success {
+        border-radius: 5px !important;
+        margin: 2px !important;
+    }
 
-        label:not(.form-check-label):not(.custom-file-label) {
-            font-weight: normal;
-        }
-
-        /* Verifikasi modal verifikasi pencaker halaman pencaker admin */
-        .hide {
-            display: none;
-        }
-
-        /* Select2 Activity Logs */
-        .select2-container .select2-selection--single {
-            height: calc(2.25rem + 2px) !important;
-        }
-
-        /* Detail User Modal */
-        div#detailUserModal .nav-pills .nav-link.active,
-        div#detailUserModal .nav-pills .show>.nav-link {
-            color: #fff;
-            background-color: #007bff;
-            border: 0 !important;
-        }
-
-        div#detailUserModal .nav-pills .nav-link {
-            color: #6c757d;
-            border: 0;
-            background-color: transparent;
-        }
-
-        /* Kolom Aksi tabel Pencaker */
-
-        table.table-bordered.dataTable th:last-child,
-        table.table-bordered.dataTable td:last-child {
-            text-align: center;
-            width: 20px;
-        }
+    label:not(.form-check-label):not(.custom-file-label) {
+        font-weight: normal;
+    }
     </style>
 </head>
 
@@ -112,7 +79,8 @@
                     <div class="navbar-search-block">
                         <form class="form-inline">
                             <div class="input-group input-group-sm">
-                                <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+                                <input class="form-control form-control-navbar" type="search" placeholder="Search"
+                                    aria-label="Search">
                                 <div class="input-group-append">
                                     <button class="btn btn-navbar" type="submit">
                                         <i class="fas fa-search"></i>
@@ -136,7 +104,8 @@
                         <a href="#" class="dropdown-item">
                             <!-- Message Start -->
                             <div class="media">
-                                <img src="<?php echo base_url(); ?>dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                                <img src="<?php echo base_url(); ?>dist/img/user1-128x128.jpg" alt="User Avatar"
+                                    class="img-size-50 mr-3 img-circle">
                                 <div class="media-body">
                                     <h3 class="dropdown-item-title">
                                         Brad Diesel
@@ -152,7 +121,8 @@
                         <a href="#" class="dropdown-item">
                             <!-- Message Start -->
                             <div class="media">
-                                <img src="<?php echo base_url(); ?>dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                                <img src="<?php echo base_url(); ?>dist/img/user8-128x128.jpg" alt="User Avatar"
+                                    class="img-size-50 img-circle mr-3">
                                 <div class="media-body">
                                     <h3 class="dropdown-item-title">
                                         John Pierce
@@ -168,11 +138,13 @@
                         <a href="#" class="dropdown-item">
                             <!-- Message Start -->
                             <div class="media">
-                                <img src="<?php echo base_url(); ?>dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                                <img src="<?php echo base_url(); ?>dist/img/user3-128x128.jpg" alt="User Avatar"
+                                    class="img-size-50 img-circle mr-3">
                                 <div class="media-body">
                                     <h3 class="dropdown-item-title">
                                         Nora Silvester
-                                        <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
+                                        <span class="float-right text-sm text-warning"><i
+                                                class="fas fa-star"></i></span>
                                     </h3>
                                     <p class="text-sm">The subject goes here</p>
                                     <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
@@ -229,26 +201,32 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="<?php echo base_url(); ?>index3.html" class="brand-link">
-                <img src="<?php echo base_url(); ?>dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <img src="<?php echo base_url(); ?>dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
+                    class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">PANEL ADMIN</span>
             </a>
             <div class="sidebar">
                 <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                        data-accordion="false">
                         <li class="nav-item">
-                            <a href="<?= base_url('admin/dashboard'); ?>" class="nav-link <?= ($current_uri == 'dashboard') ? 'active' : '' ?>">
+                            <a href="<?= base_url('admin/dashboard'); ?>"
+                                class="nav-link <?= ($current_uri == 'dashboard') ? 'active' : '' ?>">
                                 <i class="nav-icon bi bi-speedometer2"></i>
                                 <p>Dashboard</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?= base_url('admin/pencaker'); ?>" class="nav-link <?= ($current_uri == 'pencaker') ? 'active' : '' ?>">
+                            <a href="<?= base_url('admin/pencaker'); ?>"
+                                class="nav-link <?= ($current_uri == 'pencaker') ? 'active' : '' ?>">
                                 <i class="nav-icon bi bi-people"></i>
                                 <p>Pencaker</p>
                             </a>
                         </li>
-                        <li class="nav-item <?= ($current_uri == 'berita' || $current_uri == 'pengumuman' || $current_uri == 'pelatihan') ? 'menu-open' : '' ?>">
-                            <a href="#" class="nav-link <?= ($current_uri == 'berita' || $current_uri == 'pengumuman' || $current_uri == 'pelatihan') ? 'active' : '' ?>">
+                        <li
+                            class="nav-item <?= ($current_uri == 'berita' || $current_uri == 'pengumuman' || $current_uri == 'pelatihan') ? 'menu-open' : '' ?>">
+                            <a href="#"
+                                class="nav-link <?= ($current_uri == 'berita' || $current_uri == 'pengumuman' || $current_uri == 'pelatihan') ? 'active' : '' ?>">
                                 <i class="nav-icon bi bi-info-circle-fill"></i>
                                 <p>
                                     Informasi Web
@@ -257,19 +235,22 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item ">
-                                    <a href="<?= base_url('admin/berita'); ?>" class="nav-link <?= ($current_uri == 'berita') ? 'active' : '' ?>">
+                                    <a href="<?= base_url('admin/berita'); ?>"
+                                        class="nav-link <?= ($current_uri == 'berita') ? 'active' : '' ?>">
                                         <i class="bi bi-circle nav-icon"></i>
                                         <p>Berita</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="<?= base_url('admin/pengumuman'); ?>" class="nav-link <?= ($current_uri == 'pengumuman') ? 'active' : '' ?>">
+                                    <a href="<?= base_url('admin/pengumuman'); ?>"
+                                        class="nav-link <?= ($current_uri == 'pengumuman') ? 'active' : '' ?>">
                                         <i class="bi bi-circle nav-icon"></i>
                                         <p>Pengumuman</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="<?= base_url('admin/pelatihan'); ?>" class="nav-link <?= ($current_uri == 'pelatihan') ? 'active' : '' ?>">
+                                    <a href="<?= base_url('admin/pelatihan'); ?>"
+                                        class="nav-link <?= ($current_uri == 'pelatihan') ? 'active' : '' ?>">
                                         <i class="bi bi-circle nav-icon"></i>
                                         <p>Pelatihan</p>
                                     </a>
@@ -277,26 +258,30 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="<?= base_url('admin/activitylogs'); ?>" class="nav-link <?= ($current_uri == 'activitylogs') ? 'active' : '' ?>">
+                            <a href="<?= base_url('admin/userslog'); ?>"
+                                class="nav-link <?= ($current_uri == 'userslog') ? 'active' : '' ?>">
                                 <i class="nav-icon bi bi-clock-history"></i>
                                 <p>Aktivitas Pengguna</p>
                             </a>
                         </li>
                         <li class="nav-header my-3">SUPER ADMIN</li>
                         <li class="nav-item">
-                            <a href="<?php echo base_url('admin/users'); ?>" class="nav-link <?= ($current_uri == 'users') ? 'active' : '' ?>">
+                            <a href="<?php echo base_url('admin/users'); ?>"
+                                class="nav-link <?= ($current_uri == 'users') ? 'active' : '' ?>">
                                 <i class="nav-icon bi bi-person-fill-gear"></i>
                                 <p>Users</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?php echo base_url('admin/settings'); ?>" class="nav-link <?= ($current_uri == 'settings') ? 'active' : '' ?>">
+                            <a href="<?php echo base_url('admin/settings'); ?>"
+                                class="nav-link <?= ($current_uri == 'settings') ? 'active' : '' ?>">
                                 <i class="nav-icon bi bi-gear"></i>
                                 <p>Settings</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?php echo base_url('admin/backup'); ?>" class="nav-link <?= ($current_uri == 'backup') ? 'active' : '' ?>">
+                            <a href="<?php echo base_url('admin/backup'); ?>"
+                                class="nav-link <?= ($current_uri == 'backup') ? 'active' : '' ?>">
                                 <i class="nav-icon bi bi-database"></i>
                                 <p>Backup</p>
                             </a>
@@ -349,32 +334,30 @@
     <script src="<?php echo base_url('adminltev31/plugins/datatables-buttons/js/buttons.colVis.min.js'); ?>"></script>
     <script src="<?php echo base_url('adminltev31/dist/js/pages/dashboard.js'); ?>"></script>
     <script src="<?php echo base_url('adminltev31/plugins/summernote/summernote-bs4.min.js'); ?>"></script>
-
-    <script src="<?php echo base_url('adminltev31/plugins/select2/js/select2.js'); ?>"></script>
     <!-- AdminLTE App -->
     <script src="<?php echo base_url('adminltev31/dist/js/adminlte.min.js'); ?>"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="<?php echo base_url('adminltev31/dist/js/demo.js'); ?>"></script>
     <!-- Page specific script -->
     <script>
-        $(function() {
-            $("#example1").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    $(function() {
+        $("#example1").DataTable({
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
-            });
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
         });
+    });
     </script>
 </body>
 
