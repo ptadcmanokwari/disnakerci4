@@ -25,6 +25,7 @@ $routes->get('/masuk', 'Frontend::login');
 
 
 // Routes untuk backend
+$routes->get('admin', 'Admin::index');
 $routes->get('admin/dashboard', 'Admin::index');
 
 $routes->get('admin/pencaker', 'Admin::pencaker');
