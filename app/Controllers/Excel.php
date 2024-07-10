@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use CodeIgniter\Controller;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Pdf;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 use PhpOffice\PhpSpreadsheet\Style\Border;
@@ -13,7 +13,7 @@ use App\Models\PencakerModel;
 
 class Excel extends Controller
 {
-    public function exportExcel()
+    public function downloadExcel()
     {
         $pencakerModel = new PencakerModel();
         $dataPencaker = $pencakerModel->findAll();

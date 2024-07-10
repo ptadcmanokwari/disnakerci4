@@ -7,6 +7,13 @@ use App\Models\FrontendModel;
 use App\Models\UsersModel;
 use App\Models\PencakerModel;
 use App\Models\ActivityModel;
+
+use App\Models\PendidikanModel;
+use App\Models\PengalamanKerjaModel;
+use App\Models\DokumenPencakerModel;
+use App\Models\JenjangpendidikanModel;
+use App\Models\DokumenModel;
+
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
@@ -52,8 +59,6 @@ class Admin extends BaseController
         } else {
             $pencaker = $pencakerModel->findAll();
         }
-
-        $totalFilteredRecords = $usersModel->countAll(); // Hitung total data user
 
         $data = [];
 
@@ -103,7 +108,7 @@ class Admin extends BaseController
                 "email" => isset($userData['email']) ? $userData['email'] : '', // Ambil email dari userData jika ada
                 "keterangan_status" => $pc['keterangan_status'],
                 "aksi" => '<div class="btn-group" role="group" aria-label="Actions">
-                               <a href="' . base_url('admin/detail_pencaker/' . $pc['id']) . '" class="btn btn-info btn-sm">
+                               <a href="' . base_url('admin/detail_pencaker/' . $pc['id']) . '" target="_blank" class="btn btn-info btn-sm">
                                    <i class="bi bi-search px-2"></i>
                                </a>
                                <button class="btn btn-success btn-sm btn-edit" data-edit_id="' . $pc['id'] . '" data-toggle="modal" data-target="#ubahPencakerModal">
@@ -118,6 +123,59 @@ class Admin extends BaseController
 
         echo json_encode(["data" => $data]);
     }
+
+    public function detail_pencaker($id)
+    {
+        // Ambil data pencari kerja berdasarkan ID
+        $pencakerModel = new PencakerModel();
+        $pencaker = $pencakerModel->find($id);
+
+        if (!$pencaker) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException('Pencari kerja dengan ID ' . $id . ' tidak ditemukan.');
+        }
+
+        // Ambil data pendidikan berdasarkan pencaker_id
+        $pendidikanModel = new PendidikanModel();
+        $pendidikan = $pendidikanModel->where('pencaker_id', $id)->findAll();
+
+        // Ambil data pengalaman kerja berdasarkan pencaker_id
+        $pengalamanModel = new PengalamanKerjaModel();
+        $pengalaman = $pengalamanModel->where('pencaker_id', $id)->findAll();
+
+        // Ambil data dokumen berdasarkan pencaker_id
+        $dokumenModel = new DokumenPencakerModel();
+        $dokumen = $dokumenModel->where('pencaker_id', $id)->findAll();
+
+        $jenjangPendidikan = new JenjangpendidikanModel();
+        $jenjang = $jenjangPendidikan->where('id', $id)->findAll();
+
+        // Ambil jenis dokumen
+        $dokumenJenisModel = new DokumenModel();
+        $dokumenJenis = $dokumenJenisModel->findAll();
+
+        // Gabungkan data dokumen dan jenis dokumen
+        foreach ($dokumen as &$doc) {
+            foreach ($dokumenJenis as $jenis) {
+                if ($doc['dokumen_id'] == $jenis['id']) {
+                    $doc['jenis_dokumen'] = $jenis['jenis_dokumen'];
+                    break;
+                }
+            }
+        }
+
+        // Persiapkan data untuk dikirim ke view
+        $data = [
+            'title' => 'Review Data dan Dokumen Pencari Kerja',
+            'pencaker' => $pencaker,
+            'pendidikan' => $pendidikan,
+            'pengalaman' => $pengalaman,
+            'dokumen' => $dokumen,
+            'jenjang' => $jenjang
+        ];
+
+        return view('admin/review_pencaker', $data);
+    }
+
 
 
     public function update_status_pencaker()

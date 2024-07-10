@@ -33,6 +33,7 @@ $routes->post('admin/pencakerajax', 'Admin::pencakerajax');
 $routes->post('admin/update_status_pencaker', 'Admin::update_status_pencaker');
 $routes->post('admin/hapus_pencaker', 'Admin::hapus_pencaker');
 $routes->get('admin/hapus_pencaker', 'Admin::hapus_pencaker');
+$routes->get('admin/detail_pencaker/(:num)', 'Admin::detail_pencaker/$1');
 
 
 
