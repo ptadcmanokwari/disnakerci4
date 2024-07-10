@@ -1334,4 +1334,11 @@ class Admin extends BaseController
         $writer->save('php://output');
         exit;
     }
+
+
+    public function cobaform()
+    {
+        $data['title'] = 'Manajemen Pencaker';
+        return $this->loadView('admin/formdata_pencaker', $data);
+    }
 }

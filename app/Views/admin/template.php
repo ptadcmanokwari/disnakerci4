@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="<?php echo base_url('adminltev31/plugins/select2-bootstrap4-theme/select2-bootstrap4.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('adminltev31/plugins/select2/css/select2.css'); ?>">
 
-    <!-- G:\laragon\www\disnakerci4\public\adminltev31\plugins\select2-bootstrap4-theme -->
     <link rel="stylesheet" href="<?php echo base_url('adminltev31/dist/css/adminlte.min.css'); ?>">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="<?php echo base_url('adminltev31/plugins/summernote/summernote-bs4.min.css'); ?>">
@@ -305,6 +304,12 @@
                                 <p>Backup</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="<?php echo base_url('admin/cobaform'); ?>" class="nav-link <?= ($current_uri == 'cobaform') ? 'active' : '' ?>">
+                                <i class="nav-icon bi bi-database"></i>
+                                <p>Form Coba</p>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
             </div>
@@ -377,6 +382,7 @@
                 "autoWidth": false,
                 "responsive": true,
             });
+
         });
     </script>
     <!--  -->

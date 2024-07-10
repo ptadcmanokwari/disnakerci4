@@ -82,3 +82,7 @@ $routes->get('admin/backup', 'Admin::backup');
 // Export Data
 $routes->get('admin/downloadexcel', 'Admin::exportExcel');
 $routes->get('admin/downloadpdf', 'Admin::exportPDF');
+
+
+
+$routes->get('admin/cobaform', 'Admin::cobaform');
