@@ -3,18 +3,12 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Review Data dan Dokumen Pencaker</title>
+    <title><?php echo $title; ?></title>
 
-    <!-- Normalize or reset CSS with your favorite library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
-
-    <!-- Load paper.css for happy printing -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paper-css/0.4.1/paper.css">
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Set page size here: A5, A4 or A3 -->
-    <!-- Set also "landscape" if you need -->
     <style>
         @page {
             size: A4;
@@ -174,15 +168,11 @@
                 </div>
                 <div class="col-2 ms-auto">
                     <?php
-                    // Path ke gambar yang disimpan
-                    $image_path = 'uploads/pencaker/' . $pencaker['id'] . '.jpg'; // atau sesuaikan ekstensi file gambarnya
-
-                    // Cek apakah file gambar ada
+                    $image_path = 'uploads/pencaker/' . $pencaker['id'] . '.jpg';
                     if (file_exists(FCPATH . $image_path)) {
                         $image_url = base_url($image_path);
                     } else {
-                        // Path ke gambar default
-                        $image_url = base_url('uploads/pencaker/default.webp'); // pastikan gambar default ada di direktori yang benar
+                        $image_url = base_url('uploads/pencaker/default.webp');
                     }
                     ?>
                     <img class="float-end" src="<?php echo $image_url; ?>" height="200px" width="160px">

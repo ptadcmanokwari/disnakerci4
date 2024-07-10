@@ -23,7 +23,6 @@ $routes->post('/frontend/save_pencaker_data', 'Frontend::save_pencaker_data');
 $routes->get('/masuk', 'Frontend::login');
 
 
-
 // Routes untuk backend
 $routes->get('admin/dashboard', 'Admin::index');
 
@@ -34,8 +33,7 @@ $routes->post('admin/update_status_pencaker', 'Admin::update_status_pencaker');
 $routes->post('admin/hapus_pencaker', 'Admin::hapus_pencaker');
 $routes->get('admin/hapus_pencaker', 'Admin::hapus_pencaker');
 $routes->get('admin/detail_pencaker/(:num)', 'Admin::detail_pencaker/$1');
-
-
+$routes->get('admin/kartu_ak1/(:num)', 'Admin::kartu_ak1/$1');
 
 // Routes Berita
 $routes->get('admin/berita', 'Admin::berita');
@@ -64,7 +62,6 @@ $routes->post('admin/update_pelatihan', 'Admin::update_pelatihan');
 $routes->post('admin/update_status_pelatihan', 'Admin::update_status_pelatihan');
 $routes->post('admin/hapus_pelatihan', 'Admin::hapus_pelatihan');
 
-
 // $routes->get('admin/userslog', 'Admin::userslog');
 $routes->get('admin/activitylogs', 'Admin::activitylogs');
 $routes->get('admin/activitylogsajax', 'Admin::activitylogsajax');
@@ -79,11 +76,8 @@ $routes->post('admin/update_status_user', 'Admin::update_status_user');
 $routes->post('admin/hapus_user', 'Admin::hapus_user');
 $routes->get('admin/hapus_user', 'Admin::hapus_user');
 
-
-
 $routes->get('admin/settings', 'Admin::settings');
 $routes->get('admin/backup', 'Admin::backup');
-
 
 // Export Data
 $routes->get('admin/downloadexcel', 'Admin::exportExcel');

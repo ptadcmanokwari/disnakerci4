@@ -32,8 +32,75 @@ class Admin extends BaseController
 
     public function index()
     {
-        $data['title'] = 'Dashboard';
+        $pencakerModel = new PencakerModel();
+        $pendidikanData = $pencakerModel->countByPendidikan();
+        $usiaData = $pencakerModel->countByUsia();
+
+        // Data untuk chart line
+        $currentYear = date('Y');
+        $pencakerData = $pencakerModel->getPencakerByGenderAndMonth($currentYear);
+
+        // Proses data untuk dikirim ke view
+        $months = [];
+        $lakiData = [];
+        $perempuanData = [];
+
+        for ($i = 1; $i <= 12; $i++) {
+            $months[] = $this->bulan($i);
+            $lakiData[$i] = 0;
+            $perempuanData[$i] = 0;
+        }
+
+        foreach ($pencakerData as $data) {
+            if ($data->jenkel == 'Laki-laki') {
+                $lakiData[$data->bulan] = $data->jumlah;
+            } else if ($data->jenkel == 'Perempuan') {
+                $perempuanData[$data->bulan] = $data->jumlah;
+            }
+        }
+
+        $data = [
+            'title' => 'Dashboard',
+            'registrasi_count' => $pencakerModel->countByStatus('Registrasi'),
+            'verifikasi_count' => $pencakerModel->countByStatus('Verifikasi'),
+            'validasi_count' => $pencakerModel->countByStatus('Validasi'),
+            'aktif_count' => $pencakerModel->countByStatus('Aktif'),
+            'bekerja_count' => $pencakerModel->countByStatus('Bekerja'),
+            'wajib_lapor_count' => $pencakerModel->countByStatus('Wajib Lapor'),
+            'pendidikan_data' => $pencakerModel->countByPendidikan(),
+            'usia_data' => $pencakerModel->countByUsia(),
+
+            // highchart
+            'pendidikan_data' => json_encode($pendidikanData),
+            'usia_data' => json_encode($usiaData),
+
+            'currentYear' => $currentYear,
+            'months' => json_encode(array_values($months)),
+            'laki_data' => json_encode(array_values($lakiData)),
+            'perempuan_data' => json_encode(array_values($perempuanData))
+        ];
+
         return $this->loadView('admin/dashboard', $data);
+    }
+
+    protected function bulan($bulan)
+    {
+        $namaBulan = [
+            1 => 'Januari',
+            2 => 'Februari',
+            3 => 'Maret',
+            4 => 'April',
+            5 => 'Mei',
+            6 => 'Juni',
+            7 => 'Juli',
+            8 => 'Agustus',
+            9 => 'September',
+            10 => 'Oktober',
+            11 => 'November',
+            12 => 'Desember'
+        ];
+
+        return $namaBulan[$bulan] ?? '';
     }
 
     public function pencaker()
@@ -74,7 +141,7 @@ class Admin extends BaseController
             }
 
             $defaultImagePath = base_url('uploads/user/no-user.jpg');
-            $gambar = '<img src="' . $defaultImagePath . '" alt="User Image" width="40">';
+            $gambar = '<img src="' . $defaultImagePath . '" alt="' . $pc['namalengkap'] . '" title="' . $pc['namalengkap'] . '" width="40">';
 
             // Jika data user ditemukan
             if (!empty($userData)) {
@@ -83,16 +150,17 @@ class Admin extends BaseController
                     $imagePath = base_url('path/to/image/' . $userData['img_type']);
                     if (file_exists(FCPATH . 'path/to/image/' . $userData['img_type'])) {
                         // Jika gambar ada di direktori
-                        $gambar = '<img src="' . $imagePath . '" alt="User Image" width="40">';
+                        $gambar = '<img src="' . $imagePath . '" alt="' . $pc['namalengkap'] . '" title="' . $pc['namalengkap'] . '" width="40">';
                     } else {
                         // Jika gambar tidak ada di direktori
-                        $gambar = '<img src="' . $defaultImagePath . '" alt="User Image" width="40">';
+                        $gambar = '<img src="' . $defaultImagePath . '" aalt="' . $pc['namalengkap'] . '" title="' . $pc['namalengkap'] . '" width="40">';
                     }
                 }
             }
 
             $data[] = [
-                "verval" => '<button class="btn btn-secondary btn-sm btn-verval" 
+                "verval" => '<button class="btn btn-secondary btn-sm btn-verval"
+                                title="Verifikasi/Validasi Pencaker"
                                  data-id="' . $pc['id'] . '" 
                                  data-namalengkap="' . $pc['namalengkap'] . '" 
                                  data-nopendaftaran="' . $pc['nopendaftaran'] . '" 
@@ -108,13 +176,13 @@ class Admin extends BaseController
                 "email" => isset($userData['email']) ? $userData['email'] : '', // Ambil email dari userData jika ada
                 "keterangan_status" => $pc['keterangan_status'],
                 "aksi" => '<div class="btn-group" role="group" aria-label="Actions">
-                               <a href="' . base_url('admin/detail_pencaker/' . $pc['id']) . '" target="_blank" class="btn btn-info btn-sm">
+                               <a href="' . base_url('admin/detail_pencaker/' . $pc['id']) . '" target="_blank" class="btn btn-info btn-sm" title="Detail Pencaker">
                                    <i class="bi bi-search px-2"></i>
                                </a>
-                               <button class="btn btn-success btn-sm btn-edit" data-edit_id="' . $pc['id'] . '" data-toggle="modal" data-target="#ubahPencakerModal">
+                               <a href="' . base_url('admin/kartu_ak1/' . $pc['id']) . '" target="_blank" class="btn btn-success btn-sm" title="Kartu AK/1">
                                    <i class="bi bi-person-vcard-fill px-2"></i>
-                               </button>
-                               <button class="btn btn-danger btn-sm btn-delete" data-i="' . $pc['id'] . '">
+                               </a>
+                               <button class="btn btn-danger btn-sm btn-delete" data-i="' . $pc['id'] . '" title="Babat Pencaker">
                                    <i class="bi bi-trash px-2"></i>
                                </button>
                            </div>'
@@ -126,34 +194,28 @@ class Admin extends BaseController
 
     public function detail_pencaker($id)
     {
-        // Ambil data pencari kerja berdasarkan ID
         $pencakerModel = new PencakerModel();
         $pencaker = $pencakerModel->find($id);
 
-        if (!$pencaker) {
-            throw new \CodeIgniter\Exceptions\PageNotFoundException('Pencari kerja dengan ID ' . $id . ' tidak ditemukan.');
-        }
+        // if (!$pencaker) {
+        //     throw new \CodeIgniter\Exceptions\PageNotFoundException('Pencari kerja dengan ID ' . $id . ' tidak ditemukan.');
+        // }
 
-        // Ambil data pendidikan berdasarkan pencaker_id
         $pendidikanModel = new PendidikanModel();
         $pendidikan = $pendidikanModel->where('pencaker_id', $id)->findAll();
 
-        // Ambil data pengalaman kerja berdasarkan pencaker_id
         $pengalamanModel = new PengalamanKerjaModel();
         $pengalaman = $pengalamanModel->where('pencaker_id', $id)->findAll();
 
-        // Ambil data dokumen berdasarkan pencaker_id
         $dokumenModel = new DokumenPencakerModel();
         $dokumen = $dokumenModel->where('pencaker_id', $id)->findAll();
 
         $jenjangPendidikan = new JenjangpendidikanModel();
         $jenjang = $jenjangPendidikan->where('id', $id)->findAll();
 
-        // Ambil jenis dokumen
         $dokumenJenisModel = new DokumenModel();
         $dokumenJenis = $dokumenJenisModel->findAll();
 
-        // Gabungkan data dokumen dan jenis dokumen
         foreach ($dokumen as &$doc) {
             foreach ($dokumenJenis as $jenis) {
                 if ($doc['dokumen_id'] == $jenis['id']) {
@@ -163,7 +225,6 @@ class Admin extends BaseController
             }
         }
 
-        // Persiapkan data untuk dikirim ke view
         $data = [
             'title' => 'Review Data dan Dokumen Pencari Kerja',
             'pencaker' => $pencaker,
@@ -176,6 +237,50 @@ class Admin extends BaseController
         return view('admin/review_pencaker', $data);
     }
 
+    public function kartu_ak1($id)
+    {
+        $pencakerModel = new PencakerModel();
+        $pencaker = $pencakerModel->find($id);
+
+        // if (!$pencaker) {
+        //     throw new \CodeIgniter\Exceptions\PageNotFoundException('Pencari kerja dengan ID ' . $id . ' tidak ditemukan.');
+        // }
+
+        $pendidikanModel = new PendidikanModel();
+        $pendidikan = $pendidikanModel->where('pencaker_id', $id)->findAll();
+
+        $pengalamanModel = new PengalamanKerjaModel();
+        $pengalaman = $pengalamanModel->where('pencaker_id', $id)->findAll();
+
+        $dokumenModel = new DokumenPencakerModel();
+        $dokumen = $dokumenModel->where('pencaker_id', $id)->findAll();
+
+        $jenjangPendidikan = new JenjangpendidikanModel();
+        $jenjang = $jenjangPendidikan->where('id', $id)->findAll();
+
+        $dokumenJenisModel = new DokumenModel();
+        $dokumenJenis = $dokumenJenisModel->findAll();
+
+        foreach ($dokumen as &$doc) {
+            foreach ($dokumenJenis as $jenis) {
+                if ($doc['dokumen_id'] == $jenis['id']) {
+                    $doc['jenis_dokumen'] = $jenis['jenis_dokumen'];
+                    break;
+                }
+            }
+        }
+
+        $data = [
+            'title' => 'Kartu AK/1',
+            'pencaker' => $pencaker,
+            'pendidikan' => $pendidikan,
+            'pengalaman' => $pengalaman,
+            'dokumen' => $dokumen,
+            'jenjang' => $jenjang
+        ];
+
+        return view('admin/kartu_ak1', $data);
+    }
 
 
     public function update_status_pencaker()
@@ -841,9 +946,6 @@ class Admin extends BaseController
         echo json_encode(["data" => $data]);
     }
 
-
-
-
     public function getUsers()
     {
         $userModel = new UsersModel();
@@ -933,10 +1035,6 @@ class Admin extends BaseController
             ];
         }
 
-        // Panggil activitylogsajax di dalam usersajax
-        // $this->activitylogsajax();
-
-        // Mengembalikan data dalam format JSON untuk DataTables
         echo json_encode(["data" => $data]);
     }
 

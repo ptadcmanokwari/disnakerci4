@@ -33,4 +33,44 @@ class PencakerModel extends Model
     {
         return $this->countAll();
     }
+
+    public function countByStatus($status)
+    {
+        return $this->where('keterangan_status', $status)->countAllResults();
+    }
+
+    public function countByPendidikan()
+    {
+        return $this->db->table('pendidikan_pencaker')
+            ->select('jenjang_pendidikan.jenjang AS pendidikan_terakhir, COUNT(*) AS jumlah')
+            ->join('jenjang_pendidikan', 'pendidikan_pencaker.jenjang_pendidikan_id = jenjang_pendidikan.id')
+            ->groupBy('jenjang_pendidikan.jenjang')
+            ->get()
+            ->getResultArray();
+    }
+
+    public function countByUsia()
+    {
+        return $this->select("CASE
+                                WHEN YEAR(CURDATE()) - YEAR(tgllahir) BETWEEN 18 AND 25 THEN '18-25'
+                                WHEN YEAR(CURDATE()) - YEAR(tgllahir) BETWEEN 26 AND 35 THEN '26-35'
+                                WHEN YEAR(CURDATE()) - YEAR(tgllahir) BETWEEN 36 AND 45 THEN '36-45'
+                                WHEN YEAR(CURDATE()) - YEAR(tgllahir) > 45 THEN '46+'
+                              END AS rentang_usia, COUNT(*) AS jumlah")
+            ->groupBy('rentang_usia')
+            ->findAll();
+    }
+
+    public function getPencakerByGenderAndMonth($year)
+    {
+        $query = $this->db->query("
+            SELECT MONTH(tgllahir) AS bulan, jenkel, COUNT(*) AS jumlah
+            FROM pencaker
+            WHERE YEAR(tgllahir) = ?
+            GROUP BY MONTH(tgllahir), jenkel
+            ORDER BY MONTH(tgllahir)
+        ", [$year]);
+
+        return $query->getResult();
+    }
 }

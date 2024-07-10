@@ -76,11 +76,15 @@
         }
 
         /* Kolom Aksi tabel Pencaker */
-
         table.table-bordered.dataTable th:last-child,
         table.table-bordered.dataTable td:last-child {
             text-align: center;
             width: 20px;
+        }
+
+        /* Icon bagian card dashboard */
+        .small-box .icon>i {
+            font-size: 60px;
         }
     </style>
 </head>
@@ -351,11 +355,10 @@
     <script src="<?php echo base_url('adminltev31/plugins/summernote/summernote-bs4.min.js'); ?>"></script>
 
     <script src="<?php echo base_url('adminltev31/plugins/select2/js/select2.js'); ?>"></script>
-    <!-- AdminLTE App -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="<?php echo base_url('adminltev31/dist/js/adminlte.min.js'); ?>"></script>
-    <!-- AdminLTE for demo purposes -->
     <script src="<?php echo base_url('adminltev31/dist/js/demo.js'); ?>"></script>
-    <!-- Page specific script -->
+
     <script>
         $(function() {
             $("#example1").DataTable({
@@ -376,6 +379,7 @@
             });
         });
     </script>
+    <!--  -->
 </body>
 
 </html>
