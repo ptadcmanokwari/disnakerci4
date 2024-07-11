@@ -36,11 +36,9 @@ class Admin extends BaseController
         $pendidikanData = $pencakerModel->countByPendidikan();
         $usiaData = $pencakerModel->countByUsia();
 
-        // Data untuk chart line
         $currentYear = date('Y');
         $pencakerData = $pencakerModel->getPencakerByGenderAndMonth($currentYear);
 
-        // Proses data untuk dikirim ke view
         $months = [];
         $lakiData = [];
         $perempuanData = [];
@@ -1336,9 +1334,53 @@ class Admin extends BaseController
     }
 
 
-    public function cobaform()
+    public function profil_pencaker()
     {
-        $data['title'] = 'Manajemen Pencaker';
+
+        // $pencakerModel = new PencakerModel();
+        // $pencaker = $pencakerModel->find($id);
+
+
+        // $pendidikanModel = new PendidikanModel();
+        // $pendidikan = $pendidikanModel->where('pencaker_id', $id)->findAll();
+
+        // $pengalamanModel = new PengalamanKerjaModel();
+        // $pengalaman = $pengalamanModel->where('pencaker_id', $id)->findAll();
+
+        // $dokumenModel = new DokumenPencakerModel();
+        // $dokumen = $dokumenModel->where('pencaker_id', $id)->findAll();
+
+        $jenjangPendidikan = new JenjangpendidikanModel();
+        $jenjang = $jenjangPendidikan->findAll();
+
+        // $dokumenJenisModel = new DokumenModel();
+        // $dokumenJenis = $dokumenJenisModel->findAll();
+
+        // foreach ($dokumen as &$doc) {
+        //     foreach ($dokumenJenis as $jenis) {
+        //         if ($doc['dokumen_id'] == $jenis['id']) {
+        //             $doc['jenis_dokumen'] = $jenis['jenis_dokumen'];
+        //             break;
+        //         }
+        //     }
+        // }
+
+        $data = [
+            'title' => 'Review Data dan Dokumen Pencari Kerja',
+            // 'pencaker' => $pencaker,
+            // 'pendidikan' => $pendidikan,
+            // 'pengalaman' => $pengalaman,
+            // 'dokumen' => $dokumen,
+            'jenjang' => $jenjang
+        ];
+
+        $data['title'] = 'Profil Pencari Kerja';
+        return $this->loadView('admin/profil_pencaker', $data);
+    }
+
+    public function form()
+    {
+        $data['title'] = 'Profil Pencari Kerja';
         return $this->loadView('admin/formdata_pencaker', $data);
     }
 }

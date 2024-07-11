@@ -85,6 +85,19 @@
         .small-box .icon>i {
             font-size: 60px;
         }
+
+        label:not(.form-check-label):not(.custom-file-label) {
+            font-weight: normal !important;
+        }
+
+        #profilPencaker .card-header.with-border h3 {
+            font-weight: bold !important;
+        }
+
+        #profilPencaker .card {
+            box-shadow: none !important;
+            margin-bottom: 1rem;
+        }
     </style>
 </head>
 
@@ -305,9 +318,15 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?php echo base_url('admin/cobaform'); ?>" class="nav-link <?= ($current_uri == 'cobaform') ? 'active' : '' ?>">
-                                <i class="nav-icon bi bi-database"></i>
-                                <p>Form Coba</p>
+                            <a href="<?php echo base_url('admin/profil_pencaker'); ?>" class="nav-link <?= ($current_uri == 'profil_pencaker') ? 'active' : '' ?>">
+                                <i class="nav-icon bi bi-person-badge"></i>
+                                <p>Profil Pencari Kerja</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?php echo base_url('admin/form'); ?>" class="nav-link <?= ($current_uri == 'form') ? 'active' : '' ?>">
+                                <i class="nav-icon bi bi-person-badge"></i>
+                                <p>Form</p>
                             </a>
                         </li>
                     </ul>

@@ -246,9 +246,6 @@
             }
         });
 
-
-
-
         // Event listener untuk tombol hapus
         $('#tabelPelatihan').on('click', '.btn-delete', function() {
             var id = $(this).data('id');

@@ -84,5 +84,5 @@ $routes->get('admin/downloadexcel', 'Admin::exportExcel');
 $routes->get('admin/downloadpdf', 'Admin::exportPDF');
 
 
-
-$routes->get('admin/cobaform', 'Admin::cobaform');
+$routes->get('admin/profil_pencaker', 'Admin::profil_pencaker');
+$routes->get('admin/form', 'Admin::form');

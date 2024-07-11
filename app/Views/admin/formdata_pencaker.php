@@ -13,8 +13,6 @@
 <link rel="stylesheet" href="<?php echo base_url('adminltev31/plugins/dropzone/min/dropzone.min.css'); ?>">
 <link rel="stylesheet" href="<?php echo base_url('adminltev31/dist/css/adminlte.min.css'); ?>">
 
-
-
 <div class="content-wrapper">
     <section class="content-header">
         <div class="container-fluid">
@@ -597,7 +595,7 @@
                 </div>
                 <!-- /.col (right) -->
             </div>
-            <!-- /.row -->
+
             <div class="row">
                 <div class="col-md-12">
                     <div class="card card-default">
@@ -662,7 +660,7 @@
                     <!-- /.card -->
                 </div>
             </div>
-            <!-- /.row -->
+
             <div class="row">
                 <div class="col-md-12">
                     <div class="card card-default">
@@ -739,11 +737,8 @@
                     <!-- /.card -->
                 </div>
             </div>
-            <!-- /.row -->
         </div>
-        <!-- /.container-fluid -->
     </section>
-    <!-- /.content -->
 </div>
 
 <script src="<?php echo base_url('adminltev31/plugins/jquery/jquery.min.js'); ?>"></script>
@@ -760,6 +755,7 @@
 <script src="<?php echo base_url('adminltev31/plugins/dropzone/min/dropzone.min.js'); ?>"></script>
 <script src="<?php echo base_url('adminltev31/dist/js/adminlte.min.js'); ?>"></script>
 <script src="<?php echo base_url('adminltev31/dist/js/demo.js'); ?>"></script>
+
 <script>
     $(function() {
         $('.select2').select2()

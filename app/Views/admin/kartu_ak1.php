@@ -117,10 +117,10 @@
                                     <td class="text-center"><?php echo $pk['tahunmasuk']; ?></td>
                                 </tr>
                             <?php endforeach; ?>
-
                         </tbody>
                     </table>
                 </div>
+
                 <div class="row">
                     <div class="col-6">
                         <?php if (!empty($pencaker['qr_code']) or $pencaker['qr_code'] != null) { ?>
