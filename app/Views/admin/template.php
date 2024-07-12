@@ -298,7 +298,7 @@
                                 <p>Aktivitas Pengguna</p>
                             </a>
                         </li>
-                        <li class="nav-header my-3">SUPER ADMIN</li>
+                        <li class="nav-header my-2 text-muted">SUPER ADMIN</li>
                         <li class="nav-item">
                             <a href="<?php echo base_url('admin/users'); ?>" class="nav-link <?= ($current_uri == 'users') ? 'active' : '' ?>">
                                 <i class="nav-icon bi bi-person-fill-gear"></i>

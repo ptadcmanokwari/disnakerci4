@@ -7,6 +7,7 @@ use App\Models\FrontendModel;
 use App\Models\UsersModel;
 use App\Models\PencakerModel;
 use App\Models\ActivityModel;
+use App\Models\DatabaseModel;
 
 use App\Models\PendidikanModel;
 use App\Models\PengalamanKerjaModel;
@@ -1096,6 +1097,17 @@ class Admin extends BaseController
     {
         $data['title'] = 'Backup Database';
         return $this->loadView('admin/backup', $data);
+    }
+
+    public function download_db()
+    {
+        $model = new DatabaseModel();
+        $databaseContent = $model->exportDatabase();
+
+        $dbName = $model->db->getDatabase();
+        $filename = $dbName . '.sql';
+
+        return $this->response->download($filename, $databaseContent);
     }
 
     private function loadView(string $viewName, array $data = []): string

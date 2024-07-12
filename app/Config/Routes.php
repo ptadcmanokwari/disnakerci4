@@ -96,3 +96,6 @@ $routes->get('admin/downloadpdf', 'Admin::exportPDF');
 
 $routes->get('admin/profil_pencaker', 'Admin::profil_pencaker');
 $routes->get('admin/form', 'Admin::form');
+
+$routes->get('admin/backup', 'Admin::backup');
+$routes->post('admin/download_db', 'Admin::download_db');
