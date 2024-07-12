@@ -412,12 +412,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPOffice/PhpSpreadsheet.git",
-                "reference": "c196847841ea0db4c49f70e62dde5427eea91f9c"
+                "reference": "88908a8a03cb44bdd5583bc209b5629b79c165ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPOffice/PhpSpreadsheet/zipball/c196847841ea0db4c49f70e62dde5427eea91f9c",
-                "reference": "c196847841ea0db4c49f70e62dde5427eea91f9c",
+                "url": "https://api.github.com/repos/PHPOffice/PhpSpreadsheet/zipball/88908a8a03cb44bdd5583bc209b5629b79c165ab",
+                "reference": "88908a8a03cb44bdd5583bc209b5629b79c165ab",
                 "shasum": ""
             },
             "require": {
@@ -509,7 +509,7 @@
                 "issues": "https://github.com/PHPOffice/PhpSpreadsheet/issues",
                 "source": "https://github.com/PHPOffice/PhpSpreadsheet/tree/master"
             },
-            "time": "2024-07-12T03:42:58+00:00"
+            "time": "2024-07-12T16:31:53+00:00"
         },
         {
             "name": "psr/http-client",
@@ -2736,5 +2736,5 @@
         "php": "^8.1"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.3.0"
 }
