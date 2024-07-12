@@ -1986,3 +1986,103 @@ in SYSTEMPATH\Database\BaseBuilder.php on line 2806.
  7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
  8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
  9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-07-13 07:37:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 07:37:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 07:37:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 07:38:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 07:41:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 07:41:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 07:41:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 07:41:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-07-13 07:43:35 --> ErrorException: Undefined variable $pager
+[Method: GET, Route: pengumuman]
+in APPPATH\Views\frontend\pengumuman.php on line 61.
+ 1 APPPATH\Views\frontend\pengumuman.php(61): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $pager', 'G:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\pengumuman.php', 61)
+ 2 SYSTEMPATH\View\View.php(234): include('G:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\pengumuman.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('frontend/pengumuman', [], true)
+ 5 APPPATH\Controllers\Frontend.php(399): view('frontend/pengumuman', [...])
+ 6 APPPATH\Controllers\Frontend.php(211): App\Controllers\Frontend->loadView('frontend/pengumuman', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Frontend->pengumuman()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-13 07:46:51 --> ErrorException: Undefined variable $pager
+[Method: GET, Route: pelatihan]
+in APPPATH\Views\frontend\pelatihan.php on line 61.
+ 1 APPPATH\Views\frontend\pelatihan.php(61): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $pager', 'G:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\pelatihan.php', 61)
+ 2 SYSTEMPATH\View\View.php(234): include('G:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\pelatihan.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('frontend/pelatihan', [], true)
+ 5 APPPATH\Controllers\Frontend.php(399): view('frontend/pelatihan', [...])
+ 6 APPPATH\Controllers\Frontend.php(248): App\Controllers\Frontend->loadView('frontend/pelatihan', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Frontend->pelatihan()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-13 07:53:14 --> ErrorException: Undefined variable $pager
+[Method: GET, Route: pengumuman]
+in APPPATH\Views\frontend\pengumuman.php on line 61.
+ 1 APPPATH\Views\frontend\pengumuman.php(61): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $pager', 'G:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\pengumuman.php', 61)
+ 2 SYSTEMPATH\View\View.php(234): include('G:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\pengumuman.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('frontend/pengumuman', [], true)
+ 5 APPPATH\Controllers\Frontend.php(399): view('frontend/pengumuman', [...])
+ 6 APPPATH\Controllers\Frontend.php(211): App\Controllers\Frontend->loadView('frontend/pengumuman', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Frontend->pengumuman()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-13 07:54:04 --> ErrorException: Undefined variable $pager
+[Method: GET, Route: pengumuman]
+in APPPATH\Views\frontend\pengumuman.php on line 61.
+ 1 APPPATH\Views\frontend\pengumuman.php(61): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $pager', 'G:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\pengumuman.php', 61)
+ 2 SYSTEMPATH\View\View.php(234): include('G:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\pengumuman.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('frontend/pengumuman', [], true)
+ 5 APPPATH\Controllers\Frontend.php(399): view('frontend/pengumuman', [...])
+ 6 APPPATH\Controllers\Frontend.php(211): App\Controllers\Frontend->loadView('frontend/pengumuman', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Frontend->pengumuman()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-13 07:54:09 --> ErrorException: Undefined variable $pager
+[Method: GET, Route: pengumuman]
+in APPPATH\Views\frontend\pengumuman.php on line 61.
+ 1 APPPATH\Views\frontend\pengumuman.php(61): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $pager', 'G:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\pengumuman.php', 61)
+ 2 SYSTEMPATH\View\View.php(234): include('G:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\pengumuman.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('frontend/pengumuman', [], true)
+ 5 APPPATH\Controllers\Frontend.php(399): view('frontend/pengumuman', [...])
+ 6 APPPATH\Controllers\Frontend.php(211): App\Controllers\Frontend->loadView('frontend/pengumuman', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Frontend->pengumuman()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-07-13 08:02:41 --> ErrorException: Undefined variable $pager
+[Method: GET, Route: pengumuman]
+in APPPATH\Views\frontend\pengumuman.php on line 61.
+ 1 APPPATH\Views\frontend\pengumuman.php(61): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $pager', 'G:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\pengumuman.php', 61)
+ 2 SYSTEMPATH\View\View.php(234): include('G:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\pengumuman.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('frontend/pengumuman', [], true)
+ 5 APPPATH\Controllers\Frontend.php(399): view('frontend/pengumuman', [...])
+ 6 APPPATH\Controllers\Frontend.php(211): App\Controllers\Frontend->loadView('frontend/pengumuman', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Frontend->pengumuman()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-07-13 08:08:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 08:17:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

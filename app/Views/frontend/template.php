@@ -41,6 +41,12 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+    <style>
+        .text-muted {
+            font-size: 12px;
+            color: #fcf0f6;
+        }
+    </style>
 </head>
 
 <body>
