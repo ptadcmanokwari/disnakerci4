@@ -1019,3 +1019,255 @@ in VENDORPATH\myth\auth\src\Controllers\AuthController.php on line 170.
  5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
  6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
  7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-07-13 04:52:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-07-13 04:52:31 --> ErrorException: Undefined variable $title
+[Method: GET, Route: register]
+in APPPATH\Views\frontend\template.php on line 8.
+ 1 APPPATH\Views\frontend\template.php(8): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $title', 'C:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\template.php', 8)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\template.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('frontend/template', [], true)
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('App\\Views\\frontend\\registrasi_pencaker', [], true)
+ 6 VENDORPATH\myth\auth\src\Controllers\AuthController.php(524): view('App\\Views\\frontend\\registrasi_pencaker', [...])
+ 7 VENDORPATH\myth\auth\src\Controllers\AuthController.php(170): Myth\Auth\Controllers\AuthController->_render('App\\Views\\frontend\\registrasi_pencaker', [...])
+ 8 SYSTEMPATH\CodeIgniter.php(933): Myth\Auth\Controllers\AuthController->register()
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(Myth\Auth\Controllers\AuthController))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-07-13 04:56:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-07-13 04:56:17 --> ErrorException: Undefined variable $title
+[Method: GET, Route: register]
+in APPPATH\Views\frontend\template.php on line 8.
+ 1 APPPATH\Views\frontend\template.php(8): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $title', 'C:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\template.php', 8)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\template.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('frontend/template', [], true)
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('App\\Views\\frontend\\registrasi_pencaker', [], true)
+ 6 VENDORPATH\myth\auth\src\Controllers\AuthController.php(524): view('App\\Views\\frontend\\registrasi_pencaker', [...])
+ 7 VENDORPATH\myth\auth\src\Controllers\AuthController.php(170): Myth\Auth\Controllers\AuthController->_render('App\\Views\\frontend\\registrasi_pencaker', [...])
+ 8 SYSTEMPATH\CodeIgniter.php(933): Myth\Auth\Controllers\AuthController->register()
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(Myth\Auth\Controllers\AuthController))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-07-13 04:58:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-07-13 04:58:20 --> ErrorException: Undefined variable $title
+[Method: GET, Route: register]
+in APPPATH\Views\frontend\template.php on line 8.
+ 1 APPPATH\Views\frontend\template.php(8): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $title', 'C:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\template.php', 8)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\template.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('frontend/template', [], true)
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('App\\Views\\frontend\\registrasi_pencaker', [], true)
+ 6 VENDORPATH\myth\auth\src\Controllers\AuthController.php(524): view('App\\Views\\frontend\\registrasi_pencaker', [...])
+ 7 VENDORPATH\myth\auth\src\Controllers\AuthController.php(170): Myth\Auth\Controllers\AuthController->_render('App\\Views\\frontend\\registrasi_pencaker', [...])
+ 8 SYSTEMPATH\CodeIgniter.php(933): Myth\Auth\Controllers\AuthController->register()
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(Myth\Auth\Controllers\AuthController))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-07-13 04:58:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-07-13 04:58:21 --> ErrorException: Undefined variable $title
+[Method: GET, Route: register]
+in APPPATH\Views\frontend\template.php on line 8.
+ 1 APPPATH\Views\frontend\template.php(8): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $title', 'C:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\template.php', 8)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\template.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('frontend/template', [], true)
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('App\\Views\\frontend\\registrasi_pencaker', [], true)
+ 6 VENDORPATH\myth\auth\src\Controllers\AuthController.php(524): view('App\\Views\\frontend\\registrasi_pencaker', [...])
+ 7 VENDORPATH\myth\auth\src\Controllers\AuthController.php(170): Myth\Auth\Controllers\AuthController->_render('App\\Views\\frontend\\registrasi_pencaker', [...])
+ 8 SYSTEMPATH\CodeIgniter.php(933): Myth\Auth\Controllers\AuthController->register()
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(Myth\Auth\Controllers\AuthController))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-07-13 04:58:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-07-13 04:58:22 --> ErrorException: Undefined variable $title
+[Method: GET, Route: register]
+in APPPATH\Views\frontend\template.php on line 8.
+ 1 APPPATH\Views\frontend\template.php(8): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $title', 'C:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\template.php', 8)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\template.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('frontend/template', [], true)
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('App\\Views\\frontend\\registrasi_pencaker', [], true)
+ 6 VENDORPATH\myth\auth\src\Controllers\AuthController.php(524): view('App\\Views\\frontend\\registrasi_pencaker', [...])
+ 7 VENDORPATH\myth\auth\src\Controllers\AuthController.php(170): Myth\Auth\Controllers\AuthController->_render('App\\Views\\frontend\\registrasi_pencaker', [...])
+ 8 SYSTEMPATH\CodeIgniter.php(933): Myth\Auth\Controllers\AuthController->register()
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(Myth\Auth\Controllers\AuthController))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-07-13 04:59:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 04:59:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-07-13 04:59:57 --> ErrorException: Undefined variable $title
+[Method: GET, Route: register]
+in APPPATH\Views\frontend\template.php on line 8.
+ 1 APPPATH\Views\frontend\template.php(8): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $title', 'C:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\template.php', 8)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\template.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('frontend/template', [], true)
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('App\\Views\\frontend\\registrasi_pencaker', [], true)
+ 6 VENDORPATH\myth\auth\src\Controllers\AuthController.php(524): view('App\\Views\\frontend\\registrasi_pencaker', [...])
+ 7 VENDORPATH\myth\auth\src\Controllers\AuthController.php(170): Myth\Auth\Controllers\AuthController->_render('App\\Views\\frontend\\registrasi_pencaker', [...])
+ 8 SYSTEMPATH\CodeIgniter.php(933): Myth\Auth\Controllers\AuthController->register()
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(Myth\Auth\Controllers\AuthController))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-07-13 05:05:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 05:05:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 05:05:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 05:05:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 05:05:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 05:06:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 05:06:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 05:06:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 05:07:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-07-13 05:07:05 --> ErrorException: Undefined variable $title
+[Method: GET, Route: register]
+in APPPATH\Views\frontend\template.php on line 8.
+ 1 APPPATH\Views\frontend\template.php(8): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $title', 'C:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\template.php', 8)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\disnakerci4\\app\\Views\\frontend\\template.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('frontend/template', [], true)
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('App\\Views\\frontend\\registrasi_pencaker', [], true)
+ 6 VENDORPATH\myth\auth\src\Controllers\AuthController.php(524): view('App\\Views\\frontend\\registrasi_pencaker', [...])
+ 7 VENDORPATH\myth\auth\src\Controllers\AuthController.php(170): Myth\Auth\Controllers\AuthController->_render('App\\Views\\frontend\\registrasi_pencaker', [...])
+ 8 SYSTEMPATH\CodeIgniter.php(933): Myth\Auth\Controllers\AuthController->register()
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(Myth\Auth\Controllers\AuthController))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-07-13 05:07:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-07-13 05:07:34 --> ErrorException: Undefined array key "register"
+[Method: GET, Route: register]
+in VENDORPATH\myth\auth\src\Controllers\AuthController.php on line 170.
+ 1 VENDORPATH\myth\auth\src\Controllers\AuthController.php(170): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "register"', 'C:\\laragon\\www\\disnakerci4\\vendor\\myth\\auth\\src\\Controllers\\AuthController.php', 170)
+ 2 SYSTEMPATH\CodeIgniter.php(933): Myth\Auth\Controllers\AuthController->register()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(Myth\Auth\Controllers\AuthController))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-07-13 05:09:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-07-13 05:09:18 --> ErrorException: Undefined array key "register"
+[Method: GET, Route: register]
+in VENDORPATH\myth\auth\src\Controllers\AuthController.php on line 170.
+ 1 VENDORPATH\myth\auth\src\Controllers\AuthController.php(170): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "register"', 'C:\\laragon\\www\\disnakerci4\\vendor\\myth\\auth\\src\\Controllers\\AuthController.php', 170)
+ 2 SYSTEMPATH\CodeIgniter.php(933): Myth\Auth\Controllers\AuthController->register()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(Myth\Auth\Controllers\AuthController))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-07-13 05:10:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-07-13 05:10:03 --> ErrorException: Undefined array key "register"
+[Method: GET, Route: register]
+in VENDORPATH\myth\auth\src\Controllers\AuthController.php on line 170.
+ 1 VENDORPATH\myth\auth\src\Controllers\AuthController.php(170): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "register"', 'C:\\laragon\\www\\disnakerci4\\vendor\\myth\\auth\\src\\Controllers\\AuthController.php', 170)
+ 2 SYSTEMPATH\CodeIgniter.php(933): Myth\Auth\Controllers\AuthController->register()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(Myth\Auth\Controllers\AuthController))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-07-13 05:10:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-07-13 05:10:03 --> ErrorException: Undefined array key "register"
+[Method: GET, Route: register]
+in VENDORPATH\myth\auth\src\Controllers\AuthController.php on line 170.
+ 1 VENDORPATH\myth\auth\src\Controllers\AuthController.php(170): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "register"', 'C:\\laragon\\www\\disnakerci4\\vendor\\myth\\auth\\src\\Controllers\\AuthController.php', 170)
+ 2 SYSTEMPATH\CodeIgniter.php(933): Myth\Auth\Controllers\AuthController->register()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(Myth\Auth\Controllers\AuthController))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-07-13 05:10:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-07-13 05:10:21 --> ErrorException: Undefined array key "register"
+[Method: GET, Route: register]
+in VENDORPATH\myth\auth\src\Controllers\AuthController.php on line 170.
+ 1 VENDORPATH\myth\auth\src\Controllers\AuthController.php(170): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "register"', 'C:\\laragon\\www\\disnakerci4\\vendor\\myth\\auth\\src\\Controllers\\AuthController.php', 170)
+ 2 SYSTEMPATH\CodeIgniter.php(933): Myth\Auth\Controllers\AuthController->register()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(Myth\Auth\Controllers\AuthController))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-07-13 05:10:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-07-13 05:10:32 --> ErrorException: Undefined array key "login"
+[Method: GET, Route: login]
+in VENDORPATH\myth\auth\src\Controllers\AuthController.php on line 74.
+ 1 VENDORPATH\myth\auth\src\Controllers\AuthController.php(74): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "login"', 'C:\\laragon\\www\\disnakerci4\\vendor\\myth\\auth\\src\\Controllers\\AuthController.php', 74)
+ 2 SYSTEMPATH\CodeIgniter.php(933): Myth\Auth\Controllers\AuthController->login()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(Myth\Auth\Controllers\AuthController))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-07-13 05:10:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 05:10:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-07-13 05:10:39 --> ErrorException: Undefined array key "login"
+[Method: GET, Route: login]
+in VENDORPATH\myth\auth\src\Controllers\AuthController.php on line 74.
+ 1 VENDORPATH\myth\auth\src\Controllers\AuthController.php(74): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "login"', 'C:\\laragon\\www\\disnakerci4\\vendor\\myth\\auth\\src\\Controllers\\AuthController.php', 74)
+ 2 SYSTEMPATH\CodeIgniter.php(933): Myth\Auth\Controllers\AuthController->login()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(Myth\Auth\Controllers\AuthController))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-07-13 05:11:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-07-13 05:11:50 --> ErrorException: Undefined array key "login"
+[Method: GET, Route: login]
+in VENDORPATH\myth\auth\src\Controllers\AuthController.php on line 74.
+ 1 VENDORPATH\myth\auth\src\Controllers\AuthController.php(74): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "login"', 'C:\\laragon\\www\\disnakerci4\\vendor\\myth\\auth\\src\\Controllers\\AuthController.php', 74)
+ 2 SYSTEMPATH\CodeIgniter.php(933): Myth\Auth\Controllers\AuthController->login()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(Myth\Auth\Controllers\AuthController))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-07-13 05:11:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-07-13 05:11:51 --> ErrorException: Undefined array key "login"
+[Method: GET, Route: login]
+in VENDORPATH\myth\auth\src\Controllers\AuthController.php on line 74.
+ 1 VENDORPATH\myth\auth\src\Controllers\AuthController.php(74): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "login"', 'C:\\laragon\\www\\disnakerci4\\vendor\\myth\\auth\\src\\Controllers\\AuthController.php', 74)
+ 2 SYSTEMPATH\CodeIgniter.php(933): Myth\Auth\Controllers\AuthController->login()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(Myth\Auth\Controllers\AuthController))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-07-13 05:12:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-07-13 05:12:52 --> ErrorException: Undefined array key "login"
+[Method: GET, Route: login]
+in VENDORPATH\myth\auth\src\Controllers\AuthController.php on line 74.
+ 1 VENDORPATH\myth\auth\src\Controllers\AuthController.php(74): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "login"', 'C:\\laragon\\www\\disnakerci4\\vendor\\myth\\auth\\src\\Controllers\\AuthController.php', 74)
+ 2 SYSTEMPATH\CodeIgniter.php(933): Myth\Auth\Controllers\AuthController->login()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(Myth\Auth\Controllers\AuthController))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-07-13 05:14:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 05:14:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 05:14:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 05:14:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 05:14:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 05:14:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 05:14:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 05:14:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 05:14:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 05:14:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 05:14:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 05:14:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-13 05:14:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

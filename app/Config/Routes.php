@@ -18,12 +18,13 @@ $routes->get('kartu_ak1', 'Frontend::kartu_ak1');
 $routes->get('kontak', 'Frontend::kontak');
 
 //proses registrasi akun bagi pencaker
-// $routes->get('/registrasi_pencaker', 'Frontend::registrasi_pencaker');
+$routes->get('/registrasi_pencaker', 'Frontend::registrasi_pencaker');
 // $routes->post('/registrasi_pencaker', 'Frontend::registrasi_pencaker');
 // $routes->post('/frontend/save_pencaker_data', 'Frontend::save_pencaker_data');
 
 // $routes->get('/masuk', 'Frontend::login');
 
+$routes->get('auth', 'AuthController::login');
 
 // Routes untuk backend
 $routes->get('admin', 'Admin::index');

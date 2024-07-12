@@ -7,6 +7,8 @@ use App\Models\PencakerModel;
 use App\Models\PendidikanModel;
 use App\Models\UsersModel;
 
+use Myth\Auth\Controllers\AuthController;
+
 class Frontend extends BaseController
 {
     public function index(): string
@@ -256,6 +258,8 @@ class Frontend extends BaseController
     {
         $data['title'] = 'Registrasi Pencaker - Disnakertrans Manokwari';
         return $this->loadView('frontend/registrasi_pencaker', $data);
+        // check if already logged in.
+
     }
 
     public function save_pencaker_data_old()
