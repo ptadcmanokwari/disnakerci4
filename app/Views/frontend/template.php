@@ -81,12 +81,10 @@
                         </ul>
                     </li>
                     <li><a <?= ($current_uris['segment_1'] == 'kontak') ? 'class="active"' : '' ?> href="<?= base_url('kontak'); ?>">Kontak</a></li>
-                    <li><a <?= ($current_uris['segment_1'] == 'masuk') ? 'class="active"' : '' ?> href="<?= base_url('masuk'); ?>">Masuk</a></li>
+                    <li><a <?= ($current_uris['segment_1'] == 'login') ? 'class="active"' : '' ?> href="<?= base_url('login'); ?>">Masuk</a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
-
-
 
             <div class="header-social-links d-flex">
                 <a href="#" class="twitter"><i class="bu bi-twitter"></i></a>

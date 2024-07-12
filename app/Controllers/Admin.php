@@ -24,6 +24,9 @@ use TCPDF;
 use TCPDF_STATIC;
 use App\Libraries\Pdf;
 
+use Myth\Auth\Models\UserModel;
+use Myth\Auth\Entities\User;
+
 
 // use CodeIgniter\Controller;
 
@@ -209,7 +212,7 @@ class Admin extends BaseController
         $dokumen = $dokumenModel->where('pencaker_id', $id)->findAll();
 
         $jenjangPendidikan = new JenjangpendidikanModel();
-        $jenjang = $jenjangPendidikan->where('id', $id)->findAll();
+        $jenjangPd = $jenjangPendidikan->where('id', $id)->findAll();
 
         $dokumenJenisModel = new DokumenModel();
         $dokumenJenis = $dokumenJenisModel->findAll();
@@ -229,7 +232,7 @@ class Admin extends BaseController
             'pendidikan' => $pendidikan,
             'pengalaman' => $pengalaman,
             'dokumen' => $dokumen,
-            'jenjang' => $jenjang
+            'jenjang' => $jenjangPd
         ];
 
         return view('admin/review_pencaker', $data);
@@ -899,37 +902,39 @@ class Admin extends BaseController
     {
         $activityModel = new ActivityModel();
 
-        $ip_address = $this->request->getPost('ip_address');
-        $user = $this->request->getPost('user');
+        // $ip_address = $this->request->getPost('ip_address');
+        // $user = $this->request->getPost('user');
 
         // Mengubah query untuk mengambil data activity_logs beserta nama user
-        $activity = $activityModel->select('activity_logs.*, users.name as user_name')
-            ->join('users', 'activity_logs.id = users.id', 'left');
+        // $activity = $activityModel->select('activity_logs.*, users.name as user_name')
+        //     ->join('users', 'activity_logs.id = users.id', 'left');
 
-        if ($ip_address) {
-            $activity->like('activity_logs.ip_address', $ip_address);
-        }
+        // if ($ip_address) {
+        //     $activity->like('activity_logs.ip_address', $ip_address);
+        // }
 
-        if ($user) {
-            $activity->where('activity_logs.id', $user);
-        }
+        // if ($user) {
+        //     $activity->where('activity_logs.id', $user);
+        // }
 
-        $activity = $activity->findAll();
+        // $activity = $activity->findAll();
+        $activity = $activityModel->findAll();
 
         $data = [];
         foreach ($activity as $item) {
             $data[] = [
                 "id" => $item['id'],
                 "ip_address" => $item['ip_address'],
-                "title" => $item['title'],
-                "created_at" => $item['created_at'],
+                "email" => $item['email'],
+                "user_id" => $item['user_id'],
+                "date" => $item['date'],
                 // Menggunakan $item['user_name'] untuk menampilkan nama user
                 "aksi" => '<div class="btn-group" role="group" aria-label="Aksi">
                       <button class="btn btn-info btn-sm btn-detail-log" 
                              data-id="' . $item['id'] . '" 
-                             data-title="' . $item['title'] . '" 
-                             data-user="' . $item['user_name'] . '" 
-                             data-created_at="' . $item['created_at'] . '" 
+                             data-ip_address="' . $item['ip_address'] . '" 
+                             data-email="' . $item['email'] . '" 
+                             data-date="' . $item['date'] . '" 
                              data-toggle="modal" 
                              data-target="#detailLogModal">
                              <i class="bi bi-check-circle-fill px-2"></i>
@@ -953,7 +958,7 @@ class Admin extends BaseController
         foreach ($users as $user) {
             $data[] = [
                 "id" => $user['id'],
-                "text" => $user['name']
+                "text" => $user['username']
             ];
         }
 
@@ -1337,46 +1342,82 @@ class Admin extends BaseController
     public function profil_pencaker()
     {
 
-        // $pencakerModel = new PencakerModel();
-        // $pencaker = $pencakerModel->find($id);
-
-
-        // $pendidikanModel = new PendidikanModel();
-        // $pendidikan = $pendidikanModel->where('pencaker_id', $id)->findAll();
-
-        // $pengalamanModel = new PengalamanKerjaModel();
-        // $pengalaman = $pengalamanModel->where('pencaker_id', $id)->findAll();
-
-        // $dokumenModel = new DokumenPencakerModel();
-        // $dokumen = $dokumenModel->where('pencaker_id', $id)->findAll();
-
         $jenjangPendidikan = new JenjangpendidikanModel();
         $jenjang = $jenjangPendidikan->findAll();
 
-        // $dokumenJenisModel = new DokumenModel();
-        // $dokumenJenis = $dokumenJenisModel->findAll();
-
-        // foreach ($dokumen as &$doc) {
-        //     foreach ($dokumenJenis as $jenis) {
-        //         if ($doc['dokumen_id'] == $jenis['id']) {
-        //             $doc['jenis_dokumen'] = $jenis['jenis_dokumen'];
-        //             break;
-        //         }
-        //     }
-        // }
-
         $data = [
             'title' => 'Review Data dan Dokumen Pencari Kerja',
-            // 'pencaker' => $pencaker,
-            // 'pendidikan' => $pendidikan,
-            // 'pengalaman' => $pengalaman,
-            // 'dokumen' => $dokumen,
             'jenjang' => $jenjang
         ];
 
         $data['title'] = 'Profil Pencari Kerja';
         return $this->loadView('admin/profil_pencaker', $data);
     }
+
+    public function update1()
+    {
+        $model = new PencakerModel();
+        $auth = service('authentication');
+        $user = $auth->user();
+
+        if (!$user) {
+            echo json_encode(['status' => false, 'hasil' => 'User tidak ditemukan dalam sesi']);
+            return;
+        }
+
+        $userId = $user->id;
+
+        $data = [
+            'tujuan' => $this->request->getPost('tujuan'),
+            'users_id' => $userId
+        ];
+
+        if ($model->save($data)) {
+            // Mendapatkan data yang disimpan
+            $savedData = $model->where('users_id', $userId)->first();
+
+            if ($savedData) {
+                // Mengirimkan respons JSON dengan data yang diperbarui
+                echo json_encode(['status' => true, 'hasil' => 'Data berhasil disimpan', 'data' => $savedData]);
+            } else {
+                echo json_encode(['status' => false, 'hasil' => 'Data tidak ditemukan setelah penyimpanan']);
+            }
+        } else {
+            echo json_encode(['status' => false, 'hasil' => 'Gagal menyimpan data']);
+        }
+    }
+
+    public function getTujuan()
+    {
+        $auth = service('authentication');
+        $user = $auth->user();
+
+        if (!$user) {
+            return $this->response->setJSON(['status' => false, 'hasil' => 'User tidak ditemukan dalam sesi']);
+        }
+
+        $userId = $user->id;
+
+        // Contoh pengambilan data tujuan dari database untuk user yang sedang login
+        $pencakerModel = new PencakerModel();
+        $tujuan = $pencakerModel->where('users_id', $userId)->first();
+
+        if ($tujuan) {
+            $response = [
+                'status' => true,
+                'data' => ['tujuan' => $tujuan['tujuan']] // Pastikan mengakses 'tujuan' dengan benar
+            ];
+        } else {
+            $response = [
+                'status' => false,
+                'hasil' => 'Data tujuan tidak ditemukan'
+            ];
+        }
+
+        return $this->response->setJSON($response);
+    }
+
+
 
     public function form()
     {

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3ebc9d3dc981510315e1c08258242c5c",
+    "content-hash": "2c528f970ed691ea3ad1d01f7cbfe29d",
     "packages": [
         {
             "name": "codeigniter4/framework",
@@ -335,31 +335,33 @@
         },
         {
             "name": "myth/auth",
-            "version": "dev-develop",
+            "version": "v1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lonnieezell/myth-auth.git",
-                "reference": "0318c8246ee4f6c922e3072c7e17fcd97c81ce65"
+                "reference": "9bba52bd710a0c35a0b2d8cef64a70706224648a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lonnieezell/myth-auth/zipball/0318c8246ee4f6c922e3072c7e17fcd97c81ce65",
-                "reference": "0318c8246ee4f6c922e3072c7e17fcd97c81ce65",
+                "url": "https://api.github.com/repos/lonnieezell/myth-auth/zipball/9bba52bd710a0c35a0b2d8cef64a70706224648a",
+                "reference": "9bba52bd710a0c35a0b2d8cef64a70706224648a",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.4 || ^8.0"
+                "php": "^7.3 || ^8.0"
             },
             "provide": {
                 "codeigniter4/authentication-implementation": "1.0"
             },
             "require-dev": {
+                "codeigniter4/codeigniter4": "dev-develop",
                 "codeigniter4/codeigniter4-standard": "^1.0",
-                "codeigniter4/devkit": "^1.0",
-                "codeigniter4/framework": "^4.1",
-                "mockery/mockery": "^1.0"
+                "fakerphp/faker": "^1.9",
+                "mockery/mockery": "^1.0",
+                "phpstan/phpstan": "^0.12",
+                "phpunit/phpunit": "^9.2",
+                "squizlabs/php_codesniffer": "^3.5"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -390,7 +392,7 @@
             ],
             "support": {
                 "issues": "https://github.com/lonnieezell/myth-auth/issues",
-                "source": "https://github.com/lonnieezell/myth-auth/tree/develop"
+                "source": "https://github.com/lonnieezell/myth-auth/tree/v1.0"
             },
             "funding": [
                 {
@@ -398,15 +400,11 @@
                     "type": "github"
                 },
                 {
-                    "url": "https://github.com/mgatner",
-                    "type": "github"
-                },
-                {
                     "url": "https://www.patreon.com/lonnieezell",
                     "type": "patreon"
                 }
             ],
-            "time": "2024-03-09T19:25:34+00:00"
+            "time": "2021-06-10T04:25:01+00:00"
         },
         {
             "name": "phpoffice/phpspreadsheet",
@@ -414,12 +412,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPOffice/PhpSpreadsheet.git",
-                "reference": "ca41de3b23ae44d5fbebeedef51a277605aa2f30"
+                "reference": "c196847841ea0db4c49f70e62dde5427eea91f9c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPOffice/PhpSpreadsheet/zipball/ca41de3b23ae44d5fbebeedef51a277605aa2f30",
-                "reference": "ca41de3b23ae44d5fbebeedef51a277605aa2f30",
+                "url": "https://api.github.com/repos/PHPOffice/PhpSpreadsheet/zipball/c196847841ea0db4c49f70e62dde5427eea91f9c",
+                "reference": "c196847841ea0db4c49f70e62dde5427eea91f9c",
                 "shasum": ""
             },
             "require": {
@@ -511,7 +509,7 @@
                 "issues": "https://github.com/PHPOffice/PhpSpreadsheet/issues",
                 "source": "https://github.com/PHPOffice/PhpSpreadsheet/tree/master"
             },
-            "time": "2024-07-07T14:32:24+00:00"
+            "time": "2024-07-12T03:42:58+00:00"
         },
         {
             "name": "psr/http-client",
@@ -1212,12 +1210,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "5da8b1728acd1e6ffdf2ff32ffbdfd04307f26ae"
+                "reference": "0bd67077a1d393c43d5c89a64f5deeb0937cff8b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/5da8b1728acd1e6ffdf2ff32ffbdfd04307f26ae",
-                "reference": "5da8b1728acd1e6ffdf2ff32ffbdfd04307f26ae",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/0bd67077a1d393c43d5c89a64f5deeb0937cff8b",
+                "reference": "0bd67077a1d393c43d5c89a64f5deeb0937cff8b",
                 "shasum": ""
             },
             "require": {
@@ -1274,7 +1272,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
                 "security": "https://github.com/sebastianbergmann/php-code-coverage/security/policy",
-                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/10.1.15"
+                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/10.1"
             },
             "funding": [
                 {
@@ -1282,7 +1280,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-06-29T08:25:15+00:00"
+            "time": "2024-07-12T06:06:58+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -1535,12 +1533,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "42e2f13ceaa2e34461bc89bea75407550b40b2aa"
+                "reference": "2425f713b2a5350568ccb1a2d3984841a23e83c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/42e2f13ceaa2e34461bc89bea75407550b40b2aa",
-                "reference": "42e2f13ceaa2e34461bc89bea75407550b40b2aa",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/2425f713b2a5350568ccb1a2d3984841a23e83c5",
+                "reference": "2425f713b2a5350568ccb1a2d3984841a23e83c5",
                 "shasum": ""
             },
             "require": {
@@ -1550,26 +1548,26 @@
                 "ext-mbstring": "*",
                 "ext-xml": "*",
                 "ext-xmlwriter": "*",
-                "myclabs/deep-copy": "^1.10.1",
-                "phar-io/manifest": "^2.0.3",
-                "phar-io/version": "^3.0.2",
+                "myclabs/deep-copy": "^1.12.0",
+                "phar-io/manifest": "^2.0.4",
+                "phar-io/version": "^3.2.1",
                 "php": ">=8.1",
-                "phpunit/php-code-coverage": "^10.1.5",
-                "phpunit/php-file-iterator": "^4.0",
-                "phpunit/php-invoker": "^4.0",
-                "phpunit/php-text-template": "^3.0",
-                "phpunit/php-timer": "^6.0",
-                "sebastian/cli-parser": "^2.0",
-                "sebastian/code-unit": "^2.0",
-                "sebastian/comparator": "^5.0",
-                "sebastian/diff": "^5.0",
-                "sebastian/environment": "^6.0",
-                "sebastian/exporter": "^5.1",
-                "sebastian/global-state": "^6.0.1",
-                "sebastian/object-enumerator": "^5.0",
-                "sebastian/recursion-context": "^5.0",
-                "sebastian/type": "^4.0",
-                "sebastian/version": "^4.0"
+                "phpunit/php-code-coverage": "^10.1.15",
+                "phpunit/php-file-iterator": "^4.1.0",
+                "phpunit/php-invoker": "^4.0.0",
+                "phpunit/php-text-template": "^3.0.1",
+                "phpunit/php-timer": "^6.0.0",
+                "sebastian/cli-parser": "^2.0.1",
+                "sebastian/code-unit": "^2.0.0",
+                "sebastian/comparator": "^5.0.1",
+                "sebastian/diff": "^5.1.1",
+                "sebastian/environment": "^6.1.0",
+                "sebastian/exporter": "^5.1.2",
+                "sebastian/global-state": "^6.0.2",
+                "sebastian/object-enumerator": "^5.0.0",
+                "sebastian/recursion-context": "^5.0.0",
+                "sebastian/type": "^4.0.0",
+                "sebastian/version": "^4.0.1"
             },
             "suggest": {
                 "ext-soap": "To be able to generate mocks based on WSDL files"
@@ -1612,7 +1610,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.5.26"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.5"
             },
             "funding": [
                 {
@@ -1628,7 +1626,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-07-08T05:30:46+00:00"
+            "time": "2024-07-10T11:48:06+00:00"
         },
         {
             "name": "psr/container",
@@ -2729,8 +2727,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "myth/auth": 20,
-        "phpoffice/phpspreadsheet": 20
+        "phpoffice/phpspreadsheet": 20,
+        "tecnickcom/tcpdf": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

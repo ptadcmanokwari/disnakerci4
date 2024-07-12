@@ -37,58 +37,49 @@
             </div>
 
             <div class="col-md-6 px-4">
-                <form action="#" method="POST" id="formRegistrasi" novalidate="novalidate">
-                    <div class="row">
-                        <div class="mb-3 col-md-12">
-                            <label for="namalengkap" class="form-label">Nama Lengkap </label>
-                            <input type="text" class="form-control" id="namalengkap" required="" name="namalengkap">
-                        </div>
-                        <div class="mb-3 col-md-12">
-                            <label for="nik" class="form-label">NIK</label>
-                            <input type="number" class="form-control" id="nik" required="" name="nik">
+                <form action="<?= url_to('register') ?>" method="post">
+                    <?= csrf_field() ?>
+
+                    <div class="form-group mb-4">
+                        <label for="namalengkap">Nama Lengkap</label>
+                        <input type="text" name="namalengkap" id="namalengkap" class="form-control" required>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label for="nik">NIK</label>
+                        <input type="text" name="nik" id="nik" class="form-control" required>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control <?php if (session('errors.username')) : ?>is-invalid<?php endif ?>" name="username" value="<?= old('username') ?>">
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control <?php if (session('errors.email')) : ?>is-invalid<?php endif ?>" name="email" aria-describedby="emailHelp" value="<?= old('email') ?>">
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label for="nohp">No HP</label>
+                        <input type="text" name="nohp" id="nohp" class="form-control" required>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label for="password">Kata Sandi</label>
+                        <input type="password" name="password" class="form-control <?php if (session('errors.password')) : ?>is-invalid<?php endif ?>" autocomplete="off">
+                        <div class="invalid-feedback">
+                            <?= session('errors.password') ?>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="mb-3 col-md-12">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" required="" name="email">
-                        </div>
-                        <div class="mb-3 col-md-12">
-                            <label for="nohp" class="form-label">Nomor HP (WhatsApp)</label>
-                            <input type="number" class="form-control" id="nohp" required="" name="nohp">
-                        </div>
+                    <div class="form-group mb-4">
+                        <label for="pass_confirm">Konfirmasi Kata Sandi</label>
+                        <input type="password" name="pass_confirm" class="form-control <?php if (session('errors.pass_confirm')) : ?>is-invalid<?php endif ?>" autocomplete="off">
                     </div>
 
-                    <div class="row">
-                        <div class="mb-3 col-md-12">
-                            <label for="password" class="form-label">Kata Sandi</label>
-                            <div class="input-group" id="katasandi">
-                                <input class="form-control" id="password" type="password" required="" name="password">
-                            </div>
-                        </div>
-                        <div class="mb-3 col-md-12">
-                            <label for="password_confirm" class="form-label">Konfirmasi Kata Sandi </label>
-                            <div class="input-group" id="katasandi_konfir">
-                                <input type="password" class="form-control" id="password_confirm" required="" name="password_confirm">
-
-                            </div>
-                            <span id="error-password_confirm" class="errormsg"></span>
-                        </div>
-
-                        <!-- <script src="https://www.google.com/recaptcha/api.js" async="" defer=""></script> -->
-
-                        <!-- <div class="form-group">
-                            <div class="g-recaptcha" data-sitekey="6Le7UeAgAAAAALuSu9qTlF-m5kTHe8oQx-_gHsVf">
-                                <div style="width: 304px; height: 78px;">
-                                    <div><iframe title="reCAPTCHA" width="304" height="78" role="presentation" name="a-zaqbt0wepbda" frameborder="0" scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox allow-storage-access-by-user-activation" src="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6Le7UeAgAAAAALuSu9qTlF-m5kTHe8oQx-_gHsVf&amp;co=aHR0cHM6Ly9kaXNuYWtlcnRyYW5zbWt3LmNvbTo0NDM.&amp;hl=en&amp;v=rKbTvxTxwcw5VqzrtN-ICwWt&amp;size=normal&amp;cb=t8t1kt403869"></iframe></div><textarea id="g-recaptcha-response" name="g-recaptcha-response" class="g-recaptcha-response" style="width: 250px; height: 40px; border: 1px solid rgb(193, 193, 193); margin: 10px 25px; padding: 0px; resize: none; display: none;"></textarea>
-                                </div><iframe style="display: none;"></iframe>
-                            </div>
-                        </div> -->
-
-                    </div>
-                    <div class="d-flex mt-4">
-                        <button type="submit" id="btnRegistrasiPencaker" class="btn btn-primary w-50">Buat Akun</button>
+                    <div class="form-group mb-4">
+                        <button type="submit" class="btn btn-primary">Buat Akun Sekarang</button>
                     </div>
                 </form>
 
@@ -97,54 +88,5 @@
 
     </div>
 </section>
-
-<script>
-    $(document).ready(function() {
-        $('#formRegistrasi').submit(function(e) {
-            e.preventDefault();
-
-            $.ajax({
-                url: 'frontend/save_pencaker_data', // sesuaikan dengan URL controller Anda
-                type: 'POST',
-                dataType: 'json',
-                data: $(this).serialize(),
-                success: function(response) {
-                    if (response.status === 'success') {
-                        // Tampilkan SweetAlert untuk memberitahu bahwa data berhasil disimpan
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Sukses!',
-                            text: 'Data berhasil disimpan.',
-                            confirmButtonText: 'OK'
-                        }).then(function() {
-                            // Redirect ke halaman baru atau reload halaman
-                            location.reload(); // Untuk reload halaman saat ini
-                            // Atau bisa juga redirect ke halaman lain
-                            // window.location.href = 'halaman_sukses';
-                        });
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: 'Gagal menyimpan data.',
-                            confirmButtonText: 'OK'
-                        });
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error(xhr.responseText);
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Terjadi kesalahan. Silakan coba lagi.',
-                        confirmButtonText: 'OK'
-                    });
-                }
-            });
-        });
-    });
-</script>
-
-
 
 <?= $this->endSection() ?>

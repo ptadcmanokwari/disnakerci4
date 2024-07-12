@@ -14,10 +14,9 @@ class PencakerModel extends Model
         'bahasa_lainnya', 'keterangan_status', 'qr_code', 'users_id'
     ];
 
-    // Method untuk menyimpan data pencaker
     public function savePencaker($data)
     {
-        return $this->insert($data);
+        return $this->save($data); // Menyimpan data dengan menggunakan metode save
     }
 
     // Contoh method tambahan untuk mengambil statistik umur pencaker

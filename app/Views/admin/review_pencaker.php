@@ -203,10 +203,12 @@
                             <td><?php echo $no++; ?></td>
                             <td><?php echo $pd['tahunmasuk']; ?></td>
                             <td><?php echo $pd['tahunlulus']; ?></td>
-                            <td><?php echo $pd['jenjang']; ?></td>
-                            <td><?php echo $pd['nama_sekolah']; ?></td>
-                            <td><?php echo $pd['ipk']; ?></td>
-                            <td><?php echo $pd['keterampilan']; ?></td>
+                            <td><?php echo isset($pd['tahunmasuk']) ? $pd['tahunmasuk'] : '-'; ?></td>
+                            <td><?php echo isset($pd['tahunlulus']) ? $pd['tahunlulus'] : '-'; ?></td>
+                            <td><?php echo isset($pd['jenjang']) ? $pd['jenjang'] : '-'; ?></td>
+                            <td><?php echo isset($pd['nama_sekolah']) ? $pd['nama_sekolah'] : '-'; ?></td>
+                            <td><?php echo isset($pd['ipk']) ? $pd['ipk'] : '-'; ?></td>
+                            <td><?php echo isset($pd['keterampilan']) ? $pd['keterampilan'] : '-'; ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -254,11 +256,11 @@
                     foreach ($pengalaman as $pk) : ?>
                         <tr>
                             <td><?php echo $no++; ?></td>
-                            <td><?php echo $pk['nama_perusahaan']; ?></td>
-                            <td><?php echo $pk['posisi_terakhir']; ?></td>
-                            <td><?php echo $pk['pendapatan_terakhir']; ?></td>
-                            <td><?php echo $pk['periode']; ?></td>
-                            <td><?php echo $pk['alasan_berhenti']; ?></td>
+                            <td><?php echo isset($pk['nama_perusahaan']) ? $pk['nama_perusahaan'] : '-'; ?></td>
+                            <td><?php echo isset($pk['posisi_terakhir']) ? $pk['posisi_terakhir'] : '-'; ?></td>
+                            <td><?php echo isset($pk['pendapatan_terakhir']) ? $pk['pendapatan_terakhir'] : '-'; ?></td>
+                            <td><?php echo isset($pk['periode']) ? $pk['periode'] : '-'; ?></td>
+                            <td><?php echo isset($pk['alasan_berhenti']) ? $pk['alasan_berhenti'] : '-'; ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -273,19 +275,27 @@
                 <?php
 
                 foreach ($dokumen as $dp) :
-                    if ($dp['namadokumen'] != null && $dp['jenis_dokumen'] != 'PAS FOTO') {
+                    if ($dp['namadokumen'] != null && $dp['jenis_dokumen'] != 'PAS FOTO' && $dp['jenis_dokumen'] != '') {
                 ?>
                         <?php
-                        $url = base_url('uploads/pencaker/') . $dp['nopendaftaran'] . '/' . $dp['namadokumen'];
+                        // $url = base_url('uploads/pencaker/') . $dp['nopendaftaran'] . '/' . $dp['namadokumen'];
+                        $url = base_url('uploads/pencaker/') . $dp['namadokumen'];
                         $url = parse_url($url);
                         $ext  = pathinfo($url['path'], PATHINFO_EXTENSION);
                         if ($ext == 'pdf') {
                         ?>
-                            <iframe src="<?php echo base_url('uploads/pencaker/') . $dp['nopendaftaran'] . '/' . $dp['namadokumen']; ?>" frameborder="0" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:100%;width:100%;position:absolute;top:0px;left:0px;right:0px;bottom:0px" height="100%" width="100%"></iframe>
+                            <!-- <iframe src="<?php // echo base_url('uploads/pencaker/') . $dp['nopendaftaran'] . '/' . $dp['namadokumen']; 
+                                                ?>" frameborder="0" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:100%;width:100%;position:absolute;top:0px;left:0px;right:0px;bottom:0px" height="100%" width="100%"></iframe> -->
+
+                            <iframe src="<?php echo base_url('uploads/pencaker/')  . $dp['namadokumen'];
+                                            ?>" frameborder="0" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:100%;width:100%;position:absolute;top:0px;left:0px;right:0px;bottom:0px" height="100%" width="100%"></iframe>
 
                         <?php } else { ?>
 
-                            <img class="tex-center" src="<?php echo base_url('uploads/pencaker/') . $dp['nopendaftaran'] . '/' . $dp['namadokumen']; ?>" width="80%">
+                            <!-- <img class="tex-center" src="<?php // echo base_url('uploads/pencaker/') . $dp['nopendaftaran'] . '/' . $dp['namadokumen']; 
+                                                                ?>" width="80%"> -->
+                            <img class="tex-center" src="<?php echo base_url('uploads/pencaker/') . $dp['namadokumen'];
+                                                            ?>" width="80%">
                         <?php } ?>
                 <?php
                     }

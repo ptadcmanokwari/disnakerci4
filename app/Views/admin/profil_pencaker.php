@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="<?php echo base_url('adminltev31/plugins/bs-stepper/css/bs-stepper.min.css'); ?>">
 <link rel="stylesheet" href="<?php echo base_url('adminltev31/plugins/dropzone/min/dropzone.min.css'); ?>">
 <link rel="stylesheet" href="<?php echo base_url('adminltev31/dist/css/adminlte.min.css'); ?>">
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
     .nav-tabs.flex-column .nav-item.show .nav-link,
     .nav-tabs.flex-column .nav-link.active {
@@ -135,7 +135,7 @@
                                                             <div class="col-12 col-sm-12 col-md-4 col-lg-4">
                                                                 <div class="form-group">
                                                                     <label for="nopendaftaran">Nomor Pendaftaran</label>
-                                                                    <input type="text" class="form-control" name="nopendaftaran" id="nopendaftaran" readonly />
+                                                                    <input type="text" class="form-control" name="nopendaftaran" id="nopendaftaran" disabled>
                                                                 </div>
                                                             </div>
 
@@ -153,7 +153,7 @@
                                                             </div>
                                                             <div class="col-12 col-sm-12 col-md-4 col-lg-4">
                                                                 <div class="form-group">
-                                                                    <label for="jenkel">Jenis Kelamin</label>
+                                                                    <span>Jenis Kelamin</span>
                                                                     <div class="row">
                                                                         <div class="col-6 col-sm-6 col-md-6 col-lg-6">
                                                                             <div class="form-check">
@@ -416,7 +416,7 @@
                                                                         </div>
                                                                         <div id="textboxbahasalainnya" class="col-12 col-sm-12 col-md-12 col-lg-12 mt-4">
                                                                             <div class="form-floating">
-                                                                                <label for="lainnya">Bahasa Lainnya</label>
+                                                                                <span>Bahasa Lainnya</span>
                                                                                 <textarea class="form-control" placeholder="Deskripsikan bahasa yang Anda kuasai di sini" name="txt_bahasa_lainnya" id="txt_bahasa_lainnya" style="height: 100px"></textarea>
                                                                             </div>
                                                                         </div>
@@ -712,4 +712,92 @@
 <script src="<?php echo base_url('adminltev31/plugins/dropzone/min/dropzone.min.js'); ?>"></script>
 <script src="<?php echo base_url('adminltev31/dist/js/adminlte.min.js'); ?>"></script>
 <script src="<?php echo base_url('adminltev31/dist/js/demo.js'); ?>"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const tujuan1Radio = document.getElementById('tujuan1');
+        const tujuan2Radio = document.getElementById('tujuan2');
+        const perusahaanTujuanTab = document.getElementById('perusahaanTujuan-tab');
+        const perusahaanTujuanContent = document.getElementById('perusahaanTujuan');
+
+        function togglePerusahaanTab() {
+            if (tujuan1Radio.checked) {
+                perusahaanTujuanTab.style.display = 'none';
+                perusahaanTujuanContent.classList.add('show');
+            } else if (tujuan2Radio.checked) {
+                perusahaanTujuanTab.style.display = 'block';
+                perusahaanTujuanContent.classList.remove('show');
+            }
+        }
+
+        tujuan1Radio.addEventListener('change', togglePerusahaanTab);
+        tujuan2Radio.addEventListener('change', togglePerusahaanTab);
+
+        // Initial check
+        togglePerusahaanTab();
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        // Fungsi untuk menandai radio button berdasarkan nilai tujuan dari database
+        function setTujuanRadio(tujuan) {
+            if (tujuan === 'tujuan1') {
+                $('#tujuan1').prop('checked', true);
+            } else if (tujuan === 'tujuan2') {
+                $('#tujuan2').prop('checked', true);
+            }
+        }
+
+        // Memanggil AJAX saat halaman pertama dimuat
+        $.ajax({
+            url: "<?php echo site_url('admin/getTujuan') ?>",
+            type: "GET",
+            dataType: "JSON",
+            success: function(data) {
+                if (data.status) {
+                    if (data.data && data.data.tujuan) {
+                        console.log('Tujuan:', data.data.tujuan);
+                        setTujuanRadio(data.data.tujuan); // Panggil fungsi untuk menandai radio button
+                    } else {
+                        console.log('Data tujuan tidak ditemukan dalam response.');
+                    }
+                } else {
+                    console.log('Gagal mendapatkan data tujuan:', data.hasil);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error('Error saat mengambil data tujuan:', textStatus, errorThrown);
+            }
+        });
+
+        // Event handler untuk tombol Save
+        $('#btnSave1').click(function() {
+            var formData = $('#formtujuanpencaker').serialize();
+
+            $.ajax({
+                url: "<?php echo site_url('admin/update1') ?>",
+                type: "POST",
+                data: formData,
+                dataType: "JSON",
+                success: function(data) {
+                    if (data.status) {
+                        console.log(data.hasil);
+                        if (data.data && data.data.tujuan) {
+                            setTujuanRadio(data.data.tujuan); // Panggil fungsi untuk menandai radio button
+                        }
+                    } else {
+                        console.log('Gagal menyimpan data:', data.hasil);
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error('Error saat menyimpan data:', errorThrown);
+                }
+            });
+        });
+    });
+</script>
+
+
+
 <?= $this->endSection() ?>

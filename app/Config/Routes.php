@@ -16,11 +16,13 @@ $routes->get('pengumuman', 'Frontend::pengumuman');
 $routes->get('pelatihan', 'Frontend::pelatihan');
 $routes->get('kartu_ak1', 'Frontend::kartu_ak1');
 $routes->get('kontak', 'Frontend::kontak');
+
 //proses registrasi akun bagi pencaker
-$routes->get('/registrasi_pencaker', 'Frontend::registrasi_pencaker');
-$routes->post('/registrasi_pencaker', 'Frontend::registrasi_pencaker');
-$routes->post('/frontend/save_pencaker_data', 'Frontend::save_pencaker_data');
-$routes->get('/masuk', 'Frontend::login');
+// $routes->get('/registrasi_pencaker', 'Frontend::registrasi_pencaker');
+// $routes->post('/registrasi_pencaker', 'Frontend::registrasi_pencaker');
+// $routes->post('/frontend/save_pencaker_data', 'Frontend::save_pencaker_data');
+
+// $routes->get('/masuk', 'Frontend::login');
 
 
 // Routes untuk backend
@@ -34,6 +36,12 @@ $routes->post('admin/hapus_pencaker', 'Admin::hapus_pencaker');
 $routes->get('admin/hapus_pencaker', 'Admin::hapus_pencaker');
 $routes->get('admin/detail_pencaker/(:num)', 'Admin::detail_pencaker/$1');
 $routes->get('admin/kartu_ak1/(:num)', 'Admin::kartu_ak1/$1');
+
+// Profil Pencaker
+$routes->get('admin/update1', 'Admin::update1');
+$routes->get('admin/getTujuan', 'Admin::getTujuan');
+$routes->post('admin/update1', 'Admin::update1');
+
 
 // Routes Berita
 $routes->get('admin/berita', 'Admin::berita');

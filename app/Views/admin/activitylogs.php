@@ -52,9 +52,10 @@
                             <table id="tabelLogActivity" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
+                                        <th>No.</th>
                                         <th>IP Address</th>
-                                        <th>Message</th>
+                                        <th>Email</th>
+                                        <th>User Role</th>
                                         <th>Date Time</th>
                                         <th>Action</th>
                                     </tr>
@@ -183,10 +184,13 @@
                     "data": "ip_address"
                 },
                 {
-                    "data": "title"
+                    "data": "email"
                 },
                 {
-                    "data": "created_at"
+                    "data": "user_id"
+                },
+                {
+                    "data": "date"
                 },
                 {
                     "data": "aksi"

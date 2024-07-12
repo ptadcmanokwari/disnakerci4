@@ -258,7 +258,7 @@ class Frontend extends BaseController
         return $this->loadView('frontend/registrasi_pencaker', $data);
     }
 
-    public function save_pencaker_data()
+    public function save_pencaker_data_old()
     {
         $request = service('request');
 
@@ -272,10 +272,14 @@ class Frontend extends BaseController
         // Simpan data ke tabel users
         $usersModel = new UsersModel();
         $usersData = [
-            'name' => $nama_lengkap, // sesuaikan dengan field yang sesuai
+            'name' => $nama_lengkap,
             'email' => $email,
-            'password' => password_hash($password, PASSWORD_DEFAULT),
-            'phone' => $no_hp, // sesuaikan dengan field yang sesuai
+            'password_hash' => password_hash($password, PASSWORD_DEFAULT), // Sesuaikan dengan field password_hash
+            // 'phone' => $no_hp,
+            'active' => 1, // Pastikan user aktif
+            'status' => 'active', // Atau sesuaikan dengan status yang digunakan
+            'created_at' => date('Y-m-d H:i:s'), // Tambahkan waktu pembuatan
+            'updated_at' => date('Y-m-d H:i:s'), // Tambahkan waktu pembaruan
             // tambahkan field lainnya yang sesuai dengan form registrasi
         ];
         $userId = $usersModel->saveUser($usersData); // Simpan data user dan ambil ID-nya
@@ -285,7 +289,7 @@ class Frontend extends BaseController
         $pencakerData = [
             'namalengkap' => $nama_lengkap,
             'nik' => $nik,
-            'no_hp' => $no_hp,
+            'nohp' => $no_hp,
             'users_id' => $userId // Gunakan ID pengguna yang baru saja disimpan
         ];
         $pencakerModel->savePencaker($pencakerData);
@@ -297,6 +301,68 @@ class Frontend extends BaseController
         ];
         return $this->response->setJSON($response);
     }
+
+    public function save_pencaker_data()
+    {
+        helper(['form', 'url']);
+        $request = service('request');
+
+        // Validasi input
+        $validation = \Config\Services::validation();
+        $validation->setRules([
+            'namalengkap' => 'required',
+            'nik' => 'required',
+            'email' => 'required|valid_email',
+            'nohp' => 'required',
+            'password' => 'required|min_length[8]',
+            'pass_confirm' => 'required|matches[password]',
+        ]);
+
+        if (!$validation->withRequest($this->request)->run()) {
+            // Jika validasi gagal
+            return redirect()->back()->withInput()->with('errors', $validation->getErrors());
+        }
+
+        // Ambil data dari form
+        $nama_lengkap = $request->getPost('namalengkap');
+        $user_name = $request->getPost('username');
+        $nik = $request->getPost('nik');
+        $email = $request->getPost('email');
+        $no_hp = $request->getPost('nohp');
+        $password = $request->getPost('password');
+
+        // Generate activate hash
+        $activate_hash = bin2hex(random_bytes(16));
+
+        // Simpan data ke tabel users
+        $usersModel = new UsersModel();
+        $usersData = [
+            'username' => $user_name,
+            'email' => $email,
+            'password_hash' => password_hash($password, PASSWORD_DEFAULT), // Hash password
+            // 'phone' => $no_hp,
+            'active' => 1, // Pastikan user aktif
+            'status' => 1, // Sesuaikan dengan status yang digunakan
+            'activate_hash' => $activate_hash,
+            'created_at' => date('Y-m-d H:i:s'), // Tambahkan waktu pembuatan
+            'updated_at' => date('Y-m-d H:i:s'), // Tambahkan waktu pembaruan
+        ];
+        $userId = $usersModel->insert($usersData); // Simpan data user dan ambil ID-nya
+
+        // Simpan data ke tabel pencaker
+        $pencakerModel = new PencakerModel();
+        $pencakerData = [
+            'namalengkap' => $nama_lengkap,
+            'nik' => $nik,
+            'nohp' => $no_hp,
+            'users_id' => $userId // Gunakan ID pengguna yang baru saja disimpan
+        ];
+        $pencakerModel->insert($pencakerData);
+
+        // Redirect ke halaman sukses atau login
+        return redirect()->to('/login')->with('message', 'Registrasi berhasil. Silakan login.');
+    }
+
 
     public function kontak(): string
     {
