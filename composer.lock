@@ -334,81 +334,6 @@
             "time": "2022-12-02T22:17:43+00:00"
         },
         {
-            "name": "myth/auth",
-            "version": "dev-develop",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/lonnieezell/myth-auth.git",
-                "reference": "0318c8246ee4f6c922e3072c7e17fcd97c81ce65"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/lonnieezell/myth-auth/zipball/0318c8246ee4f6c922e3072c7e17fcd97c81ce65",
-                "reference": "0318c8246ee4f6c922e3072c7e17fcd97c81ce65",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.4 || ^8.0"
-            },
-            "provide": {
-                "codeigniter4/authentication-implementation": "1.0"
-            },
-            "require-dev": {
-                "codeigniter4/codeigniter4-standard": "^1.0",
-                "codeigniter4/devkit": "^1.0",
-                "codeigniter4/framework": "^4.1",
-                "mockery/mockery": "^1.0"
-            },
-            "default-branch": true,
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Myth\\Auth\\": "src"
-                },
-                "exclude-from-classmap": [
-                    "**/Database/Migrations/**"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Lonnie Ezell",
-                    "email": "lonnieje@gmail.com",
-                    "homepage": "http://newmythmedia.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Flexible authentication/authorization system for CodeIgniter 4.",
-            "homepage": "https://github.com/lonnieezell/myth-auth",
-            "keywords": [
-                "Authentication",
-                "authorization",
-                "codeigniter"
-            ],
-            "support": {
-                "issues": "https://github.com/lonnieezell/myth-auth/issues",
-                "source": "https://github.com/lonnieezell/myth-auth/tree/develop"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/lonnieezell",
-                    "type": "github"
-                },
-                {
-                    "url": "https://github.com/mgatner",
-                    "type": "github"
-                },
-                {
-                    "url": "https://www.patreon.com/lonnieezell",
-                    "type": "patreon"
-                }
-            ],
-            "time": "2024-03-09T19:25:34+00:00"
-        },
-        {
             "name": "phpoffice/phpspreadsheet",
             "version": "dev-master",
             "source": {
@@ -2729,6 +2654,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "myth/auth": 20,
         "phpoffice/phpspreadsheet": 20,
         "tecnickcom/tcpdf": 20
     },

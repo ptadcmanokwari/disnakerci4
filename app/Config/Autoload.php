@@ -39,9 +39,16 @@ class Autoload extends AutoloadConfig
      *
      * @var array<string, list<string>|string>
      */
+    // public $psr4 = [
+    //     APP_NAMESPACE => APPPATH,
+    //     'TCPDF'       => ROOTPATH . 'vendor/tecnickcom/tcpdf',
+    // ];
+
     public $psr4 = [
+        'Config'      => APPPATH . 'Config',
         APP_NAMESPACE => APPPATH,
-        'TCPDF'       => ROOTPATH . 'vendor/tecnickcom/tcpdf'
+        'App'         => APPPATH,
+        'Myth\Auth'   => APPPATH . 'ThirdParty/myth-auth/src',
     ];
 
     /**

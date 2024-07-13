@@ -37,7 +37,6 @@
             </div>
 
             <div class="col-md-6 px-4">
-                <?= view('Myth\Auth\Views\_message_block') ?>
                 <form action="<?= url_to('register') ?>" method="post">
                     <?= csrf_field() ?>
 
@@ -75,9 +74,9 @@
 
                     <div class="form-group mb-3">
                         <label for="email">Email</label>
-                        <input type="email" class="form-control <?php if (session('errors.email')) : ?>is-invalid<?php endif ?>" name="email" aria-describedby="emailHelp" value="<?= old('email') ?>">
+                        <input type="email" class="form-control <?php if (session('errors.email')) : ?>is-invalid<?php endif ?>" name="email" value="<?= old('email') ?>">
                         <div class="invalid-feedback">
-                            <?= session('errors.username') ?>
+                            <?= session('errors.email') ?>
                         </div>
                     </div>
 

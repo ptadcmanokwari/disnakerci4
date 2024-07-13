@@ -10,6 +10,18 @@
         transition: 0.4s;
         border-radius: 4px;
     }
+
+    section#cta img.w-100 {
+        height: 180px !important;
+        object-fit: contain;
+    }
+
+    section#cta .services .icon-box {
+        text-align: center;
+        padding: 40px 20px 80px 20px;
+        transition: all ease-in-out 0.3s;
+        background: #fff;
+    }
 </style>
 <section id="breadcrumbs" class="breadcrumbs">
     <div class="container">
@@ -28,7 +40,7 @@
 <section id="cta" class="cta services">
     <div class="container aos-init aos-animate" data-aos="zoom-in">
 
-        <div class="row mb-5">
+        <div class="row mb-3">
             <div class="section-title">
                 <h2>Kartu Pencari Kerja (Kartu AK/1)</h2>
                 <p>Yuk, hanya dengan 3 langkah berikut ini Anda dapat dengan mudah membuat Kartu Pencari Kerja (Kartu Ak/1).</p>
@@ -46,7 +58,7 @@
                 </div>
             </div>
 
-            <div class="col-xl-4 col-md-4 d-flex align-items-stretch mt-4 mt-md-0 aos-init aos-animate" data-aos="zoom-in" data-aos-delay="200">
+            <div class="col-xl-4 col-md-4 d-flex align-items-stretch mt-md-0 aos-init aos-animate" data-aos="zoom-in" data-aos-delay="200">
                 <div class="icon-box">
                     <div class="col-md-12 py-3 d-flex justify-content-center align-items-center ">
                         <img class="w-100" src="https://cdni.iconscout.com/illustration/premium/thumb/online-form-filling-4488741-3757136.png" alt="">
@@ -56,7 +68,7 @@
                 </div>
             </div>
 
-            <div class="col-xl-4 col-md-4 d-flex align-items-stretch mt-4 mt-xl-0 aos-init aos-animate" data-aos="zoom-in" data-aos-delay="300">
+            <div class="col-xl-4 col-md-4 d-flex align-items-stretch mt-xl-0 aos-init aos-animate" data-aos="zoom-in" data-aos-delay="300">
                 <div class="icon-box">
                     <div class="col-md-12 py-3 d-flex justify-content-center align-items-center ">
                         <img class="w-100" src="https://disnakertransmkw.com/assets/frontend/assets/img/office.jpg" alt="">

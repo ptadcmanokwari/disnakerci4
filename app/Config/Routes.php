@@ -27,7 +27,7 @@ $routes->get('kontak', 'Frontend::kontak');
 // $routes->get('auth', 'AuthController::login');
 
 // Routes untuk backend
-// $routes->get('admin', 'Admin::index');
+$routes->get('admin', 'Admin::index');
 $routes->get('admin', 'Admin::redirectDashboard');
 $routes->get('admin/dashboard', 'Admin::index');
 

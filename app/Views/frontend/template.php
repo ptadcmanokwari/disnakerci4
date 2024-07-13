@@ -5,12 +5,9 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <?php
-    $uri = service('uri'); // Menggunakan service('uri') untuk mendapatkan URI saat ini
+    $uri = service('uri');
     $current_uris = [
         'segment_1' => $uri->getSegment(1),
-        // 'segment_2' => $uri->getSegment(2),
-        // 'segment_3' => $uri->getSegment(3),
-        // Tambahkan segmen lain jika diperlukan
     ];
     ?>
     <title><?= isset($title) ? $title : 'Default Title' ?> - Panel Admin</title>

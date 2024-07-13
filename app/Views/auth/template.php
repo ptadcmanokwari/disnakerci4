@@ -14,11 +14,43 @@
   <link rel="stylesheet" href="<?= base_url(); ?>adminltev31/plugins/fontawesome-free/css/all.min.css">
   <link rel="stylesheet" href="<?= base_url(); ?>adminltev31/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <link rel="stylesheet" href="<?= base_url(); ?>adminltev31/dist/css/adminlte.min.css">
+  <style>
+    body {
+      color: #000;
+      overflow-x: hidden;
+      height: 100%;
+      background-color: #B0BEC5 !important;
+      background-repeat: no-repeat;
+    }
+
+    .card.card-outline {
+      box-shadow: 0px 4px 8px 0px #757575;
+      border-radius: 0px;
+    }
+
+    .login-box,
+    .register-box {
+      width: 400px;
+    }
+
+    .login-box-msg,
+    .register-box-msg {
+      margin: 0;
+      padding: 0 20px 20px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    button.btn.btn-primary.btn-block {
+      background-color: #116db6;
+    }
+  </style>
+
 </head>
 
 <body class="hold-transition login-page">
   <div class="login-box">
-    <div class="card card-outline card-primary">
+    <div class="card card-outline">
 
       <?= $this->renderSection('content') ?>
     </div>
