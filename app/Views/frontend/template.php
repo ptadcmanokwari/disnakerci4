@@ -4,8 +4,16 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-    <title><?= $title; ?></title>
+    <?php
+    $uri = service('uri'); // Menggunakan service('uri') untuk mendapatkan URI saat ini
+    $current_uris = [
+        'segment_1' => $uri->getSegment(1),
+        // 'segment_2' => $uri->getSegment(2),
+        // 'segment_3' => $uri->getSegment(3),
+        // Tambahkan segmen lain jika diperlukan
+    ];
+    ?>
+    <title><?= isset($title) ? $title : 'Default Title' ?> - Panel Admin</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 

@@ -18,16 +18,17 @@ $routes->get('kartu_ak1', 'Frontend::kartu_ak1');
 $routes->get('kontak', 'Frontend::kontak');
 
 //proses registrasi akun bagi pencaker
-$routes->get('/registrasi_pencaker', 'Frontend::registrasi_pencaker');
+// $routes->get('/registrasi_pencaker', 'Frontend::registrasi_pencaker');
 // $routes->post('/registrasi_pencaker', 'Frontend::registrasi_pencaker');
 // $routes->post('/frontend/save_pencaker_data', 'Frontend::save_pencaker_data');
 
 // $routes->get('/masuk', 'Frontend::login');
 
-$routes->get('auth', 'AuthController::login');
+// $routes->get('auth', 'AuthController::login');
 
 // Routes untuk backend
-$routes->get('admin', 'Admin::index');
+// $routes->get('admin', 'Admin::index');
+$routes->get('admin', 'Admin::redirectDashboard');
 $routes->get('admin/dashboard', 'Admin::index');
 
 $routes->get('admin/pencaker', 'Admin::pencaker');
@@ -99,3 +100,11 @@ $routes->get('admin/form', 'Admin::form');
 
 $routes->get('admin/backup', 'Admin::backup');
 $routes->post('admin/download_db', 'Admin::download_db');
+
+
+// $routes->setDefaultNamespace('App\Controllers');
+// $routes->setDefaultController('Dashboard');
+// $routes->setDefaultMethod('index');
+// $routes->setTranslateURIDashes(false);
+// $routes->set404Override();
+$routes->setAutoRoute(true);

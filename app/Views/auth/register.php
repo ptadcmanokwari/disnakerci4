@@ -37,35 +37,51 @@
             </div>
 
             <div class="col-md-6 px-4">
+                <?= view('Myth\Auth\Views\_message_block') ?>
                 <form action="<?= url_to('register') ?>" method="post">
                     <?= csrf_field() ?>
 
-                    <div class="form-group mb-4">
+                    <div class="form-group mb-3">
                         <label for="namalengkap">Nama Lengkap</label>
-                        <input type="text" name="namalengkap" id="namalengkap" class="form-control" required>
+                        <input type="text" class="form-control <?php if (session('errors.namalengkap')) : ?>is-invalid<?php endif ?>" name="namalengkap" value="<?= old('namalengkap') ?>">
+                        <div class="invalid-feedback">
+                            <?= session('errors.namalengkap') ?>
+                        </div>
                     </div>
 
-                    <div class="form-group mb-4">
+                    <div class="form-group mb-3">
                         <label for="nik">NIK</label>
-                        <input type="text" name="nik" id="nik" class="form-control" required>
+                        <input type="nik" class="form-control <?php if (session('errors.nik')) : ?>is-invalid<?php endif ?>" name="nik" value="<?= old('nik') ?>">
+                        <div class="invalid-feedback">
+                            <?= session('errors.nik') ?>
+                        </div>
                     </div>
 
-                    <div class="form-group mb-4">
+                    <div class="form-group mb-3">
+                        <label for="nohp">Nomor WhatsApp</label>
+                        <input type="text" class="form-control <?php if (session('errors.nohp')) : ?>is-invalid<?php endif ?>" name="nohp" value="<?= old('nohp') ?>">
+                        <div class="invalid-feedback">
+                            <?= session('errors.nohp') ?>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-3">
                         <label for="username">Username</label>
                         <input type="text" class="form-control <?php if (session('errors.username')) : ?>is-invalid<?php endif ?>" name="username" value="<?= old('username') ?>">
+                        <div class="invalid-feedback">
+                            <?= session('errors.username') ?>
+                        </div>
                     </div>
 
-                    <div class="form-group mb-4">
+                    <div class="form-group mb-3">
                         <label for="email">Email</label>
                         <input type="email" class="form-control <?php if (session('errors.email')) : ?>is-invalid<?php endif ?>" name="email" aria-describedby="emailHelp" value="<?= old('email') ?>">
+                        <div class="invalid-feedback">
+                            <?= session('errors.username') ?>
+                        </div>
                     </div>
 
-                    <div class="form-group mb-4">
-                        <label for="nohp">No HP</label>
-                        <input type="text" name="nohp" id="nohp" class="form-control" required>
-                    </div>
-
-                    <div class="form-group mb-4">
+                    <div class="form-group mb-3">
                         <label for="password">Kata Sandi</label>
                         <input type="password" name="password" class="form-control <?php if (session('errors.password')) : ?>is-invalid<?php endif ?>" autocomplete="off">
                         <div class="invalid-feedback">
@@ -73,7 +89,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group mb-4">
+                    <div class="form-group mb-3">
                         <label for="pass_confirm">Konfirmasi Kata Sandi</label>
                         <input type="password" name="pass_confirm" class="form-control <?php if (session('errors.pass_confirm')) : ?>is-invalid<?php endif ?>" autocomplete="off">
                     </div>

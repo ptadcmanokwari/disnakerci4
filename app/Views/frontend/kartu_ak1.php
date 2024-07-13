@@ -70,7 +70,7 @@
 
         <div class="row mt-5">
             <div class="col-xl-12 col-md-12 d-flex align-items-center justify-content-center">
-                <a class="btn-buy btn btn-primary text-center" href="<?php base_url(); ?>registrasi_pencaker">Buat Akun Sekarang</a>
+                <a class="btn-buy btn btn-primary text-center" href="<?= url_to('register') ?>">Buat Akun Sekarang</a>
             </div>
         </div>
 

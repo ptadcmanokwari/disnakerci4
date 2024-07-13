@@ -380,6 +380,25 @@ class Frontend extends BaseController
         return $this->loadView('frontend/login', $data);
     }
 
+    // private function loadView(string $viewName, array $data = []): string
+    // {
+    //     $uri = service('uri');
+    //     $segments = $uri->getSegments();
+
+    //     $data['current_uris'] = [
+    //         'segment_1' => isset($segments[0]) ? $segments[0] : '',
+    //         'segment_2' => isset($segments[1]) ? $segments[1] : '',
+    //         'segment_3' => isset($segments[2]) ? $segments[2] : '',
+    //     ];
+
+    //     // Handle root URL
+    //     if ($uri->getPath() === '' || $uri->getPath() === '/') {
+    //         $data['current_uris']['segment_1'] = 'home';
+    //     }
+
+    //     return view($viewName, $data);
+    // }
+
     private function loadView(string $viewName, array $data = []): string
     {
         $uri = service('uri');

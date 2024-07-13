@@ -72,7 +72,6 @@ class Admin extends BaseController
             'pendidikan_data' => $pencakerModel->countByPendidikan(),
             'usia_data' => $pencakerModel->countByUsia(),
 
-            // highchart
             'pendidikan_data' => json_encode($pendidikanData),
             'usia_data' => json_encode($usiaData),
 
@@ -83,6 +82,11 @@ class Admin extends BaseController
         ];
 
         return $this->loadView('admin/dashboard', $data);
+    }
+
+    public function redirectDashboard()
+    {
+        return redirect()->to('admin/dashboard');
     }
 
     protected function bulan($bulan)
