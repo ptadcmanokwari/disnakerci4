@@ -1,20 +1,21 @@
-<?php
-
-namespace Myth\Auth\Models;
+<?php namespace Myth\Auth\Models;
 
 use CodeIgniter\Model;
-use DateTime;
 
 class LoginModel extends Model
 {
-    protected $table          = 'auth_logins';
-    protected $primaryKey     = 'id';
-    protected $returnType     = 'object';
+    protected $table = 'auth_logins';
+    protected $primaryKey = 'id';
+
+    protected $returnType = 'object';
     protected $useSoftDeletes = false;
-    protected $allowedFields  = [
-        'ip_address', 'email', 'user_id', 'date', 'success',
+
+    protected $allowedFields = [
+        'ip_address', 'email', 'user_id', 'date', 'success'
     ];
-    protected $useTimestamps   = false;
+
+    protected $useTimestamps = false;
+
     protected $validationRules = [
         'ip_address' => 'required',
         'email'      => 'required',
@@ -22,27 +23,34 @@ class LoginModel extends Model
         'date'       => 'required|valid_date',
     ];
     protected $validationMessages = [];
-    protected $skipValidation     = false;
+    protected $skipValidation = false;
 
     /**
      * Stores a remember-me token for the user.
+     *
+     * @param int    $userID
+     * @param string $selector
+     * @param string $validator
+     * @param string $expires
      *
      * @return mixed
      */
     public function rememberUser(int $userID, string $selector, string $validator, string $expires)
     {
-        $expires = new DateTime($expires);
+        $expires = new \DateTime($expires);
 
         return $this->db->table('auth_tokens')->insert([
-            'user_id'         => $userID,
-            'selector'        => $selector,
+            'user_id' => $userID,
+            'selector' => $selector,
             'hashedValidator' => $validator,
-            'expires'         => $expires->format('Y-m-d H:i:s'),
+            'expires' => $expires->format('Y-m-d H:i:s'),
         ]);
     }
 
     /**
      * Returns the remember-me token info for a given selector.
+     *
+     * @param string $selector
      *
      * @return mixed
      */
@@ -57,6 +65,9 @@ class LoginModel extends Model
     /**
      * Updates the validator for a given selector.
      *
+     * @param string $selector
+     * @param string $validator
+     *
      * @return mixed
      */
     public function updateRememberValidator(string $selector, string $validator)
@@ -65,13 +76,16 @@ class LoginModel extends Model
             ->where('selector', $selector)
             ->update([
                 'hashedValidator' => hash('sha256', $validator),
-                'expires'         => (new DateTime())->modify('+' . config('Auth')->rememberLength . ' seconds')->format('Y-m-d H:i:s'),
+                'expires'         => (new \DateTime)->modify('+' . config('Auth')->rememberLength . ' seconds')->format('Y-m-d H:i:s'),
             ]);
     }
+
 
     /**
      * Removes all persistent login tokens (RememberMe) for a single user
      * across all devices they may have logged in with.
+     *
+     * @param int $id
      *
      * @return mixed
      */
@@ -88,12 +102,13 @@ class LoginModel extends Model
     {
         $config = config('Auth');
 
-        if (! $config->allowRemembering) {
+        if (! $config->allowRemembering)
+        {
             return;
         }
 
         $this->db->table('auth_tokens')
-            ->where('expires <=', date('Y-m-d H:i:s'))
-            ->delete();
+                 ->where('expires <=', date('Y-m-d H:i:s'))
+                 ->delete();
     }
 }

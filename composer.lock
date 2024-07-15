@@ -4,11 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9d53610dc1e8efa20b7b22cf01a5b90b",
+    "content-hash": "56d90440722efd35c9b139ebb7b8a7f7",
     "packages": [
         {
             "name": "codeigniter4/framework",
-            "version": "v4.1",
+            "version": "v4.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/codeigniter4/framework.git",
@@ -2654,7 +2654,6 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "myth/auth": 20,
         "phpoffice/phpspreadsheet": 20,
         "tecnickcom/tcpdf": 20
     },

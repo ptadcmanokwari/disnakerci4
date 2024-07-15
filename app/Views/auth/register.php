@@ -9,6 +9,10 @@
         transition: 0.4s;
         border-radius: 4px;
     }
+
+    .alert {
+        padding-left: 2rem !important;
+    }
 </style>
 <section id="breadcrumbs" class="breadcrumbs">
     <div class="container">
@@ -37,6 +41,7 @@
             </div>
 
             <div class="col-md-6 px-4">
+                <?= view('Myth\Auth\Views\_message_block') ?>
                 <form action="<?= url_to('register') ?>" method="post">
                     <?= csrf_field() ?>
 

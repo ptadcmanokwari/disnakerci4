@@ -1114,14 +1114,6 @@ class Admin extends BaseController
         return $this->response->download($filename, $databaseContent);
     }
 
-    private function loadView(string $viewName, array $data = []): string
-    {
-        $uri = service('uri');
-        $data['current_uri'] = $uri->getSegment(2); // Ambil segmen kedua dari URI
-
-        return view($viewName, $data);
-    }
-
     public function exportPDF()
     {
         $pdf = new Pdf(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
@@ -1439,5 +1431,13 @@ class Admin extends BaseController
     {
         $data['title'] = 'Profil Pencari Kerja';
         return $this->loadView('admin/formdata_pencaker', $data);
+    }
+
+    private function loadView(string $viewName, array $data = []): string
+    {
+        $uri = service('uri');
+        $data['current_uri'] = $uri->getSegment(2); // Ambil segmen kedua dari URI
+
+        return view($viewName, $data);
     }
 }

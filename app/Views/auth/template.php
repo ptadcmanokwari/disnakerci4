@@ -44,6 +44,13 @@
     button.btn.btn-primary.btn-block {
       background-color: #116db6;
     }
+
+    .alert-danger {
+      color: #fff;
+      background-color: #dc3545;
+      border-color: #d32535;
+      padding-left: 2rem;
+    }
   </style>
 
 </head>

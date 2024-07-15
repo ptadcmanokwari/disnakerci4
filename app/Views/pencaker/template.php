@@ -244,7 +244,7 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="<?php echo base_url('admin/dashboard'); ?>" class="brand-link">
+            <a href="<?php echo base_url('pencaker/dashboard'); ?>" class="brand-link">
                 <img src="<?php echo base_url(); ?>dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">PANEL ADMIN</span>
             </a>
@@ -258,21 +258,41 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?php echo base_url('admin/profil_pencaker'); ?>" class="nav-link <?= ($current_uri == 'profil_pencaker') ? 'active' : '' ?>">
+                            <a href="<?php echo base_url('pencaker/profil_pencaker'); ?>" class="nav-link <?= ($current_uri == 'profil_pencaker') ? 'active' : '' ?>">
                                 <i class="nav-icon bi bi-person-badge"></i>
                                 <p>Profil Pencari Kerja</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?php echo base_url('admin/form'); ?>" class="nav-link <?= ($current_uri == 'form') ? 'active' : '' ?>">
+                            <a href="<?php echo base_url('pencaker/form'); ?>" class="nav-link <?= ($current_uri == 'form') ? 'active' : '' ?>">
                                 <i class="nav-icon bi bi-person-badge"></i>
                                 <p>Upload Dokumen</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?php echo base_url('admin/settings'); ?>" class="nav-link <?= ($current_uri == 'settings') ? 'active' : '' ?>">
+                            <a href="<?php echo base_url('pencaker/settings'); ?>" class="nav-link <?= ($current_uri == 'settings') ? 'active' : '' ?>">
                                 <i class="nav-icon bi bi-gear"></i>
-                                <p>Pengaturan</p>
+                                <p>Pengaturan Profil</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?php echo base_url('logout'); ?>" class="nav-link <?= ($current_uri == 'logout') ? 'active' : '' ?>">
+                                <i class="nav-icon bi bi-box-arrow-right"></i>
+                                <p>Logout</p>
+                            </a>
+                        </li>
+
+                        <!-- Menu untuk pencaker -->
+                        <li class="nav-item">
+                            <a href="<?php echo base_url('pencaker/profil_pencaker'); ?>" class="nav-link <?= ($current_uri == 'profil_pencaker') ? 'active' : '' ?>">
+                                <i class="nav-icon bi bi-person-badge"></i>
+                                <p>Profil Pencari Kerja</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?php echo base_url('pencaker/form'); ?>" class="nav-link <?= ($current_uri == 'form') ? 'active' : '' ?>">
+                                <i class="nav-icon bi bi-person-badge"></i>
+                                <p>Form</p>
                             </a>
                         </li>
                         <li class="nav-item">

@@ -1,10 +1,6 @@
-<?php
+<?php namespace Myth\Auth\Exceptions;
 
-namespace Myth\Auth\Exceptions;
-
-use RuntimeException;
-
-class UserNotFoundException extends RuntimeException implements ExceptionInterface
+class UserNotFoundException extends \RuntimeException implements ExceptionInterface
 {
     public static function forUserID(int $id)
     {

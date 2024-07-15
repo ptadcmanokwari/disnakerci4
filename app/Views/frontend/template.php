@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <?php
+    helper('auth');
     $uri = service('uri');
     $current_uris = [
         'segment_1' => $uri->getSegment(1),
@@ -51,6 +52,14 @@
             font-size: 12px;
             color: #fcf0f6;
         }
+
+        #header a.btn.btn-primary.mx-4.p-2.text-white {
+            background-color: #116db6;
+        }
+
+        #header a.btn.btn-primary.mx-4.p-2.text-white:hover {
+            color: #fff !important;
+        }
     </style>
 </head>
 
@@ -92,7 +101,13 @@
                         </ul>
                     </li>
                     <li><a <?= ($current_uris['segment_1'] == 'kontak') ? 'class="active"' : '' ?> href="<?= base_url('kontak'); ?>">Kontak</a></li>
-                    <li><a <?= ($current_uris['segment_1'] == 'login') ? 'class="active"' : '' ?> href="<?= base_url('login'); ?>">Masuk</a></li>
+                    <?php if (logged_in()) : ?>
+                        <li><a class="btn btn-danger mx-4 p-2 text-white" href="<?= base_url('logout'); ?>">Logout</a></li>
+
+                    <?php else : ?>
+                        <li><a class="btn btn-primary mx-4 p-2 text-white" href="<?= base_url('login'); ?>">Masuk</a></li>
+
+                    <?php endif; ?>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->

@@ -1,9 +1,7 @@
-<?php
+<?php namespace  Myth\Auth\Authorization;
 
-namespace  Myth\Auth\Authorization;
+interface AuthorizeInterface  {
 
-interface AuthorizeInterface
-{
     /**
      * Returns the latest error string.
      *
@@ -11,9 +9,9 @@ interface AuthorizeInterface
      */
     public function error();
 
-    // --------------------------------------------------------------------
+    //--------------------------------------------------------------------
     // Actions
-    // --------------------------------------------------------------------
+    //--------------------------------------------------------------------
 
     /**
      * Checks to see if a user is in a group.
@@ -23,6 +21,7 @@ interface AuthorizeInterface
      * user must belong to ONE of. (It's an OR check not an AND check)
      *
      * @param mixed $groups
+     * @param int $userId
      *
      * @return bool
      */
@@ -32,6 +31,7 @@ interface AuthorizeInterface
      * Checks a user's groups to see if they have the specified permission.
      *
      * @param int|string $permission
+     * @param int        $userId
      *
      * @return mixed
      */
@@ -40,7 +40,8 @@ interface AuthorizeInterface
     /**
      * Makes a member a part of a group.
      *
-     * @param int|string $group Either ID or name
+     * @param int $userid
+     * @param int|string $group  Either ID or name
      *
      * @return bool
      */
@@ -49,6 +50,7 @@ interface AuthorizeInterface
     /**
      * Removes a single user from a group.
      *
+     * @param int $userId
      * @param int|string $group
      *
      * @return mixed
@@ -75,9 +77,9 @@ interface AuthorizeInterface
      */
     public function removePermissionFromGroup($permission, $group);
 
-    // --------------------------------------------------------------------
+    //--------------------------------------------------------------------
     // Groups
-    // --------------------------------------------------------------------
+    //--------------------------------------------------------------------
 
     /**
      * Grabs the details about a single group.
@@ -96,12 +98,17 @@ interface AuthorizeInterface
     public function groups();
 
     /**
+     * @param string $name
+     * @param string $description
+     *
      * @return mixed
      */
-    public function createGroup(string $name, string $description = '');
+    public function createGroup(string $name, string $description='');
 
     /**
      * Deletes a single group.
+     *
+     * @param int $groupId
      *
      * @return bool
      */
@@ -110,13 +117,17 @@ interface AuthorizeInterface
     /**
      * Updates a single group's information.
      *
+     * @param int $id
+     * @param string $name
+     * @param string $description
+     *
      * @return mixed
      */
-    public function updateGroup(int $id, string $name, string $description = '');
+    public function updateGroup(int $id, string $name, string $description='');
 
-    // --------------------------------------------------------------------
+    //--------------------------------------------------------------------
     // Permissions
-    // --------------------------------------------------------------------
+    //--------------------------------------------------------------------
 
     /**
      * Returns the details about a single permission.
@@ -137,12 +148,17 @@ interface AuthorizeInterface
     /**
      * Creates a single permission.
      *
+     * @param string $name
+     * @param string $description
+     *
      * @return mixed
      */
-    public function createPermission(string $name, string $description = '');
+    public function createPermission(string $name, string $description='');
 
     /**
      * Deletes a single permission and removes that permission from all groups.
+     *
+     * @param int $permissionId
      *
      * @return mixed
      */
@@ -151,7 +167,12 @@ interface AuthorizeInterface
     /**
      * Updates the details for a single permission.
      *
+     * @param int    $id
+     * @param string $name
+     * @param string $description
+     *
      * @return bool
      */
-    public function updatePermission(int $id, string $name, string $description = '');
+    public function updatePermission(int $id, string $name, string $description='');
+
 }

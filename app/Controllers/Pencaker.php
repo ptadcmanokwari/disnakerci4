@@ -5,7 +5,7 @@ namespace App\Controllers;
 use App\Models\UsersModel;
 use CodeIgniter\Controller;
 
-class User extends Controller
+class Pencaker extends Controller
 {
     public function index()
     {

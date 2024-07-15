@@ -1,9 +1,5 @@
-<?php
+<?php namespace Myth\Auth\Exceptions;
 
-namespace Myth\Auth\Exceptions;
-
-use RuntimeException;
-
-class PermissionException extends RuntimeException implements ExceptionInterface
+class PermissionException extends \RuntimeException implements ExceptionInterface
 {
 }

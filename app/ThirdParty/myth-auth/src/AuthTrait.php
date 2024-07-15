@@ -1,35 +1,27 @@
-<?php
-
-namespace Myth\Auth;
+<?php namespace Myth\Auth;
 
 use CodeIgniter\Router\Exceptions\RedirectException;
 
-trait AuthTrait
-{
+trait AuthTrait {
+
     /**
      * Instance of Authentication Class
-     *
      * @var null
      */
-    public $authenticate;
+    public $authenticate = null;
 
     /**
      * Instance of Authorization class
-     *
      * @var null
      */
-    public $authorize;
-
+    public $authorize = null;
     /**
      * Have the auth classes already been loaded?
-     *
      * @var bool
      */
     private $classesLoaded = false;
-
     /**
      * The alias for the authentication lib to load.
-     *
      * @var string
      */
     protected $authenticationLib = 'local';
@@ -38,33 +30,38 @@ trait AuthTrait
      * Verifies that a user is logged in
      *
      * @param string $uri
+     * @param bool   $returnOnly
      *
      * @return bool
-     *
      * @throws RedirectException
      */
-    public function restrict(?string $uri = null, bool $returnOnly = false)
+    public function restrict(string $uri=null, bool $returnOnly=false)
     {
         $this->setupAuthClasses();
 
-        if ($this->authenticate->check()) {
+        if ($this->authenticate->check())
+        {
             return true;
         }
 
-        if (method_exists($this, 'setMessage')) {
+        if (method_exists($this, 'setMessage'))
+        {
             session()->setFlashdata('error', lang('Auth.notLoggedIn'));
         }
 
-        if ($returnOnly) {
+        if ($returnOnly)
+        {
             return false;
         }
 
-        if (empty($uri)) {
-            throw new RedirectException(route_to('login'));
+        if (empty($uri))
+        {
+            throw new RedirectException( route_to('login') );
         }
 
         throw new RedirectException($uri);
     }
+
 
     /**
      * Ensures that the current user is in at least one of the passed in
@@ -82,29 +79,34 @@ trait AuthTrait
      *  restrictToGroups( ['admins', 'moderators'] );
      *
      * @param mixed  $groups
-     * @param string $uri    The URI to redirect to on fail.
+     * @param string $uri The URI to redirect to on fail.
      *
      * @return bool
-     *
      * @throws RedirectException
      */
-    public function restrictToGroups($groups, $uri = null)
+    public function restrictToGroups($groups, $uri=null)
     {
         $this->setupAuthClasses();
 
-        if ($this->authenticate->check() && $this->authorize->inGroup($groups, $this->authenticate->id())) {
-            return true;
+        if ($this->authenticate->check())
+        {
+            if ($this->authorize->inGroup($groups, $this->authenticate->id() ) )
+            {
+                return true;
+            }
         }
 
-        if (method_exists($this, 'setMessage')) {
+        if (method_exists($this, 'setMessage'))
+        {
             session()->setFlashdata('error', lang('Auth.notEnoughPrivilege'));
         }
 
-        if (empty($uri)) {
-            throw new RedirectException(route_to('login') . '?request_uri=' . current_url());
+        if (empty($uri))
+        {
+            throw new RedirectException( route_to('login') .'?request_uri='. current_url() );
         }
 
-        throw new RedirectException($uri . '?request_uri=' . current_url());
+        throw new RedirectException($uri .'?request_uri='. current_url());
     }
 
     /**
@@ -116,38 +118,35 @@ trait AuthTrait
      * the user to the URI set in $url or the site root, and attempt
      * to set a status message.
      *
-     * @param int|int[]|string|string[] $permissions
-     * @param string                    $uri         The URI to redirect to on fail.
+     * @param        $permissions
+     * @param string $uri The URI to redirect to on fail.
      *
      * @return bool
-     *
      * @throws RedirectException
      */
-    public function restrictWithPermissions($permissions, $uri = null)
+    public function restrictWithPermissions($permissions, $uri=null)
     {
         $this->setupAuthClasses();
 
-        if ($this->authenticate->check()) {
-            if (! is_array($permissions)) {
-                $permissions = [$permissions];
-            }
-
-            foreach ($permissions as $permission) {
-                if ($this->authorize->hasPermission($permission, $this->authenticate->id())) {
-                    return true;
-                }
+        if ($this->authenticate->check())
+        {
+            if ($this->authorize->hasPermission($permissions, $this->authenticate->id() ) )
+            {
+                return true;
             }
         }
 
-        if (method_exists($this, 'setMessage')) {
+        if (method_exists($this, 'setMessage'))
+        {
             session()->setFlashdata('error', lang('Auth.notEnoughPrivilege'));
         }
 
-        if (empty($uri)) {
-            throw new RedirectException(route_to('login') . '?request_uri=' . current_url());
+        if (empty($uri))
+        {
+            throw new RedirectException( route_to('login') .'?request_uri='. current_url() );
         }
 
-        throw new RedirectException($uri . '?request_uri=' . current_url());
+        throw new RedirectException($uri .'?request_uri='. current_url());
     }
 
     /**
@@ -160,19 +159,25 @@ trait AuthTrait
      */
     public function setupAuthClasses()
     {
-        if ($this->classesLoaded) {
+        if ($this->classesLoaded)
+        {
             return;
         }
 
-        // Authentication
+        /*
+         * Authentication
+         */
         $this->authenticate = service('authentication', $this->authenticationLib);
 
         // Try to log us in automatically.
         $this->authenticate->check();
 
-        // Authorization
+        /*
+         * Authorization
+         */
         $this->authorize = service('authorization');
 
         $this->classesLoaded = true;
     }
+
 }

@@ -49,6 +49,7 @@ class Autoload extends AutoloadConfig
         APP_NAMESPACE => APPPATH,
         'App'         => APPPATH,
         'Myth\Auth'   => APPPATH . 'ThirdParty/myth-auth/src',
+        'TCPDF'       => ROOTPATH . 'vendor/tecnickcom/tcpdf',
     ];
 
     /**
@@ -98,5 +99,5 @@ class Autoload extends AutoloadConfig
      *
      * @var list<string>
      */
-    public $helpers = ['url', 'text', 'date'];
+    public $helpers = ['url', 'text', 'date', 'form', 'auth'];
 }

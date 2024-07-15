@@ -2,9 +2,15 @@
 
 namespace Myth\Auth\Authentication\Passwords;
 
-// use CodeIgniter\Entity;
-use Myth\Auth\Entities\User;
+use CodeIgniter\Entity\Entity;
 
+/**
+ * Interface ValidatorInterface
+ *
+ * Forms the
+ *
+ * @package Myth\Auth\Authentication\Passwords
+ */
 interface ValidatorInterface
 {
     /**
@@ -13,12 +19,18 @@ interface ValidatorInterface
      * True means the password passes this test and
      * the password will be passed to any remaining validators.
      * False will immediately stop validation process
+     *
+     * @param string $password
+     * @param Entity $user
+     *
+     * @return bool
      */
-    // public function check(string $password, ?Entity $user = null): bool;
-    public function check(string $password, ?User $user = null): bool;
+    public function check(string $password, Entity $user = null): bool;
 
     /**
      * Returns the error string that should be displayed to the user.
+     *
+     * @return string
      */
     public function error(): string;
 
@@ -27,6 +39,8 @@ interface ValidatorInterface
      * to help them choose a better password. The method is
      * required, but a suggestion is optional. May return
      * an empty string instead.
+     *
+     * @return string
      */
     public function suggestion(): string;
 }

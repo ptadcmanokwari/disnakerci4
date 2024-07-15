@@ -5,17 +5,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?php echo $title; ?> - Panel Admin</title>
-    <?php
-    $uri = service('uri');
-    $current_uris = [
-        'segment_1' => $uri->getSegment(1),
-    ];
-    ?>
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="<?php echo base_url('adminltev31/plugins/fontawesome-free/css/all.min.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('adminltev31/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('adminltev31/plugins/datatables-responsive/css/responsive.bootstrap4.min.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('adminltev31/plugins/datatables-buttons/css/buttons.bootstrap4.min.css'); ?>">
+
+    <link rel="stylesheet" href="<?php echo base_url('adminltev31/plugins/select2-bootstrap4-theme/select2-bootstrap4.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('adminltev31/plugins/select2/css/select2.css'); ?>">
+
     <link rel="stylesheet" href="<?php echo base_url('adminltev31/dist/css/adminlte.min.css'); ?>">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="<?php echo base_url('adminltev31/plugins/summernote/summernote-bs4.min.css'); ?>">
@@ -39,16 +38,65 @@
             vertical-align: middle !important;
         }
 
-        a.btn.btn-info,
-        button.btn.btn-warning,
-        button.btn.btn-danger,
-        button.btn.btn-success {
+        .btn.btn-info,
+        .btn.btn-warning,
+        .btn.btn-danger,
+        .btn.btn-success {
             border-radius: 5px !important;
             margin: 2px !important;
         }
 
         label:not(.form-check-label):not(.custom-file-label) {
             font-weight: normal;
+        }
+
+        /* Verifikasi modal verifikasi pencaker halaman pencaker admin */
+        .hide {
+            display: none;
+        }
+
+        /* Select2 Activity Logs */
+        .select2-container .select2-selection--single {
+            height: calc(2.25rem + 2px) !important;
+        }
+
+        /* Detail User Modal */
+        div#detailUserModal .nav-pills .nav-link.active,
+        div#detailUserModal .nav-pills .show>.nav-link {
+            color: #fff;
+            background-color: #007bff;
+            border: 0 !important;
+        }
+
+        div#detailUserModal .nav-pills .nav-link {
+            color: #6c757d;
+            border: 0;
+            background-color: transparent;
+        }
+
+        /* Kolom Aksi tabel Pencaker */
+        table.table-bordered.dataTable th:last-child,
+        table.table-bordered.dataTable td:last-child {
+            text-align: center;
+            width: 20px;
+        }
+
+        /* Icon bagian card dashboard */
+        .small-box .icon>i {
+            font-size: 60px;
+        }
+
+        label:not(.form-check-label):not(.custom-file-label) {
+            font-weight: normal !important;
+        }
+
+        #profilPencaker .card-header.with-border h3 {
+            font-weight: bold !important;
+        }
+
+        #profilPencaker .card {
+            box-shadow: none !important;
+            margin-bottom: 1rem;
         }
     </style>
 </head>
@@ -196,7 +244,7 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="<?php echo base_url(); ?>index3.html" class="brand-link">
+            <a href="<?php echo base_url('dashboard'); ?>" class="brand-link">
                 <img src="<?php echo base_url(); ?>dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">PANEL ADMIN</span>
             </a>
@@ -209,6 +257,7 @@
                                 <p>Dashboard</p>
                             </a>
                         </li>
+
                         <li class="nav-item">
                             <a href="<?= base_url('admin/pencaker'); ?>" class="nav-link <?= ($current_uri == 'pencaker') ? 'active' : '' ?>">
                                 <i class="nav-icon bi bi-people"></i>
@@ -245,12 +294,12 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="<?= base_url('admin/userslog'); ?>" class="nav-link <?= ($current_uri == 'userslog') ? 'active' : '' ?>">
+                            <a href="<?= base_url('admin/activitylogs'); ?>" class="nav-link <?= ($current_uri == 'activitylogs') ? 'active' : '' ?>">
                                 <i class="nav-icon bi bi-clock-history"></i>
                                 <p>Aktivitas Pengguna</p>
                             </a>
                         </li>
-                        <li class="nav-header my-3">SUPER ADMIN</li>
+                        <li class="nav-header my-1 text-muted">SUPER ADMIN</li>
                         <li class="nav-item">
                             <a href="<?php echo base_url('admin/users'); ?>" class="nav-link <?= ($current_uri == 'users') ? 'active' : '' ?>">
                                 <i class="nav-icon bi bi-person-fill-gear"></i>
@@ -270,6 +319,7 @@
                             </a>
                         </li>
                     </ul>
+
                 </nav>
             </div>
 
@@ -317,11 +367,12 @@
     <script src="<?php echo base_url('adminltev31/plugins/datatables-buttons/js/buttons.colVis.min.js'); ?>"></script>
     <script src="<?php echo base_url('adminltev31/dist/js/pages/dashboard.js'); ?>"></script>
     <script src="<?php echo base_url('adminltev31/plugins/summernote/summernote-bs4.min.js'); ?>"></script>
-    <!-- AdminLTE App -->
+
+    <script src="<?php echo base_url('adminltev31/plugins/select2/js/select2.js'); ?>"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="<?php echo base_url('adminltev31/dist/js/adminlte.min.js'); ?>"></script>
-    <!-- AdminLTE for demo purposes -->
     <script src="<?php echo base_url('adminltev31/dist/js/demo.js'); ?>"></script>
-    <!-- Page specific script -->
+
     <script>
         $(function() {
             $("#example1").DataTable({
@@ -340,8 +391,10 @@
                 "autoWidth": false,
                 "responsive": true,
             });
+
         });
     </script>
+    <!--  -->
 </body>
 
 </html>

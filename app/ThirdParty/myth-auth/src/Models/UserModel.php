@@ -3,48 +3,37 @@
 namespace Myth\Auth\Models;
 
 use CodeIgniter\Model;
-use Faker\Generator;
 use Myth\Auth\Authorization\GroupModel;
 use Myth\Auth\Entities\User;
 
-/**
- * @method User|null first()
- */
 class UserModel extends Model
 {
-    protected $table          = 'users';
-    protected $primaryKey     = 'id';
-    protected $returnType     = User::class;
+    protected $table = 'users';
+    protected $primaryKey = 'id';
+
+    protected $returnType = User::class;
     protected $useSoftDeletes = true;
-    protected $allowedFields  = [
-        'namalengkap',
-        'nik',
-        'nohp',
-        'email',
-        'username',
-        'password_hash',
-        'reset_hash',
-        'reset_at',
-        'reset_expires',
-        'activate_hash',
-        'status',
-        'status_message',
-        'active',
-        'force_pass_reset',
-        'permissions', 'deleted_at',
+
+    protected $allowedFields = [
+        'namalengkap', 'nik', 'nohp',
+        'email', 'username', 'password_hash', 'reset_hash', 'reset_at', 'reset_expires', 'activate_hash',
+        'status', 'status_message', 'active', 'force_pass_reset', 'permissions', 'deleted_at',
     ];
-    protected $useTimestamps   = true;
+
+    protected $useTimestamps = true;
+
     protected $validationRules = [
-        'namalengkap' => 'required',
-        'nik' => 'required|min_length[16]|max_length[16]|',
-        'nohp' => 'required',
+        'namalengkap'   => 'required',
+        'nik'           => 'required|min_length[3]|max_length[30]',
+        'nohp'          => 'required',
         'email'         => 'required|valid_email|is_unique[users.email,id,{id}]',
         'username'      => 'required|alpha_numeric_punct|min_length[3]|max_length[30]|is_unique[users.username,id,{id}]',
         'password_hash' => 'required',
     ];
     protected $validationMessages = [];
-    protected $skipValidation     = false;
-    protected $afterInsert        = ['addToGroup'];
+    protected $skipValidation = false;
+
+    protected $afterInsert = ['addToGroup'];
 
     /**
      * The id of a group to assign.
@@ -56,33 +45,44 @@ class UserModel extends Model
 
     /**
      * Logs a password reset attempt for posterity sake.
+     *
+     * @param string      $email
+     * @param string|null $token
+     * @param string|null $ipAddress
+     * @param string|null $userAgent
      */
-    public function logResetAttempt(string $email, ?string $token = null, ?string $ipAddress = null, ?string $userAgent = null)
+    public function logResetAttempt(string $email, string $token = null, string $ipAddress = null, string $userAgent = null)
     {
         $this->db->table('auth_reset_attempts')->insert([
-            'email'      => $email,
+            'email' => $email,
             'ip_address' => $ipAddress,
             'user_agent' => $userAgent,
-            'token'      => $token,
-            'created_at' => date('Y-m-d H:i:s'),
+            'token' => $token,
+            'created_at' => date('Y-m-d H:i:s')
         ]);
     }
 
     /**
      * Logs an activation attempt for posterity sake.
+     *
+     * @param string|null $token
+     * @param string|null $ipAddress
+     * @param string|null $userAgent
      */
-    public function logActivationAttempt(?string $token = null, ?string $ipAddress = null, ?string $userAgent = null)
+    public function logActivationAttempt(string $token = null, string $ipAddress = null, string $userAgent = null)
     {
         $this->db->table('auth_activation_attempts')->insert([
             'ip_address' => $ipAddress,
             'user_agent' => $userAgent,
-            'token'      => $token,
-            'created_at' => date('Y-m-d H:i:s'),
+            'token' => $token,
+            'created_at' => date('Y-m-d H:i:s')
         ]);
     }
 
     /**
      * Sets the group to assign any users created.
+     *
+     * @param string $groupName
      *
      * @return $this
      */
@@ -124,17 +124,5 @@ class UserModel extends Model
         }
 
         return $data;
-    }
-
-    /**
-     * Faked data for Fabricator.
-     */
-    public function fake(Generator &$faker): User
-    {
-        return new User([
-            'email'    => $faker->email(),
-            'username' => $faker->userName(),
-            'password' => bin2hex(random_bytes(16)),
-        ]);
     }
 }

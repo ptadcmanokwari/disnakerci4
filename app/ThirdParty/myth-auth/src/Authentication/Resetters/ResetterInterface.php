@@ -1,11 +1,10 @@
-<?php
-
-namespace Myth\Auth\Authentication\Resetters;
+<?php namespace Myth\Auth\Authentication\Resetters;
 
 use Myth\Auth\Entities\User;
-
 /**
  * Interface ResetterInterface
+ *
+ * @package Myth\Auth\Authentication\Resetters
  */
 interface ResetterInterface
 {
@@ -13,11 +12,15 @@ interface ResetterInterface
      * Send reset message to user
      *
      * @param User $user
+     *
+     * @return bool
      */
-    public function send(?User $user = null): bool;
+    public function send(User $user = null): bool;
 
     /**
      * Returns the error string that should be displayed to the user.
+     *
+     * @return string
      */
     public function error(): string;
 }

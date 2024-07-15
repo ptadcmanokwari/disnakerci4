@@ -167,7 +167,7 @@
             "autoWidth": false,
             "responsive": true,
             "ajax": {
-                "url": "<?php echo base_url('admin/usersajax'); ?>",
+                "url": "<?php echo base_url('usersajax'); ?>",
                 "type": "POST"
             },
             "columns": [{
@@ -204,7 +204,7 @@
                         var id = this.getAttribute('data-id');
 
                         // Kirim AJAX request untuk memperbarui status di server
-                        fetch('<?= base_url('admin/update_status_user') ?>', {
+                        fetch('<?= base_url('update_status_user') ?>', {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json',
@@ -289,7 +289,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: '<?= base_url('admin/hapus_user') ?>',
+                        url: '<?= base_url('hapus_user') ?>',
                         type: 'POST',
                         data: {
                             user_id: userId // Sesuaikan dengan nama yang digunakan di controller
