@@ -41,7 +41,7 @@
 
                                 <div class="col-sm-4">
                                     <div class="form-group">
-                                        <label for="user">User</label>
+                                        <label for="user">User</label><br>
                                         <select name="user" id="user" class="form-control select2">
                                             <option value="">- Pilih User -</option>
                                         </select>
@@ -55,7 +55,8 @@
                                         <th>No.</th>
                                         <th>IP Address</th>
                                         <th>Email</th>
-                                        <th>User Role</th>
+                                        <th>Username</th>
+                                        <th>Perangkat</th>
                                         <th>Date Time</th>
                                         <th>Action</th>
                                     </tr>
@@ -82,30 +83,78 @@
                 </button>
             </div>
             <div class="modal-body">
-                <table class="table">
-                    <tbody>
-                        <tr>
-                            <th class="font-weight-normal" scope="row">ID:</th>
-                            <td class="font-weight-bold" id="id_log"></td>
-                        </tr>
-                        <tr>
-                            <th class="font-weight-normal" scope="row">IP Address:</th>
-                            <td class="font-weight-bold" id="ip_address_log"></td>
-                        </tr>
-                        <tr>
-                            <th class="font-weight-normal" scope="row">Title:</th>
-                            <td class="font-weight-bold" id="title_log"></td>
-                        </tr>
-                        <tr>
-                            <th class="font-weight-normal" scope="row">User:</th>
-                            <td class="font-weight-bold" id="name_log"></td>
-                        </tr>
-                        <tr>
-                            <th class="font-weight-normal" scope="row">Created At:</th>
-                            <td class="font-weight-bold" id="created_at_log"></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <img id="detailUserImage" class="img-fluid rounded w-75" src="" alt="Gambar User">
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="row my-2">
+                            <div class="col-md-3">
+                                <span>ID</span>
+                            </div>
+                            <div class="col-md-9">
+                                <strong id="detailUserId"></strong>
+                            </div>
+                        </div>
+                        <div class="row my-2">
+                            <div class="col-md-3">
+                                <span>Nama</span>
+                            </div>
+                            <div class="col-md-9">
+                                <strong id="detailUserName"></strong>
+                            </div>
+                        </div>
+                        <div class="row my-2">
+                            <div class="col-md-3">
+                                <span>NIK</span>
+                            </div>
+                            <div class="col-md-9">
+                                <strong id="detailUserNIK"></strong>
+                            </div>
+                        </div>
+                        <div class="row my-2">
+                            <div class="col-md-3">
+                                <span>Username</span>
+                            </div>
+                            <div class="col-md-9">
+                                <strong id="detailUsername"></strong>
+                            </div>
+                        </div>
+                        <div class="row my-2">
+                            <div class="col-md-3">
+                                <span>Email</span>
+                            </div>
+                            <div class="col-md-9">
+                                <strong id="detailUserEmail"></strong>
+                            </div>
+                        </div>
+                        <div class="row my-2">
+                            <div class="col-md-3">
+                                <span>No. HP</span>
+                            </div>
+                            <div class="col-md-9">
+                                <strong id="detailUserPhone"></strong>
+                            </div>
+                        </div>
+                        <div class="row my-2">
+                            <div class="col-md-3">
+                                <span>Role</span>
+                            </div>
+                            <div class="col-md-9">
+                                <strong id="detailUserRole"></strong>
+                            </div>
+                        </div>
+                        <div class="row my-2">
+                            <div class="col-md-3">
+                                <span>Terakhir Login</span>
+                            </div>
+                            <div class="col-md-9">
+                                <strong id="detailLogin"></strong>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -113,6 +162,7 @@
         </div>
     </div>
 </div>
+
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
@@ -125,7 +175,7 @@
         $('.select2').select2();
 
         $.ajax({
-            url: "<?php echo base_url('admin/getUsers'); ?>",
+            url: "<?php echo base_url('admin_v2/getUsers'); ?>",
             type: "GET",
             success: function(data) {
                 var users = JSON.parse(data);
@@ -140,18 +190,25 @@
             }
         });
 
-        $(document).on('click', '.btn-detail-log', function() {
-            var id = $(this).data('id');
-            var title = $(this).data('title');
-            var name = $(this).data('user');
-            var created_at = $(this).data('created_at');
+        $(document).on('click', '.btn-detail-user', function() {
+            var userId = $(this).data('id');
+            var userNIK = $(this).data('nik');
+            var userName = $(this).data('namalengkap');
+            var userUsername = $(this).data('username');
+            var userEmail = $(this).data('email');
+            var userPhone = $(this).data('nohp');
+            var userUpdated = $(this).data('updated_at');
+            var userRole = $(this).data('name');
 
-            // Set values in modal
-            $('#id_log').text(id);
-            $('#ip_address_log').text(ip_address);
-            $('#title_log').text(title);
-            $('#name_log').text(name);
-            $('#created_at_log').text(created_at);
+            // Masukkan data ke dalam modal
+            $('#detailUserId').text(userId);
+            $('#detailUserNIK').text(userNIK);
+            $('#detailUserName').text(userName);
+            $('#detailUsername').text(userUsername);
+            $('#detailUserEmail').text(userEmail);
+            $('#detailUserPhone').text(userPhone);
+            $('#detailLogin').text(userUpdated);
+            $('#detailUserRole').text(userRole);
         });
 
         var tabelLogActivity = $('#tabelLogActivity').DataTable({
@@ -165,7 +222,7 @@
             "autoWidth": false,
             "responsive": true,
             "ajax": {
-                "url": "<?php echo base_url('admin/activitylogsajax'); ?>",
+                "url": "<?php echo base_url('admin_v2/activitylogsajax'); ?>",
                 "type": "POST",
                 "data": function(d) {
                     d.ip_address = $('#ip_address').val();
@@ -187,7 +244,10 @@
                     "data": "email"
                 },
                 {
-                    "data": "user_id"
+                    "data": "username"
+                },
+                {
+                    "data": "user_agent"
                 },
                 {
                     "data": "date"

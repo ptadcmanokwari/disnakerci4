@@ -41,7 +41,9 @@
         .btn.btn-info,
         .btn.btn-warning,
         .btn.btn-danger,
-        .btn.btn-success {
+        .btn.btn-success,
+        .btn.btn-secondary,
+        .btn.btn-primary {
             border-radius: 5px !important;
             margin: 2px !important;
         }
@@ -94,10 +96,10 @@
             font-weight: bold !important;
         }
 
-        #profilPencaker .card {
+        /* #profilPencaker .card {
             box-shadow: none !important;
             margin-bottom: 1rem;
-        }
+        } */
     </style>
 </head>
 
@@ -256,16 +258,16 @@
             <div class="sidebar">
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                        <?php if (in_groups('admin', 'superadmin')) : ?>
+                        <?php if (in_groups('administrator')) : ?>
                             <li class="nav-item">
-                                <a href="<?= base_url('admin/dashboard'); ?>" class="nav-link <?= ($current_uri == 'dashboard') ? 'active' : '' ?>">
+                                <a href="<?= base_url('admin_v2/dashboard'); ?>" class="nav-link <?= ($current_uri == 'dashboard') ? 'active' : '' ?>">
                                     <i class="nav-icon bi bi-speedometer2"></i>
                                     <p>Dashboard</p>
                                 </a>
                             </li>
 
                             <li class="nav-item">
-                                <a href="<?= base_url('admin/pencaker'); ?>" class="nav-link <?= ($current_uri == 'pencaker') ? 'active' : '' ?>">
+                                <a href="<?= base_url('admin_v2/pencaker'); ?>" class="nav-link <?= ($current_uri == 'pencaker') ? 'active' : '' ?>">
                                     <i class="nav-icon bi bi-people"></i>
                                     <p>Pencaker</p>
                                 </a>
@@ -280,19 +282,19 @@
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item ">
-                                        <a href="<?= base_url('admin/berita'); ?>" class="nav-link <?= ($current_uri == 'berita') ? 'active' : '' ?>">
+                                        <a href="<?= base_url('admin_v2/berita'); ?>" class="nav-link <?= ($current_uri == 'berita') ? 'active' : '' ?>">
                                             <i class="bi bi-circle nav-icon"></i>
                                             <p>Berita</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="<?= base_url('admin/pengumuman'); ?>" class="nav-link <?= ($current_uri == 'pengumuman') ? 'active' : '' ?>">
+                                        <a href="<?= base_url('admin_v2/pengumuman'); ?>" class="nav-link <?= ($current_uri == 'pengumuman') ? 'active' : '' ?>">
                                             <i class="bi bi-circle nav-icon"></i>
                                             <p>Pengumuman</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="<?= base_url('admin/pelatihan'); ?>" class="nav-link <?= ($current_uri == 'pelatihan') ? 'active' : '' ?>">
+                                        <a href="<?= base_url('admin_v2/pelatihan'); ?>" class="nav-link <?= ($current_uri == 'pelatihan') ? 'active' : '' ?>">
                                             <i class="bi bi-circle nav-icon"></i>
                                             <p>Pelatihan</p>
                                         </a>
@@ -300,31 +302,37 @@
                                 </ul>
                             </li>
                             <li class="nav-item">
-                                <a href="<?= base_url('admin/activitylogs'); ?>" class="nav-link <?= ($current_uri == 'activitylogs') ? 'active' : '' ?>">
+                                <a href="<?= base_url('admin_v2/activitylogs'); ?>" class="nav-link <?= ($current_uri == 'activitylogs') ? 'active' : '' ?>">
                                     <i class="nav-icon bi bi-clock-history"></i>
                                     <p>Aktivitas Pengguna</p>
                                 </a>
                             </li>
                             <li class="nav-header my-1 text-muted">SUPER ADMIN</li>
                             <li class="nav-item">
-                                <a href="<?php echo base_url('admin/users'); ?>" class="nav-link <?= ($current_uri == 'users') ? 'active' : '' ?>">
+                                <a href="<?php echo base_url('admin_v2/users'); ?>" class="nav-link <?= ($current_uri == 'users') ? 'active' : '' ?>">
                                     <i class="nav-icon bi bi-person-fill-gear"></i>
                                     <p>Users</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="<?php echo base_url('admin/settings'); ?>" class="nav-link <?= ($current_uri == 'settings') ? 'active' : '' ?>">
+                                <a href="<?php echo base_url('admin_v2/settings'); ?>" class="nav-link <?= ($current_uri == 'settings') ? 'active' : '' ?>">
                                     <i class="nav-icon bi bi-gear"></i>
                                     <p>Settings</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="<?php echo base_url('admin/backup'); ?>" class="nav-link <?= ($current_uri == 'backup') ? 'active' : '' ?>">
+                                <a href="<?php echo base_url('admin_v2/backup'); ?>" class="nav-link <?= ($current_uri == 'backup') ? 'active' : '' ?>">
                                     <i class="nav-icon bi bi-database"></i>
                                     <p>Backup</p>
                                 </a>
                             </li>
                         <?php elseif (in_groups('pencaker')) : ?>
+                            <li class="nav-item">
+                                <a href="<?php echo base_url('pencaker/dashboard'); ?>" class="nav-link <?= ($current_uri == 'dashboard') ? 'active' : '' ?>">
+                                    <i class="nav-icon bi bi-speedometer2"></i>
+                                    <p>Dashboard</p>
+                                </a>
+                            </li>
                             <li class="nav-item">
                                 <a href="<?php echo base_url('pencaker/profil_pencaker'); ?>" class="nav-link <?= ($current_uri == 'profil_pencaker') ? 'active' : '' ?>">
                                     <i class="nav-icon bi bi-person-badge"></i>
@@ -332,8 +340,8 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="<?php echo base_url('pencaker/form'); ?>" class="nav-link <?= ($current_uri == 'form') ? 'active' : '' ?>">
-                                    <i class="nav-icon bi bi-person-badge"></i>
+                                <a href="<?php echo base_url('pencaker/dokumen_pencaker'); ?>" class="nav-link <?= ($current_uri == 'dokumen_pencaker') ? 'active' : '' ?>">
+                                    <i class="nav-icon bi bi-file-earmark-arrow-up-fill"></i>
                                     <p>Upload Dokumen</p>
                                 </a>
                             </li>

@@ -172,7 +172,7 @@
             "autoWidth": false,
             "responsive": true,
             "ajax": {
-                "url": "<?php echo base_url('admin/pengumumanajax'); ?>", // Sesuaikan dengan route yang benar di CodeIgniter
+                "url": "<?php echo base_url('admin_v2/pengumumanajax'); ?>", // Sesuaikan dengan route yang benar di CodeIgniter
                 "type": "POST"
             },
             "columns": [{
@@ -209,7 +209,7 @@
                         var id = this.getAttribute('data-id');
 
                         // Kirim AJAX request untuk memperbarui status di server
-                        fetch('<?= base_url('admin/update_status_pengumuman') ?>', {
+                        fetch('<?= base_url('admin_v2/update_status_pengumuman') ?>', {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json',
@@ -266,7 +266,7 @@
                 if (result.isConfirmed) {
                     // Jika user mengonfirmasi, lakukan proses hapus via AJAX
                     $.ajax({
-                        url: '<?= base_url('admin/hapus_pengumuman') ?>',
+                        url: '<?= base_url('admin_v2/hapus_pengumuman') ?>',
                         type: 'POST',
                         data: {
                             id: id
@@ -340,7 +340,7 @@
 
 
         const addDropzone = new Dropzone("#unggahGambarBaru", {
-            url: "<?= base_url('admin/save_pengumuman') ?>",
+            url: "<?= base_url('admin_v2/save_pengumuman') ?>",
             autoProcessQueue: false,
             uploadMultiple: false,
             maxFiles: 1,
@@ -419,7 +419,7 @@
         });
 
         const editDropzone = new Dropzone("#edit_gambar_dropzone", {
-            url: "<?= base_url('admin/update_pengumuman') ?>",
+            url: "<?= base_url('admin_v2/update_pengumuman') ?>",
             autoProcessQueue: false,
             uploadMultiple: false,
             maxFiles: 1,
@@ -475,7 +475,7 @@
 
         function updatePengumumanWithoutImage() {
             $.ajax({
-                url: "<?= base_url('admin/update_pengumuman') ?>",
+                url: "<?= base_url('admin_v2/update_pengumuman') ?>",
                 type: 'POST',
                 data: {
                     id: document.querySelector("#edit_id").value,

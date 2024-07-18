@@ -10,9 +10,22 @@ class PencakerModel extends Model
     protected $primaryKey = 'id';
     protected $allowedFields = [
         'namalengkap', 'tempatlahir', 'tgllahir', 'jenkel', 'alamat', 'kodepos', 'statusnikah', 'tinggibadan', 'beratbadan',
-        'agama', 'nik', 'nopendaftaran', 'tujuan', 'lokasi_jabatan', 'tujuan_perusahaan', 'catatan_pengantar', 'keterampilan_bahasa',
-        'bahasa_lainnya', 'keterangan_status', 'qr_code', 'users_id'
+        'agama', 'nik', 'nohp', 'nopendaftaran', 'tujuan', 'lokasi_jabatan', 'tujuan_perusahaan', 'catatan_pengantar', 'keterampilan_bahasa',
+        'bahasa_lainnya', 'keterangan_status', 'qr_code', 'user_id'
     ];
+
+    public function getPencakerWithUser($filter = null)
+    {
+        $builder = $this->db->table($this->table);
+        $builder->select('pencaker.*, users.nohp, users.email');
+        $builder->join('users', 'users.id = pencaker.user_id');
+
+        if ($filter) {
+            $builder->where('pencaker.keterangan_status', $filter);
+        }
+
+        return $builder->get()->getResultArray();
+    }
 
     public function savePencaker($data)
     {
@@ -71,5 +84,11 @@ class PencakerModel extends Model
         ", [$year]);
 
         return $query->getResult();
+    }
+
+
+    public function getNikByPencakerId($pencaker_id)
+    {
+        return $this->where('id', $pencaker_id)->first();
     }
 }

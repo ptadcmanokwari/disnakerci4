@@ -8,7 +8,7 @@
     "packages": [
         {
             "name": "codeigniter4/framework",
-            "version": "v4.5.3",
+            "version": "v4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/codeigniter4/framework.git",
@@ -86,12 +86,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-escaper.git",
-                "reference": "f79a58cb1c74279a6fe388efad8046a26bfa80f6"
+                "reference": "2b245cf70fcdb29aba157e15e49353526606a0fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-escaper/zipball/f79a58cb1c74279a6fe388efad8046a26bfa80f6",
-                "reference": "f79a58cb1c74279a6fe388efad8046a26bfa80f6",
+                "url": "https://api.github.com/repos/laminas/laminas-escaper/zipball/2b245cf70fcdb29aba157e15e49353526606a0fe",
+                "reference": "2b245cf70fcdb29aba157e15e49353526606a0fe",
                 "shasum": ""
             },
             "require": {
@@ -141,7 +141,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2024-07-08T00:12:29+00:00"
+            "time": "2024-07-15T00:52:48+00:00"
         },
         {
             "name": "maennchen/zipstream-php",
@@ -1460,12 +1460,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "2425f713b2a5350568ccb1a2d3984841a23e83c5"
+                "reference": "d350f2782d5ec662c1f1d6e39c341542068da1ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/2425f713b2a5350568ccb1a2d3984841a23e83c5",
-                "reference": "2425f713b2a5350568ccb1a2d3984841a23e83c5",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/d350f2782d5ec662c1f1d6e39c341542068da1ae",
+                "reference": "d350f2782d5ec662c1f1d6e39c341542068da1ae",
                 "shasum": ""
             },
             "require": {
@@ -1553,7 +1553,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-07-10T11:48:06+00:00"
+            "time": "2024-07-15T06:56:16+00:00"
         },
         {
             "name": "psr/container",

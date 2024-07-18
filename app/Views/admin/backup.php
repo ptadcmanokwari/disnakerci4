@@ -27,7 +27,7 @@
                             <h3 class="card-title">Backup Database</h3>
                         </div>
                         <div class="card-body">
-                            <form action="<?= site_url('admin/download_db'); ?>" method="post">
+                            <form action="<?= site_url('admin_v2/download_db'); ?>" method="post">
                                 <button type="submit" class="btn btn-primary">Download Database</button>
                             </form>
                         </div>

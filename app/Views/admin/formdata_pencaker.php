@@ -1,29 +1,17 @@
 <?= $this->extend('admin/template') ?>
 <?= $this->section('content') ?>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-<link rel="stylesheet" href="<?php echo base_url('adminltev31/plugins/fontawesome-free/css/all.min.css'); ?>">
-<link rel="stylesheet" href="<?php echo base_url('adminltev31/plugins/daterangepicker/daterangepicker.css'); ?>">
-<link rel="stylesheet" href="<?php echo base_url('adminltev31/plugins/icheck-bootstrap/icheck-bootstrap.min.css'); ?>">
-<link rel="stylesheet" href="<?php echo base_url('adminltev31/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css'); ?>">
-<link rel="stylesheet" href="<?php echo base_url('adminltev31/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css'); ?>">
-<link rel="stylesheet" href="<?php echo base_url('adminltev31/plugins/select2/css/select2.min.css'); ?>">
-<link rel="stylesheet" href="<?php echo base_url('adminltev31/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css'); ?>">
-<link rel="stylesheet" href="<?php echo base_url('adminltev31/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css'); ?>">
-<link rel="stylesheet" href="<?php echo base_url('adminltev31/plugins/bs-stepper/css/bs-stepper.min.css'); ?>">
-<link rel="stylesheet" href="<?php echo base_url('adminltev31/plugins/dropzone/min/dropzone.min.css'); ?>">
-<link rel="stylesheet" href="<?php echo base_url('adminltev31/dist/css/adminlte.min.css'); ?>">
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/dropzone.min.css">
 <div class="content-wrapper">
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Advanced Form</h1>
+                    <h1>Unggah Dokumen</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Advanced Form</li>
+                        <li class="breadcrumb-item active">Unggah Dokumen</li>
                     </ol>
                 </div>
             </div>
@@ -34,846 +22,248 @@
         <div class="container-fluid">
             <div class="card card-default">
                 <div class="card-header">
-                    <h3 class="card-title">Select2 (Default Theme)</h3>
-
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                            <i class="fas fa-minus"></i>
-                        </button>
-                        <button type="button" class="btn btn-tool" data-card-widget="remove">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
+                    <h3 class="card-title">Form Unggah Dokumen yang Dibutuhkan</h3>
                 </div>
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Minimal</label>
-                                <select class="form-control select2" style="width: 100%;">
-                                    <option selected="selected">Alabama</option>
-                                    <option>Alaska</option>
-                                    <option>California</option>
-                                    <option>Delaware</option>
-                                    <option>Tennessee</option>
-                                    <option>Texas</option>
-                                    <option>Washington</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Disabled</label>
-                                <select class="form-control select2" disabled="disabled" style="width: 100%;">
-                                    <option selected="selected">Alabama</option>
-                                    <option>Alaska</option>
-                                    <option>California</option>
-                                    <option>Delaware</option>
-                                    <option>Tennessee</option>
-                                    <option>Texas</option>
-                                    <option>Washington</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Multiple</label>
-                                <select class="select2" multiple="multiple" data-placeholder="Select a State" style="width: 100%;">
-                                    <option>Alabama</option>
-                                    <option>Alaska</option>
-                                    <option>California</option>
-                                    <option>Delaware</option>
-                                    <option>Tennessee</option>
-                                    <option>Texas</option>
-                                    <option>Washington</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Disabled Result</label>
-                                <select class="form-control select2" style="width: 100%;">
-                                    <option selected="selected">Alabama</option>
-                                    <option>Alaska</option>
-                                    <option disabled="disabled">California (disabled)</option>
-                                    <option>Delaware</option>
-                                    <option>Tennessee</option>
-                                    <option>Texas</option>
-                                    <option>Washington</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <h5>Custom Color Variants</h5>
-                    <div class="row">
-                        <div class="col-12 col-sm-6">
-                            <div class="form-group">
-                                <label>Minimal (.select2-danger)</label>
-                                <select class="form-control select2 select2-danger" data-dropdown-css-class="select2-danger" style="width: 100%;">
-                                    <option selected="selected">Alabama</option>
-                                    <option>Alaska</option>
-                                    <option>California</option>
-                                    <option>Delaware</option>
-                                    <option>Tennessee</option>
-                                    <option>Texas</option>
-                                    <option>Washington</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6">
-                            <div class="form-group">
-                                <label>Multiple (.select2-purple)</label>
-                                <div class="select2-purple">
-                                    <select class="select2" multiple="multiple" data-placeholder="Select a State" data-dropdown-css-class="select2-purple" style="width: 100%;">
-                                        <option>Alabama</option>
-                                        <option>Alaska</option>
-                                        <option>California</option>
-                                        <option>Delaware</option>
-                                        <option>Tennessee</option>
-                                        <option>Texas</option>
-                                        <option>Washington</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <table id="tabelDokumen" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Jenis Dokumen</th>
+                                <th>Nama Dokumen</th>
+                                <th>Tanggal Unggah</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
                 </div>
                 <div class="card-footer">
-                    Visit <a href="https://select2.github.io/">Select2 documentation</a> for more examples and information about
-                    the plugin.
-                </div>
-            </div>
-
-            <div class="card card-default">
-                <div class="card-header">
-                    <h3 class="card-title">Select2 (Bootstrap4 Theme)</h3>
-
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                            <i class="fas fa-minus"></i>
-                        </button>
-                        <button type="button" class="btn btn-tool" data-card-widget="remove">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Minimal</label>
-                                <select class="form-control select2bs4" style="width: 100%;">
-                                    <option selected="selected">Alabama</option>
-                                    <option>Alaska</option>
-                                    <option>California</option>
-                                    <option>Delaware</option>
-                                    <option>Tennessee</option>
-                                    <option>Texas</option>
-                                    <option>Washington</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Disabled</label>
-                                <select class="form-control select2bs4" disabled="disabled" style="width: 100%;">
-                                    <option selected="selected">Alabama</option>
-                                    <option>Alaska</option>
-                                    <option>California</option>
-                                    <option>Delaware</option>
-                                    <option>Tennessee</option>
-                                    <option>Texas</option>
-                                    <option>Washington</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Multiple</label>
-                                <select class="select2bs4" multiple="multiple" data-placeholder="Select a State" style="width: 100%;">
-                                    <option>Alabama</option>
-                                    <option>Alaska</option>
-                                    <option>California</option>
-                                    <option>Delaware</option>
-                                    <option>Tennessee</option>
-                                    <option>Texas</option>
-                                    <option>Washington</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Disabled Result</label>
-                                <select class="form-control select2bs4" style="width: 100%;">
-                                    <option selected="selected">Alabama</option>
-                                    <option>Alaska</option>
-                                    <option disabled="disabled">California (disabled)</option>
-                                    <option>Delaware</option>
-                                    <option>Tennessee</option>
-                                    <option>Texas</option>
-                                    <option>Washington</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    Visit <a href="https://select2.github.io/">Select2 documentation</a> for more examples and information about
-                    the plugin.
-                </div>
-            </div>
-
-            <div class="card card-default">
-                <div class="card-header">
-                    <h3 class="card-title">Bootstrap Duallistbox</h3>
-
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                            <i class="fas fa-minus"></i>
-                        </button>
-                        <button type="button" class="btn btn-tool" data-card-widget="remove">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label>Multiple</label>
-                                <select class="duallistbox" multiple="multiple">
-                                    <option selected>Alabama</option>
-                                    <option>Alaska</option>
-                                    <option>California</option>
-                                    <option>Delaware</option>
-                                    <option>Tennessee</option>
-                                    <option>Texas</option>
-                                    <option>Washington</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    Visit <a href="https://github.com/istvan-ujjmeszaros/bootstrap-duallistbox#readme">Bootstrap Duallistbox</a> for more examples and information about
-                    the plugin.
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-6">
-
-                    <div class="card card-danger">
-                        <div class="card-header">
-                            <h3 class="card-title">Input masks</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label>Date masks:</label>
-
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                                    </div>
-                                    <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                                    </div>
-                                    <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" data-mask>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label>US phone mask:</label>
-
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fas fa-phone"></i></span>
-                                    </div>
-                                    <input type="text" class="form-control" data-inputmask='"mask": "(999) 999-9999"' data-mask>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Intl US phone mask:</label>
-
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fas fa-phone"></i></span>
-                                    </div>
-                                    <input type="text" class="form-control" data-inputmask="'mask': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label>IP mask:</label>
-
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fas fa-laptop"></i></span>
-                                    </div>
-                                    <input type="text" class="form-control" data-inputmask="'alias': 'ip'" data-mask>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="card card-info">
-                        <div class="card-header">
-                            <h3 class="card-title">Color & Time Picker</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label>Color picker:</label>
-                                <input type="text" class="form-control my-colorpicker1">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Color picker with addon:</label>
-
-                                <div class="input-group my-colorpicker2">
-                                    <input type="text" class="form-control">
-
-                                    <div class="input-group-append">
-                                        <span class="input-group-text"><i class="fas fa-square"></i></span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="bootstrap-timepicker">
-                                <div class="form-group">
-                                    <label>Time picker:</label>
-
-                                    <div class="input-group date" id="timepicker" data-target-input="nearest">
-                                        <input type="text" class="form-control datetimepicker-input" data-target="#timepicker" />
-                                        <div class="input-group-append" data-target="#timepicker" data-toggle="datetimepicker">
-                                            <div class="input-group-text"><i class="far fa-clock"></i></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-md-6">
-                    <div class="card card-primary">
-                        <div class="card-header">
-                            <h3 class="card-title">Date picker</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label>Date:</label>
-                                <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                                    <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" />
-                                    <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
-                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Date and time -->
-                            <div class="form-group">
-                                <label>Date and time:</label>
-                                <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
-                                    <input type="text" class="form-control datetimepicker-input" data-target="#reservationdatetime" />
-                                    <div class="input-group-append" data-target="#reservationdatetime" data-toggle="datetimepicker">
-                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.form group -->
-                            <!-- Date range -->
-                            <div class="form-group">
-                                <label>Date range:</label>
-
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">
-                                            <i class="far fa-calendar-alt"></i>
-                                        </span>
-                                    </div>
-                                    <input type="text" class="form-control float-right" id="reservation">
-                                </div>
-                                <!-- /.input group -->
-                            </div>
-                            <!-- /.form group -->
-
-                            <!-- Date and time range -->
-                            <div class="form-group">
-                                <label>Date and time range:</label>
-
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="far fa-clock"></i></span>
-                                    </div>
-                                    <input type="text" class="form-control float-right" id="reservationtime">
-                                </div>
-                                <!-- /.input group -->
-                            </div>
-                            <!-- /.form group -->
-
-                            <!-- Date and time range -->
-                            <div class="form-group">
-                                <label>Date range button:</label>
-
-                                <div class="input-group">
-                                    <button type="button" class="btn btn-default float-right" id="daterange-btn">
-                                        <i class="far fa-calendar-alt"></i> Date range picker
-                                        <i class="fas fa-caret-down"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <!-- /.form group -->
-                        </div>
-                        <div class="card-footer">
-                            Visit <a href="https://getdatepicker.com/5-4/">tempusdominus </a> for more examples and information about
-                            the plugin.
-                        </div>
-                        <!-- /.card-body -->
-                    </div>
-                    <!-- /.card -->
-
-                    <!-- iCheck -->
-                    <div class="card card-success">
-                        <div class="card-header">
-                            <h3 class="card-title">iCheck Bootstrap - Checkbox &amp; Radio Inputs</h3>
-                        </div>
-                        <div class="card-body">
-                            <!-- Minimal style -->
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <!-- checkbox -->
-                                    <div class="form-group clearfix">
-                                        <div class="icheck-primary d-inline">
-                                            <input type="checkbox" id="checkboxPrimary1" checked>
-                                            <label for="checkboxPrimary1">
-                                            </label>
-                                        </div>
-                                        <div class="icheck-primary d-inline">
-                                            <input type="checkbox" id="checkboxPrimary2">
-                                            <label for="checkboxPrimary2">
-                                            </label>
-                                        </div>
-                                        <div class="icheck-primary d-inline">
-                                            <input type="checkbox" id="checkboxPrimary3" disabled>
-                                            <label for="checkboxPrimary3">
-                                                Primary checkbox
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <!-- radio -->
-                                    <div class="form-group clearfix">
-                                        <div class="icheck-primary d-inline">
-                                            <input type="radio" id="radioPrimary1" name="r1" checked>
-                                            <label for="radioPrimary1">
-                                            </label>
-                                        </div>
-                                        <div class="icheck-primary d-inline">
-                                            <input type="radio" id="radioPrimary2" name="r1">
-                                            <label for="radioPrimary2">
-                                            </label>
-                                        </div>
-                                        <div class="icheck-primary d-inline">
-                                            <input type="radio" id="radioPrimary3" name="r1" disabled>
-                                            <label for="radioPrimary3">
-                                                Primary radio
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Minimal red style -->
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <!-- checkbox -->
-                                    <div class="form-group clearfix">
-                                        <div class="icheck-danger d-inline">
-                                            <input type="checkbox" checked id="checkboxDanger1">
-                                            <label for="checkboxDanger1">
-                                            </label>
-                                        </div>
-                                        <div class="icheck-danger d-inline">
-                                            <input type="checkbox" id="checkboxDanger2">
-                                            <label for="checkboxDanger2">
-                                            </label>
-                                        </div>
-                                        <div class="icheck-danger d-inline">
-                                            <input type="checkbox" disabled id="checkboxDanger3">
-                                            <label for="checkboxDanger3">
-                                                Danger checkbox
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <!-- radio -->
-                                    <div class="form-group clearfix">
-                                        <div class="icheck-danger d-inline">
-                                            <input type="radio" name="r2" checked id="radioDanger1">
-                                            <label for="radioDanger1">
-                                            </label>
-                                        </div>
-                                        <div class="icheck-danger d-inline">
-                                            <input type="radio" name="r2" id="radioDanger2">
-                                            <label for="radioDanger2">
-                                            </label>
-                                        </div>
-                                        <div class="icheck-danger d-inline">
-                                            <input type="radio" name="r2" disabled id="radioDanger3">
-                                            <label for="radioDanger3">
-                                                Danger radio
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Minimal red style -->
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <!-- checkbox -->
-                                    <div class="form-group clearfix">
-                                        <div class="icheck-success d-inline">
-                                            <input type="checkbox" checked id="checkboxSuccess1">
-                                            <label for="checkboxSuccess1">
-                                            </label>
-                                        </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="checkbox" id="checkboxSuccess2">
-                                            <label for="checkboxSuccess2">
-                                            </label>
-                                        </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="checkbox" disabled id="checkboxSuccess3">
-                                            <label for="checkboxSuccess3">
-                                                Success checkbox
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <!-- radio -->
-                                    <div class="form-group clearfix">
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" name="r3" checked id="radioSuccess1">
-                                            <label for="radioSuccess1">
-                                            </label>
-                                        </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" name="r3" id="radioSuccess2">
-                                            <label for="radioSuccess2">
-                                            </label>
-                                        </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" name="r3" disabled id="radioSuccess3">
-                                            <label for="radioSuccess3">
-                                                Success radio
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.card-body -->
-                        <div class="card-footer">
-                            Many more skins available. <a href="https://bantikyan.github.io/icheck-bootstrap/">Documentation</a>
-                        </div>
-                    </div>
-                    <!-- /.card -->
-
-                    <!-- Bootstrap Switch -->
-                    <div class="card card-secondary">
-                        <div class="card-header">
-                            <h3 class="card-title">Bootstrap Switch</h3>
-                        </div>
-                        <div class="card-body">
-                            <input type="checkbox" name="my-checkbox" checked data-bootstrap-switch>
-                            <input type="checkbox" name="my-checkbox" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
-                        </div>
-                    </div>
-                    <!-- /.card -->
-                </div>
-                <!-- /.col (right) -->
-            </div>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card card-default">
-                        <div class="card-header">
-                            <h3 class="card-title">bs-stepper</h3>
-                        </div>
-                        <div class="card-body p-0">
-                            <div class="bs-stepper">
-                                <div class="bs-stepper-header" role="tablist">
-                                    <!-- your steps here -->
-                                    <div class="step" data-target="#logins-part">
-                                        <button type="button" class="step-trigger" role="tab" aria-controls="logins-part" id="logins-part-trigger">
-                                            <span class="bs-stepper-circle">1</span>
-                                            <span class="bs-stepper-label">Logins</span>
-                                        </button>
-                                    </div>
-                                    <div class="line"></div>
-                                    <div class="step" data-target="#information-part">
-                                        <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
-                                            <span class="bs-stepper-circle">2</span>
-                                            <span class="bs-stepper-label">Various information</span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="bs-stepper-content">
-                                    <!-- your steps content here -->
-                                    <div id="logins-part" class="content" role="tabpanel" aria-labelledby="logins-part-trigger">
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Email address</label>
-                                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Password</label>
-                                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                                        </div>
-                                        <button class="btn btn-primary" onclick="stepper.next()">Next</button>
-                                    </div>
-                                    <div id="information-part" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
-                                        <div class="form-group">
-                                            <label for="exampleInputFile">File input</label>
-                                            <div class="input-group">
-                                                <div class="custom-file">
-                                                    <input type="file" class="custom-file-input" id="exampleInputFile">
-                                                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                                                </div>
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text">Upload</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <button class="btn btn-primary" onclick="stepper.previous()">Previous</button>
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.card-body -->
-                        <div class="card-footer">
-                            Visit <a href="https://github.com/Johann-S/bs-stepper/#how-to-use-it">bs-stepper documentation</a> for more examples and information about the plugin.
-                        </div>
-                    </div>
-                    <!-- /.card -->
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card card-default">
-                        <div class="card-header">
-                            <h3 class="card-title">Dropzone.js <small><em>jQuery File Upload</em> like look</small></h3>
-                        </div>
-                        <div class="card-body">
-                            <div id="actions" class="row">
-                                <div class="col-lg-6">
-                                    <div class="btn-group w-100">
-                                        <span class="btn btn-success col fileinput-button">
-                                            <i class="fas fa-plus"></i>
-                                            <span>Add files</span>
-                                        </span>
-                                        <button type="submit" class="btn btn-primary col start">
-                                            <i class="fas fa-upload"></i>
-                                            <span>Start upload</span>
-                                        </button>
-                                        <button type="reset" class="btn btn-warning col cancel">
-                                            <i class="fas fa-times-circle"></i>
-                                            <span>Cancel upload</span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 d-flex align-items-center">
-                                    <div class="fileupload-process w-100">
-                                        <div id="total-progress" class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-                                            <div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="table table-striped files" id="previews">
-                                <div id="template" class="row mt-2">
-                                    <div class="col-auto">
-                                        <span class="preview"><img src="data:," alt="" data-dz-thumbnail /></span>
-                                    </div>
-                                    <div class="col d-flex align-items-center">
-                                        <p class="mb-0">
-                                            <span class="lead" data-dz-name></span>
-                                            (<span data-dz-size></span>)
-                                        </p>
-                                        <strong class="error text-danger" data-dz-errormessage></strong>
-                                    </div>
-                                    <div class="col-4 d-flex align-items-center">
-                                        <div class="progress progress-striped active w-100" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-                                            <div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto d-flex align-items-center">
-                                        <div class="btn-group">
-                                            <button class="btn btn-primary start">
-                                                <i class="fas fa-upload"></i>
-                                                <span>Start</span>
-                                            </button>
-                                            <button data-dz-remove class="btn btn-warning cancel">
-                                                <i class="fas fa-times-circle"></i>
-                                                <span>Cancel</span>
-                                            </button>
-                                            <button data-dz-remove class="btn btn-danger delete">
-                                                <i class="fas fa-trash"></i>
-                                                <span>Delete</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.card-body -->
-                        <div class="card-footer">
-                            Visit <a href="https://www.dropzonejs.com">dropzone.js documentation</a> for more examples and information about the plugin.
-                        </div>
-                    </div>
-                    <!-- /.card -->
+                    * = Dokumen yang wajib diunggah
                 </div>
             </div>
         </div>
     </section>
 </div>
 
-<script src="<?php echo base_url('adminltev31/plugins/jquery/jquery.min.js'); ?>"></script>
-<script src="<?php echo base_url('adminltev31/plugins/bootstrap/js/bootstrap.bundle.min.js'); ?>"></script>
-<script src="<?php echo base_url('adminltev31/plugins/select2/js/select2.full.min.js'); ?>"></script>
-<script src="<?php echo base_url('adminltev31/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js'); ?>"></script>
-<script src="<?php echo base_url('adminltev31/plugins/moment/moment.min.js'); ?>"></script>
-<script src="<?php echo base_url('adminltev31/plugins/inputmask/jquery.inputmask.min.js'); ?>"></script>
-<script src="<?php echo base_url('adminltev31/plugins/daterangepicker/daterangepicker.js'); ?>"></script>
-<script src="<?php echo base_url('adminltev31/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js'); ?>"></script>
-<script src="<?php echo base_url('adminltev31/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js'); ?>"></script>
-<script src="<?php echo base_url('adminltev31/plugins/bootstrap-switch/js/bootstrap-switch.min.js'); ?>"></script>
-<script src="<?php echo base_url('adminltev31/plugins/bs-stepper/js/bs-stepper.min.js'); ?>"></script>
-<script src="<?php echo base_url('adminltev31/plugins/dropzone/min/dropzone.min.js'); ?>"></script>
-<script src="<?php echo base_url('adminltev31/dist/js/adminlte.min.js'); ?>"></script>
-<script src="<?php echo base_url('adminltev31/dist/js/demo.js'); ?>"></script>
+
+<div class="modal fade" id="uploadDokumenModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="uploadDokumenModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="uploadDokumenModalLabel">Upload Dokumen</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="uploadDokumenForm" enctype="multipart/form-data" method="post">
+                <input type="hidden" name="dokumen_id" id="dokumen_id">
+                <input type="hidden" name="jenis_dokumen_id" id="jenis_dokumen_id">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="jenis_dokumen">Jenis Dokumen</label>
+                        <input type="text" name="jenis_dokumen" id="jenis_dokumen" class="form-control" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="dropzone" class="form-label">Unggah Dokumen</label>
+                        <div id="unggahDokumen" class="dropzone"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <button type="submit" id="btnUnggahDokumen" class="btn btn-primary">Unggah Dokumen</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/dropzone.min.js"></script>
+<script>
+    Dropzone.autoDiscover = false;
+    $(document).ready(function() {
+        // Event handler untuk tombol "Upload Dokumen
+        var tabelDokumen = $('#tabelDokumen').DataTable({
+            "processing": true,
+            "serverSide": false,
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": false,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+            "ajax": {
+                "url": "<?php echo base_url('pencaker/dokajax'); ?>", // Sesuaikan dengan route yang benar di CodeIgniter
+                "type": "POST"
+            },
+            "columns": [{
+                    "data": "no"
+                },
+                {
+                    "data": "jenis"
+                },
+                {
+                    "data": "nama"
+                },
+                {
+                    "data": "tgl"
+                },
+                {
+                    "data": "aksi"
+                }
+            ],
+            "drawCallback": function(settings) {}
+        });
+
+        $('#tabelDokumen').on('click', '.deleteDokumen', function() {
+            var id = $(this).data('id');
+            var row = $(this).closest('tr');
+
+            Swal.fire({
+                title: 'Konfirmasi',
+                text: 'Apakah Anda yakin ingin menghapus dokumen ini?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Ya, Hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '<?= base_url('pencaker/hapus_dokumen') ?>',
+                        type: 'POST',
+                        data: {
+                            id: id
+                        },
+                        success: function(response) {
+                            if (response.status === 'success') {
+                                tabelDokumen.ajax.reload();
+                                Swal.fire(
+                                    'Sukses!',
+                                    'Berita berhasil dihapus.',
+                                    'success'
+                                );
+                            } else {
+                                Swal.fire(
+                                    'Gagal!',
+                                    'Terjadi kesalahan saat menghapus berita.',
+                                    'error'
+                                );
+                            }
+                        },
+                        error: function() {
+                            Swal.fire(
+                                'Gagal!',
+                                'Terjadi kesalahan saat menghapus berita.',
+                                'error'
+                            );
+                        }
+                    });
+                }
+            });
+        });
+    });
+</script>
 
 <script>
-    $(function() {
-        $('.select2').select2()
+    // Event handler untuk tombol "Upload Dokumen"
+    $(document).on('click', '.uplodDokumenBTN', function() {
+        var id = $(this).data('id');
+        var jenis = $(this).data('jenis');
 
-        $('.select2bs4').select2({
-            theme: 'bootstrap4'
-        })
+        $('#dokumen_id').val(id); // Set nilai id ke input hidden
+        $('#jenis_dokumen_id').val(jenis); // Set nilai jenis_dokumen ke input hidden
+        $('#jenis_dokumen').val(jenis); // Set nilai jenis_dokumen ke input visible
 
-        $('#datemask').inputmask('dd/mm/yyyy', {
-            'placeholder': 'dd/mm/yyyy'
-        })
-        $('#datemask2').inputmask('mm/dd/yyyy', {
-            'placeholder': 'mm/dd/yyyy'
-        })
-        $('[data-mask]').inputmask()
+        // Tampilkan modal upload dokumen jika perlu
+        $('#uploadDokumenModal').modal('show');
+    });
 
-        $('#reservationdate').datetimepicker({
-            format: 'L'
-        });
+    function resetModal() {
+        var jenis_dokumen = document.getElementById('jenis_dokumen');
+        var namadokumen = document.getElementById('namadokumen');
 
-        $('#reservationdatetime').datetimepicker({
-            icons: {
-                time: 'far fa-clock'
-            }
-        });
-
-        $('#reservation').daterangepicker()
-        $('#reservationtime').daterangepicker({
-            timePicker: true,
-            timePickerIncrement: 30,
-            locale: {
-                format: 'MM/DD/YYYY hh:mm A'
-            }
-        })
-        $('#daterange-btn').daterangepicker({
-                ranges: {
-                    'Today': [moment(), moment()],
-                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                    'This Month': [moment().startOf('month'), moment().endOf('month')],
-                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-                },
-                startDate: moment().subtract(29, 'days'),
-                endDate: moment()
-            },
-            function(start, end) {
-                $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
-            }
-        )
-
-        $('#timepicker').datetimepicker({
-            format: 'LT'
-        })
-
-        $('.duallistbox').bootstrapDualListbox()
-
-        $('.my-colorpicker1').colorpicker()
-        $('.my-colorpicker2').colorpicker()
-
-        $('.my-colorpicker2').on('colorpickerChange', function(event) {
-            $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
-        })
-
-        $("input[data-bootstrap-switch]").each(function() {
-            $(this).bootstrapSwitch('state', $(this).prop('checked'));
-        })
-
-    })
-
-    document.addEventListener('DOMContentLoaded', function() {
-        window.stepper = new Stepper(document.querySelector('.bs-stepper'))
-    })
-
-
-    Dropzone.autoDiscover = false
-
-
-    var previewNode = document.querySelector("#template")
-    previewNode.id = ""
-    var previewTemplate = previewNode.parentNode.innerHTML
-    previewNode.parentNode.removeChild(previewNode)
-
-    var myDropzone = new Dropzone(document.body, {
-        url: "/target-url",
-        thumbnailWidth: 80,
-        thumbnailHeight: 80,
-        parallelUploads: 20,
-        previewTemplate: previewTemplate,
-        autoQueue: false,
-        previewsContainer: "#previews",
-        clickable: ".fileinput-button"
-    })
-
-    myDropzone.on("addedfile", function(file) {
-        file.previewElement.querySelector(".start").onclick = function() {
-            myDropzone.enqueueFile(file)
+        if (jenis_dokumen) {
+            jenis_dokumen.value = '';
         }
-    })
+        if (namadokumen) {
+            namadokumen.value = '';
+        }
 
-    myDropzone.on("totaluploadprogress", function(progress) {
-        document.querySelector("#total-progress .progress-bar").style.width = progress + "%"
-    })
-
-    myDropzone.on("sending", function(file) {
-        document.querySelector("#total-progress").style.opacity = "1"
-        file.previewElement.querySelector(".start").setAttribute("disabled", "disabled")
-    })
-
-    myDropzone.on("queuecomplete", function(progress) {
-        document.querySelector("#total-progress").style.opacity = "0"
-    })
-
-    document.querySelector("#actions .start").onclick = function() {
-        myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED))
+        if (addDokumenDropzone) {
+            addDokumenDropzone.removeAllFiles();
+        }
     }
-    document.querySelector("#actions .cancel").onclick = function() {
-        myDropzone.removeAllFiles(true)
-    }
+
+    // Dropzone untuk unggah dokumen
+    const addDokumenDropzone = new Dropzone("#unggahDokumen", {
+        url: "<?= base_url('pencaker/upload_dokumen') ?>",
+        autoProcessQueue: false,
+        uploadMultiple: false,
+        maxFiles: 1,
+        dictDefaultMessage: "Seret dokumen ke sini untuk unggah",
+        acceptedFiles: 'application/pdf', // Ganti dengan jenis file yang sesuai
+        addRemoveLinks: true,
+        init: function() {
+            var addDokumenDropzone = this;
+
+            $('#uploadDokumenForm').submit(function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                if (addDokumenDropzone.getQueuedFiles().length > 0) {
+                    addDokumenDropzone.processQueue();
+                } else {
+                    Swal.fire('Error', 'Dokumen belum diunggah.', 'error');
+                }
+            });
+
+            this.on("sending", function(file, xhr, formData) {
+                const dokumenId = $('#dokumen_id').val(); // Ambil ID dokumen dari input hidden
+                const jenisDokumen = $('#jenis_dokumen').val(); // Ambil jenis dokumen dari input hidden
+
+                formData.append("dokumen_id", dokumenId); // Kirim ID dokumen ke server
+                formData.append("jenis_dokumen", jenisDokumen); // Kirim jenis dokumen ke server
+
+                const nik = '<?= user()->nik ?>'; // Ganti dengan nilai sesuai kebutuhan
+                const fileExtension = file.name.split('.').pop(); // Ambil ekstensi file
+                const fileName = nik + '_' + jenisDokumen + '.' + fileExtension;
+                formData.append("file", file, fileName); // Kirim file ke server
+            });
+
+            this.on("success", function(file, response) {
+                if (response.success) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil',
+                        text: 'Dokumen berhasil diunggah.',
+                    }).then((result) => {
+                        $('#uploadDokumenModal').modal('hide');
+                        resetModal(); // Fungsi untuk mereset modal jika diperlukan
+                        $('#tabelDokumen').DataTable().ajax.reload(); // Reload tabel jika menggunakan DataTables
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: response.errors ? response.errors.join("<br>") : 'Gagal unggah dokumen.',
+                    });
+                }
+            });
+
+            this.on("error", function(file, response) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Gagal unggah dokumen.',
+                });
+            });
+        }
+    });
 </script>
+
+
 <?= $this->endSection() ?>

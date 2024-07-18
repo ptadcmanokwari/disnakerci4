@@ -14,6 +14,9 @@ use App\Models\PengalamanKerjaModel;
 use App\Models\DokumenPencakerModel;
 use App\Models\JenjangpendidikanModel;
 use App\Models\DokumenModel;
+use App\Models\BahasaModel;
+use App\Models\JabatanModal;
+use App\Models\PerusahaanModel;
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
@@ -86,7 +89,7 @@ class Admin extends BaseController
 
     public function redirectDashboard()
     {
-        return redirect()->to('admin/dashboard');
+        return redirect()->to('admin_v2/dashboard');
     }
 
     protected function bulan($bulan)
@@ -117,86 +120,61 @@ class Admin extends BaseController
 
     public function pencakerajax()
     {
-        $usersModel = new UsersModel();
         $pencakerModel = new PencakerModel();
 
         // Ambil nilai filter dari request
         $filter = $this->request->getPost('filter');
 
-        // Ambil semua data user
-        $users = $usersModel->findAll();
-
-        // Sesuaikan query pencaker berdasarkan filter
-        if ($filter) {
-            $pencaker = $pencakerModel->where('keterangan_status', $filter)->findAll();
-        } else {
-            $pencaker = $pencakerModel->findAll();
-        }
+        // Ambil data pencaker dengan join ke tabel users
+        $pencaker = $pencakerModel->getPencakerWithUser($filter);
 
         $data = [];
 
         foreach ($pencaker as $pc) {
-            $userData = null;
-
-            // Cari data user yang sesuai berdasarkan users_id dari pencaker
-            foreach ($users as $user) {
-                if ($user['id'] == $pc['users_id']) {
-                    $userData = $user;
-                    break;
-                }
-            }
-
             $defaultImagePath = base_url('uploads/user/no-user.jpg');
             $gambar = '<img src="' . $defaultImagePath . '" alt="' . $pc['namalengkap'] . '" title="' . $pc['namalengkap'] . '" width="40">';
 
-            // Jika data user ditemukan
-            if (!empty($userData)) {
-                if (!empty($userData['img_type'])) {
-                    // Jika ada gambar di database
-                    $imagePath = base_url('path/to/image/' . $userData['img_type']);
-                    if (file_exists(FCPATH . 'path/to/image/' . $userData['img_type'])) {
-                        // Jika gambar ada di direktori
-                        $gambar = '<img src="' . $imagePath . '" alt="' . $pc['namalengkap'] . '" title="' . $pc['namalengkap'] . '" width="40">';
-                    } else {
-                        // Jika gambar tidak ada di direktori
-                        $gambar = '<img src="' . $defaultImagePath . '" aalt="' . $pc['namalengkap'] . '" title="' . $pc['namalengkap'] . '" width="40">';
-                    }
+            if (!empty($pc['img_type'])) {
+                $imagePath = base_url('path/to/image/' . $pc['img_type']);
+                if (file_exists(FCPATH . 'path/to/image/' . $pc['img_type'])) {
+                    $gambar = '<img src="' . $imagePath . '" alt="' . $pc['namalengkap'] . '" title="' . $pc['namalengkap'] . '" width="40">';
                 }
             }
 
             $data[] = [
                 "verval" => '<button class="btn btn-secondary btn-sm btn-verval"
-                                title="Verifikasi/Validasi Pencaker"
-                                 data-id="' . $pc['id'] . '" 
-                                 data-namalengkap="' . $pc['namalengkap'] . '" 
-                                 data-nopendaftaran="' . $pc['nopendaftaran'] . '" 
-                                 data-toggle="modal" 
-                                 data-target="#VerVal">
-                                 <i class="bi bi-check-circle-fill px-2"></i>
-                             </button>',
+                            title="Verifikasi/Validasi Pencaker"
+                             data-id="' . $pc['id'] . '" 
+                             data-namalengkap="' . $pc['namalengkap'] . '" 
+                             data-nopendaftaran="' . $pc['nopendaftaran'] . '" 
+                             data-toggle="modal" 
+                             data-target="#VerVal">
+                             <i class="bi bi-check-circle-fill px-2"></i>
+                         </button>',
                 "img" => $gambar,
                 "namalengkap" => $pc['namalengkap'],
                 "nopendaftaran" => $pc['nopendaftaran'],
                 "nik" => $pc['nik'],
-                "phone" => isset($userData['phone']) ? $userData['phone'] : '', // Ambil phone dari userData jika ada
-                "email" => isset($userData['email']) ? $userData['email'] : '', // Ambil email dari userData jika ada
+                "nohp" => $pc['nohp'], // Ambil phone dari userData jika ada
+                "email" =>  $pc['email'], // Ambil email dari userData jika ada
                 "keterangan_status" => $pc['keterangan_status'],
                 "aksi" => '<div class="btn-group" role="group" aria-label="Actions">
-                               <a href="' . base_url('admin/detail_pencaker/' . $pc['id']) . '" target="_blank" class="btn btn-info btn-sm" title="Detail Pencaker">
-                                   <i class="bi bi-search px-2"></i>
-                               </a>
-                               <a href="' . base_url('admin/kartu_ak1/' . $pc['id']) . '" target="_blank" class="btn btn-success btn-sm" title="Kartu AK/1">
-                                   <i class="bi bi-person-vcard-fill px-2"></i>
-                               </a>
-                               <button class="btn btn-danger btn-sm btn-delete" data-i="' . $pc['id'] . '" title="Babat Pencaker">
-                                   <i class="bi bi-trash px-2"></i>
-                               </button>
-                           </div>'
+                           <a href="' . base_url('admin_v2/detail_pencaker/' . $pc['id']) . '" target="_blank" class="btn btn-info btn-sm" title="Detail Pencaker">
+                               <i class="bi bi-search px-2"></i>
+                           </a>
+                           <a href="' . base_url('admin_v2/kartu_ak1/' . $pc['id']) . '" target="_blank" class="btn btn-success btn-sm" title="Kartu AK/1">
+                               <i class="bi bi-person-vcard-fill px-2"></i>
+                           </a>
+                           <button class="btn btn-danger btn-sm btn-delete" data-i="' . $pc['id'] . '" title="Babat Pencaker">
+                               <i class="bi bi-trash px-2"></i>
+                           </button>
+                       </div>'
             ];
         }
 
         echo json_encode(["data" => $data]);
     }
+
 
     public function detail_pencaker($id)
     {
@@ -240,7 +218,8 @@ class Admin extends BaseController
             'jenjang' => $jenjangPd
         ];
 
-        return view('admin/review_pencaker', $data);
+        // return view('admin/review_pencaker', $data);
+        return $this->loadView('admin/review_pencaker', $data);
     }
 
     public function kartu_ak1($id)
@@ -878,81 +857,49 @@ class Admin extends BaseController
         return $this->loadView('admin/activitylogs', $data);
     }
 
-    function getUserIP()
-    {
-        $ipAddress = '';
-
-        // Check for shared internet/ISP IP
-        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-            $ipAddress = $_SERVER['HTTP_CLIENT_IP'];
-        }
-        // Check for IPs passing through proxies
-        elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-            $ipAddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
-        }
-        // Check for IP address from remote address
-        else {
-            $ipAddress = $_SERVER['REMOTE_ADDR'];
-        }
-
-        // If IP address is "::1", convert to "127.0.0.1"
-        if ($ipAddress == '::1') {
-            $ipAddress = '127.0.0.1';
-        }
-
-        return $ipAddress;
-    }
-
     public function activitylogsajax()
     {
-        $activityModel = new ActivityModel();
+        $db = \Config\Database::connect();
+        $builder = $db->table('users');
+        $builder->select('users.id as userid, username, email, name, namalengkap, auth_groups.name as group_name, user_agent, ip_address, auth_activation_attempts.created_at');
+        $builder->join('auth_groups_users', 'auth_groups_users.user_id = users.id');
+        $builder->join('auth_groups', 'auth_groups.id = auth_groups_users.group_id');
+        $builder->join('auth_activation_attempts', 'auth_activation_attempts.id = users.id');
+        $query = $builder->get();
 
-        // $ip_address = $this->request->getPost('ip_address');
-        // $user = $this->request->getPost('user');
-
-        // Mengubah query untuk mengambil data activity_logs beserta nama user
-        // $activity = $activityModel->select('activity_logs.*, users.name as user_name')
-        //     ->join('users', 'activity_logs.id = users.id', 'left');
-
-        // if ($ip_address) {
-        //     $activity->like('activity_logs.ip_address', $ip_address);
-        // }
-
-        // if ($user) {
-        //     $activity->where('activity_logs.id', $user);
-        // }
-
-        // $activity = $activity->findAll();
-        $activity = $activityModel->findAll();
+        $logs = $query->getResult();
 
         $data = [];
-        foreach ($activity as $item) {
+        foreach ($logs as $item) {
             $data[] = [
-                "id" => $item['id'],
-                "ip_address" => $item['ip_address'],
-                "email" => $item['email'],
-                "user_id" => $item['user_id'],
-                "date" => $item['date'],
-                // Menggunakan $item['user_name'] untuk menampilkan nama user
+                "id" => $item->userid,
+                "ip_address" => $item->ip_address,
+                "email" => $item->email,
+                "username" => $item->username,
+                "user_agent" => $item->user_agent,
+                "name" => $item->name,
+                "date" => $item->created_at,
+                // Menggunakan $item->group_name untuk menampilkan nama grup user
                 "aksi" => '<div class="btn-group" role="group" aria-label="Aksi">
-                      <button class="btn btn-info btn-sm btn-detail-log" 
-                             data-id="' . $item['id'] . '" 
-                             data-ip_address="' . $item['ip_address'] . '" 
-                             data-email="' . $item['email'] . '" 
-                             data-date="' . $item['date'] . '" 
-                             data-toggle="modal" 
-                             data-target="#detailLogModal">
-                             <i class="bi bi-check-circle-fill px-2"></i>
-                         </button>
-                      <a class="btn btn-info btn-sm btn-detail-user" data-id="' . $item['id'] . '">
-                          <i class="bi bi-person-fill px-2"></i>
-                      </a>
-                   </div>'
+                  <button class="btn btn-info btn-sm btn-detail-log" 
+                         data-id="' . $item->userid . '" 
+                         data-ip_address="' . $item->ip_address . '" 
+                         data-email="' . $item->email . '" 
+                         data-date="' . $item->created_at . '" 
+                         data-toggle="modal" 
+                         data-target="#detailLogModal">
+                         <i class="bi bi-check-circle-fill px-2"></i>
+                     </button>
+                  <a class="btn btn-info btn-sm btn-detail-user" data-id="' . $item->userid . '">
+                      <i class="bi bi-person-fill px-2"></i>
+                  </a>
+               </div>'
             ];
         }
 
         echo json_encode(["data" => $data]);
     }
+
 
     public function getUsers()
     {
@@ -979,30 +926,28 @@ class Admin extends BaseController
 
     public function usersajax()
     {
-        $usersModel = new UsersModel();
+        $db = \Config\Database::connect();
+        $builder = $db->table('users');
+        $builder->select('users.id as userid, username, nohp, nik, status, email, name, namalengkap, auth_groups.name as group_name, users.updated_at');
+        $builder->join('auth_groups_users', 'auth_groups_users.user_id = users.id');
+        $builder->join('auth_groups', 'auth_groups.id = auth_groups_users.group_id');
 
-        // Mengambil data users dari model
-        $users = $usersModel->findAll();
-        // $totalFilteredRecords = $usersModel->countAll();
+        $query = $builder->get();
+
+        $users = $query->getResult();
 
         $data = [];
-        $no = 1;
-
-        // Mengisi data untuk DataTables
+        $no = 1;  // Penomoran untuk tabel
         foreach ($users as $user) {
             $defaultImagePath = base_url('uploads/user/no-user.jpg');
 
             // Tentukan path gambar berdasarkan kondisi
-            if (!empty($user['img_type'])) {
-                // Jika ada gambar di database
-                $imagePath = base_url('uploads/user/' . $user['img_type']);
-                if (!file_exists(FCPATH . 'uploads/user/' . $user['img_type'])) {
-                    // Jika gambar tidak ada di direktori
+            $imagePath = $defaultImagePath;
+            if (!empty($user->img_type)) {
+                $imagePath = base_url('uploads/user/' . $user->img_type);
+                if (!file_exists(FCPATH . 'uploads/user/' . $user->img_type)) {
                     $imagePath = $defaultImagePath;
                 }
-            } else {
-                // Jika tidak ada gambar di database
-                $imagePath = $defaultImagePath;
             }
 
             // Format gambar untuk ditampilkan dalam tabel atau modal
@@ -1011,40 +956,44 @@ class Admin extends BaseController
             // Format data lainnya sesuai kebutuhan
             $data[] = [
                 "no" => $no++,
-                // "img_type" => $gambar,
-                // "name" => $user['name'],
-                "email" => $user['email'],
-                "username" => $user['username'],
-                // "role" => $user['role'],
-                "updated_at" => $user['updated_at'], // Asumsi 'updated_at' adalah waktu login terakhir
-                "status" => '<input type="checkbox" class="js-switch" data-id="' . $user['id'] . '" ' . ($user['status'] ? 'checked' : '') . '>',
+                "namalengkap" => $user->namalengkap,
+                "email" => $user->email,
+                "username" => $user->username,
+                "updated_at" => $user->updated_at,
+                "name" => $user->name,
+                "status" => '<input type="checkbox" class="js-switch" data-id="' . $user->userid . '" ' . ($user->status ? 'checked' : '') . '>',
                 "aksi" => '
                 <div class="btn-group" role="group" aria-label="Actions">
                     <button class="btn btn-info btn-sm btn-detail-user" 
-                        data-id="' . $user['id'] . '"  
-                        data-email="' . htmlspecialchars($user['email']) . '" 
-                        data-username="' . $user['username'] . '" 
-                        data-updated_at="' . $user['updated_at'] . '" 
+                        data-id="' . $user->userid . '"  
+                        data-email="' . htmlspecialchars($user->email) . '" 
+                        data-namalengkap="' . $user->namalengkap . '" 
+                        data-username="' . $user->username . '" 
+                        data-nik="' . $user->nik . '" 
+                        data-nohp="' . $user->nohp . '" 
+                        data-name="' . $user->name . '" 
+                        data-updated_at="' . $user->updated_at . '" 
                         data-toggle="modal" 
                         data-target="#detailUserModal"
                         data-load-logs="true">
                         <i class="bi bi-eye px-2"></i>
                     </button>
                     <button class="btn btn-warning btn-sm btn-edit"
-                        data-edit_id="' . $user['id'] . '"
+                        data-edit_id="' . $user->userid . '"
                         data-toggle="modal"
                         data-target="#ubahUserBaruModal">
                         <i class="bi bi-pencil-square px-2"></i>
                     </button>
-                    <button class="btn btn-danger btn-sm btn-delete" data-id="' . $user['id'] . '">
+                    <button class="btn btn-danger btn-sm btn-delete" data-id="' . $user->userid . '">
                         <i class="bi bi-trash px-2"></i>
                     </button>
-            </div>'
+                </div>'
             ];
         }
 
         echo json_encode(["data" => $data]);
     }
+
 
 
     public function update_status_user()
@@ -1346,79 +1295,435 @@ class Admin extends BaseController
         exit;
     }
 
+    // Generate nomopendaftaran
+    public function nomorpendaftaran()
+    {
+        $db = \Config\Database::connect();
+        $query = $db->query("SELECT RIGHT(nopendaftaran, 6) AS nopendaftaran FROM pencaker ORDER BY nopendaftaran DESC LIMIT 1");
+
+        if ($query->getNumRows() <> 0) {
+            $data = $query->getRow();
+            $nourut = intval($data->nopendaftaran) + 1;
+        } else {
+            $nourut = 1;  // cek jika kode belum terdapat pada tabel
+        }
+
+        $tgl = date('dmY');
+        $batas = str_pad($nourut, 6, "0", STR_PAD_LEFT);
+        $nopendaftaran = "9202" . $tgl . $batas;  // format kode
+        return $nopendaftaran;
+    }
 
     public function profil_pencaker()
     {
+        $bahasaModel = new BahasaModel();
+        $bahasa = $bahasaModel->findAll();
 
         $jenjangPendidikan = new JenjangpendidikanModel();
         $jenjang = $jenjangPendidikan->findAll();
 
+        $usersModel = new UsersModel();
+        $userId = user()->id; // Asumsi: menggunakan metode user() untuk mendapatkan ID pengguna yang sedang login
+
+        // Ambil data pengguna berdasarkan user ID
+        $user = $usersModel->find($userId);
+
+        // Dapatkan nomor pendaftaran yang di-generate oleh sistem
+        $nopendaftaran = $this->nomorpendaftaran();
+
         $data = [
-            'title' => 'Review Data dan Dokumen Pencari Kerja',
-            'jenjang' => $jenjang
+            'title' => 'Profil Pencari Kerja',
+            'jenjang' => $jenjang,
+            'user' => $user,
+            'nopendaftaran' => $nopendaftaran,
+            'bahasa' => $bahasa,
         ];
 
-        $data['title'] = 'Profil Pencari Kerja';
         return $this->loadView('admin/profil_pencaker', $data);
     }
 
-    public function update1()
+    public function save_data_tujuan()
     {
-        $model = new PencakerModel();
-        $auth = service('authentication');
-        $user = $auth->user();
+        $pencakerModel = new PencakerModel();
 
-        if (!$user) {
-            echo json_encode(['status' => false, 'hasil' => 'User tidak ditemukan dalam sesi']);
-            return;
-        }
-
-        $userId = $user->id;
+        $userId = $this->request->getPost('id_pencaker');
 
         $data = [
+            'user_id' => $userId,
             'tujuan' => $this->request->getPost('tujuan'),
-            'users_id' => $userId
         ];
 
-        if ($model->save($data)) {
-            // Mendapatkan data yang disimpan
-            $savedData = $model->where('users_id', $userId)->first();
+        // Check if user already exists in the pencaker table
+        $existingPencaker = $pencakerModel->where('user_id', $userId)->first();
 
-            if ($savedData) {
-                // Mengirimkan respons JSON dengan data yang diperbarui
-                echo json_encode(['status' => true, 'hasil' => 'Data berhasil disimpan', 'data' => $savedData]);
-            } else {
-                echo json_encode(['status' => false, 'hasil' => 'Data tidak ditemukan setelah penyimpanan']);
-            }
+        if ($existingPencaker) {
+            // Update the existing record
+            $pencakerModel->update($existingPencaker['id'], $data);
         } else {
-            echo json_encode(['status' => false, 'hasil' => 'Gagal menyimpan data']);
+            // Insert a new record
+            $pencakerModel->insert($data);
+        }
+
+        return $this->response->setStatusCode(200)->setBody('Data berhasil disimpan');
+    }
+
+    public function get_data_tujuan($id)
+    {
+        $pencakerModel = new PencakerModel();
+        $data = $pencakerModel->where('user_id', $id)->first();
+        return $this->response->setJSON($data);
+    }
+
+
+    public function save_data_keterangan_umum()
+    {
+        $pencakerModel = new PencakerModel();
+
+        $userId = $this->request->getPost('id_pencaker');
+
+        $data = [
+            'user_id' => $userId,
+            'nopendaftaran' => $this->request->getPost('nopendaftaran'),
+            'nik' => $this->request->getPost('nik'),
+            'namalengkap' => $this->request->getPost('namalengkap'),
+            'nohp' => $this->request->getPost('nohp'),
+            'email' => $this->request->getPost('email'),
+            'jenkel' => $this->request->getPost('jenkel'),
+            'tempatlahir' => $this->request->getPost('tempatlahir'),
+            'tgllahir' => $this->request->getPost('tgllahir'),
+            'statusnikah' => $this->request->getPost('statusnikah'),
+            'agama' => $this->request->getPost('agama'),
+            'tinggibadan' => $this->request->getPost('tinggibadan'),
+            'beratbadan' => $this->request->getPost('beratbadan'),
+            'alamat' => $this->request->getPost('alamat'),
+            'kodepos' => $this->request->getPost('kodepos')
+        ];
+
+        // Check if user already exists in the pencaker table
+        $existingPencaker = $pencakerModel->where('user_id', $userId)->first();
+
+        if ($existingPencaker) {
+            // Update the existing record
+            $pencakerModel->update($existingPencaker['id'], $data);
+        } else {
+            // Insert a new record
+            $pencakerModel->insert($data);
+        }
+
+        return $this->response->setStatusCode(200)->setBody('Data berhasil disimpan');
+    }
+
+    public function get_data_keterangan_umum($id)
+    {
+        $pencakerModel = new PencakerModel();
+        $data = $pencakerModel->where('user_id', $id)->first();
+        return $this->response->setJSON($data);
+    }
+
+    public function save_data_pendidikan()
+    {
+        $pendidikanModel = new PendidikanModel();
+
+        $pencaker_id = $this->request->getPost('pencaker_id');
+        $jenjang_pendidikan_id = $this->request->getPost('jenjang');
+
+        $data = [
+            'nama_sekolah' => $this->request->getPost('nama_sekolah'),
+            'tahunmasuk' => $this->request->getPost('tahunmasuk'),
+            'tahunlulus' => $this->request->getPost('tahunlulus'),
+            'ipk' => $this->request->getPost('ipk'),
+            'keterampilan' => $this->request->getPost('keterampilan'),
+            'pencaker_id' => $pencaker_id,
+            'jenjang_pendidikan_id' => $jenjang_pendidikan_id
+        ];
+
+        // Cek apakah data dengan pencaker_id dan jenjang_pendidikan_id sudah ada
+        $existingData = $pendidikanModel->where('pencaker_id', $pencaker_id)
+            ->where('jenjang_pendidikan_id', $jenjang_pendidikan_id)
+            ->first();
+
+        if ($existingData) {
+            // Jika data sudah ada, lakukan update
+            $pendidikanModel->update($existingData['id'], $data);
+            $response = [
+                'status' => 'success',
+                'message' => 'Data pendidikan berhasil diperbarui.'
+            ];
+        } else {
+            // Jika data belum ada, lakukan insert
+            if ($pendidikanModel->save($data)) {
+                $response = [
+                    'status' => 'success',
+                    'message' => 'Data pendidikan berhasil disimpan.'
+                ];
+            } else {
+                $response = [
+                    'status' => 'error',
+                    'message' => 'Gagal menyimpan data pendidikan.'
+                ];
+            }
+        }
+
+        return $this->response->setJSON($response);
+    }
+
+    public function fetch_data_pendidikan()
+    {
+        $pendidikanModel = new PendidikanModel();
+        $request = service('request');
+
+        // Ambil pencaker_id dari request
+        $pencaker_id = $this->request->getPost('pencaker_id');
+
+        // Ambil data pendidikan dengan join ke tabel jenjang_pendidikan
+        $pendidikan = $pendidikanModel->select('pendidikan_pencaker.*, jenjang_pendidikan.jenjang')
+            ->join('jenjang_pendidikan', 'pendidikan_pencaker.jenjang_pendidikan_id = jenjang_pendidikan.id', 'left')
+            ->where('pendidikan_pencaker.pencaker_id', $pencaker_id)
+            ->orderBy('jenjang_pendidikan.id', 'ASC')
+            ->findAll();
+
+        $data = [];
+        $no = 1;
+        foreach ($pendidikan as $pd) {
+            $data[] = [
+                'no' => $no++,
+                'tahunmasuk' => $pd['tahunmasuk'],
+                'tahunlulus' => $pd['tahunlulus'],
+                'jenjang' => $pd['jenjang'],
+                'nama_sekolah' => $pd['nama_sekolah'],
+                'ipk' => $pd['ipk'],
+                'keterampilan' => $pd['keterampilan'],
+                'aksi' => '<div class="btn-group" role="group" aria-label="Actions">
+                           <button class="btn btn-primary btn-sm editPendidikan" data-id="' . $pd['id'] . '" data-pencaker_id="' . $pd['pencaker_id'] . '" title="Edit Pendidikan">
+                               <i class="bi bi-pencil-fill px-2"></i>
+                           </button>
+                           <button class="btn btn-danger btn-sm deletePendidikan" data-id="' . $pd['id'] . '" title="Hapus Pendidikan">
+                               <i class="bi bi-trash px-2"></i>
+                           </button>
+                       </div>'
+            ];
+        }
+
+        echo json_encode(["data" => $data]);
+    }
+
+    public function get_pendidikan_by_id()
+    {
+        $request = service('request');
+        $id = $request->getPost('id'); // Ambil ID dari POST data
+
+        $model = new PendidikanModel(); // Buat instance model PendidikanModel
+
+        $pendidikan = $model->find($id); // Ambil data pendidikan berdasarkan ID
+
+        if ($pendidikan) {
+            // Jika data pendidikan ditemukan, kirim respons JSON
+            return $this->response->setJSON($pendidikan)->setStatusCode(200);
+        } else {
+            // Jika data tidak ditemukan, kirim respons error
+            return $this->response->setJSON(['message' => 'Data pendidikan tidak ditemukan'])->setStatusCode(404);
         }
     }
 
-    public function getTujuan()
+    public function update_data_pendidikan()
     {
-        $auth = service('authentication');
-        $user = $auth->user();
+        $request = service('request');
 
-        if (!$user) {
-            return $this->response->setJSON(['status' => false, 'hasil' => 'User tidak ditemukan dalam sesi']);
+        // Ambil data dari POST request
+        $data = [
+            'id' => $request->getPost('id'),
+            'nama_sekolah' => $request->getPost('nama_sekolah'),
+            'tahunmasuk' => $request->getPost('tahunmasuk'),
+            'tahunlulus' => $request->getPost('tahunlulus'),
+            'ipk' => $request->getPost('ipk'),
+            'keterampilan' => $request->getPost('keterampilan'),
+            'jenjang' => $request->getPost('jenjang'),
+            'pencaker_id' => user()->id,
+        ];
+
+        $model = new PendidikanModel(); // Buat instance model PendidikanModel
+
+        // Lakukan update data pendidikan berdasarkan ID
+        if ($model->update($data['id'], $data)) {
+            // Jika berhasil update, kirim respons JSON sukses
+            return $this->response->setJSON(['status' => 'success'])->setStatusCode(200);
+        } else {
+            // Jika gagal update, kirim respons JSON error
+            return $this->response->setJSON(['status' => 'error'])->setStatusCode(500);
         }
+    }
 
-        $userId = $user->id;
 
-        // Contoh pengambilan data tujuan dari database untuk user yang sedang login
-        $pencakerModel = new PencakerModel();
-        $tujuan = $pencakerModel->where('users_id', $userId)->first();
+    public function hapus_data_pendidikan()
+    {
+        $id = $this->request->getPost('id');
+        $model = new PendidikanModel();
 
-        if ($tujuan) {
+        // Hapus data pendidikan dari database berdasarkan id
+        if ($model->delete($id)) {
+            // Berhasil menghapus, kembalikan respons JSON sukses
+            return $this->response->setJSON(['status' => 'success'])->setStatusCode(200);
+        } else {
+            // Gagal menghapus, kembalikan respons JSON error
+            return $this->response->setJSON(['status' => 'error'])->setStatusCode(500);
+        }
+    }
+
+
+    // Penglaman Kerja
+    public function save_data_pengalaman_kerja()
+    {
+        $pengalamanKerjaModel = new PengalamanKerjaModel();
+
+        $pencaker_id = $this->request->getPost('pencaker_id');
+
+        $data = [
+            'tahunmasuk' => $this->request->getPost('tahunmasukkerja'),
+            'tahunkeluar' => $this->request->getPost('tahunkeluarkerja'),
+            'instansi' => $this->request->getPost('instansi'),
+            'jabatan' => $this->request->getPost('jabatan'),
+            'pencaker_id' => $pencaker_id,
+        ];
+
+        // Jika data belum ada, lakukan insert
+        if ($pengalamanKerjaModel->save($data)) {
             $response = [
-                'status' => true,
-                'data' => ['tujuan' => $tujuan['tujuan']] // Pastikan mengakses 'tujuan' dengan benar
+                'status' => 'success',
+                'message' => 'Data pengalaman kerja berhasil disimpan.'
             ];
         } else {
             $response = [
-                'status' => false,
-                'hasil' => 'Data tujuan tidak ditemukan'
+                'status' => 'error',
+                'message' => 'Gagal menyimpan data pengalaman kerja.'
+            ];
+        }
+
+
+        return $this->response->setJSON($response);
+    }
+
+    public function fetch_data_pengalaman_kerja()
+    {
+        $pengalamanKerjaModel = new PengalamanKerjaModel();
+
+        // Ambil pencaker_id dari request
+        $pencaker_id = $this->request->getPost('pencaker_id');
+
+        // Ambil data pendidikan dengan join ke tabel jenjang_pendidikan
+        $pekerjaan = $pengalamanKerjaModel->findAll();
+
+        $pekerjaan = $pengalamanKerjaModel->select('pengalaman_kerja.*')
+            ->where('pengalaman_kerja.pencaker_id', $pencaker_id)
+            ->findAll();
+
+        $data = [];
+        $no = 1;
+        foreach ($pekerjaan as $pk) {
+            $data[] = [
+                'no' => $no++,
+                'tahunmasuk' => $pk['tahunmasuk'],
+                'tahunkeluar' => $pk['tahunkeluar'],
+                'instansi' => $pk['instansi'],
+                'jabatan' => $pk['jabatan'],
+                'aksi' => '<div class="btn-group" role="group" aria-label="Actions">
+                           <button class="btn btn-primary btn-sm editPekerjaan" data-id="' . $pk['id'] . '" data-pencaker_id="' . $pk['pencaker_id'] . '" title="Edit Pekerjaan">
+                               <i class="bi bi-pencil-fill px-2"></i>
+                           </button>
+                           <button class="btn btn-danger btn-sm deletePekerjaan" data-id="' . $pk['id'] . '" title="Hapus Pekerjaan">
+                               <i class="bi bi-trash px-2"></i>
+                           </button>
+                       </div>'
+            ];
+        }
+
+        echo json_encode(["data" => $data]);
+    }
+
+    public function get_pengalaman_kerja_by_id()
+    {
+        $request = service('request');
+        $id = $request->getPost('id');
+
+        $model = new PengalamanKerjaModel();
+
+        $pekerjaan = $model->find($id);
+
+        if ($pekerjaan) {
+            // Jika data pekerjaan ditemukan, kirim respons JSON
+            return $this->response->setJSON($pekerjaan)->setStatusCode(200);
+        } else {
+            // Jika data tidak ditemukan, kirim respons error
+            return $this->response->setJSON(['message' => 'Data pekerjaan tidak ditemukan'])->setStatusCode(404);
+        }
+    }
+
+    public function update_data_pengalaman_kerja()
+    {
+        $request = service('request');
+
+        // Ambil data dari POST request
+        $data = [
+            'id' => $request->getPost('id'),
+            'tahunmasuk' => $request->getPost('tahunmasukkerja'),
+            'tahunkeluar' => $request->getPost('tahunkeluarkerja'),
+            'instansi' => $request->getPost('instansi'),
+            'jabatan' => $request->getPost('jabatan'),
+            'pencaker_id' => user()->id,
+        ];
+
+        if (empty($data['id'])) {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'ID is missing'])->setStatusCode(400);
+        }
+
+        $model = new PengalamanKerjaModel(); // Buat instance model PengalamanKerjaModel
+
+        // Lakukan update data pendidikan berdasarkan ID
+        if ($model->update($data['id'], $data)) {
+            return $this->response->setJSON(['status' => 'success'])->setStatusCode(200);
+        } else {
+            return $this->response->setJSON(['status' => 'error'])->setStatusCode(500);
+        }
+    }
+
+    public function hapus_data_pengalaman_kerja()
+    {
+        $id = $this->request->getPost('id');
+        $model = new PengalamanKerjaModel();
+
+        // Hapus data pendidikan dari database berdasarkan id
+        if ($model->delete($id)) {
+            // Berhasil menghapus, kembalikan respons JSON sukses
+            return $this->response->setJSON(['status' => 'success'])->setStatusCode(200);
+        } else {
+            // Gagal menghapus, kembalikan respons JSON error
+            return $this->response->setJSON(['status' => 'error'])->setStatusCode(500);
+        }
+    }
+
+
+    // Bagian Minat Jabatan
+    public function save_data_minat_jabatan()
+    {
+        $jabatan = new JabatanModal();
+
+        $pencaker_id = $this->request->getPost('pencaker_id');
+
+        $data = [
+            'nama_jabatan' => $this->request->getPost('minat_jabatan'),
+            'lokasi_jabatan' => $this->request->getPost('lokasi_jabatan'),
+            'pencaker_id' => $pencaker_id,
+        ];
+
+        // Jika data belum ada, lakukan insert
+        if ($jabatan->save($data)) {
+            $response = [
+                'status' => 'success',
+                'message' => 'Data pengalaman kerja berhasil disimpan.'
+            ];
+        } else {
+            $response = [
+                'status' => 'error',
+                'message' => 'Gagal menyimpan data pengalaman kerja.'
             ];
         }
 
@@ -1426,11 +1731,412 @@ class Admin extends BaseController
     }
 
 
-
-    public function form()
+    public function fetch_data_minat_jabatan()
     {
-        $data['title'] = 'Profil Pencari Kerja';
+        $jabatanModel = new JabatanModal();
+
+        // Ambil pencaker_id dari request
+        $pencaker_id = $this->request->getPost('pencaker_id');
+
+        $jabatan = $jabatanModel->select('minat_jabatan.*')
+            ->where('minat_jabatan.pencaker_id', $pencaker_id)
+            ->findAll();
+
+        $data = [];
+        $no = 1;
+        foreach ($jabatan as $jb) {
+            $lokasiJabatan = ($jb['lokasi_jabatan'] === 'LN') ? 'Luar Negeri' : 'Dalam Negeri';
+
+            $data[] = [
+                'no' => $no++,
+                'nama_jabatan' => $jb['nama_jabatan'],
+                'lokasi_jabatan' => $lokasiJabatan,
+                'aksi' => '<div class="btn-group" role="group" aria-label="Actions">
+                           <button class="btn btn-primary btn-sm editJabatan" data-id="' . $jb['id'] . '" data-pencaker_id="' . $jb['pencaker_id'] . '" title="Edit Jabatan">
+                               <i class="bi bi-pencil-fill px-2"></i>
+                           </button>
+                           <button class="btn btn-danger btn-sm deleteJabatan" data-id="' . $jb['id'] . '" title="Hapus Jabatan">
+                               <i class="bi bi-trash px-2"></i>
+                           </button>
+                       </div>'
+            ];
+        }
+
+        echo json_encode(["data" => $data]);
+    }
+
+
+    public function get_minat_jabatan_by_id()
+    {
+        $request = service('request');
+        $id = $request->getPost('id');
+
+        $model = new JabatanModal();
+
+        $pekerjaan = $model->find($id);
+
+        if ($pekerjaan) {
+            // Jika data pekerjaan ditemukan, kirim respons JSON
+            return $this->response->setJSON($pekerjaan)->setStatusCode(200);
+        } else {
+            // Jika data tidak ditemukan, kirim respons error
+            return $this->response->setJSON(['message' => 'Data pekerjaan tidak ditemukan'])->setStatusCode(404);
+        }
+    }
+
+    public function update_data_minat_jabatan()
+    {
+        $request = service('request');
+
+        // Ambil data dari POST request
+        $data = [
+            'id' => $request->getPost('id'),
+            'nama_jabatan' => $this->request->getPost('minat_jabatan'),
+            'lokasi_jabatan' => $this->request->getPost('lokasi_jabatan'),
+            'pencaker_id' => user()->id,
+        ];
+
+        if (empty($data['id'])) {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'ID is missing'])->setStatusCode(400);
+        }
+
+        $model = new JabatanModal();
+
+        // Lakukan update data pendidikan berdasarkan ID
+        if ($model->update($data['id'], $data)) {
+            return $this->response->setJSON(['status' => 'success'])->setStatusCode(200);
+        } else {
+            return $this->response->setJSON(['status' => 'error'])->setStatusCode(500);
+        }
+    }
+
+
+    public function hapus_data_minat_jabatan()
+    {
+        $id = $this->request->getPost('id');
+        $model = new JabatanModal();
+
+        // Hapus data pendidikan dari database berdasarkan id
+        if ($model->delete($id)) {
+            // Berhasil menghapus, kembalikan respons JSON sukses
+            return $this->response->setJSON(['status' => 'success'])->setStatusCode(200);
+        } else {
+            // Gagal menghapus, kembalikan respons JSON error
+            return $this->response->setJSON(['status' => 'error'])->setStatusCode(500);
+        }
+    }
+
+    // Perushaan Tujuan
+
+    public function save_data_perusahaan_tujuan()
+    {
+        $perusahaanModel = new PerusahaanModel();
+
+        $id = $this->request->getPost('id');  // Ambil id perusahaan jika ada
+        $pencaker_id = $this->request->getPost('pencaker_id');
+
+        $data = [
+            'nama_perusahaan' => $this->request->getPost('nama_perusahaan'),
+            'nohp_perusahaan' => $this->request->getPost('nohp_perusahaan'),
+            'alamat_perusahaan' => $this->request->getPost('alamat_perusahaan'),
+            'pencaker_id' => $pencaker_id,
+        ];
+
+        // Cek apakah data dengan pencaker_id tersebut sudah ada di database
+        $existingData = $perusahaanModel->where('pencaker_id', $pencaker_id)->first();
+
+        if ($existingData) {
+            // Jika data sudah ada, lakukan update
+            $perusahaanModel->update($existingData['id'], $data);
+            $response = [
+                'status' => 'success',
+                'message' => 'Data perusahaan tujuan berhasil diperbarui.'
+            ];
+        } else {
+            // Jika data belum ada, lakukan insert
+            if ($perusahaanModel->insert($data)) {
+                $response = [
+                    'status' => 'success',
+                    'message' => 'Data perusahaan tujuan berhasil disimpan.'
+                ];
+            } else {
+                $response = [
+                    'status' => 'error',
+                    'message' => 'Gagal menyimpan data perusahaan tujuan.'
+                ];
+            }
+        }
+
+        return $this->response->setJSON($response);
+    }
+
+
+    public function get_perusahaan_tujuan_by_id($id)
+    {
+        $perusahaanModel = new PerusahaanModel();
+        $data = $perusahaanModel->where('pencaker_id', $id)->first();
+        if ($data) {
+            return $this->response->setJSON($data);
+        } else {
+            return $this->response->setJSON(['error' => 'Data tidak ditemukan.'], 404);
+        }
+    }
+
+
+    // Data Tambahan
+    public function save_catatan_pengantar()
+    {
+        $pencakerModel = new PencakerModel();
+
+        $userId = $this->request->getPost('id_pencaker');
+        $catatanPengantar = $this->request->getPost('catatan_pengantar');
+
+        // Validasi input (opsional)
+        if (empty($userId) || empty($catatanPengantar)) {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'ID Pencaker dan Catatan Pengantar harus diisi.',
+            ]);
+        }
+
+        // Data untuk diupdate
+        $data = [
+            'catatan_pengantar' => $catatanPengantar,
+        ];
+
+        // Cari data pencaker berdasarkan user_id
+        $existingPencaker = $pencakerModel->where('user_id', $userId)->first();
+
+        if ($existingPencaker) {
+            // Jika data sudah ada, lakukan update
+            $pencakerModel->update($existingPencaker['id'], $data);
+        } else {
+            // Jika data belum ada, lakukan insert
+            $data['user_id'] = $userId;
+            $pencakerModel->insert($data);
+        }
+
+        return $this->response->setJSON([
+            'status' => 'success',
+            'message' => 'Catatan pengantar berhasil disimpan.',
+        ]);
+    }
+
+    public function get_catatan_pengantar_by_id($id)
+    {
+        $pencakerModel = new PencakerModel();
+        $data = $pencakerModel->where('user_id', $id)->first();
+        return $this->response->setJSON($data);
+    }
+
+    public function save_bahasa()
+    {
+        $pencakerModel = new PencakerModel();
+
+        $userId = $this->request->getPost('id_pencaker');
+        $keterampilanBahasa = $this->request->getPost('keterampilan_bahasa');
+        $bahasaLainnya = $this->request->getPost('bahasa_lainnya');
+
+        // Validasi input (opsional)
+        if (empty($userId) || (empty($keterampilanBahasa) && empty($bahasaLainnya))) {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'ID Pencaker dan keterampilan bahasa atau bahasa lainnya harus diisi.',
+            ]);
+        }
+
+        // Data untuk diupdate
+        $data = [
+            'keterampilan_bahasa' => $keterampilanBahasa,
+            'bahasa_lainnya' => $bahasaLainnya
+        ];
+
+        // Cari data pencaker berdasarkan user_id
+        $existingPencaker = $pencakerModel->where('user_id', $userId)->first();
+
+        if ($existingPencaker) {
+            // Jika data sudah ada, lakukan update
+            $pencakerModel->update($existingPencaker['id'], $data);
+        } else {
+            // Jika data belum ada, lakukan insert
+            $data['user_id'] = $userId;
+            $pencakerModel->insert($data);
+        }
+
+        return $this->response->setJSON([
+            'status' => 'success',
+            'message' => 'Data keterampilan bahasa berhasil disimpan.',
+        ]);
+    }
+
+
+    public function get_bahasa_pencaker_by_id($id)
+    {
+        $pencakerModel = new PencakerModel();
+        $data = $pencakerModel->where('user_id', $id)->first();
+        if ($data) {
+            return $this->response->setJSON($data);
+        } else {
+            return $this->response->setJSON(['error' => 'Data tidak ditemukan.'], 404);
+        }
+    }
+
+
+    // Upload Dokumen
+    public function dokumen_pencaker()
+    {
+        // Paket paneggil data user dari tabel Users agar bisa diparsing dalam halaman view formdata_pencaker
+        $usersModel = new UsersModel();
+        $userId = user()->id;
+        $user = $usersModel->find($userId);
+
+        $dokumenModel = new DokumenModel();
+        $jenis_dokumen = $dokumenModel->findAll();
+        $data = [
+            'title' => 'Review Data dan Dokumen Pencari Kerja',
+            'jenis_dok' => $jenis_dokumen,
+            'user' => $user,
+        ];
+
         return $this->loadView('admin/formdata_pencaker', $data);
+    }
+
+    public function dokajax()
+    {
+        $dokumenModel = new DokumenModel();
+        $dokumenPencakerModel = new DokumenPencakerModel();
+
+        // Ambil semua data dari tabel dokumen
+        $dokumen = $dokumenModel->findAll();
+
+        $data = [];
+        $no = 1;
+
+        // Iterasi setiap data dari tabel dokumen
+        foreach ($dokumen as $dok) {
+            // Ambil data terkait dari tabel pencaker_dokumen berdasarkan dokumen_id dari tabel dokumen dan pencaker_id yang sedang aktif
+            $pencakerDokumen = $dokumenPencakerModel->where('dokumen_id', $dok['id'])
+                ->where('pencaker_id', user()->id)
+                ->first();
+
+            // Jika data ditemukan di tabel pencaker_dokumen
+            if ($pencakerDokumen) {
+                $data[] = [
+                    "no" => $no++,
+                    "jenis" => $dok['jenis_dokumen'],
+                    "nama" => $pencakerDokumen['namadokumen'],
+                    "tgl" => $pencakerDokumen['tgl_upload'],
+                    "aksi" => '<div class="btn-group" role="group" aria-label="Actions">
+                           <a href="' . base_url('uploads/dokumen_pencaker/' . $pencakerDokumen['namadokumen']) . '" target="_blank" class="btn btn-info btn-sm" title="Detail Dokumen">
+                               <i class="bi bi-search"></i>
+                           </a>
+                           <button class="btn btn-danger btn-sm deleteDokumen" data-id="' . $pencakerDokumen['id'] . '" title="Hapus Dokumen">
+                               <i class="bi bi-trash"></i>
+                           </button>
+                       </div>'
+                ];
+            } else {
+                // Jika tidak ada data terkait, tetap tampilkan jenis dokumen dengan tombol "Upload Dokumen"
+                $data[] = [
+                    "no" => $no++,
+                    "jenis" => $dok['jenis_dokumen'],
+                    "nama" => '-', // Atau kosongkan jika tidak ada data yang ingin ditampilkan
+                    "tgl" => '-',
+                    "aksi" => '<div class="btn-group" role="group" aria-label="Actions">
+                           <a data-id="' . $dok['id'] . '"  data-jenis="' . $dok['jenis_dokumen'] . '"  data-toggle="modal" data-target="#uploadDokumenModal" class="btn btn-success btn-sm uplodDokumenBTN" title="Upload Dokumen">
+                               <i class="bi bi-upload"></i>
+                           </a>
+                       </div>'
+                ];
+            }
+        }
+
+        echo json_encode(["data" => $data]);
+    }
+
+    public function upload_dokumen()
+    {
+        // Validasi input (jika diperlukan)
+        $validationRules = [
+            'dokumen_id' => 'required|numeric',
+            'jenis_dokumen' => 'required',
+            'file' => 'uploaded[file]|max_size[file,1024]|ext_in[file,pdf]' // Contoh validasi untuk file PDF dengan maksimum 1MB
+        ];
+
+        if (!$this->validate($validationRules)) {
+            $response['success'] = false;
+            $response['errors'] = $this->validator->getErrors();
+            return $this->response->setJSON($response);
+        }
+
+        // Ambil data dari form
+        $dokumenId = $this->request->getPost('dokumen_id');
+        $jenisDokumen = $this->request->getPost('jenis_dokumen');
+        $file = $this->request->getFile('file');
+
+        // Ambil NIK dari pengguna yang aktif
+        $nik = user()->nik;
+
+        // Ambil ekstensi file
+        $fileExtension = $file->getClientExtension();
+
+        // Buat nama file baru dengan format NIK_jenis_dokumen.ekstensi_dokumen
+        $newFileName = $nik . '_' . str_replace(' ', '-', strtoupper($jenisDokumen)) . '.' . $fileExtension;
+
+        // Lakukan proses simpan file ke server
+        $uploadPath = FCPATH . 'uploads/dokumen_pencaker/';
+
+        if (!$file->move($uploadPath, $newFileName)) {
+            $response['success'] = false;
+            $response['errors'] = ['Failed to upload file.'];
+            return $this->response->setJSON($response);
+        }
+
+        // Proses penyimpanan informasi dokumen ke database (jika diperlukan)
+
+        // Contoh: Simpan informasi dokumen ke database
+        $model = new DokumenPencakerModel(); // Gunakan model DokumenPencakerModel
+        $data = [
+            'namadokumen' => $newFileName, // Simpan nama file di database
+            'tgl_upload' => date('Y-m-d H:i:s'), // Tanggal upload
+            'pencaker_id' => user()->id, // Ganti dengan ID pencaker yang sesuai
+            'dokumen_id' => $dokumenId,
+            // Tambahkan kolom-kolom lain sesuai kebutuhan
+        ];
+
+        $model->insert($data);
+
+        // Kirim respons berhasil
+        $response['success'] = true;
+        $response['message'] = 'File berhasil diunggah.';
+        return $this->response->setJSON($response);
+    }
+
+
+    public function hapus_dokumen()
+    {
+        $id = $this->request->getPost('id');
+        $model = new DokumenPencakerModel();
+
+        $dokumen = $model->find($id);
+        if (!$dokumen) {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'dokumen tidak ditemukan'])->setStatusCode(404);
+        }
+
+        // Hapus gambar dari direktori jika ada
+        $file_dokumen = $dokumen['namadokumen'];
+        if (!empty($file_dokumen)) {
+            $path = FCPATH . 'uploads/dokumen_pencaker/' . $file_dokumen;
+            if (file_exists($path)) {
+                unlink($path);
+            }
+        }
+
+        if ($model->delete($id)) {
+            return $this->response->setJSON(['status' => 'success'])->setStatusCode(200);
+        } else {
+            return $this->response->setJSON(['status' => 'error'])->setStatusCode(500);
+        }
     }
 
     private function loadView(string $viewName, array $data = []): string

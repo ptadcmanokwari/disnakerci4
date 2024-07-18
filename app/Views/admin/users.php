@@ -34,9 +34,11 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
+                                        <th>Nama Lengkap</th>
                                         <th>Email</th>
                                         <th>Username</th>
                                         <th>Last Login</th>
+                                        <th>Role</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -64,79 +66,78 @@
                 </button>
             </div>
             <div class="modal-body">
-                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="pills-home-tab" data-toggle="pill" data-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Detail User</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="pills-profile-tab" data-toggle="pill" data-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Log Aktivitas</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="pills-contact-tab" data-toggle="pill" data-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Ubah User</button>
-                    </li>
-                </ul>
-                <div class="tab-content" id="pills-tabContent">
-                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <img id="detailUserImage" class="img-fluid rounded" src="" alt="Gambar User">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <img id="detailUserImage" class="img-fluid rounded w-75" src="" alt="Gambar User">
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="row my-2">
+                            <div class="col-md-3">
+                                <span>ID</span>
                             </div>
-                            <div class="col-lg-8">
-                                <table class="table table-bordered">
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row" style="width: 30%;">ID</th>
-                                            <td style="width: 70%;"><span id="detailUserId"></span></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Nama</th>
-                                            <td><span id="detailUserName"></span></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Username</th>
-                                            <td><span id="detailUsername"></span></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Email</th>
-                                            <td><span id="detailUserEmail"></span></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">No. HP</th>
-                                            <td><span id="detailUserPhone"></span></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Role</th>
-                                            <td><span id="detailUserRole"></span></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Terakhir Login</th>
-                                            <td><span id="detailLogin"></span></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <div class="col-md-9">
+                                <strong id="detailUserId"></strong>
                             </div>
                         </div>
-                    </div>
-                    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                        <div class="row">
-                            <table id="tabelLogActivity" class="table table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>IP Address</th>
-                                        <th>Message</th>
-                                        <th>Date Time</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
+                        <div class="row my-2">
+                            <div class="col-md-3">
+                                <span>Nama</span>
+                            </div>
+                            <div class="col-md-9">
+                                <strong id="detailUserName"></strong>
+                            </div>
                         </div>
-                    </div>
-                    <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">...</div>
-                </div>
+                        <div class="row my-2">
+                            <div class="col-md-3">
+                                <span>NIK</span>
+                            </div>
+                            <div class="col-md-9">
+                                <strong id="detailUserNIK"></strong>
+                            </div>
+                        </div>
+                        <div class="row my-2">
+                            <div class="col-md-3">
+                                <span>Username</span>
+                            </div>
+                            <div class="col-md-9">
+                                <strong id="detailUsername"></strong>
+                            </div>
+                        </div>
+                        <div class="row my-2">
+                            <div class="col-md-3">
+                                <span>Email</span>
+                            </div>
+                            <div class="col-md-9">
+                                <strong id="detailUserEmail"></strong>
+                            </div>
+                        </div>
+                        <div class="row my-2">
+                            <div class="col-md-3">
+                                <span>No. HP</span>
+                            </div>
+                            <div class="col-md-9">
+                                <strong id="detailUserPhone"></strong>
+                            </div>
+                        </div>
+                        <div class="row my-2">
+                            <div class="col-md-3">
+                                <span>Role</span>
+                            </div>
+                            <div class="col-md-9">
+                                <strong id="detailUserRole"></strong>
+                            </div>
+                        </div>
+                        <div class="row my-2">
+                            <div class="col-md-3">
+                                <span>Terakhir Login</span>
+                            </div>
+                            <div class="col-md-9">
+                                <strong id="detailLogin"></strong>
+                            </div>
+                        </div>
 
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -144,7 +145,6 @@
         </div>
     </div>
 </div>
-
 
 
 <!-- jQuery dan DataTables -->
@@ -167,11 +167,14 @@
             "autoWidth": false,
             "responsive": true,
             "ajax": {
-                "url": "<?php echo base_url('usersajax'); ?>",
+                "url": "<?php echo base_url('admin_v2/usersajax'); ?>",
                 "type": "POST"
             },
             "columns": [{
                     "data": "no"
+                },
+                {
+                    "data": "namalengkap"
                 },
                 {
                     "data": "email"
@@ -181,6 +184,9 @@
                 },
                 {
                     "data": "updated_at"
+                },
+                {
+                    "data": "name"
                 },
                 {
                     "data": "status"
@@ -245,16 +251,18 @@
 
         $(document).on('click', '.btn-detail-user', function() {
             var userId = $(this).data('id');
-            var userName = $(this).data('name');
+            var userNIK = $(this).data('nik');
+            var userName = $(this).data('namalengkap');
             var userUsername = $(this).data('username');
             var userEmail = $(this).data('email');
-            var userPhone = $(this).data('phone');
+            var userPhone = $(this).data('nohp');
             var userUpdated = $(this).data('updated_at');
-            var userRole = $(this).data('role');
+            var userRole = $(this).data('name');
             var userImage = $(this).data('gambar');
 
             // Masukkan data ke dalam modal
             $('#detailUserId').text(userId);
+            $('#detailUserNIK').text(userNIK);
             $('#detailUserName').text(userName);
             $('#detailUsername').text(userUsername);
             $('#detailUserEmail').text(userEmail);
@@ -267,7 +275,7 @@
             if (userImage) {
                 imagePath = '<?php echo base_url('uploads/user/'); ?>' + userImage;
             } else {
-                imagePath = '<?php echo base_url('assets/img/default-user-image.png'); ?>';
+                imagePath = '<?php echo base_url('uploads/user/no-user.jpg'); ?>';
             }
 
             // Tampilkan gambar user

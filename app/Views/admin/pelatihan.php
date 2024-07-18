@@ -172,7 +172,7 @@
             "autoWidth": false,
             "responsive": true,
             "ajax": {
-                "url": "<?php echo base_url('admin/pelatihanajax'); ?>", // Sesuaikan dengan route yang benar di CodeIgniter
+                "url": "<?php echo base_url('admin_v2/pelatihanajax'); ?>", // Sesuaikan dengan route yang benar di CodeIgniter
                 "type": "POST"
             },
             "columns": [{
@@ -209,7 +209,7 @@
                         var id = this.getAttribute('data-id');
 
                         // Kirim AJAX request untuk memperbarui status di server
-                        fetch('<?= base_url('admin/update_status_pelatihan') ?>', {
+                        fetch('<?= base_url('admin_v2/update_status_pelatihan') ?>', {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json',
@@ -263,7 +263,7 @@
                 if (result.isConfirmed) {
                     // Jika user mengonfirmasi, lakukan proses hapus via AJAX
                     $.ajax({
-                        url: '<?= base_url('admin/hapus_pelatihan') ?>',
+                        url: '<?= base_url('admin_v2/hapus_pelatihan') ?>',
                         type: 'POST',
                         data: {
                             id: id
@@ -337,7 +337,7 @@
 
 
         const addDropzone = new Dropzone("#unggahGambarBaru", {
-            url: "<?= base_url('admin/save_pelatihan') ?>",
+            url: "<?= base_url('admin_v2/save_pelatihan') ?>",
             autoProcessQueue: false,
             uploadMultiple: false,
             maxFiles: 1,
@@ -416,7 +416,7 @@
         });
 
         const editDropzone = new Dropzone("#edit_gambar_dropzone", {
-            url: "<?= base_url('admin/update_pelatihan') ?>",
+            url: "<?= base_url('admin_v2/update_pelatihan') ?>",
             autoProcessQueue: false,
             uploadMultiple: false,
             maxFiles: 1,
@@ -472,7 +472,7 @@
 
         function updatePelatihanWithoutImage() {
             $.ajax({
-                url: "<?= base_url('admin/update_pelatihan') ?>",
+                url: "<?= base_url('admin_v2/update_pelatihan') ?>",
                 type: 'POST',
                 data: {
                     id: document.querySelector("#edit_id").value,

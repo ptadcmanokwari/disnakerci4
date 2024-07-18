@@ -41,10 +41,10 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-4 d-flex justify-content-end align-items-center">
-                                    <a href="<?= base_url('admin/downloadpdf') ?>" type="button" class="btn btn-success btn-sm">
+                                    <a href="<?= base_url('admin_v2/downloadpdf') ?>" type="button" class="btn btn-success btn-sm">
                                         <i class="bi bi-file-pdf"></i> Unduh PDF
                                     </a>
-                                    <a href="<?= base_url('admin/downloadexcel') ?>" type="button" class="btn btn-info btn-sm">
+                                    <a href="<?= base_url('admin_v2/downloadexcel') ?>" type="button" class="btn btn-info btn-sm">
                                         <i class="bi bi-file-excel"></i> Unduh Excel
                                     </a>
                                 </div>
@@ -161,7 +161,7 @@
             "autoWidth": false,
             "responsive": true,
             "ajax": {
-                "url": "<?php echo base_url('admin/pencakerajax'); ?>",
+                "url": "<?php echo base_url('admin_v2/pencakerajax'); ?>",
                 "type": "POST",
                 "data": function(d) {
                     d.filter = $('#filter_pencaker').val(); // Kirim nilai filter
@@ -189,7 +189,7 @@
                     "data": "nik"
                 },
                 {
-                    "data": "phone"
+                    "data": "nohp"
                 },
                 {
                     "data": "email"
@@ -222,7 +222,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: '<?= base_url('admin/hapus_pencaker') ?>',
+                        url: '<?= base_url('admin_v2/hapus_pencaker') ?>',
                         type: 'POST',
                         data: {
                             pencakerID: pencakerId // Sesuaikan dengan nama yang digunakan di controller

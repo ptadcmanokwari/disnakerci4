@@ -172,7 +172,7 @@
             "autoWidth": false,
             "responsive": true,
             "ajax": {
-                "url": "<?php echo base_url('admin/beritaajax'); ?>", // Sesuaikan dengan route yang benar di CodeIgniter
+                "url": "<?php echo base_url('admin_v2/beritaajax'); ?>", // Sesuaikan dengan route yang benar di CodeIgniter
                 "type": "POST"
             },
             "columns": [{
@@ -209,7 +209,7 @@
                         var id = this.getAttribute('data-id');
 
                         // Kirim AJAX request untuk memperbarui status di server
-                        fetch('<?= base_url('admin/update_status_berita') ?>', {
+                        fetch('<?= base_url('admin_v2/update_status_berita') ?>', {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json',
@@ -264,7 +264,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: '<?= base_url('admin/hapus_berita') ?>',
+                        url: '<?= base_url('admin_v2/hapus_berita') ?>',
                         type: 'POST',
                         data: {
                             id: id
@@ -337,7 +337,7 @@
 
 
         const addDropzone = new Dropzone("#unggahGambarBaru", {
-            url: "<?= base_url('admin/save_berita') ?>",
+            url: "<?= base_url('admin_v2/save_berita') ?>",
             autoProcessQueue: false,
             uploadMultiple: false,
             maxFiles: 1,
@@ -416,7 +416,7 @@
         });
 
         const editDropzone = new Dropzone("#edit_gambar_dropzone", {
-            url: "<?= base_url('admin/update_berita') ?>",
+            url: "<?= base_url('admin_v2/update_berita') ?>",
             autoProcessQueue: false,
             uploadMultiple: false,
             maxFiles: 1,
@@ -472,7 +472,7 @@
 
         function updateBeritaWithoutImage() {
             $.ajax({
-                url: "<?= base_url('admin/update_berita') ?>",
+                url: "<?= base_url('admin_v2/update_berita') ?>",
                 type: 'POST',
                 data: {
                     id: document.querySelector("#edit_id").value,
