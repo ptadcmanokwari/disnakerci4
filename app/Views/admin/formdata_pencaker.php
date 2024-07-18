@@ -39,9 +39,9 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="card-footer">
+                <!-- <div class="card-footer">
                     * = Dokumen yang wajib diunggah
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
@@ -86,7 +86,6 @@
 <script>
     Dropzone.autoDiscover = false;
     $(document).ready(function() {
-        // Event handler untuk tombol "Upload Dokumen
         var tabelDokumen = $('#tabelDokumen').DataTable({
             "processing": true,
             "serverSide": false,
@@ -98,7 +97,7 @@
             "autoWidth": false,
             "responsive": true,
             "ajax": {
-                "url": "<?php echo base_url('pencaker/dokajax'); ?>", // Sesuaikan dengan route yang benar di CodeIgniter
+                "url": "<?php echo base_url('pencaker/dokajax'); ?>",
                 "type": "POST"
             },
             "columns": [{
@@ -123,7 +122,6 @@
         $('#tabelDokumen').on('click', '.deleteDokumen', function() {
             var id = $(this).data('id');
             var row = $(this).closest('tr');
-
             Swal.fire({
                 title: 'Konfirmasi',
                 text: 'Apakah Anda yakin ingin menghapus dokumen ini?',
@@ -170,14 +168,13 @@
 </script>
 
 <script>
-    // Event handler untuk tombol "Upload Dokumen"
     $(document).on('click', '.uplodDokumenBTN', function() {
         var id = $(this).data('id');
         var jenis = $(this).data('jenis');
 
-        $('#dokumen_id').val(id); // Set nilai id ke input hidden
-        $('#jenis_dokumen_id').val(jenis); // Set nilai jenis_dokumen ke input hidden
-        $('#jenis_dokumen').val(jenis); // Set nilai jenis_dokumen ke input visible
+        $('#dokumen_id').val(id);
+        $('#jenis_dokumen_id').val(jenis);
+        $('#jenis_dokumen').val(jenis);
 
         // Tampilkan modal upload dokumen jika perlu
         $('#uploadDokumenModal').modal('show');
@@ -206,7 +203,7 @@
         uploadMultiple: false,
         maxFiles: 1,
         dictDefaultMessage: "Seret dokumen ke sini untuk unggah",
-        acceptedFiles: 'application/pdf', // Ganti dengan jenis file yang sesuai
+        acceptedFiles: 'application/pdf, image/*',
         addRemoveLinks: true,
         init: function() {
             var addDokumenDropzone = this;
@@ -222,16 +219,16 @@
             });
 
             this.on("sending", function(file, xhr, formData) {
-                const dokumenId = $('#dokumen_id').val(); // Ambil ID dokumen dari input hidden
-                const jenisDokumen = $('#jenis_dokumen').val(); // Ambil jenis dokumen dari input hidden
+                const dokumenId = $('#dokumen_id').val();
+                const jenisDokumen = $('#jenis_dokumen').val();
 
-                formData.append("dokumen_id", dokumenId); // Kirim ID dokumen ke server
-                formData.append("jenis_dokumen", jenisDokumen); // Kirim jenis dokumen ke server
+                formData.append("dokumen_id", dokumenId);
+                formData.append("jenis_dokumen", jenisDokumen);
 
-                const nik = '<?= user()->nik ?>'; // Ganti dengan nilai sesuai kebutuhan
-                const fileExtension = file.name.split('.').pop(); // Ambil ekstensi file
+                const nik = '<?= user()->nik ?>';
+                const fileExtension = file.name.split('.').pop();
                 const fileName = nik + '_' + jenisDokumen + '.' + fileExtension;
-                formData.append("file", file, fileName); // Kirim file ke server
+                formData.append("file", file, fileName);
             });
 
             this.on("success", function(file, response) {
@@ -242,8 +239,8 @@
                         text: 'Dokumen berhasil diunggah.',
                     }).then((result) => {
                         $('#uploadDokumenModal').modal('hide');
-                        resetModal(); // Fungsi untuk mereset modal jika diperlukan
-                        $('#tabelDokumen').DataTable().ajax.reload(); // Reload tabel jika menggunakan DataTables
+                        resetModal();
+                        $('#tabelDokumen').DataTable().ajax.reload();
                     });
                 } else {
                     Swal.fire({
@@ -264,6 +261,4 @@
         }
     });
 </script>
-
-
 <?= $this->endSection() ?>

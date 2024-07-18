@@ -149,7 +149,7 @@ class Admin extends BaseController
                              data-nopendaftaran="' . $pc['nopendaftaran'] . '" 
                              data-toggle="modal" 
                              data-target="#VerVal">
-                             <i class="bi bi-check-circle-fill px-2"></i>
+                             <i class="bi bi-check-circle-fill"></i>
                          </button>',
                 "img" => $gambar,
                 "namalengkap" => $pc['namalengkap'],
@@ -160,13 +160,13 @@ class Admin extends BaseController
                 "keterangan_status" => $pc['keterangan_status'],
                 "aksi" => '<div class="btn-group" role="group" aria-label="Actions">
                            <a href="' . base_url('admin_v2/detail_pencaker/' . $pc['id']) . '" target="_blank" class="btn btn-info btn-sm" title="Detail Pencaker">
-                               <i class="bi bi-search px-2"></i>
+                               <i class="bi bi-search"></i>
                            </a>
                            <a href="' . base_url('admin_v2/kartu_ak1/' . $pc['id']) . '" target="_blank" class="btn btn-success btn-sm" title="Kartu AK/1">
-                               <i class="bi bi-person-vcard-fill px-2"></i>
+                               <i class="bi bi-person-vcard-fill"></i>
                            </a>
                            <button class="btn btn-danger btn-sm btn-delete" data-i="' . $pc['id'] . '" title="Babat Pencaker">
-                               <i class="bi bi-trash px-2"></i>
+                               <i class="bi bi-trash"></i>
                            </button>
                        </div>'
             ];
@@ -326,12 +326,12 @@ class Admin extends BaseController
                 "aksi" =>
                 '<div class="btn-group" role="group" aria-label="Aksi">
                         <a href="' . base_url('admin/detail_berita/' . $item['id']) . '" class="btn btn-info btn-sm">
-                            <i class="bi bi-eye px-2"></i>
+                            <i class="bi bi-eye"></i>
                         </a>
-                        <button class="btn btn-warning btn-sm btn-edit" data-edit_id="' . $item['id'] . '"  data-edit_judul="' . htmlspecialchars($item['judul']) . '" data-edit_isi="' . htmlspecialchars($item['isi']) . '" data-edit_tags="' . $item['tags'] . '" data-edit_gambar="' . $item['gambar'] . '" data-toggle="modal"  data-toggle="modal" data-target="#ubahBeritaBaruModal"> <i class="bi bi-pencil-square px-2"></i>
+                        <button class="btn btn-warning btn-sm btn-edit" data-edit_id="' . $item['id'] . '"  data-edit_judul="' . htmlspecialchars($item['judul']) . '" data-edit_isi="' . htmlspecialchars($item['isi']) . '" data-edit_tags="' . $item['tags'] . '" data-edit_gambar="' . $item['gambar'] . '" data-toggle="modal"  data-toggle="modal" data-target="#ubahBeritaBaruModal"> <i class="bi bi-pencil-square"></i>
                         </button>
                         <button class="btn btn-danger btn-sm btn-delete" data-id="' . $item['id'] . '">
-                            <i class="bi bi-trash px-2"></i>
+                            <i class="bi bi-trash"></i>
                         </button>
                     </div>'
             ];
@@ -513,12 +513,12 @@ class Admin extends BaseController
                 "aksi" =>
                 '<div class="btn-group" role="group" aria-label="Aksi">
                         <a href="' . base_url('admin/detail_pengumuman/' . $item['id']) . '" class="btn btn-info btn-sm">
-                            <i class="bi bi-eye px-2"></i>
+                            <i class="bi bi-eye"></i>
                         </a>
-                        <button class="btn btn-warning btn-sm btn-edit" data-edit_id="' . $item['id'] . '"  data-edit_judul="' . htmlspecialchars($item['judul']) . '" data-edit_isi="' . htmlspecialchars($item['isi']) . '" data-edit_tags="' . $item['tags'] . '" data-edit_gambar="' . $item['gambar'] . '" data-toggle="modal"  data-toggle="modal" data-target="#ubahPengumumanModal"> <i class="bi bi-pencil-square px-2"></i>
+                        <button class="btn btn-warning btn-sm btn-edit" data-edit_id="' . $item['id'] . '"  data-edit_judul="' . htmlspecialchars($item['judul']) . '" data-edit_isi="' . htmlspecialchars($item['isi']) . '" data-edit_tags="' . $item['tags'] . '" data-edit_gambar="' . $item['gambar'] . '" data-toggle="modal"  data-toggle="modal" data-target="#ubahPengumumanModal"> <i class="bi bi-pencil-square"></i>
                         </button>
                         <button class="btn btn-danger btn-sm btn-delete" data-id="' . $item['id'] . '">
-                            <i class="bi bi-trash px-2"></i>
+                            <i class="bi bi-trash"></i>
                         </button>
                     </div>'
             ];
@@ -696,12 +696,12 @@ class Admin extends BaseController
                 "aksi" =>
                 '<div class="btn-group" role="group" aria-label="Aksi">
                         <a href="' . base_url('admin/detail_pelatihan/' . $item['id']) . '" class="btn btn-info btn-sm">
-                            <i class="bi bi-eye px-2"></i>
+                            <i class="bi bi-eye"></i>
                         </a>
-                        <button class="btn btn-warning btn-sm btn-edit" data-edit_id="' . $item['id'] . '"  data-edit_judul="' . htmlspecialchars($item['judul']) . '" data-edit_isi="' . htmlspecialchars($item['isi']) . '" data-edit_tags="' . $item['tags'] . '" data-edit_gambar="' . $item['gambar'] . '" data-toggle="modal"  data-toggle="modal" data-target="#ubahPelatihanModal"> <i class="bi bi-pencil-square px-2"></i>
+                        <button class="btn btn-warning btn-sm btn-edit" data-edit_id="' . $item['id'] . '"  data-edit_judul="' . htmlspecialchars($item['judul']) . '" data-edit_isi="' . htmlspecialchars($item['isi']) . '" data-edit_tags="' . $item['tags'] . '" data-edit_gambar="' . $item['gambar'] . '" data-toggle="modal"  data-toggle="modal" data-target="#ubahPelatihanModal"> <i class="bi bi-pencil-square"></i>
                         </button>
                         <button class="btn btn-danger btn-sm btn-delete" data-id="' . $item['id'] . '">
-                            <i class="bi bi-trash px-2"></i>
+                            <i class="bi bi-trash"></i>
                         </button>
                     </div>'
             ];
@@ -888,10 +888,10 @@ class Admin extends BaseController
                          data-date="' . $item->created_at . '" 
                          data-toggle="modal" 
                          data-target="#detailLogModal">
-                         <i class="bi bi-check-circle-fill px-2"></i>
+                         <i class="bi bi-check-circle-fill"></i>
                      </button>
                   <a class="btn btn-info btn-sm btn-detail-user" data-id="' . $item->userid . '">
-                      <i class="bi bi-person-fill px-2"></i>
+                      <i class="bi bi-person-fill"></i>
                   </a>
                </div>'
             ];
@@ -976,16 +976,16 @@ class Admin extends BaseController
                         data-toggle="modal" 
                         data-target="#detailUserModal"
                         data-load-logs="true">
-                        <i class="bi bi-eye px-2"></i>
+                        <i class="bi bi-eye"></i>
                     </button>
                     <button class="btn btn-warning btn-sm btn-edit"
                         data-edit_id="' . $user->userid . '"
                         data-toggle="modal"
                         data-target="#ubahUserBaruModal">
-                        <i class="bi bi-pencil-square px-2"></i>
+                        <i class="bi bi-pencil-square"></i>
                     </button>
                     <button class="btn btn-danger btn-sm btn-delete" data-id="' . $user->userid . '">
-                        <i class="bi bi-trash px-2"></i>
+                        <i class="bi bi-trash"></i>
                     </button>
                 </div>'
             ];
@@ -1396,7 +1396,8 @@ class Admin extends BaseController
             'tinggibadan' => $this->request->getPost('tinggibadan'),
             'beratbadan' => $this->request->getPost('beratbadan'),
             'alamat' => $this->request->getPost('alamat'),
-            'kodepos' => $this->request->getPost('kodepos')
+            'kodepos' => $this->request->getPost('kodepos'),
+            'keterangan_status' => 'Registrasi',
         ];
 
         // Check if user already exists in the pencaker table
@@ -1495,10 +1496,10 @@ class Admin extends BaseController
                 'keterampilan' => $pd['keterampilan'],
                 'aksi' => '<div class="btn-group" role="group" aria-label="Actions">
                            <button class="btn btn-primary btn-sm editPendidikan" data-id="' . $pd['id'] . '" data-pencaker_id="' . $pd['pencaker_id'] . '" title="Edit Pendidikan">
-                               <i class="bi bi-pencil-fill px-2"></i>
+                               <i class="bi bi-pencil-fill"></i>
                            </button>
                            <button class="btn btn-danger btn-sm deletePendidikan" data-id="' . $pd['id'] . '" title="Hapus Pendidikan">
-                               <i class="bi bi-trash px-2"></i>
+                               <i class="bi bi-trash"></i>
                            </button>
                        </div>'
             ];
@@ -1627,10 +1628,10 @@ class Admin extends BaseController
                 'jabatan' => $pk['jabatan'],
                 'aksi' => '<div class="btn-group" role="group" aria-label="Actions">
                            <button class="btn btn-primary btn-sm editPekerjaan" data-id="' . $pk['id'] . '" data-pencaker_id="' . $pk['pencaker_id'] . '" title="Edit Pekerjaan">
-                               <i class="bi bi-pencil-fill px-2"></i>
+                               <i class="bi bi-pencil-fill"></i>
                            </button>
                            <button class="btn btn-danger btn-sm deletePekerjaan" data-id="' . $pk['id'] . '" title="Hapus Pekerjaan">
-                               <i class="bi bi-trash px-2"></i>
+                               <i class="bi bi-trash"></i>
                            </button>
                        </div>'
             ];
@@ -1753,10 +1754,10 @@ class Admin extends BaseController
                 'lokasi_jabatan' => $lokasiJabatan,
                 'aksi' => '<div class="btn-group" role="group" aria-label="Actions">
                            <button class="btn btn-primary btn-sm editJabatan" data-id="' . $jb['id'] . '" data-pencaker_id="' . $jb['pencaker_id'] . '" title="Edit Jabatan">
-                               <i class="bi bi-pencil-fill px-2"></i>
+                               <i class="bi bi-pencil-fill"></i>
                            </button>
                            <button class="btn btn-danger btn-sm deleteJabatan" data-id="' . $jb['id'] . '" title="Hapus Jabatan">
-                               <i class="bi bi-trash px-2"></i>
+                               <i class="bi bi-trash"></i>
                            </button>
                        </div>'
             ];
@@ -2006,20 +2007,17 @@ class Admin extends BaseController
         $dokumenModel = new DokumenModel();
         $dokumenPencakerModel = new DokumenPencakerModel();
 
-        // Ambil semua data dari tabel dokumen
         $dokumen = $dokumenModel->findAll();
 
         $data = [];
         $no = 1;
 
-        // Iterasi setiap data dari tabel dokumen
         foreach ($dokumen as $dok) {
-            // Ambil data terkait dari tabel pencaker_dokumen berdasarkan dokumen_id dari tabel dokumen dan pencaker_id yang sedang aktif
+
             $pencakerDokumen = $dokumenPencakerModel->where('dokumen_id', $dok['id'])
                 ->where('pencaker_id', user()->id)
                 ->first();
 
-            // Jika data ditemukan di tabel pencaker_dokumen
             if ($pencakerDokumen) {
                 $data[] = [
                     "no" => $no++,
@@ -2036,11 +2034,11 @@ class Admin extends BaseController
                        </div>'
                 ];
             } else {
-                // Jika tidak ada data terkait, tetap tampilkan jenis dokumen dengan tombol "Upload Dokumen"
+
                 $data[] = [
                     "no" => $no++,
                     "jenis" => $dok['jenis_dokumen'],
-                    "nama" => '-', // Atau kosongkan jika tidak ada data yang ingin ditampilkan
+                    "nama" => '-',
                     "tgl" => '-',
                     "aksi" => '<div class="btn-group" role="group" aria-label="Actions">
                            <a data-id="' . $dok['id'] . '"  data-jenis="' . $dok['jenis_dokumen'] . '"  data-toggle="modal" data-target="#uploadDokumenModal" class="btn btn-success btn-sm uplodDokumenBTN" title="Upload Dokumen">
@@ -2056,11 +2054,10 @@ class Admin extends BaseController
 
     public function upload_dokumen()
     {
-        // Validasi input (jika diperlukan)
         $validationRules = [
             'dokumen_id' => 'required|numeric',
             'jenis_dokumen' => 'required',
-            'file' => 'uploaded[file]|max_size[file,1024]|ext_in[file,pdf]' // Contoh validasi untuk file PDF dengan maksimum 1MB
+            'file' => 'uploaded[file]|max_size[file,1024]'
         ];
 
         if (!$this->validate($validationRules)) {
@@ -2069,22 +2066,22 @@ class Admin extends BaseController
             return $this->response->setJSON($response);
         }
 
-        // Ambil data dari form
         $dokumenId = $this->request->getPost('dokumen_id');
         $jenisDokumen = $this->request->getPost('jenis_dokumen');
         $file = $this->request->getFile('file');
 
-        // Ambil NIK dari pengguna yang aktif
         $nik = user()->nik;
 
-        // Ambil ekstensi file
         $fileExtension = $file->getClientExtension();
 
-        // Buat nama file baru dengan format NIK_jenis_dokumen.ekstensi_dokumen
         $newFileName = $nik . '_' . str_replace(' ', '-', strtoupper($jenisDokumen)) . '.' . $fileExtension;
 
-        // Lakukan proses simpan file ke server
-        $uploadPath = FCPATH . 'uploads/dokumen_pencaker/';
+        $uploadPath = FCPATH . 'uploads/dokumen_pencaker/' . $nik . '/';
+
+        // Cek apakah folder dengan nama NIK sudah ada, jika tidak, buat folder baru
+        if (!is_dir($uploadPath)) {
+            mkdir($uploadPath, 0777, true);
+        }
 
         if (!$file->move($uploadPath, $newFileName)) {
             $response['success'] = false;
@@ -2092,25 +2089,21 @@ class Admin extends BaseController
             return $this->response->setJSON($response);
         }
 
-        // Proses penyimpanan informasi dokumen ke database (jika diperlukan)
-
-        // Contoh: Simpan informasi dokumen ke database
-        $model = new DokumenPencakerModel(); // Gunakan model DokumenPencakerModel
+        $model = new DokumenPencakerModel();
         $data = [
-            'namadokumen' => $newFileName, // Simpan nama file di database
-            'tgl_upload' => date('Y-m-d H:i:s'), // Tanggal upload
-            'pencaker_id' => user()->id, // Ganti dengan ID pencaker yang sesuai
+            'namadokumen' => $newFileName,
+            'tgl_upload' => date('Y-m-d H:i:s'),
+            'pencaker_id' => user()->id,
             'dokumen_id' => $dokumenId,
-            // Tambahkan kolom-kolom lain sesuai kebutuhan
         ];
 
         $model->insert($data);
 
-        // Kirim respons berhasil
         $response['success'] = true;
         $response['message'] = 'File berhasil diunggah.';
         return $this->response->setJSON($response);
     }
+
 
 
     public function hapus_dokumen()
@@ -2137,6 +2130,27 @@ class Admin extends BaseController
         } else {
             return $this->response->setJSON(['status' => 'error'])->setStatusCode(500);
         }
+    }
+
+    public function pengaturan()
+    {
+
+        $userId = user()->id; // Mengambil user ID dari sesi
+
+        $db = \Config\Database::connect();
+        $builder = $db->table('pencaker_dokumen');
+        $builder->select('pencaker_dokumen.namadokumen');
+        $builder->where('pencaker_dokumen.pencaker_id', $userId);
+        $query = $builder->get();
+
+        $dokumen = $query->getRow(); // Mengambil satu baris hasil query
+
+        $data = [
+            'title' => 'Pengaturan Profile',
+            'dokumen' => $dokumen,
+        ];
+
+        return $this->loadView('admin/myprofile', $data);
     }
 
     private function loadView(string $viewName, array $data = []): string

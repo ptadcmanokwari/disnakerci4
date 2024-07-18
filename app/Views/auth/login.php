@@ -1,5 +1,6 @@
 <?= $this->extend('auth/template') ?>
 <?= $this->section('content') ?>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 <div class="card-header text-center">
   <h1 class="bold">Panel Login</h1>
@@ -44,6 +45,9 @@
       <div class="col-6 d-flex align-items-center justify-content-end">
         <a href="<?= url_to('forgot') ?>">Lupa Kata Sandi?</a>
       </div>
+    </div>
+    <div class="col-12 mt-3 px-0 d-flex justify-content-center">
+      <div class="g-recaptcha w-100 d-flex justify-content-center" data-sitekey="<?= config('MyGoogleRecaptcha')->siteKey ?>"></div>
     </div>
     <div class="col-12 mt-3 px-0">
       <button type="submit" class="btn btn-primary btn-block">Masuk</button>

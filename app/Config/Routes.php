@@ -184,3 +184,9 @@ $routes->get('pencaker/get_catatan_pengantar_by_id/(:num)', 'Admin::get_catatan_
 // Bahasa
 $routes->post('pencaker/save_bahasa', 'Admin::save_bahasa');
 $routes->get('pencaker/get_bahasa_pencaker_by_id/(:num)', 'Admin::get_bahasa_pencaker_by_id/$1');
+
+
+// Sidebar pengaturan
+$routes->get('pencaker/pengaturan', 'Admin::pengaturan', ['filter' => 'role:pencaker']);
+
+$routes->get('notification', 'NotificationController::sendNotification');
