@@ -1,5 +1,11 @@
 <?= $this->extend('admin/template') ?>
 <?= $this->section('content') ?>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css">
+<style>
+    a.disabled:hover {
+        cursor: not-allowed !important;
+    }
+</style>
 <div class="content-wrapper">
     <div class="content-header">
         <div class="container-fluid">
@@ -21,15 +27,24 @@
         <div class="container-fluid">
             <div class="card card-default">
                 <div class="card-header">
+                    <h3 class="card-title">Status Anda</h3>
+                </div>
+                <div class="card-body">
+                    <h2 class="text-bold">Registrasi</h2>
+                    <p>
+                        <?php if ($isDataComplete) : ?>
+                            Data Anda sudah lengkap. Silakan ajukan verifikasi data di bawah ini.
+                        <?php else : ?>
+                            Data belum diisi. Silakan lengkapi Formulir AK/1 pada menu Profil Pencaker dan mengunggah dokumen pada menu Dokumen Pencaker. Jika sudah lengkap, klik tombol Minta Verifikasi Data berikut ini.
+                        <?php endif; ?>
+                    </p>
+
+                    <a class="btn btn-primary <?= $isDataComplete ? '' : 'btn btn-secondary disabled' ?>" href="">Minta Verifikasi Data</a>
+                </div>
+            </div>
+            <div class="card card-default">
+                <div class="card-header">
                     <h3 class="card-title">Timeline Aktivitas Anda</h3>
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                            <i class="fas fa-minus"></i>
-                        </button>
-                        <button type="button" class="btn btn-tool" data-card-widget="remove">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
                 </div>
                 <div class="card-body">
                     <div class="timeline">

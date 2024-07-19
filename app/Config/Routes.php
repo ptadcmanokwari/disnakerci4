@@ -160,12 +160,7 @@ $routes->post('pencaker/get_pengalaman_kerja_by_id', 'Admin::get_pengalaman_kerj
 
 // Minat Jabatan
 $routes->post('pencaker/save_data_minat_jabatan', 'Admin::save_data_minat_jabatan', ['filter' => 'role:pencaker']);
-$routes->get('pencaker/save_data_minat_jabatan/(:num)', 'Admin::save_data_minat_jabatan/$1');
-$routes->post('pencaker/fetch_data_minat_jabatan', 'Admin::fetch_data_minat_jabatan');
-$routes->post('pencaker/hapus_data_minat_jabatan', 'Admin::hapus_data_minat_jabatan', ['filter' => 'role:pencaker']);
-$routes->get('pencaker/update_data_minat_jabatan', 'Admin::update_data_minat_jabatan', ['filter' => 'role:pencaker']);
-$routes->post('pencaker/update_data_minat_jabatan', 'Admin::update_data_minat_jabatan', ['filter' => 'role:pencaker']);
-$routes->post('pencaker/get_minat_jabatan_by_id', 'Admin::get_minat_jabatan_by_id', ['filter' => 'role:pencaker']);
+$routes->get('pencaker/get_data_minat_jabatan/(:num)', 'Admin::get_data_minat_jabatan/$1');
 
 // Perusahaan Tujuan
 $routes->post('pencaker/save_data_perusahaan_tujuan', 'Admin::save_data_perusahaan_tujuan', ['filter' => 'role:pencaker']);

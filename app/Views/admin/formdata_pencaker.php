@@ -39,9 +39,6 @@
                         </tbody>
                     </table>
                 </div>
-                <!-- <div class="card-footer">
-                    * = Dokumen yang wajib diunggah
-                </div> -->
             </div>
         </div>
     </section>
@@ -140,26 +137,36 @@
                         success: function(response) {
                             if (response.status === 'success') {
                                 tabelDokumen.ajax.reload();
-                                Swal.fire(
-                                    'Sukses!',
-                                    'Berita berhasil dihapus.',
-                                    'success'
-                                );
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Sukses!',
+                                    text: 'Dokumen berhasil dihapus.',
+                                    timer: 2000,
+                                    timerProgressBar: true,
+                                    showConfirmButton: false,
+                                });
                             } else {
-                                Swal.fire(
-                                    'Gagal!',
-                                    'Terjadi kesalahan saat menghapus berita.',
-                                    'error'
-                                );
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Gagal!',
+                                    text: 'Terjadi kesalahan saat menghapus dokumen.',
+                                    timer: 2000,
+                                    timerProgressBar: true,
+                                    showConfirmButton: false,
+                                });
                             }
                         },
                         error: function() {
-                            Swal.fire(
-                                'Gagal!',
-                                'Terjadi kesalahan saat menghapus berita.',
-                                'error'
-                            );
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Gagal!',
+                                text: 'Terjadi kesalahan saat menghapus dokumen.',
+                                timer: 2000,
+                                timerProgressBar: true,
+                                showConfirmButton: false,
+                            });
                         }
+
                     });
                 }
             });
@@ -203,7 +210,6 @@
         uploadMultiple: false,
         maxFiles: 1,
         dictDefaultMessage: "Seret dokumen ke sini untuk unggah",
-        acceptedFiles: 'application/pdf, image/*',
         addRemoveLinks: true,
         init: function() {
             var addDokumenDropzone = this;
@@ -237,6 +243,9 @@
                         icon: 'success',
                         title: 'Berhasil',
                         text: 'Dokumen berhasil diunggah.',
+                        timer: 2000,
+                        timerProgressBar: true,
+                        showConfirmButton: false,
                     }).then((result) => {
                         $('#uploadDokumenModal').modal('hide');
                         resetModal();
@@ -247,16 +256,52 @@
                         icon: 'error',
                         title: 'Error',
                         text: response.errors ? response.errors.join("<br>") : 'Gagal unggah dokumen.',
+                        timer: 2000,
+                        timerProgressBar: true,
+                        showConfirmButton: false,
                     });
                 }
             });
 
-            this.on("error", function(file, response) {
+            this.on("error", function(file, message) {
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
-                    text: 'Gagal unggah dokumen.',
+                    text: message,
+                    timer: 2000,
+                    timerProgressBar: true,
+                    showConfirmButton: false,
                 });
+                addDokumenDropzone.removeFile(file);
+            });
+
+            this.on("addedfile", function(file) {
+                // Check file size
+                if (file.size > 200 * 1024) { // 200 KB
+                    this.removeFile(file);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Ukuran file terlalu besar. Maksimal ukuran file adalah 200KB.',
+                        timer: 2000,
+                        timerProgressBar: true,
+                        showConfirmButton: false,
+                    });
+                }
+            });
+
+            // Update acceptedFiles saat modal dibuka
+            $('#uploadDokumenModal').on('show.bs.modal', function() {
+                const jenisDokumen = $('#jenis_dokumen').val();
+                let acceptedFileTypes;
+
+                if (jenisDokumen === 'PAS FOTO' || jenisDokumen === 'KTP') {
+                    acceptedFileTypes = 'image/*';
+                } else {
+                    acceptedFileTypes = 'application/pdf';
+                }
+
+                addDokumenDropzone.options.acceptedFiles = acceptedFileTypes;
             });
         }
     });

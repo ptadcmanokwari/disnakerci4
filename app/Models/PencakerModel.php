@@ -91,4 +91,18 @@ class PencakerModel extends Model
     {
         return $this->where('id', $pencaker_id)->first();
     }
+
+    public function isDataComplete($userId)
+    {
+        $data = $this->where('user_id', $userId)->first();
+        if ($data) {
+            foreach ($this->allowedFields as $field) {
+                if (!isset($data[$field]) || empty($data[$field])) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
+    }
 }

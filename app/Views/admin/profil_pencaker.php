@@ -26,6 +26,10 @@
     #profilPencaker .nav-tabs.flex-column {
         border: 0 !important;
     }
+
+    .form-control {
+        text-transform: uppercase;
+    }
 </style>
 <div class="content-wrapper">
     <section class="content-header">
@@ -274,13 +278,13 @@
                                                                 <div class="col-12 col-sm-12 col-md-3 col-lg-3 ">
                                                                     <div class="form-group">
                                                                         <label for="tahunmasuk">Tahun Masuk</label>
-                                                                        <input type="text" class="form-control year" name="tahunmasuk" id="tahunmasuk" autofocus required />
+                                                                        <input type="number" class="form-control year" name="tahunmasuk" id="tahunmasuk" autofocus required />
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-12 col-sm-12 col-md-3 col-lg-3 ">
                                                                     <div class="form-group">
                                                                         <label for="tahunlulus">Tahun Lulus</label>
-                                                                        <input type="text" class="form-control year" name="tahunlulus" id="tahunlulus" required autofocus required />
+                                                                        <input type="number" class="form-control year" name="tahunlulus" id="tahunlulus" required autofocus required />
                                                                     </div>
                                                                 </div>
 
@@ -485,179 +489,158 @@
                             </div>
 
                             <div class="tab-pane fade" id="bidangPekerjaan" role="tabpanel" aria-labelledby="bidangPekerjaan-tab">
-                                <div class="card jabatanpencaker">
+                                <div class="card identitaspencaker">
                                     <div class="card-header with-border">
-                                        <h3 class="card-title">Bidang Pekerjaan Yang Diminati</h3>
+                                        <h3 class="card-title">Keterangan Umum Identitas Pencaker</h3>
+                                    </div>
+                                    <form action="#" id="formbidangPekerjaan">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                                    <div class="form-card">
+                                                        <div class="alert alert-success" role="alert">
+                                                            Lengkapi data diri Anda di bawah ini!
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <input type="hidden" class="form-control" name="id_pencaker" id="id_pencaker" disabled value="<?= $user['id']; ?>">
+                                                <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                                                    <div class="form-group">
+                                                        <label for="nama_jabatan">Bidang Pekerjaan</label>
+                                                        <input type="text" class="form-control" name="nama_jabatan" id="nama_jabatan">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                                                    <div class="form-group mb-0">
+                                                        <span>Pilih Lokasi Jabatan Anda</span>
+                                                        <div class="row mt-3">
+                                                            <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="lokasi_jabatan" id="lokasijabatan1" value="DN">
+                                                                    <label class="form-check-label" for="lokasijabatan1">
+                                                                        Dalam Negeri
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="lokasi_jabatan" id="lokasijabatan2" value="LN">
+                                                                    <label class="form-check-label" for="lokasijabatan2">
+                                                                        Luar Negeri
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="card-footer">
+                                            <button type="button" id="btnback8" class="btn btn-flat btn-secondary">Sebelumnya</button>
+                                            <button type="button" id="btnSave9" class="btn btn-flat btn-primary">Selanjutnya</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="perusahaanTujuan" role="tabpanel" aria-labelledby="perusahaanTujuan-tab">
+                                <div class="card perusahaanpencaker">
+                                    <div class="card-header with-border">
+                                        <h3 class="card-title">Perusahaan/Instansi Yang Dituju</h3>
                                     </div>
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-lg-12">
                                                 <div class="form-card">
                                                     <div class="alert alert-success" role="alert">
-                                                        Silakan isi data terkait bidang pekerjaan yang diminati
+                                                        Silakan tentukan tujuan perusahaan/instansi pilihan Anda!
                                                     </div>
-                                                    <form action="#" id="formjabatanpencaker">
-                                                        <div class="row">
-                                                            <input type="hidden" class="form-control" name="id_pencaker" id="id_pencaker" disabled value="<?= $user['id']; ?>">
-                                                            <div class="col-6">
-                                                                <label for="minat_jabatan">Bidang Pekerjaan</label>
-                                                                <div class="form-group form-group-sm">
-                                                                    <input type="text" class="form-control form-control-sm" name="minat_jabatan" id="minat_jabatan" required />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <span>Pilih Lokasi Jabatan Anda</span>
-                                                                <div class="row">
-                                                                    <div class="col-6">
-                                                                        <div class="form-check">
-                                                                            <input class="form-check-input" type="radio" name="lokasi_jabatan" id="lokasijabatan1" value="DN">
-                                                                            <label class="form-check-label" for="lokasijabatan1">
-                                                                                Dalam Negeri
-                                                                            </label>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-6">
-                                                                        <div class="form-check">
-                                                                            <input class="form-check-input" type="radio" name="lokasi_jabatan" id="lokasijabatan2" value="LN">
-                                                                            <label class="form-check-label" for="lokasijabatan2">
-                                                                                Luar Negeri
-                                                                            </label>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="ol-12 col-sm-12 col-md-6 col-lg-6">
-                                                                <div class="col-12 col-sm-12 col-md-3 col-lg-3">
-                                                                    <button type="button" id="btnSaveJabatan" class="btn btn-primary btn-sm"><i class="fas fa-save"></i> Simpan</button>
-                                                                    <button type="button" id="btnUpdateJabatan" class="btn btn-primary btn-sm hide"><i class="fas fa-edit"></i> Perbarui</button>
-                                                                    <input type="hidden" name="idjabatan">
-                                                                </div>
-                                                            </div>
-                                                    </form>
-
-                                                </div>
-                                                <div class="row mt-5">
-                                                    <div class="col-12">
-                                                        <table id="tabelJabatan" class="table table-bordered table-hover">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th width="10px">No</th>
-                                                                    <th>Bidang Pekerjaan</th>
-                                                                    <th>Lokasi Jabatan</th>
-                                                                    <th>Aksi</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="card-footer">
-                                    <button type="button" id="btnback5" class="btn btn-flat btn-secondary">Sebelumnya</button>
-                                    <button type="button" id="btnSave6" class="btn btn-flat btn-primary">Selanjutnya</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="tab-pane fade" id="perusahaanTujuan" role="tabpanel" aria-labelledby="perusahaanTujuan-tab">
-                            <div class="card perusahaanpencaker">
-                                <div class="card-header with-border">
-                                    <h3 class="card-title">Perusahaan/Instansi Yang Dituju</h3>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <div class="form-card">
-                                                <div class="alert alert-success" role="alert">
-                                                    Silakan tentukan tujuan perusahaan/instansi pilihan Anda!
                                                 </div>
                                             </div>
-                                        </div>
 
-                                        <div class="col-lg-12">
-                                            <form id="formtujuanperusahaan" class="w-100">
-                                                <div class="row">
-                                                    <input type="hidden" class="form-control" name="id_pencaker" id="id_pencaker" value="<?= $user['id']; ?>">
-                                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                                                        <div class="form-group">
-                                                            <label for="nama_perusahaan">Nama Perusahaan/Instansi</label>
-                                                            <input type="text" class="form-control" name="nama_perusahaan" id="nama_perusahaan">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                                                        <div class="form-group">
-                                                            <label for="nohp_perusahaan">Nomor Telepon Instansi</label>
-                                                            <input type="text" class="form-control" name="nohp_perusahaan" id="nohp_perusahaan">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                                                        <div class="form-group">
-                                                            <label for="alamat_perusahaan">Alamat</label>
-                                                            <textarea class="form-control" name="alamat_perusahaan" id="alamat_perusahaan"></textarea>
-                                                        </div>
-                                                    </div>
-                                                    <input type="hidden" name="id_perusahaan" id="id_perusahaan">
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="card-footer">
-                                    <button type="button" id="btnback6" class="btn btn-flat btn-secondary">Sebelumnya</button>
-                                    <button type="button" id="btnSave7" class="btn btn-flat btn-primary">Selanjutnya</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="tab-pane fade" id="keteranganTambahan" role="tabpanel" aria-labelledby="keteranganTambahan-tab">
-                            <div class="card datatambahanpencaker">
-                                <div class="card-header with-border">
-                                    <h3 class="card-title">Keterangan Tambahan</h3>
-                                </div>
-                                <form action="#" id="formcatatanpengantar">
-                                    <div class="card-body">
-                                        <div class="row">
                                             <div class="col-lg-12">
-                                                <div class="form-card">
-                                                    <div class="alert alert-success" role="alert">
-                                                        Catatan pengantar kerja yang berkaitan dengan faktor-faktor yang mempengaruhi pekerjaan!
-                                                    </div>
+                                                <form id="formtujuanperusahaan" class="w-100">
                                                     <div class="row">
                                                         <input type="hidden" class="form-control" name="id_pencaker" id="id_pencaker" value="<?= $user['id']; ?>">
-                                                        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                                                             <div class="form-group">
-                                                                <label for="catatan_pengantar">Catatan Pencaker</label>
-                                                                <textarea class="form-control" name="catatan_pengantar" id="catatan_pengantar" rows="3" required autofocus></textarea>
+                                                                <label for="nama_perusahaan">Nama Perusahaan/Instansi</label>
+                                                                <input type="text" class="form-control" name="nama_perusahaan" id="nama_perusahaan">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                                            <div class="form-group">
+                                                                <label for="nohp_perusahaan">Nomor Telepon Instansi</label>
+                                                                <input type="text" class="form-control" name="nohp_perusahaan" id="nohp_perusahaan">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                                            <div class="form-group">
+                                                                <label for="alamat_perusahaan">Alamat</label>
+                                                                <textarea class="form-control" name="alamat_perusahaan" id="alamat_perusahaan"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <input type="hidden" name="id_perusahaan" id="id_perusahaan">
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="card-footer">
+                                        <button type="button" id="btnback6" class="btn btn-flat btn-secondary">Sebelumnya</button>
+                                        <button type="button" id="btnSave7" class="btn btn-flat btn-primary">Selanjutnya</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="keteranganTambahan" role="tabpanel" aria-labelledby="keteranganTambahan-tab">
+                                <div class="card datatambahanpencaker">
+                                    <div class="card-header with-border">
+                                        <h3 class="card-title">Keterangan Tambahan</h3>
+                                    </div>
+                                    <form action="#" id="formcatatanpengantar">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="form-card">
+                                                        <div class="alert alert-success" role="alert">
+                                                            Catatan pengantar kerja yang berkaitan dengan faktor-faktor yang mempengaruhi pekerjaan!
+                                                        </div>
+                                                        <div class="row">
+                                                            <input type="hidden" class="form-control" name="id_pencaker" id="id_pencaker" value="<?= $user['id']; ?>">
+                                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                                                <div class="form-group">
+                                                                    <label for="catatan_pengantar">Catatan Pencaker</label>
+                                                                    <textarea class="form-control" name="catatan_pengantar" id="catatan_pengantar" rows="3" required autofocus></textarea>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="card-footer">
-                                        <button type="button" id="btnback7" class="btn btn-flat btn-secondary">Sebelumnya</button>
-                                        <button type="button" id="btnSave8" class="btn btn-flat btn-primary">Selesai</button>
-                                    </div>
-                                </form>
+                                        <div class="card-footer">
+                                            <button type="button" id="btnback7" class="btn btn-flat btn-secondary">Sebelumnya</button>
+                                            <button type="button" id="btnSave8" class="btn btn-flat btn-primary">Selesai</button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
+
+
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-</div>
+        </div>
 </div>
 </section>
 </div>
@@ -1306,229 +1289,7 @@
 <!-- Bagian Jabatan yang diminati -->
 <script>
     $(document).ready(function() {
-        // Initialize DataTable
-        var pencakerId = $('#id_pencaker').val(); // Pastikan elemen ini memiliki pencaker_id
-        var tabelJabatan = $('#tabelJabatan').DataTable({
-            "processing": true,
-            "serverSide": false,
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": false,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-            "ajax": {
-                "url": "<?= base_url('pencaker/fetch_data_minat_jabatan') ?>",
-                "type": "POST",
-                "data": function(d) {
-                    d.pencaker_id = pencakerId; // Kirim pencaker_id
-                }
-            },
-            "columns": [{
-                    "data": "no"
-                },
-                {
-                    "data": "nama_jabatan"
-                },
-                {
-                    "data": "lokasi_jabatan"
-                },
-                {
-                    "data": "aksi",
-                    "orderable": false,
-                    "searchable": false
-                }
-            ]
-        });
-
-        // Event untuk tombol Save
-        $('#btnSaveJabatan').click(function() {
-            var data = {
-                minat_jabatan: $('#minat_jabatan').val(),
-                lokasi_jabatan: $('input[name="lokasi_jabatan"]:checked').val(),
-                pencaker_id: $('#id_pencaker').val(),
-            };
-
-            $.ajax({
-                url: '<?= base_url('pencaker/save_data_minat_jabatan') ?>',
-                type: 'POST',
-                data: data,
-                success: function(response) {
-                    if (response.status === 'success') {
-                        Swal.fire(
-                            'Berhasil!',
-                            response.message,
-                            'success'
-                        );
-                        tabelJabatan.ajax.reload();
-                        $('#formjabatanpencaker')[0].reset();
-                    } else {
-                        Swal.fire(
-                            'Gagal!',
-                            response.message,
-                            'error'
-                        );
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.log(error);
-                    Swal.fire(
-                        'Error!',
-                        'Terjadi kesalahan saat menyimpan data.',
-                        'error'
-                    );
-                }
-            });
-        });
-
-
-        $('#tabelJabatan').on('click', '.deleteJabatan', function() {
-            var idjabatan = $(this).data('id'); // Ambil id dari tombol yang diklik
-
-            // Tampilkan SweetAlert untuk konfirmasi
-            Swal.fire({
-                title: 'Konfirmasi',
-                text: 'Apakah Anda yakin ingin menghapus pelatihan ini?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Ya, Hapus!',
-                cancelButtonText: 'Batal'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Jika user mengonfirmasi, lakukan proses hapus via AJAX
-                    $.ajax({
-                        url: '<?= base_url('pencaker/hapus_data_minat_jabatan') ?>',
-                        type: 'POST',
-                        data: {
-                            id: idjabatan // Kirim id pendidikan yang akan dihapus
-                        },
-                        success: function(response) {
-                            if (response.status === 'success') {
-                                tabelJabatan.ajax.reload(); // Reload tabel setelah hapus
-                                Swal.fire(
-                                    'Sukses!',
-                                    'Pelatihan berhasil dihapus.',
-                                    'success'
-                                );
-                            } else {
-                                Swal.fire(
-                                    'Gagal!',
-                                    'Terjadi kesalahan saat menghapus pelatihan.',
-                                    'error'
-                                );
-                            }
-                        },
-                        error: function() {
-                            Swal.fire(
-                                'Gagal!',
-                                'Terjadi kesalahan saat menghapus pelatihan.',
-                                'error'
-                            );
-                        }
-                    });
-                }
-            });
-        });
-
-
-
-        $('#tabelJabatan').on('click', '.editJabatan', function() {
-            // Ambil id dari data jabatan
-            var idJabatan = $(this).data('id');
-
-            // Kirim AJAX request untuk mendapatkan data jabatan berdasarkan id
-            $.ajax({
-                url: '<?= base_url('pencaker/get_minat_jabatan_by_id') ?>',
-                type: 'POST',
-                data: {
-                    id: idJabatan
-                },
-                dataType: 'json',
-                success: function(response) {
-                    // Isi data dari response ke dalam form input
-                    $('#minat_jabatan').val(response.nama_jabatan);
-
-                    // Menandai radio button berdasarkan lokasi jabatan dari response
-                    if (response.lokasi_jabatan === 'LN') {
-                        $('#lokasijabatan2').prop('checked', true); // Luar Negeri
-                    } else {
-                        $('#lokasijabatan1').prop('checked', true); // Dalam Negeri
-                    }
-
-                    // Ubah tombol Save menjadi Update
-                    $('#btnSaveJabatan').addClass('hide');
-                    $('#btnUpdateJabatan').removeClass('hide');
-
-                    // Simpan id jabatan di form untuk digunakan saat proses update
-                    $('input[name="idjabatan"]').val(response.id);
-                },
-                error: function(xhr, status, error) {
-                    console.error('Terjadi kesalahan saat mengambil data jabatan:', error);
-                    Swal.fire(
-                        'Error!',
-                        'Terjadi kesalahan saat mengambil data jabatan.',
-                        'error'
-                    );
-                }
-            });
-        });
-
-
-
-        // Event handler untuk tombol Update pada form input Pendidikan
-
-        $('#btnUpdateJabatan').click(function() {
-            var data = {
-                id: $('input[name="idjabatan"]').val(), // Pastikan Anda mendapatkan ID dari input form
-                minat_jabatan: $('#minat_jabatan').val(),
-                lokasi_jabatan: $('input[name="lokasi_jabatan"]:checked').val(),
-                // pencaker_id: $('#id_pencaker').val(),
-            };
-
-            console.log('Data yang dikirim:', data);
-
-            $.ajax({
-                url: '<?= base_url('pencaker/update_data_minat_jabatan') ?>',
-                type: 'POST',
-                data: data,
-                success: function(response) {
-                    console.log('Response dari server:', response);
-                    if (response.status === 'success') {
-                        tabelJabatan.ajax.reload();
-                        Swal.fire(
-                            'Sukses!',
-                            'Data pendidikan berhasil diperbarui.',
-                            'success'
-                        );
-
-                        $('#formjabatanpencaker')[0].reset();
-                        $('input[name="idjabatan"]').val('');
-                        $('#btnUpdateJabatan').addClass('hide');
-                        $('#btnSaveJabatan').removeClass('hide');
-                    } else {
-                        Swal.fire(
-                            'Gagal!',
-                            'Terjadi kesalahan saat memperbarui data pendidikan.',
-                            'error'
-                        );
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error('Terjadi kesalahan saat memperbarui data pendidikan:', error);
-                    Swal.fire(
-                        'Error!',
-                        'Terjadi kesalahan saat memperbarui data pendidikan.',
-                        'error'
-                    );
-                }
-            });
-        });
-
-
-
         // Catatan Tambahan
-
         $('#btnSave8').on('click', function() {
             var formData = {
                 id_pencaker: $('#id_pencaker').val(),
@@ -1747,7 +1508,63 @@
     });
 </script>
 
+<script>
+    $(document).ready(function() {
+        $('#btnSave9').on('click', function() {
+            var formData = {
+                id_pencaker: $('#id_pencaker').val(),
+                nama_jabatan: $('#nama_jabatan').val(),
+                lokasi_jabatan: $('input[name="lokasi_jabatan"]:checked').val(),
+            };
 
+            $.ajax({
+                url: '<?= site_url("pencaker/save_data_minat_jabatan") ?>',
+                type: 'POST',
+                data: formData,
+                success: function(response) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Sukses!',
+                        text: 'Data berhasil disimpan.',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $('#perusahaanTujuan-tab').tab('show');
+                        }
+                    });
+                },
+                error: function(xhr, status, error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: 'Terjadi kesalahan saat menyimpan data.',
+                    });
+                }
+            });
+        });
+
+        var userId = $('#id_pencaker').val();
+        // Fungsi untuk mengisi form dengan data yang diambil dari server
+        function fillForm(data) {
+            if (data.lokasi_jabatan) {
+                $('input[name="lokasi_jabatan"][value="' + data.lokasi_jabatan + '"]').prop('checked', true);
+            }
+            $('#nama_jabatan').val(data.nama_jabatan);
+        }
+
+        // AJAX request untuk mengambil data berdasarkan user_id
+        $.ajax({
+            url: '<?= site_url("pencaker/get_data_minat_jabatan/") ?>' + userId,
+            type: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                fillForm(response);
+            },
+            error: function(xhr, status, error) {
+                console.error('Error: ' + status + ' - ' + error);
+            }
+        });
+    });
+</script>
 
 
 <?= $this->endSection() ?>

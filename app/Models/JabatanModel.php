@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class JabatanModal extends Model
+class JabatanModel extends Model
 {
     protected $table = 'minat_jabatan';
     protected $primaryKey = 'id';
