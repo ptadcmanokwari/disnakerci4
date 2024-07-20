@@ -40,12 +40,8 @@
                                     <img class="profile-user-img img-fluid img-circle" src="<?php echo base_url('uploads/dokumen_pencaker/default.webp'); ?>" alt="User profile picture">
                                 <?php endif; ?>
                             </div>
-
-
                             <h3 class="profile-username text-center"><?php echo user()->namalengkap; ?></h3>
-
                             <p class="text-muted text-center"><?php echo user()->username; ?></p>
-
                             <ul class="list-group list-group-unbordered mb-3">
                                 <li class="list-group-item">
                                     <b>NIK :</b> <a class="float-right"><?php echo user()->nik; ?></a>

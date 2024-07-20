@@ -1,6 +1,10 @@
 <?= $this->extend('admin/template') ?>
 <?= $this->section('content') ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css">
+<!-- SweetAlert2 CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<meta name="csrf-token" content="<?= csrf_hash() ?>">
+
 <style>
     a.disabled:hover {
         cursor: not-allowed !important;
@@ -30,16 +34,30 @@
                     <h3 class="card-title">Status Anda</h3>
                 </div>
                 <div class="card-body">
-                    <h2 class="text-bold">Registrasi</h2>
-                    <p>
-                        <?php if ($isDataComplete) : ?>
-                            Data Anda sudah lengkap. Silakan ajukan verifikasi data di bawah ini.
-                        <?php else : ?>
-                            Data belum diisi. Silakan lengkapi Formulir AK/1 pada menu Profil Pencaker dan mengunggah dokumen pada menu Dokumen Pencaker. Jika sudah lengkap, klik tombol Minta Verifikasi Data berikut ini.
-                        <?php endif; ?>
-                    </p>
+                    <h2 class="text-bold"><?php echo $id_pencaker['keterangan_status']; ?></h2>
 
-                    <a class="btn btn-primary <?= $isDataComplete ? '' : 'btn btn-secondary disabled' ?>" href="">Minta Verifikasi Data</a>
+                    <?php if ($id_pencaker['keterangan_status'] == 'Verifikasi') : ?>
+                        <div class="alert alert-info" role="alert">
+                            Dokumen Anda sudah dikirim untuk diverifikasi oleh Admin Disnaker.
+                        </div>
+                    <?php else : ?>
+                        <p>
+                            <?php if ($isDataComplete && $isDocumentComplete) : ?>
+                        <div class="alert alert-success" role="alert">
+                            Data Anda sudah lengkap. Silakan ajukan verifikasi data di bawah ini.
+                        </div>
+                    <?php else : ?>
+                        <div class="alert alert-warning" role="alert">
+                            Data Anda belum lengkap. Silakan cek Formulir AK/1 pada menu Profil Pencaker dan mengunggah dokumen pada menu Dokumen Pencaker.
+                        </div>
+                    <?php endif; ?>
+                    </p>
+                    <form id="verificationForm">
+                        <input type="text" class="form-control" name="id_pencaker" id="id_pencaker" readonly value="<?= $id_pencaker['id']; ?>">
+                        <input type="hidden" id="mintaVerifikasi" name="mintaverifikasi" value="Verifikasi">
+                        <button id="verifyLink" class="btn btn-primary <?= $isDataComplete && $isDocumentComplete ? '' : 'btn btn-secondary disabled' ?>">Minta Verifikasi Data</button>
+                    </form>
+                <?php endif; ?>
                 </div>
             </div>
             <div class="card card-default">
@@ -136,5 +154,47 @@
         </div>
     </section>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- SweetAlert2 JS -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#verificationForm').on('submit', function(event) {
+            event.preventDefault(); // Mencegah form dari submit default
+
+            var id_pencaker = $('#id_pencaker').val();
+            var formData = {
+                id_pencaker: id_pencaker,
+                keterangan_status: $('#mintaVerifikasi').val(),
+            };
+
+            $.ajax({
+                url: '<?= site_url("pencaker/minta_verifikasi") ?>',
+                type: 'POST',
+                data: formData,
+                success: function(response) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Sukses!',
+                        text: 'Data berhasil disimpan.',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            location.reload(); // Muat ulang halaman untuk menampilkan perubahan
+                        }
+                    });
+                },
+                error: function(xhr, status, error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: 'Terjadi kesalahan saat menyimpan data.',
+                    });
+                }
+            });
+        });
+    });
+</script>
 
 <?= $this->endSection() ?>

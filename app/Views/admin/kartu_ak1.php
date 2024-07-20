@@ -4,6 +4,10 @@
 <head>
     <meta charset="utf-8">
     <title>Kartu Pencaker</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="<?= base_url(); ?>frontend/assets/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="<?= base_url(); ?>frontend/assets/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url(); ?>frontend/assets/img/favicon/favicon-16x16.png">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paper-css/0.4.1/paper.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -61,6 +65,10 @@
 
         #profil {
             padding-left: 0 !important;
+        }
+
+        table td {
+            text-transform: capitalize !important;
         }
     </style>
     </style>
@@ -152,15 +160,8 @@
                 </div>
                 <div class="row" style="margin-top:20px !important">
                     <div id="profil" class="col-3">
-                        <?php
-                        $image_path = 'uploads/pencaker/' . $pencaker['id'] . '.jpg';
-                        if (file_exists(FCPATH . $image_path)) {
-                            $image_url = base_url($image_path);
-                        } else {
-                            $image_url = base_url('uploads/pencaker/default.webp');
-                        }
-                        ?>
-                        <img class="float-left w-100" src="<?php echo $image_url; ?>" style="width:28mm;height: 38mm;border: 1px solid #dee2e6; ">
+
+                        <img src="<?= base_url('uploads/dokumen_pencaker/' . $pencaker['nik'] . '/' . $dokumen['namadokumen']) ?>" alt="Pas Foto" style="width:150px;height:200px;">
 
                     </div>
                     <div class="col-9 px-0">
@@ -185,9 +186,9 @@
                                     <td>Tempat, Tanggal Lahir</td>
                                     <td>:</td>
                                     <td class="border-bottom">
-                                        <?php
-                                        echo $pencaker['tempatlahir'] . ", ";
-                                        echo (!empty($pencaker->tgllahir)) ? $pencaker['tgllahir'] : ''; ?></td>
+                                        <?php echo ucfirst($pencaker['tempatlahir']) . ", " . date_indo($pencaker['tgllahir']); ?>
+                                    </td>
+
                                 </tr>
                                 <tr>
                                     <td>Jenis Kelamin</td>

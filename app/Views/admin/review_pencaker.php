@@ -4,7 +4,9 @@
 <head>
     <meta charset="utf-8">
     <title><?php echo $title; ?></title>
-
+    <link rel="apple-touch-icon" sizes="180x180" href="<?= base_url(); ?>frontend/assets/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="<?= base_url(); ?>frontend/assets/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url(); ?>frontend/assets/img/favicon/favicon-16x16.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paper-css/0.4.1/paper.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -82,12 +84,16 @@
                     <tr>
                         <td width="30%">NOMOR PENDAFTARAN</td>
                         <td width="2%">:</td>
-                        <td class="fw-bold" width="68%"><?php echo $pencaker['nopendaftaran']; ?></td>
+                        <td class="fw-bold" width="68%">
+                            <?php echo isset($pencaker['nopendaftaran']) ? $pencaker['nopendaftaran'] : '-'; ?>
+                        </td>
                     </tr>
                     <tr>
                         <td>TANGGAL PENDAFTARAN</td>
                         <td>:</td>
-                        <td class="fw-bold"><?php echo $pencaker['agama']; ?></td>
+                        <td class="fw-bold">
+                            <?php echo isset($pencaker['created_at']) ? date_indo($pencaker['created_at']) : '-'; ?>
+                        </td>
                     </tr>
                     <tr>
                         <td>NOMOR INDUK KEPENDUDUKAN</td>
@@ -115,7 +121,7 @@
                                 <td>Tempat, Tanggal Lahir</td>
                                 <td>:</td>
                                 <td class="fw-bold">
-                                    <?php echo strtoupper($pencaker['tempatlahir']) . ", " . strtoupper($pencaker['tgllahir']); ?>
+                                    <?php echo strtoupper($pencaker['tempatlahir']) . ", " . date_indo($pencaker['tgllahir']); ?>
                                 </td>
                             </tr>
                             <tr>
@@ -146,12 +152,12 @@
                             <tr>
                                 <td>Nomor HP</td>
                                 <td>:</td>
-                                <td class="fw-bold"><?php echo $pencaker['agama']; ?></td>
+                                <td class="fw-bold"><?php echo $pencaker['nohp']; ?></td>
                             </tr>
                             <tr>
                                 <td>Email</td>
                                 <td>:</td>
-                                <td class="fw-bold"><?php echo $pencaker['agama']; ?></td>
+                                <td class="fw-bold"><?php echo $pencaker['email']; ?></td>
                             </tr>
                             <tr>
                                 <td>Kode Pos</td>
@@ -201,8 +207,6 @@
                     foreach ($pendidikan as $pd) : ?>
                         <tr>
                             <td><?php echo $no++; ?></td>
-                            <td><?php echo $pd['tahunmasuk']; ?></td>
-                            <td><?php echo $pd['tahunlulus']; ?></td>
                             <td><?php echo isset($pd['tahunmasuk']) ? $pd['tahunmasuk'] : '-'; ?></td>
                             <td><?php echo isset($pd['tahunlulus']) ? $pd['tahunlulus'] : '-'; ?></td>
                             <td><?php echo isset($pd['jenjang']) ? $pd['jenjang'] : '-'; ?></td>
@@ -214,6 +218,9 @@
                 </tbody>
             </table>
         </div>
+
+
+
 
         <hr>
 

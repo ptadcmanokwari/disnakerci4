@@ -8,6 +8,7 @@ use Myth\Auth\Config\Auth as AuthConfig;
 use Myth\Auth\Entities\User;
 use Myth\Auth\Models\UserModel;
 use Myth\Auth\Models\SettingsModel;
+use App\Models\PencakerModel;
 
 class AuthController extends Controller
 {
@@ -212,6 +213,87 @@ class AuthController extends Controller
 	 * Attempt to register a new user.
 	 */
 
+	// public function attemptRegister()
+	// {
+	// 	// Check if registration is allowed
+	// 	if (!$this->config->allowRegistration) {
+	// 		return redirect()->back()->withInput()->with('error', lang('Auth.registerDisabled'));
+	// 	}
+
+	// 	$recaptchaResponse = $this->request->getPost('g-recaptcha-response');
+	// 	if (!$this->verifyRecaptcha($recaptchaResponse)) {
+	// 		return redirect()->back()->withInput()->with('error', 'Please complete the reCAPTCHA validation.');
+	// 	}
+
+	// 	$users = model(UserModel::class);
+
+	// 	// Validate basics first since some password rules rely on these fields
+	// 	$rules = [
+	// 		'namalengkap'   => 'required',
+	// 		'nik'           => 'required|min_length[3]|max_length[30]',
+	// 		'nohp'          => 'required',
+	// 		'username' => 'required|alpha_numeric_space|min_length[3]|max_length[30]|is_unique[users.username]',
+	// 		'email'    => 'required|valid_email|is_unique[users.email]',
+	// 	];
+
+	// 	if (!$this->validate($rules)) {
+	// 		return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+	// 	}
+
+	// 	// Validate passwords since they can only be validated properly here
+	// 	$rules = [
+	// 		'password'     => 'required|strong_password',
+	// 		'pass_confirm' => 'required|matches[password]',
+	// 	];
+
+	// 	if (!$this->validate($rules)) {
+	// 		return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+	// 	}
+
+	// 	// Save the user
+	// 	$allowedPostFields = array_merge(['password'], $this->config->validFields, $this->config->personalFields);
+	// 	$user = new User($this->request->getPost($allowedPostFields));
+
+	// 	$this->config->requireActivation === null ? $user->activate() : $user->generateActivateHash();
+
+	// 	// Ensure default group gets assigned if set
+	// 	if (!empty($this->config->defaultUserGroup)) {
+	// 		$users = $users->withGroup($this->config->defaultUserGroup);
+	// 	}
+
+	// 	if (!$users->save($user)) {
+	// 		return redirect()->back()->withInput()->with('errors', $users->errors());
+	// 	}
+
+	// 	// Send WhatsApp notification
+	// 	$phoneNumber = $this->request->getPost('nohp');
+	// 	$message = "*Notifikasi disnakertransmkw.com*" . PHP_EOL . PHP_EOL . "Hi, *" . $this->request->getPost('namalengkap') . "*," . PHP_EOL . "Anda telah berhasil melakukan registrasi sebagai pencaker di situs disnakertransmkw.com. Silakan lakukan aktivasi akun Anda dengan mengecek email aktivasi dari Sistem Disnakertrans Manokwari." . PHP_EOL . PHP_EOL . "*<noreply>*";
+
+	// 	// Ensure SettingsModel is correctly loaded
+	// 	$userKey = $this->settingsModel->getValueByKey('whatsapp_userkey');
+	// 	$passKey = $this->settingsModel->getValueByKey('whatsapp_passkey');
+	// 	$admin = $this->settingsModel->getValueByKey('whatsapp_admin');
+
+	// 	$response = sendWhatsAppMessage($phoneNumber, $message, $userKey, $passKey, $admin);
+	// 	// Handle $response as needed
+
+	// 	if ($this->config->requireActivation !== null) {
+	// 		$activator = service('activator');
+	// 		$sent = $activator->send($user);
+
+	// 		if (!$sent) {
+	// 			return redirect()->back()->withInput()->with('error', $activator->error() ?? lang('Auth.unknownError'));
+	// 		}
+
+	// 		// Success!
+	// 		return redirect()->route('login')->with('message', lang('Auth.activationSuccess'));
+	// 	}
+
+	// 	// Success!
+	// 	return redirect()->route('login')->with('message', lang('Auth.registerSuccess'));
+	// }
+
+
 	public function attemptRegister()
 	{
 		// Check if registration is allowed
@@ -263,6 +345,20 @@ class AuthController extends Controller
 		if (!$users->save($user)) {
 			return redirect()->back()->withInput()->with('errors', $users->errors());
 		}
+
+		// Get the ID of the newly registered user
+		$userId = $users->getInsertID();
+
+		// Save the pencaker data
+		$pencakerData = [
+			'namalengkap' => $this->request->getPost('namalengkap'),
+			'email' => $this->request->getPost('email'),
+			'nopendaftaran' => 'generate_or_get_nopendaftaran', // Sesuaikan dengan cara Anda mendapatkan no pendaftaran
+			'user_id' => $userId
+		];
+
+		$pencakerModel = model(PencakerModel::class);
+		$pencakerModel->insert($pencakerData);
 
 		// Send WhatsApp notification
 		$phoneNumber = $this->request->getPost('nohp');

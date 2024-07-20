@@ -6,6 +6,7 @@ use App\Models\FrontendModel;
 use App\Models\PencakerModel;
 use App\Models\PendidikanModel;
 use App\Models\UsersModel;
+use App\Helpers\QrCodeHelper;
 
 use Myth\Auth\Controllers\AuthController;
 
@@ -397,5 +398,22 @@ class Frontend extends BaseController
         }
 
         return view($viewName, $data);
+    }
+
+
+    public function kartu($id)
+    {
+        log_message('debug', 'Metode kartu dipanggil dengan ID: ' . $id);
+        $model = new PencakerModel();
+        $data['pencari_kerja'] = $model->find($id);
+
+        if (empty($data['pencari_kerja'])) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException('Pencari Kerja tidak ditemukan');
+        }
+
+        $url = base_url('pencari_kerja/detail/' . $id);
+        $data['qr_code'] = QrCodeHelper::generate($url);
+
+        return view('frontend/kartu', $data); // Pastikan view path sesuai dengan struktur direktori Anda
     }
 }

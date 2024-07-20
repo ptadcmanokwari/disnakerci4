@@ -184,4 +184,7 @@ $routes->get('pencaker/get_bahasa_pencaker_by_id/(:num)', 'Admin::get_bahasa_pen
 // Sidebar pengaturan
 $routes->get('pencaker/pengaturan', 'Admin::pengaturan', ['filter' => 'role:pencaker']);
 
-$routes->get('notification', 'NotificationController::sendNotification');
+// $routes->get('kartu/(:num)', 'Frontend::kartu/$1');
+$routes->get('kartu/(:num)', 'Frontend::kartu/$1');
+
+$routes->post('pencaker/minta_verifikasi', 'Pencaker::minta_verifikasi');

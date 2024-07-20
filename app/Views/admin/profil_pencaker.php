@@ -81,7 +81,7 @@
                                                     <div class="alert alert-success" role="alert">
                                                         Silakan pilih tujuan Anda membuat Kartu Kuning!
                                                     </div>
-                                                    <input type="hidden" class="form-control" name="id_pencaker" id="id_pencaker" disabled value="<?= $user['id']; ?>">
+                                                    <input type="hidden" class="form-control" name="id_pencaker" id="id_pencaker" disabled value="<?= $id_pencaker['id']; ?>">
                                                     <div class="row mt-3" id="pilihTujuan">
                                                         <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-3">
                                                             <span>Pilih Tujuan Anda</span>
@@ -127,7 +127,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <input type="hidden" class="form-control" name="id_pencaker" id="id_pencaker" disabled value="<?= $user['id']; ?>">
+                                                    <input type="hidden" class="form-control" name="id_pencaker" id="id_pencaker" disabled value="<?= $id_pencaker['id']; ?>">
                                                     <div class="col-12 col-sm-12 col-md-4 col-lg-4">
                                                         <div class="form-group">
                                                             <label for="nopendaftaran">Nomor Pendaftaran</label>
@@ -200,8 +200,8 @@
                                                     <div class=" col-12 col-sm-12 col-md-4 col-lg-4 statusmenikah">
                                                         <div class="form-group">
                                                             <label for="statusnikah">Status Menikah</label>
-                                                            <select name="statusnikah" id="statusnikah" class="form-control select2 select2-danger" data-dropdown-css-class="select2-danger" style="width: 100%;">
-                                                                <option selected="selected">- Pilih -</option>
+                                                            <select name="statusnikah" id="statusnikah" class="w-100 form-control">
+                                                                <option value="">- Pilih -</option>
                                                                 <option value="Kawin">Kawin</option>
                                                                 <option value="Belum Kawin">Belum Kawin</option>
                                                                 <option value="Janda">Janda</option>
@@ -274,7 +274,7 @@
 
                                                         <form action="#" id="formpendidikanpencaker">
                                                             <div class="row mb-5">
-                                                                <input type="hidden" class="form-control" name="id_pencaker" id="id_pencaker" disabled value="<?= $user['id']; ?>">
+                                                                <input type="hidden" class="form-control" name="id_pencaker" id="id_pencaker" disabled value="<?= $id_pencaker['id']; ?>">
                                                                 <div class="col-12 col-sm-12 col-md-3 col-lg-3 ">
                                                                     <div class="form-group">
                                                                         <label for="tahunmasuk">Tahun Masuk</label>
@@ -372,7 +372,7 @@
                                                         </div>
                                                         <form action="#" id="formbahasapencaker">
                                                             <div class="row mb-5">
-                                                                <input type="hidden" class="form-control" name="id_pencaker" id="id_pencaker" disabled value="<?= $user['id']; ?>">
+                                                                <input type="hidden" class="form-control" name="id_pencaker" id="id_pencaker" disabled value="<?= $id_pencaker['id']; ?>">
                                                                 <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                                                                     <div class="form-group clearfix">
                                                                         <div class="row">
@@ -422,7 +422,7 @@
                                                     </div>
                                                     <form action="#" id="formpekerjaanpencaker">
                                                         <div class="row">
-                                                            <input type="hidden" class="form-control" name="id_pencaker" id="id_pencaker" disabled value="<?= $user['id']; ?>">
+                                                            <input type="hidden" class="form-control" name="id_pencaker" id="id_pencaker" disabled value="<?= $id_pencaker['id']; ?>">
                                                             <div class="col-12 col-sm-12 col-md-3 col-lg-2 ">
                                                                 <div class="form-group">
                                                                     <label for="tahunmasukkerja">Tahun Masuk</label>
@@ -504,7 +504,7 @@
                                                     </div>
                                                 </div>
 
-                                                <input type="hidden" class="form-control" name="id_pencaker" id="id_pencaker" disabled value="<?= $user['id']; ?>">
+                                                <input type="hidden" class="form-control" name="id_pencaker" id="id_pencaker" disabled value="<?= $id_pencaker['id']; ?>">
                                                 <div class="col-12 col-sm-12 col-md-4 col-lg-4">
                                                     <div class="form-group">
                                                         <label for="nama_jabatan">Bidang Pekerjaan</label>
@@ -565,7 +565,7 @@
                                             <div class="col-lg-12">
                                                 <form id="formtujuanperusahaan" class="w-100">
                                                     <div class="row">
-                                                        <input type="hidden" class="form-control" name="id_pencaker" id="id_pencaker" value="<?= $user['id']; ?>">
+                                                        <input type="hidden" class="form-control" name="id_pencaker" id="id_pencaker" value="<?= $id_pencaker['id']; ?>">
                                                         <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                                                             <div class="form-group">
                                                                 <label for="nama_perusahaan">Nama Perusahaan/Instansi</label>
@@ -614,7 +614,7 @@
                                                             Catatan pengantar kerja yang berkaitan dengan faktor-faktor yang mempengaruhi pekerjaan!
                                                         </div>
                                                         <div class="row">
-                                                            <input type="hidden" class="form-control" name="id_pencaker" id="id_pencaker" value="<?= $user['id']; ?>">
+                                                            <input type="hidden" class="form-control" name="id_pencaker" id="id_pencaker" value="<?= $id_pencaker['id']; ?>">
                                                             <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                                                                 <div class="form-group">
                                                                     <label for="catatan_pengantar">Catatan Pencaker</label>
@@ -651,7 +651,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     $(document).ready(function() {
-        var userId = $('#id_pencaker').val();
+        var id_pencaker = $('#id_pencaker').val();
 
         function fillForm(data) {
             $('input[name="tujuan"][value="' + data.tujuan + '"]').prop('checked', true);
@@ -676,7 +676,7 @@
         $('input[name="tujuan"]').change(togglePerusahaanTab);
 
         $.ajax({
-            url: '<?= site_url("pencaker/get_data_tujuan/") ?>' + userId,
+            url: '<?= site_url("pencaker/get_data_tujuan/") ?>' + id_pencaker,
             type: 'GET',
             dataType: 'json',
             success: function(response) {
@@ -689,7 +689,7 @@
 
         $('#btnSave1').on('click', function() {
             var formData = {
-                id_pencaker: userId,
+                id_pencaker: id_pencaker,
                 tujuan: $('input[name="tujuan"]:checked').val(),
             };
 

@@ -30,7 +30,8 @@ use App\Libraries\Pdf;
 
 use Myth\Auth\Models\UserModel;
 use Myth\Auth\Entities\User;
-
+use Endroid\QrCode\QrCode;
+use Endroid\QrCode\Writer\PngWriter;
 
 // use CodeIgniter\Controller;
 
@@ -178,15 +179,29 @@ class Admin extends BaseController
 
     public function detail_pencaker($id)
     {
-        $pencakerModel = new PencakerModel();
-        $pencaker = $pencakerModel->find($id);
+        $db = \Config\Database::connect();
+        $builder = $db->table('users');
+        $builder->select('users.id as userid, username, email, pencaker.namalengkap, created_at, nopendaftaran, pencaker.nik, tempatlahir, tgllahir, tinggibadan, beratbadan, jenkel, agama, alamat, kodepos, statusnikah, pencaker.id, keterampilan_bahasa, bahasa_lainnya, pencaker.nohp');
+        $builder->join('pencaker', 'pencaker.user_id = users.id');
+        // $builder->join('pendidikan_pencaker', 'pendidikan_pencaker.pencaker_id = pencaker.id');
+        // $builder->join('jenjang_pendidikan', 'jenjang_pendidikan.id = jenjang_pendidikan_id');
+        $query = $builder->get();
 
-        // if (!$pencaker) {
-        //     throw new \CodeIgniter\Exceptions\PageNotFoundException('Pencari kerja dengan ID ' . $id . ' tidak ditemukan.');
-        // }
+        $pencaker = $query->getRowArray();
+        // $pencakerModel = new PencakerModel();
+        // $pencaker = $pencakerModel->find($id);
 
-        $pendidikanModel = new PendidikanModel();
-        $pendidikan = $pendidikanModel->where('pencaker_id', $id)->findAll();
+
+        $builder = $db->table('pencaker');
+        $builder->select('pencaker.id, nama_sekolah, tahunmasuk, tahunlulus, ipk, keterampilan, pendidikan_pencaker.id');
+        $builder->join('pendidikan_pencaker', 'pendidikan_pencaker.pencaker_id = pencaker.id');
+        // $builder->join('jenjang_pendidikan', 'jenjang_pendidikan.id = pendidikan_pencaker.jenjang_pendidikan_id');
+
+        $q_pendidikan = $builder->get();
+        $pendidikan = $q_pendidikan->getResultArray();
+
+        // $pendidikanModel = new PendidikanModel();
+        // $pendidikan = $pendidikanModel->where('pencaker_id', $id)->findAll();
 
         $pengalamanModel = new PengalamanKerjaModel();
         $pengalaman = $pengalamanModel->where('pencaker_id', $id)->findAll();
@@ -222,38 +237,23 @@ class Admin extends BaseController
         return $this->loadView('admin/review_pencaker', $data);
     }
 
-    public function kartu_ak1($id)
+    public function kartu_ak1($id_pencaker)
     {
-        $pencakerModel = new PencakerModel();
-        $pencaker = $pencakerModel->find($id);
 
-        // if (!$pencaker) {
-        //     throw new \CodeIgniter\Exceptions\PageNotFoundException('Pencari kerja dengan ID ' . $id . ' tidak ditemukan.');
-        // }
+
+
+        $pencakerModel = new PencakerModel();
+        $pencaker = $pencakerModel->find($id_pencaker);
+        $dokumen = $pencakerModel->getdokumenpencaker($id_pencaker); // Mengambil satu hasil query sebagai array
 
         $pendidikanModel = new PendidikanModel();
-        $pendidikan = $pendidikanModel->where('pencaker_id', $id)->findAll();
+        $pendidikan = $pendidikanModel->where('pencaker_id', $id_pencaker)->findAll();
 
         $pengalamanModel = new PengalamanKerjaModel();
-        $pengalaman = $pengalamanModel->where('pencaker_id', $id)->findAll();
-
-        $dokumenModel = new DokumenPencakerModel();
-        $dokumen = $dokumenModel->where('pencaker_id', $id)->findAll();
+        $pengalaman = $pengalamanModel->where('pencaker_id', $id_pencaker)->findAll();
 
         $jenjangPendidikan = new JenjangpendidikanModel();
-        $jenjang = $jenjangPendidikan->where('id', $id)->findAll();
-
-        $dokumenJenisModel = new DokumenModel();
-        $dokumenJenis = $dokumenJenisModel->findAll();
-
-        foreach ($dokumen as &$doc) {
-            foreach ($dokumenJenis as $jenis) {
-                if ($doc['dokumen_id'] == $jenis['id']) {
-                    $doc['jenis_dokumen'] = $jenis['jenis_dokumen'];
-                    break;
-                }
-            }
-        }
+        $jenjang = $jenjangPendidikan->where('id', $id_pencaker)->findAll();
 
         $data = [
             'title' => 'Kartu AK/1',
@@ -264,8 +264,9 @@ class Admin extends BaseController
             'jenjang' => $jenjang
         ];
 
-        return view('admin/kartu_ak1', $data);
+        return $this->loadView('admin/kartu_ak1', $data);
     }
+
 
 
     public function update_status_pencaker()
@@ -1308,11 +1309,12 @@ class Admin extends BaseController
             $nourut = 1;  // cek jika kode belum terdapat pada tabel
         }
 
-        $tgl = date('dmY');
+        $tgl = date('Y');
         $batas = str_pad($nourut, 6, "0", STR_PAD_LEFT);
         $nopendaftaran = "9202" . $tgl . $batas;  // format kode
         return $nopendaftaran;
     }
+
 
     public function profil_pencaker()
     {
@@ -1323,10 +1325,13 @@ class Admin extends BaseController
         $jenjang = $jenjangPendidikan->findAll();
 
         $usersModel = new UsersModel();
-        $userId = user()->id; // Asumsi: menggunakan metode user() untuk mendapatkan ID pengguna yang sedang login
+        $userId = user()->id;
 
         // Ambil data pengguna berdasarkan user ID
         $user = $usersModel->find($userId);
+        $pencakerModel = new PencakerModel();
+
+        $id_pencaker = $pencakerModel->get_pencaker_id_by_user_id($user['id']);
 
         // Dapatkan nomor pendaftaran yang di-generate oleh sistem
         $nopendaftaran = $this->nomorpendaftaran();
@@ -1337,6 +1342,7 @@ class Admin extends BaseController
             'user' => $user,
             'nopendaftaran' => $nopendaftaran,
             'bahasa' => $bahasa,
+            'id_pencaker' => $id_pencaker
         ];
 
         return $this->loadView('admin/profil_pencaker', $data);
@@ -1375,11 +1381,53 @@ class Admin extends BaseController
     }
 
 
+    // public function save_data_keterangan_umum()
+    // {
+    //     $pencakerModel = new PencakerModel();
+
+    //     $userId = $this->request->getPost('id_pencaker');
+
+    //     $data = [
+    //         'user_id' => $userId,
+    //         'nopendaftaran' => $this->request->getPost('nopendaftaran'),
+    //         'nik' => $this->request->getPost('nik'),
+    //         'namalengkap' => $this->request->getPost('namalengkap'),
+    //         'nohp' => $this->request->getPost('nohp'),
+    //         'email' => $this->request->getPost('email'),
+    //         'jenkel' => $this->request->getPost('jenkel'),
+    //         'tempatlahir' => $this->request->getPost('tempatlahir'),
+    //         'tgllahir' => $this->request->getPost('tgllahir'),
+    //         'statusnikah' => $this->request->getPost('statusnikah'),
+    //         'agama' => $this->request->getPost('agama'),
+    //         'tinggibadan' => $this->request->getPost('tinggibadan'),
+    //         'beratbadan' => $this->request->getPost('beratbadan'),
+    //         'alamat' => $this->request->getPost('alamat'),
+    //         'kodepos' => $this->request->getPost('kodepos'),
+    //         'keterangan_status' => 'Registrasi',
+    //     ];
+
+    //     // Check if user already exists in the pencaker table
+    //     $existingPencaker = $pencakerModel->where('user_id', $userId)->first();
+
+    //     if ($existingPencaker) {
+    //         // Update the existing record
+    //         $pencakerModel->update($existingPencaker['id'], $data);
+    //     } else {
+    //         // Insert a new record
+    //         $pencakerModel->insert($data);
+    //     }
+
+    //     return $this->response->setStatusCode(200)->setBody('Data berhasil disimpan');
+    // }
+
+
     public function save_data_keterangan_umum()
     {
         $pencakerModel = new PencakerModel();
 
         $userId = $this->request->getPost('id_pencaker');
+        $nopendaftaran = $this->request->getPost('nopendaftaran');
+        $qrcode = $this->generate_qr_code($nopendaftaran);
 
         $data = [
             'user_id' => $userId,
@@ -1398,6 +1446,7 @@ class Admin extends BaseController
             'alamat' => $this->request->getPost('alamat'),
             'kodepos' => $this->request->getPost('kodepos'),
             'keterangan_status' => 'Registrasi',
+            'qr_code' => $qrcode,
         ];
 
         // Check if user already exists in the pencaker table
@@ -1411,8 +1460,67 @@ class Admin extends BaseController
             $pencakerModel->insert($data);
         }
 
+        // Generate QR code
+        $this->generate_qr_code($data['nopendaftaran']);
+
         return $this->response->setStatusCode(200)->setBody('Data berhasil disimpan');
     }
+
+    public function generate_qr_code($nopendaftaran)
+    {
+        $qrCode = new QrCode(site_url("admin/validasi_ak1/" . sha1($nopendaftaran)));
+        $qrCode->setSize(300);
+
+        $writer = new PngWriter();
+        $qrImage = $writer->write($qrCode);
+
+        // Directory where QR codes will be saved
+        $directory = FCPATH . 'uploads/pencaker/qrcode/';
+
+        // Ensure the directory exists
+        if (!is_dir($directory)) {
+            mkdir($directory, 0755, true);
+        }
+
+        $qrName = $nopendaftaran . '.png';
+        $qrImage->saveToFile($directory . $qrName);
+
+        return $qrName;
+    }
+
+
+    public function validasi_ak1($code)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('pencaker p');
+        $builder->select('*, DATE(tu.tglwaktu) AS tglaktifpencaker');
+        $builder->join('pencaker_dokumen pd', 'pd.pencaker_id = p.id');
+        $builder->join('dokumen d', 'd.id = pd.dokumen_id');
+        $builder->join('users u', 'u.id = p.user_id');
+        $builder->join('timeline_user tu', 'tu.user_id = u.id');
+        $builder->where('d.id', '1');
+        $builder->where('tu.timeline_id', '6');
+        $builder->where('SHA1(p.nopendaftaran)', $code);
+        $getPencaker = $builder->get();
+
+        $data['v_msg'] = new \stdClass();
+
+        if ($getPencaker->getNumRows() > 0) {
+            $data['v_msg']->valid = "Kartu Anda Valid dan Terdaftar di Sistem Dinas Tenaga Kerja dan Transmigrasi Kabupaten Manokwari";
+            $data['v_msg']->code = TRUE;
+            $data['v_msg']->pencaker = $getPencaker->getRow();
+        } else {
+            $data['v_msg']->valid = "Maaf, Kartu Anda Tidak Terdaftar di Sistem Disnakertrans Manokwari!";
+            $data['v_msg']->code = FALSE;
+        }
+
+        $data['page'] = new \stdClass();
+        $data['page']->menu = 'dashboard';
+        $data['page']->title = 'Pelatihan';
+
+        echo view('frontend/validasi_ak1', $data);
+    }
+
 
     public function get_data_keterangan_umum($id)
     {
@@ -2045,7 +2153,6 @@ class Admin extends BaseController
         $nik = user()->nik;
 
         $fileExtension = $file->getClientExtension();
-
         $newFileName = $nik . '_' . str_replace(' ', '-', strtoupper($jenisDokumen)) . '.' . $fileExtension;
 
         $uploadPath = FCPATH . 'uploads/dokumen_pencaker/' . $nik . '/';
@@ -2055,27 +2162,42 @@ class Admin extends BaseController
             mkdir($uploadPath, 0777, true);
         }
 
+        $model = new DokumenPencakerModel();
+        $existingDokumen = $model->where(['pencaker_id' => user()->id, 'dokumen_id' => $dokumenId])->first();
+
+        if ($existingDokumen) {
+            // Hapus file lama jika ada
+            $oldFilePath = $uploadPath . $existingDokumen['namadokumen'];
+            if (file_exists($oldFilePath)) {
+                unlink($oldFilePath);
+            }
+            // Update data dengan file baru
+            $data = [
+                'namadokumen' => $newFileName,
+                'tgl_upload' => date('Y-m-d H:i:s')
+            ];
+            $model->update($existingDokumen['id'], $data);
+        } else {
+            // Insert data baru
+            $data = [
+                'namadokumen' => $newFileName,
+                'tgl_upload' => date('Y-m-d H:i:s'),
+                'pencaker_id' => user()->id,
+                'dokumen_id' => $dokumenId,
+            ];
+            $model->insert($data);
+        }
+
         if (!$file->move($uploadPath, $newFileName)) {
             $response['success'] = false;
             $response['errors'] = ['Failed to upload file.'];
             return $this->response->setJSON($response);
         }
 
-        $model = new DokumenPencakerModel();
-        $data = [
-            'namadokumen' => $newFileName,
-            'tgl_upload' => date('Y-m-d H:i:s'),
-            'pencaker_id' => user()->id,
-            'dokumen_id' => $dokumenId,
-        ];
-
-        $model->insert($data);
-
         $response['success'] = true;
         $response['message'] = 'File berhasil diunggah.';
         return $this->response->setJSON($response);
     }
-
 
 
     public function hapus_dokumen()
@@ -2091,7 +2213,8 @@ class Admin extends BaseController
         // Hapus gambar dari direktori jika ada
         $file_dokumen = $dokumen['namadokumen'];
         if (!empty($file_dokumen)) {
-            $path = FCPATH . 'uploads/dokumen_pencaker/' . $file_dokumen;
+            $nik = user()->nik; // Pastikan Anda mendapatkan NIK dari user
+            $path = FCPATH . 'uploads/dokumen_pencaker/' . $nik . '/' . $file_dokumen;
             if (file_exists($path)) {
                 unlink($path);
             }
@@ -2104,15 +2227,16 @@ class Admin extends BaseController
         }
     }
 
+
     public function pengaturan()
     {
-
         $userId = user()->id; // Mengambil user ID dari sesi
 
         $db = \Config\Database::connect();
         $builder = $db->table('pencaker_dokumen');
         $builder->select('pencaker_dokumen.namadokumen');
         $builder->where('pencaker_dokumen.pencaker_id', $userId);
+        $builder->where('pencaker_dokumen.dokumen_id', 1, 'pencaker_id', $userId); // Kondisi untuk mengambil dokumen dengan ID 1
         $query = $builder->get();
 
         $dokumen = $query->getRow(); // Mengambil satu baris hasil query
@@ -2124,6 +2248,24 @@ class Admin extends BaseController
 
         return $this->loadView('admin/myprofile', $data);
     }
+
+
+    // public function requestVerification()
+    // {
+    //     $pencakerModel = new PencakerModel();
+    //     $userId = session()->get('user_id'); // Mengambil user_id dari session
+
+    //     if ($userId) {
+    //         $data = [
+    //             'keterangan_status' => 'Validasi'
+    //         ];
+    //         $pencakerModel->update($userId, $data);
+    //         return $this->response->setJSON(['status' => 'success', 'message' => 'Status updated successfully.']);
+    //     }
+
+    //     return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to update status.']);
+    // }
+
 
     private function loadView(string $viewName, array $data = []): string
     {

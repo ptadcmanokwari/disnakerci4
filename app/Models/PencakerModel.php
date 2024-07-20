@@ -46,6 +46,12 @@ class PencakerModel extends Model
         return $this->countAll();
     }
 
+    // Status Halaman Dashboard
+    public function getStatusByUserId($userId)
+    {
+        return $this->where('user_id', $userId)->first();
+    }
+
     public function countByStatus($status)
     {
         return $this->where('keterangan_status', $status)->countAllResults();
@@ -104,5 +110,19 @@ class PencakerModel extends Model
             return true;
         }
         return false;
+    }
+
+    public function getdokumenpencaker($id_pencaker)
+    {
+
+        $builder = $this->db->query('select p.nik, p.namalengkap, pd.*, d.jenis_dokumen from pencaker p join pencaker_dokumen pd on pd.pencaker_id = p.id join dokumen d on d.id = pd.dokumen_id where d.id = 1 and p.id = ' . $id_pencaker);
+        return $builder->getRowArray();
+    }
+
+
+    public function get_pencaker_id_by_user_id($id_user)
+    {
+        $builder = $this->db->query('select p.id from pencaker p join users u on u.id = p.user_id where u.id =' . $id_user);
+        return $builder->getRowArray();
     }
 }
