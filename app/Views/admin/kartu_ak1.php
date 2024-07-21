@@ -97,7 +97,7 @@
                             ?>
                                 <tr>
                                     <td class="text-center" width="2%"><?php echo $no++; ?></td>
-                                    <td><?php echo $pd['jenjang']; ?></td>
+                                    <td><?php echo isset($pd['jenjang']) ? $pd['jenjang'] : '-'; ?></td>
                                     <td><?php echo $pd['keterampilan']; ?></td>
                                     <td class="text-center"><?php echo $pd['tahunlulus']; ?></td>
                                 </tr>
@@ -161,7 +161,7 @@
                 <div class="row" style="margin-top:20px !important">
                     <div id="profil" class="col-3">
 
-                        <img src="<?= base_url('uploads/dokumen_pencaker/' . $pencaker['nik'] . '/' . $dokumen['namadokumen']) ?>" alt="Pas Foto" style="width:150px;height:200px;">
+                        <img class="w-100 mt-3" src="<?= base_url('uploads/dokumen_pencaker/' . $pencaker['nik'] . '/' . $dokumen['namadokumen']) ?>" alt="Pas Foto">
 
                     </div>
                     <div class="col-9 px-0">

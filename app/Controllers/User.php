@@ -115,9 +115,6 @@ class User extends Controller
         }
     }
 
-
-
-
     private function loadView(string $viewName, array $data = []): string
     {
         $uri = service('uri');

@@ -92,7 +92,7 @@
                         <td>TANGGAL PENDAFTARAN</td>
                         <td>:</td>
                         <td class="fw-bold">
-                            <?php echo isset($pencaker['created_at']) ? date_indo($pencaker['created_at']) : '-'; ?>
+                            <?php echo isset($user['created_at']) ? $user['created_at'] : '-'; ?>
                         </td>
                     </tr>
                     <tr>
@@ -121,7 +121,7 @@
                                 <td>Tempat, Tanggal Lahir</td>
                                 <td>:</td>
                                 <td class="fw-bold">
-                                    <?php echo strtoupper($pencaker['tempatlahir']) . ", " . date_indo($pencaker['tgllahir']); ?>
+                                    <?php echo strtoupper($pencaker['tempatlahir']) . ", " . $pencaker['tgllahir']; ?>
                                 </td>
                             </tr>
                             <tr>
@@ -157,7 +157,7 @@
                             <tr>
                                 <td>Email</td>
                                 <td>:</td>
-                                <td class="fw-bold"><?php echo $pencaker['email']; ?></td>
+                                <td class="fw-bold"><?php echo $user['email']; ?></td>
                             </tr>
                             <tr>
                                 <td>Kode Pos</td>
@@ -173,15 +173,7 @@
                     </table>
                 </div>
                 <div class="col-2 ms-auto">
-                    <?php
-                    $image_path = 'uploads/pencaker/' . $pencaker['id'] . '.jpg';
-                    if (file_exists(FCPATH . $image_path)) {
-                        $image_url = base_url($image_path);
-                    } else {
-                        $image_url = base_url('uploads/pencaker/default.webp');
-                    }
-                    ?>
-                    <img class="float-end" src="<?php echo $image_url; ?>" height="200px" width="160px">
+                    <img class="img-fluid w-100 mt-3" src="<?= base_url('uploads/dokumen_pencaker/' . $pencaker['nik'] . '/' . $dokumen['namadokumen']) ?>" alt="Pas Foto">
                 </div>
             </div>
         </div>
@@ -275,42 +267,6 @@
         </div>
 
         <hr>
-
-        <div class="col-12">
-            <h4>DOKUMEN</h4>
-            <div class="div1">
-                <?php
-
-                foreach ($dokumen as $dp) :
-                    if ($dp['namadokumen'] != null && $dp['jenis_dokumen'] != 'PAS FOTO' && $dp['jenis_dokumen'] != '') {
-                ?>
-                        <?php
-                        // $url = base_url('uploads/pencaker/') . $dp['nopendaftaran'] . '/' . $dp['namadokumen'];
-                        $url = base_url('uploads/pencaker/') . $dp['namadokumen'];
-                        $url = parse_url($url);
-                        $ext  = pathinfo($url['path'], PATHINFO_EXTENSION);
-                        if ($ext == 'pdf') {
-                        ?>
-                            <!-- <iframe src="<?php // echo base_url('uploads/pencaker/') . $dp['nopendaftaran'] . '/' . $dp['namadokumen']; 
-                                                ?>" frameborder="0" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:100%;width:100%;position:absolute;top:0px;left:0px;right:0px;bottom:0px" height="100%" width="100%"></iframe> -->
-
-                            <iframe src="<?php echo base_url('uploads/pencaker/')  . $dp['namadokumen'];
-                                            ?>" frameborder="0" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:100%;width:100%;position:absolute;top:0px;left:0px;right:0px;bottom:0px" height="100%" width="100%"></iframe>
-
-                        <?php } else { ?>
-
-                            <!-- <img class="tex-center" src="<?php // echo base_url('uploads/pencaker/') . $dp['nopendaftaran'] . '/' . $dp['namadokumen']; 
-                                                                ?>" width="80%"> -->
-                            <img class="tex-center" src="<?php echo base_url('uploads/pencaker/') . $dp['namadokumen'];
-                                                            ?>" width="80%">
-                        <?php } ?>
-                <?php
-                    }
-                endforeach;
-
-                ?>
-            </div>
-        </div>
     </section>
 </body>
 

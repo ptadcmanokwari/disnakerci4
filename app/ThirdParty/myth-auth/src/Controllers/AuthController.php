@@ -354,7 +354,8 @@ class AuthController extends Controller
 			'namalengkap' => $this->request->getPost('namalengkap'),
 			'email' => $this->request->getPost('email'),
 			'nopendaftaran' => '-', // Sesuaikan dengan cara Anda mendapatkan no pendaftaran
-			'user_id' => $userId
+			'user_id' => $userId,
+			'keterangan_status' => 'Registrasi'
 		];
 
 		$pencakerModel = model(PencakerModel::class);
