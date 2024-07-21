@@ -53,7 +53,7 @@
                     <?php endif; ?>
                     </p>
                     <form id="verificationForm">
-                        <input type="text" class="form-control" name="id_pencaker" id="id_pencaker" readonly value="<?= $id_pencaker['id']; ?>">
+                        <input type="hidden" class="form-control" name="id_pencaker" id="id_pencaker" readonly value="<?= $id_pencaker['id']; ?>">
                         <input type="hidden" id="mintaVerifikasi" name="mintaverifikasi" value="Verifikasi">
                         <button id="verifyLink" class="btn btn-primary <?= $isDataComplete && $isDocumentComplete ? '' : 'btn btn-secondary disabled' ?>">Minta Verifikasi Data</button>
                     </form>
@@ -161,35 +161,49 @@
 
 <script>
     $(document).ready(function() {
-        $('#verificationForm').on('submit', function(event) {
-            event.preventDefault(); // Mencegah form dari submit default
+        $('#verifyLink').on('click', function(event) {
+            event.preventDefault(); // Mencegah tombol dari aksi default
 
-            var id_pencaker = $('#id_pencaker').val();
-            var formData = {
-                id_pencaker: id_pencaker,
-                keterangan_status: $('#mintaVerifikasi').val(),
-            };
+            Swal.fire({
+                title: 'Apakah Anda Yakin?',
+                text: 'Pastikan semua data yang Anda input sudah benar dan dokumen-dokumen yang diunggah dapat dibaca dengan baik (tidak kabur).',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Saya Yakin!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Jika konfirmasi, submit form menggunakan AJAX
+                    var id_pencaker = $('#id_pencaker').val();
+                    var formData = {
+                        id_pencaker: id_pencaker,
+                        keterangan_status: $('#mintaVerifikasi').val(),
+                    };
 
-            $.ajax({
-                url: '<?= site_url("pencaker/minta_verifikasi") ?>',
-                type: 'POST',
-                data: formData,
-                success: function(response) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Sukses!',
-                        text: 'Data berhasil disimpan.',
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            location.reload(); // Muat ulang halaman untuk menampilkan perubahan
+                    $.ajax({
+                        url: '<?= site_url("pencaker/minta_verifikasi") ?>',
+                        type: 'POST',
+                        data: formData,
+                        success: function(response) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Berhasil!',
+                                text: 'Semua informasi tentang Anda telah dikirim untuk selanjutnya diverifikasi.',
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    location.reload();
+                                }
+                            });
+                        },
+                        error: function(xhr, status, error) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Eror!',
+                                text: 'Gagal melakukan verifikasi data!',
+                            });
                         }
-                    });
-                },
-                error: function(xhr, status, error) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error!',
-                        text: 'Terjadi kesalahan saat menyimpan data.',
                     });
                 }
             });

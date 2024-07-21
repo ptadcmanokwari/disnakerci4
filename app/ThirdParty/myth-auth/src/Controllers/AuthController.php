@@ -353,7 +353,7 @@ class AuthController extends Controller
 		$pencakerData = [
 			'namalengkap' => $this->request->getPost('namalengkap'),
 			'email' => $this->request->getPost('email'),
-			'nopendaftaran' => 'generate_or_get_nopendaftaran', // Sesuaikan dengan cara Anda mendapatkan no pendaftaran
+			'nopendaftaran' => '-', // Sesuaikan dengan cara Anda mendapatkan no pendaftaran
 			'user_id' => $userId
 		];
 
