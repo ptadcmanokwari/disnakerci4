@@ -70,13 +70,11 @@ class Pencaker extends Controller
             $nourut = 1;  // cek jika kode belum terdapat pada tabel
         }
 
-        $tgl = date('Y');
+        $tgl = date('dMY');
         $batas = str_pad($nourut, 6, "0", STR_PAD_LEFT);
         $nopendaftaran = "9202" . $tgl . $batas;  // format kode
         return $nopendaftaran;
     }
-
-
 
     public function profil_pencaker()
     {
@@ -413,6 +411,8 @@ class Pencaker extends Controller
             'tahunkeluar' => $this->request->getPost('tahunkeluarkerja'),
             'instansi' => $this->request->getPost('instansi'),
             'jabatan' => $this->request->getPost('jabatan'),
+            'alasan_berhenti' => $this->request->getPost('alasan_berhenti'),
+            'pendapatan_terakhir' => $this->request->getPost('pendapatan_terakhir'),
             'pencaker_id' => $pencaker_id,
         ];
 
@@ -456,6 +456,8 @@ class Pencaker extends Controller
                 'tahunkeluar' => $pk['tahunkeluar'],
                 'instansi' => $pk['instansi'],
                 'jabatan' => $pk['jabatan'],
+                'alasan_berhenti' => $pk['alasan_berhenti'],
+                'pendapatan_terakhir' => $pk['pendapatan_terakhir'],
                 'aksi' => '<div class="btn-group" role="group" aria-label="Actions">
                            <button class="btn btn-primary btn-sm editPekerjaan" data-id="' . $pk['id'] . '" data-pencaker_id="' . $pk['pencaker_id'] . '" title="Edit Pekerjaan">
                                <i class="bi bi-pencil-fill"></i>
@@ -499,6 +501,8 @@ class Pencaker extends Controller
             'tahunkeluar' => $request->getPost('tahunkeluarkerja'),
             'instansi' => $request->getPost('instansi'),
             'jabatan' => $request->getPost('jabatan'),
+            'alasan_berhenti' => $request->getPost('alasan_berhenti'),
+            'pendapatan_terakhir' => $request->getPost('pendapatan_terakhir'),
             'pencaker_id' => user()->id,
         ];
 

@@ -59,6 +59,10 @@
         img.float-end {
             object-fit: cover;
         }
+
+        img.pasfoto {
+            height: auto !important;
+        }
     </style>
 </head>
 
@@ -92,7 +96,7 @@
                         <td>TANGGAL PENDAFTARAN</td>
                         <td>:</td>
                         <td class="fw-bold">
-                            <?php echo isset($user['created_at']) ? $user['created_at'] : '-'; ?>
+                            <?php echo isset($user['created_at']) ? date_indo($user['created_at']) : '-'; ?>
                         </td>
                     </tr>
                     <tr>
@@ -172,8 +176,17 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="col-2 ms-auto">
-                    <img class="img-fluid w-100 mt-3" src="<?= base_url('uploads/dokumen_pencaker/' . $pencaker['nik'] . '/' . $dokumen['namadokumen']) ?>" alt="Pas Foto">
+                <div class="col-2 ms-auto d-flex justify-content-center align-items-center">
+                    <?php
+                    // Tentukan URL gambar default
+                    $default_image_url = base_url('uploads/dokumen_pencaker/default.webp');
+                    ?>
+
+                    <?php if (isset($dokpasfoto['namadokumen']) && !empty($dokpasfoto['namadokumen'])) : ?>
+                        <img class="w-100 pasfoto" src="<?php echo base_url('uploads/dokumen_pencaker/') . $dokpasfoto['nik'] . '/' . $dokpasfoto['namadokumen'] ?>" alt="Dokumen Pencaker">
+                    <?php else : ?>
+                        <img class="w-100 pasfoto" src="<?php echo $default_image_url; ?>" alt="Gambar Default">
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
@@ -220,16 +233,19 @@
             <h4>BAHASA YANG DIKUASAI</h4>
             <ul class="bahasa">
                 <?php
-                $ket_bahasa = explode(',', $pencaker['keterampilan_bahasa'] ?? '');
-                $bahasa_lainnya = explode(',', $pencaker['bahasa_lainnya'] ?? '');
+                // Mendapatkan keterampilan bahasa dan bahasa lainnya, kemudian memisahkannya menjadi array
+                $ket_bahasa = array_filter(explode(',', $pencaker['keterampilan_bahasa'] ?? ''));
+                $bahasa_lainnya = array_filter(explode(',', $pencaker['bahasa_lainnya'] ?? ''));
+
+                // Menggabungkan kedua array menjadi satu
+                $all_languages = array_merge($ket_bahasa, $bahasa_lainnya);
+
+                // Inisialisasi urutan
                 $urut = 1;
 
-                foreach (array_filter($ket_bahasa) as $kb) {
-                    echo '<li>' . $urut++ . '. ' . strtoupper($kb) . '</li>';
-                }
-
-                foreach (array_filter($bahasa_lainnya) as $bl) {
-                    echo '<li>' . $urut++ . '. ' . strtoupper($bl) . '</li>';
+                // Iterasi hanya pada elemen yang memiliki nilai
+                foreach ($all_languages as $language) {
+                    echo '<li>' . $urut++ . '. ' . strtoupper($language) . '</li>';
                 }
                 ?>
             </ul>
@@ -243,11 +259,12 @@
                 <thead>
                     <tr>
                         <th width="10px" style="padding: 3px !important;">No</th>
-                        <th>Nama Perusahaan</th>
-                        <th>Posisi Terakhir</th>
+                        <th>Tahun Masuk</th>
+                        <th>Tahun Keluar</th>
+                        <th>Nama Perusahaan/Instansi</th>
+                        <th>Jabatan</th>
+                        <th>Alasan Keluar</th>
                         <th>Pendapatan Terakhir</th>
-                        <th>Periode</th>
-                        <th>Alasan Berhenti</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -255,11 +272,12 @@
                     foreach ($pengalaman as $pk) : ?>
                         <tr>
                             <td><?php echo $no++; ?></td>
-                            <td><?php echo isset($pk['nama_perusahaan']) ? $pk['nama_perusahaan'] : '-'; ?></td>
-                            <td><?php echo isset($pk['posisi_terakhir']) ? $pk['posisi_terakhir'] : '-'; ?></td>
-                            <td><?php echo isset($pk['pendapatan_terakhir']) ? $pk['pendapatan_terakhir'] : '-'; ?></td>
-                            <td><?php echo isset($pk['periode']) ? $pk['periode'] : '-'; ?></td>
+                            <td><?php echo isset($pk['tahunmasuk']) ? $pk['tahunmasuk'] : '-'; ?></td>
+                            <td><?php echo isset($pk['tahunkeluar']) ? $pk['tahunkeluar'] : '-'; ?></td>
+                            <td><?php echo isset($pk['instansi']) ? $pk['instansi'] : '-'; ?></td>
+                            <td><?php echo isset($pk['jabatan']) ? $pk['jabatan'] : '-'; ?></td>
                             <td><?php echo isset($pk['alasan_berhenti']) ? $pk['alasan_berhenti'] : '-'; ?></td>
+                            <td><?php echo isset($pk['pendapatan_terakhir']) ? $pk['pendapatan_terakhir'] : '-'; ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -268,6 +286,42 @@
 
         <hr>
     </section>
+
+
+    <section class="sheet padding-10mm d-flex justify-content-center align-items-center">
+        <?php
+        // Tentukan URL gambar default
+        $default_image_url = base_url('uploads/dokumen_pencaker/noimageavailable.webp');
+        ?>
+
+        <?php if (isset($dokpasfoto['namadokumen']) && !empty($dokpasfoto['namadokumen'])) : ?>
+            <img class="w-50 pasfoto" src="<?php echo base_url('uploads/dokumen_pencaker/') . $dokpasfoto['nik'] . '/' . $dokpasfoto['namadokumen'] ?>" alt="Dokumen Pencaker">
+        <?php else : ?>
+            <img class="w-50 pasfoto" src="<?php echo $default_image_url; ?>" alt="Gambar Default">
+        <?php endif; ?>
+    </section>
+
+    <?php
+
+    foreach ($alldokumen as $dp) :
+        if ($dp['namadokumen'] != null && $dp['jenis_dokumen'] != 'PAS FOTO') { ?>
+            <section class="sheet padding-10mm">
+                <?php
+                $url = base_url('uploads/dokumen_pencaker/') . $dp['nik'] . '/' . $dp['namadokumen'];
+                $url = parse_url($url);
+                $ext  = pathinfo($url['path'], PATHINFO_EXTENSION);
+                if ($ext == 'pdf') {
+                ?>
+                    <iframe src="<?php echo base_url('uploads/dokumen_pencaker/') . $dp['nik'] . '/' . $dp['namadokumen'] ?>" frameborder="0" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:100%;width:100%;position:absolute;top:0px;left:0px;right:0px;bottom:0px" height="100%" width="100%"></iframe>
+
+                <?php } else { ?>
+                    <img class="text-center" src="<?php echo base_url('uploads/dokumen_pencaker/') . $dp['nik'] . '/' . $dp['namadokumen'] ?>" width="80%">
+                <?php } ?>
+            </section>
+    <?php }
+    endforeach;
+
+    ?>
 </body>
 
 </html>

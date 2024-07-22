@@ -96,16 +96,6 @@
         #profilPencaker .card-header.with-border h3 {
             font-weight: bold !important;
         }
-
-        a.disabled:hover {
-            cursor: not-allowed !important;
-        }
-
-        .disabled-link {
-            pointer-events: none;
-            opacity: 0.5;
-            /* atau sesuai kebutuhan */
-        }
     </style>
 </head>
 
@@ -136,12 +126,8 @@
         </nav>
 
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
-            <?php if (in_groups('administrator')) : ?>
-                <a href="<?php echo base_url('admin_v2/dashboard'); ?>" class="brand-link">
-                    <img src="<?= base_url(); ?>frontend/assets/img/favicon/favicon-32x32.png" alt="Logo Pemkab" class="brand-image elevation-3" style="opacity: .8">
-                    <span class="brand-text font-weight-light font-weight-bold">PANEL ADMIN</span>
-                </a>
-            <?php elseif (in_groups('pencaker')) : ?>
+
+            <?php if (in_groups('pencaker')) : ?>
                 <a href="<?php echo base_url('pencaker/dashboard'); ?>" class="brand-link">
                     <img src="<?= base_url(); ?>frontend/assets/img/favicon/favicon-32x32.png" alt="Logo Pemkab" class="brand-image elevation-3" style="opacity: .8">
                     <span class="brand-text font-weight-light font-weight-bold">PANEL PENCAKER</span>
@@ -151,75 +137,7 @@
             <div class="sidebar">
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                        <?php if (in_groups('administrator')) : ?>
-                            <li class="nav-item">
-                                <a href="<?= base_url('admin_v2/dashboard'); ?>" class="nav-link <?= ($current_uri == 'dashboard') ? 'active' : '' ?>">
-                                    <i class="nav-icon bi bi-speedometer2"></i>
-                                    <p>Dashboard</p>
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a href="<?= base_url('admin_v2/pencaker'); ?>" class="nav-link <?= ($current_uri == 'pencaker') ? 'active' : '' ?>">
-                                    <i class="nav-icon bi bi-people"></i>
-                                    <p>Pencaker</p>
-                                </a>
-                            </li>
-                            <li class="nav-item <?= ($current_uri == 'berita' || $current_uri == 'pengumuman' || $current_uri == 'pelatihan') ? 'menu-open' : '' ?>">
-                                <a href="#" class="nav-link <?= ($current_uri == 'berita' || $current_uri == 'pengumuman' || $current_uri == 'pelatihan') ? 'active' : '' ?>">
-                                    <i class="nav-icon bi bi-info-circle-fill"></i>
-                                    <p>
-                                        Informasi Web
-                                        <i class="bi bi-chevron-right right"></i>
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item ">
-                                        <a href="<?= base_url('admin_v2/berita'); ?>" class="nav-link <?= ($current_uri == 'berita') ? 'active' : '' ?>">
-                                            <i class="bi bi-circle nav-icon"></i>
-                                            <p>Berita</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="<?= base_url('admin_v2/pengumuman'); ?>" class="nav-link <?= ($current_uri == 'pengumuman') ? 'active' : '' ?>">
-                                            <i class="bi bi-circle nav-icon"></i>
-                                            <p>Pengumuman</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="<?= base_url('admin_v2/pelatihan'); ?>" class="nav-link <?= ($current_uri == 'pelatihan') ? 'active' : '' ?>">
-                                            <i class="bi bi-circle nav-icon"></i>
-                                            <p>Pelatihan</p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a href="<?= base_url('admin_v2/activitylogs'); ?>" class="nav-link <?= ($current_uri == 'activitylogs') ? 'active' : '' ?>">
-                                    <i class="nav-icon bi bi-clock-history"></i>
-                                    <p>Aktivitas Pengguna</p>
-                                </a>
-                            </li>
-                            <li class="nav-header my-1 text-muted">SUPER ADMIN</li>
-                            <li class="nav-item">
-                                <a href="<?php echo base_url('admin_v2/users'); ?>" class="nav-link <?= ($current_uri == 'users') ? 'active' : '' ?>">
-                                    <i class="nav-icon bi bi-person-fill-gear"></i>
-                                    <p>Users</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="<?php echo base_url('admin_v2/settings'); ?>" class="nav-link <?= ($current_uri == 'settings') ? 'active' : '' ?>">
-                                    <i class="nav-icon bi bi-gear"></i>
-                                    <p>Settings</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="<?php echo base_url('admin_v2/backup'); ?>" class="nav-link <?= ($current_uri == 'backup') ? 'active' : '' ?>">
-                                    <i class="nav-icon bi bi-database"></i>
-                                    <p>Backup</p>
-                                </a>
-                            </li>
-                        <?php elseif (in_groups('pencaker')) : ?>
+                        <?php if (in_groups('pencaker')) : ?>
                             <li class="nav-item">
                                 <a href="<?php echo base_url('pencaker/dashboard'); ?>" class="nav-link <?= ($current_uri == 'dashboard') ? 'active' : '' ?>">
                                     <i class="nav-icon bi bi-speedometer2"></i>
@@ -305,7 +223,6 @@
 
         });
     </script>
-    <!--  -->
 </body>
 
 </html>

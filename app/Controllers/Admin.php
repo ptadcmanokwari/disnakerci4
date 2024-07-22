@@ -113,11 +113,66 @@ class Admin extends BaseController
     }
 
 
+    // public function pencakerajax()
+    // {
+    //     $pencakerModel = new PencakerModel();
+    //     $dokpasfoto = $pencakerModel->getpasfotopencaker($id_pencaker);
+    //     // Ambil nilai filter dari request
+    //     $filter = $this->request->getPost('filter');
+
+    //     // Ambil data pencaker dengan join ke tabel users
+    //     $pencaker = $pencakerModel->getPencakerWithUser($filter);
+
+    //     $data = [];
+
+    //     foreach ($pencaker as $pc) {
+    //         $defaultImagePath = base_url('uploads/user/no-user.jpg');
+    //         $gambar = '<img src="' . $defaultImagePath . '" alt="' . $pc['namalengkap'] . '" title="' . $pc['namalengkap'] . '" width="40">';
+
+    //         if (!empty($pc['img_type'])) {
+    //             $imagePath = base_url('path/to/image/' . $pc['img_type']);
+    //             if (file_exists(FCPATH . 'path/to/image/' . $pc['img_type'])) {
+    //                 $gambar = '<img src="' . $imagePath . '" alt="' . $pc['namalengkap'] . '" title="' . $pc['namalengkap'] . '" width="40">';
+    //             }
+    //         }
+
+    //         $data[] = [
+    //             "verval" => '<button class="btn btn-secondary btn-sm btn-verval"
+    //                         title="Verifikasi/Validasi Pencaker"
+    //                          data-id="' . $pc['id'] . '" 
+    //                          data-namalengkap="' . $pc['namalengkap'] . '" 
+    //                          data-nopendaftaran="' . $pc['nopendaftaran'] . '" 
+    //                          data-toggle="modal" 
+    //                          data-target="#VerVal">
+    //                          <i class="bi bi-check-circle-fill"></i>
+    //                      </button>',
+    //             "img" => $gambar,
+    //             "namalengkap" => $pc['namalengkap'],
+    //             "nopendaftaran" => $pc['nopendaftaran'],
+    //             "nik" => $pc['nik'],
+    //             "nohp" => $pc['nohp'], // Ambil phone dari userData jika ada
+    //             "email" =>  $pc['email'], // Ambil email dari userData jika ada
+    //             "keterangan_status" => $pc['keterangan_status'],
+    //             "aksi" => '<div class="btn-group" role="group" aria-label="Actions">
+    //                        <a href="' . base_url('admin_v2/detail_pencaker/' . $pc['id']) . '" target="_blank" class="btn btn-info btn-sm" title="Detail Pencaker">
+    //                            <i class="bi bi-search"></i>
+    //                        </a>
+    //                        <a href="' . base_url('admin_v2/kartu_ak1/' . $pc['id']) . '" target="_blank" class="btn btn-success btn-sm" title="Kartu AK/1">
+    //                            <i class="bi bi-person-vcard-fill"></i>
+    //                        </a>
+    //                        <button class="btn btn-danger btn-sm btn-delete" data-i="' . $pc['id'] . '" title="Babat Pencaker">
+    //                            <i class="bi bi-trash"></i>
+    //                        </button>
+    //                    </div>'
+    //         ];
+    //     }
+
+    //     echo json_encode(["data" => $data]);
+    // }
+
     public function pencakerajax()
     {
         $pencakerModel = new PencakerModel();
-
-        // Ambil nilai filter dari request
         $filter = $this->request->getPost('filter');
 
         // Ambil data pencaker dengan join ke tabel users
@@ -126,26 +181,43 @@ class Admin extends BaseController
         $data = [];
 
         foreach ($pencaker as $pc) {
+            // Ambil data pas foto untuk pencaker
+            $dokpasfoto = $pencakerModel->getpasfotopencaker($pc['id']);
+
+            // Tentukan path gambar default
             $defaultImagePath = base_url('uploads/user/no-user.jpg');
             $gambar = '<img src="' . $defaultImagePath . '" alt="' . $pc['namalengkap'] . '" title="' . $pc['namalengkap'] . '" width="40">';
 
-            if (!empty($pc['img_type'])) {
-                $imagePath = base_url('path/to/image/' . $pc['img_type']);
-                if (file_exists(FCPATH . 'path/to/image/' . $pc['img_type'])) {
+            // Periksa apakah dokpasfoto ada dan memiliki namadokumen
+            if ($dokpasfoto && !empty($dokpasfoto['namadokumen'])) {
+                $imagePath = base_url('uploads/dokumen_pencaker/' . $dokpasfoto['nik'] . '/' . $dokpasfoto['namadokumen']);
+                if (file_exists(FCPATH . 'uploads/dokumen_pencaker/' . $dokpasfoto['nik'] . '/' . $dokpasfoto['namadokumen'])) {
                     $gambar = '<img src="' . $imagePath . '" alt="' . $pc['namalengkap'] . '" title="' . $pc['namalengkap'] . '" width="40">';
                 }
             }
 
+            // Tentukan kondisi tombol jika keterangan_status kosong atau null
+            $isDisabled = empty($pc['keterangan_status']) ? 'disabled' : '';
+
+            // Tentukan kondisi tombol untuk verifikasi/validasi pencaker
+            $vervalDisabled = ($pc['keterangan_status'] === 'Registrasi' || $isDisabled) ? 'disabled' : '';
+
+            // Tentukan kondisi tombol untuk Kartu AK/1
+            $kartuDisabled = ($pc['keterangan_status'] === 'Validasi' && !$isDisabled) ? '' : 'disabled-link';
+
+            // Tentukan kondisi tombol untuk Detail Pencaker
+            $detailDisabled = ($isDisabled) ? 'disabled-link' : '';
+
             $data[] = [
-                "verval" => '<button class="btn btn-secondary btn-sm btn-verval"
-                            title="Verifikasi/Validasi Pencaker"
-                             data-id="' . $pc['id'] . '" 
-                             data-namalengkap="' . $pc['namalengkap'] . '" 
-                             data-nopendaftaran="' . $pc['nopendaftaran'] . '" 
-                             data-toggle="modal" 
-                             data-target="#VerVal">
-                             <i class="bi bi-check-circle-fill"></i>
-                         </button>',
+                "verval" => '<button class="btn btn-secondary btn-sm btn-verval" ' . $vervalDisabled . '
+                    title="Verifikasi/Validasi Pencaker"
+                     data-id="' . $pc['id'] . '" 
+                     data-namalengkap="' . $pc['namalengkap'] . '" 
+                     data-nopendaftaran="' . $pc['nopendaftaran'] . '" 
+                     data-toggle="modal" 
+                     data-target="#VerVal">
+                     <i class="bi bi-check-circle-fill"></i>
+                 </button>',
                 "img" => $gambar,
                 "namalengkap" => $pc['namalengkap'],
                 "nopendaftaran" => $pc['nopendaftaran'],
@@ -154,16 +226,16 @@ class Admin extends BaseController
                 "email" =>  $pc['email'], // Ambil email dari userData jika ada
                 "keterangan_status" => $pc['keterangan_status'],
                 "aksi" => '<div class="btn-group" role="group" aria-label="Actions">
-                           <a href="' . base_url('admin_v2/detail_pencaker/' . $pc['id']) . '" target="_blank" class="btn btn-info btn-sm" title="Detail Pencaker">
-                               <i class="bi bi-search"></i>
-                           </a>
-                           <a href="' . base_url('admin_v2/kartu_ak1/' . $pc['id']) . '" target="_blank" class="btn btn-success btn-sm" title="Kartu AK/1">
-                               <i class="bi bi-person-vcard-fill"></i>
-                           </a>
-                           <button class="btn btn-danger btn-sm btn-delete" data-i="' . $pc['id'] . '" title="Babat Pencaker">
-                               <i class="bi bi-trash"></i>
-                           </button>
-                       </div>'
+                   <a href="' . base_url('admin_v2/detail_pencaker/' . $pc['id']) . '" target="_blank" class="btn btn-info btn-sm ' . $detailDisabled . '" title="Detail Pencaker">
+                       <i class="bi bi-search"></i>
+                   </a>
+                   <a href="' . base_url('admin_v2/kartu_ak1/' . $pc['id']) . '" target="_blank" class="btn btn-success btn-sm ' . $kartuDisabled . '" title="Kartu AK/1">
+                       <i class="bi bi-person-vcard-fill"></i>
+                   </a>
+                   <button class="btn btn-danger btn-sm btn-delete" data-id="' . $pc['id'] . '" ' . $isDisabled . ' title="Hapus Pencaker">
+                       <i class="bi bi-trash"></i>
+                   </button>
+               </div>'
             ];
         }
 
@@ -171,25 +243,19 @@ class Admin extends BaseController
     }
 
 
+
+
     public function detail_pencaker($id_pencaker)
     {
         $pencakerModel = new PencakerModel();
         $pencaker = $pencakerModel->find($id_pencaker);
+        $pendidikan = $pencakerModel->getpendidikanpencaker($id_pencaker);
+        $pengalaman = $pencakerModel->getpengalamankerjapencaker($id_pencaker);
+        $alldokumen = $pencakerModel->getdokumenpencaker($id_pencaker);
+        $dokpasfoto = $pencakerModel->getpasfotopencaker($id_pencaker);
 
         $users = new UsersModel();
         $user = $users->find($id_pencaker);
-
-        $pendidikanModel = new PendidikanModel();
-        $pendidikan = $pendidikanModel->where('pencaker_id', $id_pencaker)->findAll();
-
-        $pengalamanModel = new PengalamanKerjaModel();
-        $pengalaman = $pengalamanModel->where('pencaker_id', $id_pencaker)->findAll();
-
-        // $dokumenModel = new DokumenPencakerModel();
-        $dokumen = $pencakerModel->getdokumenpencaker($id_pencaker);
-
-        $jenjangPendidikan = new JenjangpendidikanModel();
-        $jenjangPd = $jenjangPendidikan->where('id', $id_pencaker)->findAll();
 
         $data = [
             'title' => 'Review Data dan Dokumen Pencari Kerja',
@@ -197,8 +263,8 @@ class Admin extends BaseController
             'user' => $user,
             'pendidikan' => $pendidikan,
             'pengalaman' => $pengalaman,
-            'dokumen' => $dokumen,
-            'jenjang' => $jenjangPd
+            'alldokumen' => $alldokumen,
+            'dokpasfoto' => $dokpasfoto,
         ];
 
         // return view('admin/review_pencaker', $data);
@@ -211,24 +277,17 @@ class Admin extends BaseController
     {
         $pencakerModel = new PencakerModel();
         $pencaker = $pencakerModel->find($id_pencaker);
-        $dokumen = $pencakerModel->getdokumenpencaker($id_pencaker);
-
-        $pendidikanModel = new PendidikanModel();
-        $pendidikan = $pendidikanModel->where('pencaker_id', $id_pencaker)->findAll();
-
-        $pengalamanModel = new PengalamanKerjaModel();
-        $pengalaman = $pengalamanModel->where('pencaker_id', $id_pencaker)->findAll();
-
-        $jenjangPendidikan = new JenjangpendidikanModel();
-        $jenjang = $jenjangPendidikan->where('id', $id_pencaker)->findAll();
-
+        $pendidikan = $pencakerModel->getpendidikanpencaker($id_pencaker);
+        $pengalaman = $pencakerModel->getpengalamankerjapencaker($id_pencaker);
+        $alldokumen = $pencakerModel->getdokumenpencaker($id_pencaker);
+        $dokpasfoto = $pencakerModel->getpasfotopencaker($id_pencaker);
         $data = [
             'title' => 'Kartu AK/1',
             'pencaker' => $pencaker,
             'pendidikan' => $pendidikan,
             'pengalaman' => $pengalaman,
-            'dokumen' => $dokumen,
-            'jenjang' => $jenjang
+            'alldokumen' => $alldokumen,
+            'dokpasfoto' => $dokpasfoto
         ];
 
         return view('admin/kartu_ak1', $data);

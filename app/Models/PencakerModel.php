@@ -14,6 +14,7 @@ class PencakerModel extends Model
         'bahasa_lainnya', 'keterangan_status', 'qr_code', 'user_id'
     ];
 
+    // datatables server side
     public function getPencakerWithUser($filter = null)
     {
         $builder = $this->db->table($this->table);
@@ -112,10 +113,28 @@ class PencakerModel extends Model
         return false;
     }
 
+    public function getpendidikanpencaker($id_pencaker)
+    {
+        $builder = $this->db->query('select pp.nama_sekolah, pp.tahunmasuk, pp.tahunlulus, pp.ipk, pp.keterampilan, jp.jenjang from pencaker p join pendidikan_pencaker pp on pp.pencaker_id = p.id join jenjang_pendidikan jp on jp.id = pp.jenjang_pendidikan_id where p.id = ' . $id_pencaker);
+        return $builder->getResultArray();
+    }
+
+    public function getpengalamankerjapencaker($id_pencaker)
+    {
+        $builder = $this->db->query('select pk.instansi, pk.tahunmasuk, pk.tahunkeluar, pk.jabatan, pk.pendapatan_terakhir, pk.alasan_berhenti from pencaker p join pengalaman_kerja pk on pk.pencaker_id = p.id where p.id = ' . $id_pencaker);
+        return $builder->getResultArray();
+    }
+
     public function getdokumenpencaker($id_pencaker)
     {
+        $builder = $this->db->query('select p.nik, p.namalengkap, namadokumen, d.jenis_dokumen from pencaker p join pencaker_dokumen pd on pd.pencaker_id = p.id join dokumen d on d.id = pd.dokumen_id where p.id = ' . $id_pencaker);
+        return $builder->getResultArray();
+    }
 
-        $builder = $this->db->query('select p.nik, p.namalengkap, pd.*, d.jenis_dokumen from pencaker p join pencaker_dokumen pd on pd.pencaker_id = p.id join dokumen d on d.id = pd.dokumen_id where d.id = 1 and p.id = ' . $id_pencaker);
+    public function getpasfotopencaker($id_pencaker)
+    {
+
+        $builder = $this->db->query('select p.nik, p.namalengkap, namadokumen, pd.*, d.jenis_dokumen from pencaker p join pencaker_dokumen pd on pd.pencaker_id = p.id join dokumen d on d.id = pd.dokumen_id where d.id = 1 and p.id = ' . $id_pencaker);
         return $builder->getRowArray();
     }
 

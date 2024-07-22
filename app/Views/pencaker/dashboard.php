@@ -1,7 +1,6 @@
-<?= $this->extend('admin/template') ?>
+<?= $this->extend('pencaker/template') ?>
 <?= $this->section('content') ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css">
-<!-- SweetAlert2 CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 <meta name="csrf-token" content="<?= csrf_hash() ?>">
 
@@ -55,7 +54,7 @@
                     <form id="verificationForm">
                         <input type="hidden" class="form-control" name="id_pencaker" id="id_pencaker" readonly value="<?= $id_pencaker['id']; ?>">
                         <input type="hidden" id="mintaVerifikasi" name="mintaverifikasi" value="Verifikasi">
-                        <button id="verifyLink" class="btn btn-primary <?= $isDataComplete && $isDocumentComplete ? '' : 'btn btn-secondary disabled' ?>">Minta Verifikasi Data</button>
+                        <button id="verifyLink" class="btn btn-primary <?= $isDataComplete && $isDocumentComplete ? '' : 'btn btn-secondary disabled' ?> title='Verifikasi Data'">Minta Verifikasi Data</button>
                     </form>
                 <?php endif; ?>
                 </div>
@@ -132,9 +131,6 @@
                                 <span class="time"><i class="fas fa-clock"></i> 5 days ago</span>
                                 <h3 class="timeline-header"><a href="#">Mr. Doe</a> shared a video</h3>
                                 <div class="timeline-body">
-                                    <div class="embed-responsive embed-responsive-16by9">
-                                        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/tMWkeBIohBs" allowfullscreen></iframe>
-                                    </div>
                                 </div>
                                 <div class="timeline-footer">
                                     <a href="#" class="btn btn-sm bg-maroon">See comments</a>
@@ -146,23 +142,18 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-footer">
-                    Visit <a href="https://select2.github.io/">Select2 documentation</a> for more examples and information about
-                    the plugin.
-                </div>
             </div>
         </div>
     </section>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- SweetAlert2 JS -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
 
 <script>
     $(document).ready(function() {
         $('#verifyLink').on('click', function(event) {
-            event.preventDefault(); // Mencegah tombol dari aksi default
+            event.preventDefault();
 
             Swal.fire({
                 title: 'Apakah Anda Yakin?',
@@ -175,7 +166,6 @@
                 cancelButtonText: 'Batal'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // Jika konfirmasi, submit form menggunakan AJAX
                     var id_pencaker = $('#id_pencaker').val();
                     var formData = {
                         id_pencaker: id_pencaker,

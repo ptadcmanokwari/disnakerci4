@@ -1,4 +1,4 @@
-<?= $this->extend('admin/template') ?>
+<?= $this->extend('pencaker/template') ?>
 <?= $this->section('content') ?>
 
 <link rel="stylesheet" href="<?php echo base_url('adminltev31/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css'); ?>">
@@ -426,25 +426,39 @@
                                                             <div class="col-12 col-sm-12 col-md-3 col-lg-2 ">
                                                                 <div class="form-group">
                                                                     <label for="tahunmasukkerja">Tahun Masuk</label>
-                                                                    <input type="number" class="form-control year" name="tahunmasukkerja" id="tahunmasukkerja" placeholder="" required placeholder="Tahun masuk kerja">
+                                                                    <input type="number" class="form-control year" name="tahunmasukkerja" id="tahunmasukkerja" required>
                                                                 </div>
                                                             </div>
                                                             <div class="col-12 col-sm-12 col-md-3 col-lg-2 ">
                                                                 <div class="form-group">
                                                                     <label for="tahunkeluarkerja">Tahun Keluar</label>
-                                                                    <input type="number" class="form-control year" name="tahunkeluarkerja" id="tahunkeluarkerja" placeholder="" required placeholder="Tahun keluar kerja">
+                                                                    <input type="number" class="form-control year" name="tahunkeluarkerja" id="tahunkeluarkerja" required>
                                                                 </div>
                                                             </div>
                                                             <div class="col-12 col-sm-12 col-md-3 col-lg-4">
                                                                 <div class="form-group">
                                                                     <label for="instansi">Nama Perusahan/Instansi</label>
-                                                                    <input type="text" class="form-control" name="instansi" id="instansi" placeholder="" required placeholder="Nama Perusahan/Instansi">
+                                                                    <input type="text" class="form-control" name="instansi" id="instansi" required>
                                                                 </div>
                                                             </div>
                                                             <div class="col-12 col-sm-12 col-md-3 col-lg-4">
                                                                 <div class="form-group">
                                                                     <label for="jabatan">Jabatan</label>
-                                                                    <input type="text" class="form-control" name="jabatan" id="jabatan" placeholder="" required placeholder="Tahun masuk sekolah">
+                                                                    <input type="text" class="form-control" name="jabatan" id="jabatan" required>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="col-12 col-sm-12 col-md-3 col-lg-4">
+                                                                <div class="form-group">
+                                                                    <label for="alasan_berhenti">Alasan Berhenti</label>
+                                                                    <input type="text" class="form-control" name="alasan_berhenti" id="alasan_berhenti" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 col-sm-12 col-md-3 col-lg-4">
+                                                                <div class="form-group">
+                                                                    <label for="pendapatan_terakhir">Pendapatan Terakhir</label>
+                                                                    <input type="text" class="form-control" name="pendapatan_terakhir" id="pendapatan_terakhir" required>
                                                                 </div>
                                                             </div>
                                                             <div class="col-12 col-sm-12 col-md-12 col-lg-12 ">
@@ -467,6 +481,8 @@
                                                                         <th>Tahun Keluar</th>
                                                                         <th>Nama Perusahan/Instansi</th>
                                                                         <th>Jabatan</th>
+                                                                        <th>Alasan Berhenti</th>
+                                                                        <th>Pendapatan Terakhir</th>
                                                                         <th>Aksi</th>
                                                                     </tr>
                                                                 </thead>
@@ -1094,6 +1110,12 @@
                     "data": "jabatan"
                 },
                 {
+                    "data": "alasan_berhenti"
+                },
+                {
+                    "data": "pendapatan_terakhir"
+                },
+                {
                     "data": "aksi",
                     "orderable": false,
                     "searchable": false
@@ -1108,6 +1130,8 @@
                 tahunkeluarkerja: $('#tahunkeluarkerja').val(),
                 instansi: $('#instansi').val(),
                 jabatan: $('#jabatan').val(),
+                alasan_berhenti: $('#alasan_berhenti').val(),
+                pendapatan_terakhir: $('#pendapatan_terakhir').val(),
                 pencaker_id: $('#id_pencaker').val(), // Pastikan nilai ini sudah benar
             };
 
@@ -1212,6 +1236,8 @@
                     $('#tahunmasukkerja').val(response.tahunmasuk);
                     $('#tahunkeluarkerja').val(response.tahunkeluar);
                     $('#instansi').val(response.instansi);
+                    $('#alasan_berhenti').val(response.alasan_berhenti);
+                    $('#pendapatan_terakhir').val(response.pendapatan_terakhir);
                     $('#jabatan').val(response.jabatan);
 
                     // Ubah tombol Save menjadi Update
@@ -1242,6 +1268,8 @@
                 tahunkeluarkerja: $('#tahunkeluarkerja').val(),
                 instansi: $('#instansi').val(),
                 jabatan: $('#jabatan').val(),
+                alasan_berhenti: $('#alasan_berhenti').val(),
+                pendapatan_terakhir: $('#pendapatan_terakhir').val(),
             };
 
             console.log('Data yang dikirim:', data);

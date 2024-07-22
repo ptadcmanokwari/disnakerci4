@@ -40,7 +40,7 @@
         }
 
         table.t3 td {
-            padding: 5px !important;
+            padding: 3px !important;
         }
 
         tbody {
@@ -161,7 +161,7 @@
                 <div class="row" style="margin-top:20px !important">
                     <div id="profil" class="col-3">
 
-                        <img class="w-100 mt-3" src="<?= base_url('uploads/dokumen_pencaker/' . $pencaker['nik'] . '/' . $dokumen['namadokumen']) ?>" alt="Pas Foto">
+                        <img class="w-100 mt-3" src="<?= base_url('uploads/dokumen_pencaker/' . $pencaker['nik'] . '/' . $dokpasfoto['namadokumen']) ?>" alt="Pas Foto">
 
                     </div>
                     <div class="col-9 px-0">

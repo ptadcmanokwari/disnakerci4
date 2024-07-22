@@ -1,4 +1,4 @@
-<?= $this->extend('admin/template') ?>
+<?= $this->extend('pencaker/template') ?>
 <?= $this->section('content') ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/dropzone.min.css">
 <div class="content-wrapper">

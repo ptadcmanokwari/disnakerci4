@@ -1,4 +1,4 @@
-<?= $this->extend('admin/template') ?>
+<?= $this->extend('pencaker/template') ?>
 <?= $this->section('content') ?>
 <style>
     .profile-user-img {
