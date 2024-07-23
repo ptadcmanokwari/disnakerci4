@@ -6,12 +6,8 @@ use App\Controllers\BaseController;
 use App\Models\FrontendModel;
 use App\Models\UsersModel;
 use App\Models\PencakerModel;
-use App\Models\ActivityModel;
+use App\Models\ActivitylogsModel;
 use App\Models\DatabaseModel;
-
-use App\Models\PendidikanModel;
-use App\Models\PengalamanKerjaModel;
-use App\Models\JenjangpendidikanModel;
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
@@ -113,63 +109,6 @@ class Admin extends BaseController
     }
 
 
-    // public function pencakerajax()
-    // {
-    //     $pencakerModel = new PencakerModel();
-    //     $dokpasfoto = $pencakerModel->getpasfotopencaker($id_pencaker);
-    //     // Ambil nilai filter dari request
-    //     $filter = $this->request->getPost('filter');
-
-    //     // Ambil data pencaker dengan join ke tabel users
-    //     $pencaker = $pencakerModel->getPencakerWithUser($filter);
-
-    //     $data = [];
-
-    //     foreach ($pencaker as $pc) {
-    //         $defaultImagePath = base_url('uploads/user/no-user.jpg');
-    //         $gambar = '<img src="' . $defaultImagePath . '" alt="' . $pc['namalengkap'] . '" title="' . $pc['namalengkap'] . '" width="40">';
-
-    //         if (!empty($pc['img_type'])) {
-    //             $imagePath = base_url('path/to/image/' . $pc['img_type']);
-    //             if (file_exists(FCPATH . 'path/to/image/' . $pc['img_type'])) {
-    //                 $gambar = '<img src="' . $imagePath . '" alt="' . $pc['namalengkap'] . '" title="' . $pc['namalengkap'] . '" width="40">';
-    //             }
-    //         }
-
-    //         $data[] = [
-    //             "verval" => '<button class="btn btn-secondary btn-sm btn-verval"
-    //                         title="Verifikasi/Validasi Pencaker"
-    //                          data-id="' . $pc['id'] . '" 
-    //                          data-namalengkap="' . $pc['namalengkap'] . '" 
-    //                          data-nopendaftaran="' . $pc['nopendaftaran'] . '" 
-    //                          data-toggle="modal" 
-    //                          data-target="#VerVal">
-    //                          <i class="bi bi-check-circle-fill"></i>
-    //                      </button>',
-    //             "img" => $gambar,
-    //             "namalengkap" => $pc['namalengkap'],
-    //             "nopendaftaran" => $pc['nopendaftaran'],
-    //             "nik" => $pc['nik'],
-    //             "nohp" => $pc['nohp'], // Ambil phone dari userData jika ada
-    //             "email" =>  $pc['email'], // Ambil email dari userData jika ada
-    //             "keterangan_status" => $pc['keterangan_status'],
-    //             "aksi" => '<div class="btn-group" role="group" aria-label="Actions">
-    //                        <a href="' . base_url('admin_v2/detail_pencaker/' . $pc['id']) . '" target="_blank" class="btn btn-info btn-sm" title="Detail Pencaker">
-    //                            <i class="bi bi-search"></i>
-    //                        </a>
-    //                        <a href="' . base_url('admin_v2/kartu_ak1/' . $pc['id']) . '" target="_blank" class="btn btn-success btn-sm" title="Kartu AK/1">
-    //                            <i class="bi bi-person-vcard-fill"></i>
-    //                        </a>
-    //                        <button class="btn btn-danger btn-sm btn-delete" data-i="' . $pc['id'] . '" title="Babat Pencaker">
-    //                            <i class="bi bi-trash"></i>
-    //                        </button>
-    //                    </div>'
-    //         ];
-    //     }
-
-    //     echo json_encode(["data" => $data]);
-    // }
-
     public function pencakerajax()
     {
         $pencakerModel = new PencakerModel();
@@ -197,7 +136,7 @@ class Admin extends BaseController
             }
 
             // Tentukan kondisi tombol jika keterangan_status kosong atau null
-            $isDisabled = empty($pc['keterangan_status']) ? 'disabled' : '';
+            $isDisabled = empty($pc['nik']) ? 'disabled' : '';
 
             // Tentukan kondisi tombol untuk verifikasi/validasi pencaker
             $vervalDisabled = ($pc['keterangan_status'] === 'Registrasi' || $isDisabled) ? 'disabled' : '';
@@ -222,8 +161,8 @@ class Admin extends BaseController
                 "namalengkap" => $pc['namalengkap'],
                 "nopendaftaran" => $pc['nopendaftaran'],
                 "nik" => $pc['nik'],
-                "nohp" => $pc['nohp'], // Ambil phone dari userData jika ada
-                "email" =>  $pc['email'], // Ambil email dari userData jika ada
+                "nohp" => $pc['nohp'],
+                "email" =>  $pc['email'],
                 "keterangan_status" => $pc['keterangan_status'],
                 "aksi" => '<div class="btn-group" role="group" aria-label="Actions">
                    <a href="' . base_url('admin_v2/detail_pencaker/' . $pc['id']) . '" target="_blank" class="btn btn-info btn-sm ' . $detailDisabled . '" title="Detail Pencaker">
@@ -885,41 +824,32 @@ class Admin extends BaseController
 
     public function activitylogsajax()
     {
-        $db = \Config\Database::connect();
-        $builder = $db->table('users');
-        $builder->select('users.id as userid, username, email, name, namalengkap, auth_groups.name as group_name, user_agent, ip_address, auth_activation_attempts.created_at');
-        $builder->join('auth_groups_users', 'auth_groups_users.user_id = users.id');
-        $builder->join('auth_groups', 'auth_groups.id = auth_groups_users.group_id');
-        $builder->join('auth_activation_attempts', 'auth_activation_attempts.id = users.id');
-        $query = $builder->get();
-
-        $logs = $query->getResult();
+        $activityModel = new ActivitylogsModel();
+        $logs = $activityModel->findAll();
 
         $data = [];
         foreach ($logs as $item) {
             $data[] = [
-                "id" => $item->userid,
-                "ip_address" => $item->ip_address,
-                "email" => $item->email,
-                "username" => $item->username,
-                "user_agent" => $item->user_agent,
-                "name" => $item->name,
-                "date" => $item->created_at,
-                // Menggunakan $item->group_name untuk menampilkan nama grup user
+                "id" => $item['id'],
+                "title" => $item['title'],
+                "user" => $item['user'],
+                "ip_address" => $item['ip_address'],
+                "updated_at" => $item['updated_at'],
                 "aksi" => '<div class="btn-group" role="group" aria-label="Aksi">
-                  <button class="btn btn-info btn-sm btn-detail-log" 
-                         data-id="' . $item->userid . '" 
-                         data-ip_address="' . $item->ip_address . '" 
-                         data-email="' . $item->email . '" 
-                         data-date="' . $item->created_at . '" 
-                         data-toggle="modal" 
-                         data-target="#detailLogModal">
-                         <i class="bi bi-check-circle-fill"></i>
-                     </button>
-                  <a class="btn btn-info btn-sm btn-detail-user" data-id="' . $item->userid . '">
-                      <i class="bi bi-person-fill"></i>
-                  </a>
-               </div>'
+              <button class="btn btn-info btn-sm btn-detail-log" 
+                     data-id="' . $item['id'] . '" 
+                     data-ip_address="' . $item['ip_address'] . '" 
+                     data-title="' . $item['title'] . '" 
+                     data-user="' . $item['user'] . '" 
+                     data-updated_at="' . $item['updated_at'] . '" 
+                     data-toggle="modal" 
+                     data-target="#detailLogModal">
+                     <i class="bi bi-check-circle-fill"></i>
+                 </button>
+              <a class="btn btn-info btn-sm btn-detail-user" data-id="' . $item['id'] . '">
+                  <i class="bi bi-person-fill"></i>
+              </a>
+           </div>'
             ];
         }
 
@@ -952,15 +882,8 @@ class Admin extends BaseController
 
     public function usersajax()
     {
-        $db = \Config\Database::connect();
-        $builder = $db->table('users');
-        $builder->select('users.id as userid, username, nohp, nik, status, email, name, namalengkap, auth_groups.name as group_name, users.updated_at');
-        $builder->join('auth_groups_users', 'auth_groups_users.user_id = users.id');
-        $builder->join('auth_groups', 'auth_groups.id = auth_groups_users.group_id');
-
-        $query = $builder->get();
-
-        $users = $query->getResult();
+        $usersModel = new UsersModel();
+        $users = $usersModel->ubah_status_user();
 
         $data = [];
         $no = 1;  // Penomoran untuk tabel
@@ -987,33 +910,33 @@ class Admin extends BaseController
                 "username" => $user->username,
                 "updated_at" => $user->updated_at,
                 "name" => $user->name,
-                "status" => '<input type="checkbox" class="js-switch" data-id="' . $user->userid . '" ' . ($user->status ? 'checked' : '') . '>',
+                "active" => '<input type="checkbox" class="js-switch" data-id="' . $user->userid . '" ' . ($user->active ? 'checked' : '') . '>',
                 "aksi" => '
-                <div class="btn-group" role="group" aria-label="Actions">
-                    <button class="btn btn-info btn-sm btn-detail-user" 
-                        data-id="' . $user->userid . '"  
-                        data-email="' . htmlspecialchars($user->email) . '" 
-                        data-namalengkap="' . $user->namalengkap . '" 
-                        data-username="' . $user->username . '" 
-                        data-nik="' . $user->nik . '" 
-                        data-nohp="' . $user->nohp . '" 
-                        data-name="' . $user->name . '" 
-                        data-updated_at="' . $user->updated_at . '" 
-                        data-toggle="modal" 
-                        data-target="#detailUserModal"
-                        data-load-logs="true">
-                        <i class="bi bi-eye"></i>
-                    </button>
-                    <button class="btn btn-warning btn-sm btn-edit"
-                        data-edit_id="' . $user->userid . '"
-                        data-toggle="modal"
-                        data-target="#ubahUserBaruModal">
-                        <i class="bi bi-pencil-square"></i>
-                    </button>
-                    <button class="btn btn-danger btn-sm btn-delete" data-id="' . $user->userid . '">
-                        <i class="bi bi-trash"></i>
-                    </button>
-                </div>'
+            <div class="btn-group" role="group" aria-label="Actions">
+                <button class="btn btn-info btn-sm btn-detail-user" 
+                    data-id="' . $user->userid . '"  
+                    data-email="' . htmlspecialchars($user->email) . '" 
+                    data-namalengkap="' . $user->namalengkap . '" 
+                    data-username="' . $user->username . '" 
+                    data-nik="' . $user->nik . '" 
+                    data-nohp="' . $user->nohp . '" 
+                    data-name="' . $user->name . '" 
+                    data-updated_at="' . $user->updated_at . '" 
+                    data-toggle="modal" 
+                    data-target="#detailUserModal"
+                    data-load-logs="true">
+                    <i class="bi bi-eye"></i>
+                </button>
+                <button class="btn btn-warning btn-sm btn-edit"
+                    data-edit_id="' . $user->userid . '"
+                    data-toggle="modal"
+                    data-target="#ubahUserBaruModal">
+                    <i class="bi bi-pencil-square"></i>
+                </button>
+                <button class="btn btn-danger btn-sm btn-delete" data-id="' . $user->userid . '">
+                    <i class="bi bi-trash"></i>
+                </button>
+            </div>'
             ];
         }
 
@@ -1022,13 +945,14 @@ class Admin extends BaseController
 
 
 
+
     public function update_status_user()
     {
         $id = $this->request->getJSON()->id;
-        $status = $this->request->getJSON()->status;
+        $active = $this->request->getJSON()->active;
 
         $model = new UsersModel();
-        $update = $model->update($id, ['status' => $status]);
+        $update = $model->update($id, ['active' => $active]);
 
         if ($update) {
             return $this->response->setJSON(['success' => true]);

@@ -57,22 +57,22 @@ class Pencaker extends Controller
     }
 
 
-    // Generate nomopendaftaran
+    // Generate nomor pendaftaran
     public function nomorpendaftaran()
     {
-        $db = \Config\Database::connect();
-        $query = $db->query("SELECT RIGHT(nopendaftaran, 6) AS nopendaftaran FROM pencaker ORDER BY nopendaftaran DESC LIMIT 1");
+        $pencakerModel = new PencakerModel();
+        $lastEntry = $pencakerModel->generate_nopendaftaran();
 
-        if ($query->getNumRows() <> 0) {
-            $data = $query->getRow();
-            $nourut = intval($data->nopendaftaran) + 1;
+        if ($lastEntry) {
+            $lastNoUrut = intval($lastEntry['nopendaftaran']);
+            $nourut = $lastNoUrut + 1;
         } else {
-            $nourut = 1;  // cek jika kode belum terdapat pada tabel
+            $nourut = 1;  // Cek jika kode belum terdapat pada tabel
         }
 
-        $tgl = date('dMY');
+        $tgl = date('dmY');
         $batas = str_pad($nourut, 6, "0", STR_PAD_LEFT);
-        $nopendaftaran = "9202" . $tgl . $batas;  // format kode
+        $nopendaftaran = "9202" . $tgl . $batas;  // Format kode
         return $nopendaftaran;
     }
 

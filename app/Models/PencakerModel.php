@@ -144,4 +144,26 @@ class PencakerModel extends Model
         $builder = $this->db->query('select p.id from pencaker p join users u on u.id = p.user_id where u.id =' . $id_user);
         return $builder->getRowArray();
     }
+
+    // Generasi nopendaftaran
+    public function generate_nopendaftaran()
+    {
+        $query = $this->db->query("SELECT RIGHT(nopendaftaran, 6) AS nopendaftaran FROM pencaker ORDER BY nopendaftaran DESC LIMIT 1");
+        return $query->getRowArray();
+    }
+
+
+    // Activitylogs
+
+    public function activitylogs()
+    {
+        $builder = $this->db->table('users');
+        $builder->select('users.id as userid, username, email, name, namalengkap, auth_groups.name as group_name, user_agent, ip_address, auth_activation_attempts.created_at');
+        $builder->join('auth_groups_users', 'auth_groups_users.user_id = users.id');
+        $builder->join('auth_groups', 'auth_groups.id = auth_groups_users.group_id');
+        $builder->join('auth_activation_attempts', 'auth_activation_attempts.user_id = users.id'); // pastikan kolom yang digunakan untuk join benar
+
+        $query = $builder->get(); // eksekusi query
+        return $query->getResultArray(); // ambil hasil sebagai array
+    }
 }

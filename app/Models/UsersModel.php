@@ -32,4 +32,16 @@ class UsersModel extends Model
     {
         return $this->insert($data);
     }
+
+    public function ubah_status_user()
+    {
+        $builder = $this->db->table('users');
+        $builder->distinct();
+        $builder->select('users.id as userid, username, nohp, nik, active, email, name, namalengkap, auth_groups.name as group_name, users.updated_at');
+        $builder->join('auth_groups_users', 'auth_groups_users.user_id = users.id');
+        $builder->join('auth_groups', 'auth_groups.id = auth_groups_users.group_id');
+
+        $query = $builder->get();
+        return $query->getResult();
+    }
 }

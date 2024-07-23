@@ -189,7 +189,7 @@
                     "data": "name"
                 },
                 {
-                    "data": "status"
+                    "data": "active"
                 },
                 {
                     "data": "aksi"
@@ -206,11 +206,11 @@
                     }
 
                     html.onchange = function() {
-                        var status = this.checked ? 1 : 0;
+                        var active = this.checked ? 1 : 0;
                         var id = this.getAttribute('data-id');
 
                         // Kirim AJAX request untuk memperbarui status di server
-                        fetch('<?= base_url('update_status_user') ?>', {
+                        fetch('<?= base_url('admin_v2/update_status_user') ?>', {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json',
@@ -218,7 +218,7 @@
                                 },
                                 body: JSON.stringify({
                                     id: id,
-                                    status: status
+                                    active: active
                                 })
                             })
                             .then(response => response.json())

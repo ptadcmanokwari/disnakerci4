@@ -10,12 +10,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Log Activitas</h1>
+                    <h1>Log Aktivitas</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Log Activitas</li>
+                        <li class="breadcrumb-item active">Log Aktivitas</li>
                     </ol>
                 </div>
             </div>
@@ -53,11 +53,10 @@
                                 <thead>
                                     <tr>
                                         <th>No.</th>
+                                        <th>Title</th>
+                                        <th>User</th>
                                         <th>IP Address</th>
-                                        <th>Email</th>
-                                        <th>Username</th>
-                                        <th>Perangkat</th>
-                                        <th>Date Time</th>
+                                        <th>Last Login</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -238,19 +237,16 @@
                     "data": "id"
                 },
                 {
+                    "data": "title"
+                },
+                {
+                    "data": "user"
+                },
+                {
                     "data": "ip_address"
                 },
                 {
-                    "data": "email"
-                },
-                {
-                    "data": "username"
-                },
-                {
-                    "data": "user_agent"
-                },
-                {
-                    "data": "date"
+                    "data": "updated_at"
                 },
                 {
                     "data": "aksi"
@@ -264,5 +260,6 @@
         });
     });
 </script>
+
 
 <?= $this->endSection() ?>

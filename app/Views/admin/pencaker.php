@@ -225,7 +225,7 @@
                         url: '<?= base_url('admin_v2/hapus_pencaker') ?>',
                         type: 'POST',
                         data: {
-                            pencakerID: pencakerId // Sesuaikan dengan nama yang digunakan di controller
+                            pencakerID: pencakerId
                         },
                         success: function(response) {
                             if (response.status === 'success') {
