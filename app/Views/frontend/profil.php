@@ -1,21 +1,12 @@
 <?= $this->extend('frontend/template') ?>
-
 <?= $this->section('content') ?>
-<!-- ======= About Us Section ======= -->
+
 <section id="breadcrumbs" class="breadcrumbs">
     <div class="container">
-
         <div class="d-flex justify-content-between align-items-center">
-            <h2>About</h2>
-            <ol>
-                <li><a href="index.html">Home</a></li>
-                <li>About</li>
-            </ol>
         </div>
-
     </div>
-</section><!-- End Breadcrumbs -->
-
+</section>
 <section id="about-us" class="section-bg mt-4 about-us">
     <div class="container" data-aos="fade-up">
 

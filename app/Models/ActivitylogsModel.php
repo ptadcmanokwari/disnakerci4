@@ -13,4 +13,13 @@ class ActivitylogsModel extends Model
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
+
+
+    // Activitylogs
+    public function getLogsByUser($userId)
+    {
+        return $this->where('user', $userId)
+            ->orderBy('created_at', 'DESC')
+            ->findAll();
+    }
 }

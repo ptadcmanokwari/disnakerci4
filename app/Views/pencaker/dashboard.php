@@ -28,121 +28,135 @@
 
     <section class="content">
         <div class="container-fluid">
-            <div class="card card-default">
-                <div class="card-header">
-                    <h3 class="card-title">Status Anda</h3>
-                </div>
-                <div class="card-body">
-                    <h2 class="text-bold"><?php echo $id_pencaker['keterangan_status']; ?></h2>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card card-default">
+                        <div class="card-header">
+                            <h3 class="card-title">Timeline Aktivitas Anda</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="timeline">
+                                <div class="time-label">
+                                    <span class="bg-red">10 Feb. 2014</span>
+                                </div>
+                                <div>
+                                    <i class="fas fa-envelope bg-blue"></i>
+                                    <div class="timeline-item">
+                                        <span class="time"><i class="fas fa-clock"></i> 12:05</span>
+                                        <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
 
-                    <?php if ($id_pencaker['keterangan_status'] == 'Verifikasi') : ?>
-                        <div class="alert alert-info" role="alert">
-                            Dokumen Anda sudah dikirim untuk diverifikasi oleh Admin Disnaker.
-                        </div>
-                    <?php else : ?>
-                        <p>
-                            <?php if ($isDataComplete && $isDocumentComplete) : ?>
-                        <div class="alert alert-success" role="alert">
-                            Data Anda sudah lengkap. Silakan ajukan verifikasi data di bawah ini.
-                        </div>
-                    <?php else : ?>
-                        <div class="alert alert-warning" role="alert">
-                            Data Anda belum lengkap. Silakan cek Formulir AK/1 pada menu Profil Pencaker dan mengunggah dokumen pada menu Dokumen Pencaker.
-                        </div>
-                    <?php endif; ?>
-                    </p>
-                    <form id="verificationForm">
-                        <input type="hidden" class="form-control" name="id_pencaker" id="id_pencaker" readonly value="<?= $id_pencaker['id']; ?>">
-                        <input type="hidden" id="mintaVerifikasi" name="mintaverifikasi" value="Verifikasi">
-                        <button id="verifyLink" class="btn btn-primary <?= $isDataComplete && $isDocumentComplete ? '' : 'btn btn-secondary disabled' ?> title='Verifikasi Data'">Minta Verifikasi Data</button>
-                    </form>
-                <?php endif; ?>
-                </div>
-            </div>
-            <div class="card card-default">
-                <div class="card-header">
-                    <h3 class="card-title">Timeline Aktivitas Anda</h3>
-                </div>
-                <div class="card-body">
-                    <div class="timeline">
-                        <div class="time-label">
-                            <span class="bg-red">10 Feb. 2014</span>
-                        </div>
-                        <div>
-                            <i class="fas fa-envelope bg-blue"></i>
-                            <div class="timeline-item">
-                                <span class="time"><i class="fas fa-clock"></i> 12:05</span>
-                                <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
-
-                                <div class="timeline-body">
-                                    Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
-                                    weebly ning heekya handango imeem plugg dopplr jibjab, movity
-                                    jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
-                                    quora plaxo ideeli hulu weebly balihoo...
+                                        <div class="timeline-body">
+                                            Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
+                                            weebly ning heekya handango imeem plugg dopplr jibjab, movity
+                                            jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
+                                            quora plaxo ideeli hulu weebly balihoo...
+                                        </div>
+                                        <div class="timeline-footer">
+                                            <a class="btn btn-primary btn-sm">Read more</a>
+                                            <a class="btn btn-danger btn-sm">Delete</a>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="timeline-footer">
-                                    <a class="btn btn-primary btn-sm">Read more</a>
-                                    <a class="btn btn-danger btn-sm">Delete</a>
+                                <div>
+                                    <i class="fas fa-user bg-green"></i>
+                                    <div class="timeline-item">
+                                        <span class="time"><i class="fas fa-clock"></i> 5 mins ago</span>
+                                        <h3 class="timeline-header no-border"><a href="#">Sarah Young</a> accepted your friend request</h3>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div>
-                            <i class="fas fa-user bg-green"></i>
-                            <div class="timeline-item">
-                                <span class="time"><i class="fas fa-clock"></i> 5 mins ago</span>
-                                <h3 class="timeline-header no-border"><a href="#">Sarah Young</a> accepted your friend request</h3>
-                            </div>
-                        </div>
-                        <div>
-                            <i class="fas fa-comments bg-yellow"></i>
-                            <div class="timeline-item">
-                                <span class="time"><i class="fas fa-clock"></i> 27 mins ago</span>
-                                <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>
-                                <div class="timeline-body">
-                                    Take me to your leader!
-                                    Switzerland is small and neutral!
-                                    We are more like Germany, ambitious and misunderstood!
+                                <div>
+                                    <i class="fas fa-comments bg-yellow"></i>
+                                    <div class="timeline-item">
+                                        <span class="time"><i class="fas fa-clock"></i> 27 mins ago</span>
+                                        <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>
+                                        <div class="timeline-body">
+                                            Take me to your leader!
+                                            Switzerland is small and neutral!
+                                            We are more like Germany, ambitious and misunderstood!
+                                        </div>
+                                        <div class="timeline-footer">
+                                            <a class="btn btn-warning btn-sm">View comment</a>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="timeline-footer">
-                                    <a class="btn btn-warning btn-sm">View comment</a>
+                                <div class="time-label">
+                                    <span class="bg-green">3 Jan. 2014</span>
+                                </div>
+                                <div>
+                                    <i class="fa fa-camera bg-purple"></i>
+                                    <div class="timeline-item">
+                                        <span class="time"><i class="fas fa-clock"></i> 2 days ago</span>
+                                        <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
+                                        <div class="timeline-body">
+                                            <img src="https://placehold.it/150x100" alt="...">
+                                            <img src="https://placehold.it/150x100" alt="...">
+                                            <img src="https://placehold.it/150x100" alt="...">
+                                            <img src="https://placehold.it/150x100" alt="...">
+                                            <img src="https://placehold.it/150x100" alt="...">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <i class="fas fa-video bg-maroon"></i>
+                                    <div class="timeline-item">
+                                        <span class="time"><i class="fas fa-clock"></i> 5 days ago</span>
+                                        <h3 class="timeline-header"><a href="#">Mr. Doe</a> shared a video</h3>
+                                        <div class="timeline-body">
+                                        </div>
+                                        <div class="timeline-footer">
+                                            <a href="#" class="btn btn-sm bg-maroon">See comments</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <i class="fas fa-clock bg-gray"></i>
                                 </div>
                             </div>
-                        </div>
-                        <div class="time-label">
-                            <span class="bg-green">3 Jan. 2014</span>
-                        </div>
-                        <div>
-                            <i class="fa fa-camera bg-purple"></i>
-                            <div class="timeline-item">
-                                <span class="time"><i class="fas fa-clock"></i> 2 days ago</span>
-                                <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
-                                <div class="timeline-body">
-                                    <img src="https://placehold.it/150x100" alt="...">
-                                    <img src="https://placehold.it/150x100" alt="...">
-                                    <img src="https://placehold.it/150x100" alt="...">
-                                    <img src="https://placehold.it/150x100" alt="...">
-                                    <img src="https://placehold.it/150x100" alt="...">
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <i class="fas fa-video bg-maroon"></i>
-                            <div class="timeline-item">
-                                <span class="time"><i class="fas fa-clock"></i> 5 days ago</span>
-                                <h3 class="timeline-header"><a href="#">Mr. Doe</a> shared a video</h3>
-                                <div class="timeline-body">
-                                </div>
-                                <div class="timeline-footer">
-                                    <a href="#" class="btn btn-sm bg-maroon">See comments</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <i class="fas fa-clock bg-gray"></i>
                         </div>
                     </div>
                 </div>
+                <div class="col-lg-6">
+                    <div class="card card-default">
+                        <div class="card-header">
+                            <h3 class="card-title">Status Anda</h3>
+                        </div>
+                        <div class="card-body">
+                            <h2 class="text-bold"><?php echo $id_pencaker['keterangan_status']; ?></h2>
+                            <?php if ($id_pencaker['keterangan_status'] == 'Validasi') : ?>
+                                <div class="alert alert-info" role="alert">
+                                    Data dan dokumen Anda sedang diverifikasi.
+                                </div>
+                            <?php elseif ($id_pencaker['keterangan_status'] == 'Verifikasi') : ?>
+                                <div class="alert alert-info" role="alert">
+                                    Dokumen Anda sudah dikirim untuk diverifikasi oleh Admin Disnaker.
+                                </div>
+                            <?php else : ?>
+                                <p>
+                                    <?php if ($isDataComplete && $isDocumentComplete) : ?>
+                                <div class="alert alert-success" role="alert">
+                                    Data Anda sudah lengkap. Silakan ajukan verifikasi data di bawah ini.
+                                </div>
+                            <?php else : ?>
+                                <div class="alert alert-warning" role="alert">
+                                    Data Anda belum lengkap. Silakan cek Formulir AK/1 pada menu Profil Pencaker dan mengunggah dokumen pada menu Dokumen Pencaker.
+                                </div>
+                            <?php endif; ?>
+                            </p>
+                            <?php if ($id_pencaker['keterangan_status'] != 'Validasi') : ?>
+                                <form id="verificationForm">
+                                    <input type="hidden" class="form-control" name="id_pencaker" id="id_pencaker" readonly value="<?= $id_pencaker['id']; ?>">
+                                    <input type="hidden" id="mintaVerifikasi" name="mintaverifikasi" value="Verifikasi">
+                                    <button id="verifyLink" class="btn btn-primary <?= $isDataComplete && $isDocumentComplete ? '' : 'btn btn-secondary disabled' ?>" title="Verifikasi Data">Minta Verifikasi Data</button>
+                                </form>
+                            <?php endif; ?>
+                        <?php endif; ?>
+                        </div>
+
+                    </div>
+                </div>
             </div>
+
+
         </div>
     </section>
 </div>

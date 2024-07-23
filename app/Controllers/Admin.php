@@ -15,14 +15,14 @@ use PhpOffice\PhpSpreadsheet\Style\Fill;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
-use TCPDF;
-use TCPDF_STATIC;
+// use TCPDF;
+// use TCPDF_STATIC;
 use App\Libraries\Pdf;
 
-use Myth\Auth\Models\UserModel;
-use Myth\Auth\Entities\User;
-use Endroid\QrCode\QrCode;
-use Endroid\QrCode\Writer\PngWriter;
+// use Myth\Auth\Models\UserModel;
+// use Myth\Auth\Entities\User;
+// use Endroid\QrCode\QrCode;
+// use Endroid\QrCode\Writer\PngWriter;
 
 class Admin extends BaseController
 {
@@ -942,8 +942,6 @@ class Admin extends BaseController
 
         echo json_encode(["data" => $data]);
     }
-
-
 
 
     public function update_status_user()

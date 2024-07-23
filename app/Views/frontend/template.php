@@ -38,6 +38,7 @@
 
     <!-- Template Main CSS File -->
     <link href="<?= base_url(); ?>frontend/assets/css/style.css" rel="stylesheet">
+    <link href="<?= base_url(); ?>frontend/assets/css/custom-informasi-frontend.css" rel="stylesheet">
 
     <script src="<?= base_url('frontend/jquery/jquery.min.js') ?>"></script>
     <!-- =======================================================

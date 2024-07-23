@@ -16,6 +16,7 @@ use App\Models\BahasaModel;
 use App\Models\JabatanModel;
 use App\Models\PerusahaanModel;
 use App\Models\SettingsModel;
+use App\Models\ActivitylogsModel;
 
 use Endroid\QrCode\QrCode;
 use Endroid\QrCode\Writer\PngWriter;
@@ -37,6 +38,11 @@ class Pencaker extends Controller
         // Ambil data pengguna berdasarkan user ID
         $user = $usersModel->find($userId);
 
+        $activityLogsModel = new ActivitylogsModel();
+
+        // Ambil log aktivitas berdasarkan user ID
+        $logs = $activityLogsModel->getLogsByUser($userId);
+
         $pencakerModel = new PencakerModel();
         $id_pencaker = $pencakerModel->getStatusByUserId($user['id']);
 
@@ -50,7 +56,8 @@ class Pencaker extends Controller
             'user' => $user,
             'id_pencaker' => $id_pencaker,
             'isDocumentComplete' => $isDocumentComplete,
-            'isDataComplete' => $isDataComplete
+            'isDataComplete' => $isDataComplete,
+            'logs' => $logs
         ];
 
         return $this->loadView('pencaker/dashboard', $data);
@@ -211,24 +218,14 @@ class Pencaker extends Controller
 
     public function validasi_ak1($code)
     {
-        $db = \Config\Database::connect();
-        $builder = $db->table('pencaker p');
-        $builder->select('*, DATE(tu.tglwaktu) AS tglaktifpencaker');
-        $builder->join('pencaker_dokumen pd', 'pd.pencaker_id = p.id');
-        $builder->join('dokumen d', 'd.id = pd.dokumen_id');
-        $builder->join('users u', 'u.id = p.user_id');
-        $builder->join('timeline_user tu', 'tu.user_id = u.id');
-        $builder->where('d.id', '1');
-        $builder->where('tu.timeline_id', '6');
-        $builder->where('SHA1(p.nopendaftaran)', $code);
-        $getPencaker = $builder->get();
-
+        $pencakerModel = new PencakerModel();
+        $getPencaker = $pencakerModel->validasi_ak1($code);
         $data['v_msg'] = new \stdClass();
 
-        if ($getPencaker->getNumRows() > 0) {
+        if (count($getPencaker) > 0) {
             $data['v_msg']->valid = "Kartu Anda Valid dan Terdaftar di Sistem Dinas Tenaga Kerja dan Transmigrasi Kabupaten Manokwari";
             $data['v_msg']->code = TRUE;
-            $data['v_msg']->pencaker = $getPencaker->getRow();
+            $data['v_msg']->pencaker = $getPencaker[0];
         } else {
             $data['v_msg']->valid = "Maaf, Kartu Anda Tidak Terdaftar di Sistem Disnakertrans Manokwari!";
             $data['v_msg']->code = FALSE;
@@ -764,6 +761,7 @@ class Pencaker extends Controller
         return $this->loadView('pencaker/formdata_pencaker', $data);
     }
 
+
     public function dokajax()
     {
         $dokumenModel = new DokumenModel();
@@ -781,13 +779,18 @@ class Pencaker extends Controller
                 ->first();
 
             if ($pencakerDokumen) {
+                // Dapatkan NIK dari pengguna yang sedang login
+                $nik = user()->nik;
+                // Buat URL dengan menyertakan folder NIK
+                $fileUrl = base_url('uploads/dokumen_pencaker/' . $nik . '/' . $pencakerDokumen['namadokumen']);
+
                 $data[] = [
                     "no" => $no++,
                     "jenis" => $dok['jenis_dokumen'],
                     "nama" => $pencakerDokumen['namadokumen'],
                     "tgl" => $pencakerDokumen['tgl_upload'],
                     "aksi" => '<div class="btn-group" role="group" aria-label="Actions">
-                           <a href="' . base_url('uploads/dokumen_pencaker/' . $pencakerDokumen['namadokumen']) . '" target="_blank" class="btn btn-info btn-sm" title="Detail Dokumen">
+                           <a href="' . $fileUrl . '" target="_blank" class="btn btn-info btn-sm" title="Detail Dokumen">
                                <i class="bi bi-search"></i>
                            </a>
                            <button class="btn btn-danger btn-sm deleteDokumen" data-id="' . $pencakerDokumen['id'] . '" title="Hapus Dokumen">
@@ -796,7 +799,6 @@ class Pencaker extends Controller
                        </div>'
                 ];
             } else {
-
                 $data[] = [
                     "no" => $no++,
                     "jenis" => $dok['jenis_dokumen'],
@@ -813,6 +815,7 @@ class Pencaker extends Controller
 
         echo json_encode(["data" => $data]);
     }
+
 
     public function upload_dokumen()
     {
@@ -962,8 +965,8 @@ class Pencaker extends Controller
             // Format pesan yang akan dikirim
             $message = "*Notifikasi disnakertransmkw.com*" . PHP_EOL . PHP_EOL .
                 "Hi, *" . $namaLengkap . "*," . PHP_EOL .
-                "Anda telah berhasil melakukan registrasi sebagai pencaker di situs disnakertransmkw.com. " .
-                "Silakan lakukan aktivasi akun Anda dengan mengecek email aktivasi dari Sistem Disnakertrans Manokwari." . PHP_EOL . PHP_EOL .
+                "Data dan dokumen Anda telah berhasil dikirim untuk diverifikasi." .
+                "Selanjutnya, silakan menunggu notifikasi validasi dari Sistem Disnakertrans Manokwari." . PHP_EOL . PHP_EOL .
                 "*<noreply>*";
 
             $settingsModel = new SettingsModel();
@@ -1013,6 +1016,21 @@ class Pencaker extends Controller
         curl_close($ch);
 
         return json_decode($response, true);
+    }
+
+
+    public function activity_by_user()
+    {
+        $activityLogsModel = new ActivitylogsModel();
+
+        // Misalnya user ID didapat dari session atau request
+        $userId = user()->id;
+
+        // Ambil log aktivitas berdasarkan user ID
+        $logs = $activityLogsModel->getLogsByUser($userId);
+
+        // Contoh: Mengembalikan data sebagai response JSON
+        return $this->response->setJSON($logs);
     }
 
 

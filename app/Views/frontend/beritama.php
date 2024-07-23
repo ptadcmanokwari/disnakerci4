@@ -1,195 +1,59 @@
 <?= $this->extend('frontend/template') ?>
-
 <?= $this->section('content') ?>
-<style>
-    section#portfolio {
-        margin-top: 120px;
-        padding-top: 60px !important;
-    }
 
-    ::-webkit-scrollbar {
-        width: 8px;
-    }
-
-    /* Track */
-
-    ::-webkit-scrollbar-track {
-        background: #f1f1f1;
-    }
-
-    /* Handle */
-
-    ::-webkit-scrollbar-thumb {
-        background: #888;
-    }
-
-    /* Handle on hover */
-
-    ::-webkit-scrollbar-thumb:hover {
-        background: #555;
-    }
-
-    body {
-        background: #eee;
-    }
-
-    .barto {
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
-        color: #ffffff;
-        float: left;
-        font-family: 'Lato', Arial, sans-serif;
-        font-size: 16px;
-        margin: 10px 1%;
-        overflow: hidden;
-        position: relative;
-        text-align: left;
-        width: 100%;
-    }
-
-    .barto * {
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-        -webkit-transition: all 0.25s ease;
-        transition: all 0.25s ease;
-    }
-
-    .barto img {
-        width: 100%;
-        vertical-align: top;
-        position: relative;
-        object-fit: cover;
-        height: 400px;
-    }
-
-    .barto figcaption {
-        padding: 25px 20px 25px;
-        position: absolute;
-        bottom: 0;
-        z-index: 1;
-    }
-
-    .barto figcaption:before {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: #700877;
-        content: '';
-        background: -moz-linear-gradient(90deg, #700877 0%, #ff2759 100%, #ff2759 100%);
-        background: -webkit-linear-gradient(90deg, #700877 0%, #ff2759 100%, #ff2759 100%);
-        background: linear-gradient(90deg, #700877 0%, #ff2759 100%, #ff2759 100%);
-        opacity: 0.8;
-        z-index: -1;
-    }
-
-    .barto .date {
-        background-color: #fff;
-        border-radius: 50%;
-        color: #700877;
-        font-size: 18px;
-        font-weight: 700;
-        min-height: 48px;
-        min-width: 48px;
-        padding: 10px 0;
-        position: absolute;
-        right: 15px;
-        text-align: center;
-        text-transform: uppercase;
-        top: -25px;
-    }
-
-    .barto .date span {
-        display: block;
-        line-height: 14px;
-    }
-
-    .barto .date .month {
-        font-size: 11px;
-    }
-
-    .barto h3,
-    .barto p {
-        margin: 0;
-        padding: 0;
-    }
-
-    .barto h3 {
-        display: inline-block;
-        font-weight: 700;
-        letter-spacing: -0.4px;
-        margin-bottom: 5px;
-    }
-
-    .barto p {
-        font-size: 0.8em;
-        line-height: 1.6em;
-        margin-bottom: 0px;
-    }
-
-    .barto a {
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        position: absolute;
-        z-index: 1;
-    }
-
-    .barto:hover img,
-    .barto.hover img {
-        -webkit-transform: scale(1.1);
-        transform: scale(1.1);
-    }
-
-    img {
-        border-radius: 5px;
-    }
-
-    img {
-        border-radius: 5px;
-    }
-
-    section#portfolio .row {
-        justify-content: center;
-    }
-</style>
-<main id="main">
-
-    <!-- ======= Portfolio Section ======= -->
-    <section id="portfolio" class="portfolio">
-        <div class="container">
-
-            <div class="section-title">
-                <h2>Berita</h2>
-            </div>
-
-            <div class="row">
-                <?php foreach ($informasi as $info) : ?>
-                    <div class="col-12 col-sm-12 col-md-4 col-lg-4">
-                        <figure class="barto">
-                            <div class="image">
-                                <img src="<?= base_url('uploads/berita/' . $info['gambar']); ?>" alt="<?= $info['judul']; ?>" class="img-fluid">
-                            </div>
-                            <figcaption>
-                                <div class="date">
-                                    <span class="day">
-                                        <?= date('d', strtotime($info['tgl_publikasi'])); ?>
-                                    </span>
-                                    <span class="month">
-                                        <?= date('M', strtotime($info['tgl_publikasi'])); ?>
-                                    </span>
-                                </div>
-                                <h3><?= $info['judul']; ?></h3>
-                                <p><?= character_limiter($info['isi'], 150); ?></p>
-                            </figcaption>
-                            <a href="<?php echo site_url('berita/') . $info['slug']; ?>"></a>
-                        </figure>
-                    </div>
-                <?php endforeach; ?>
-            </div>
+<section id="breadcrumbs" class="breadcrumbs">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
         </div>
-    </section><!-- End Portfolio Section -->
+    </div>
+</section>
 
-</main><!-- End #main -->
+<section class="py-3 py-md-5">
+    <div class="container overflow-hidden">
+        <div class="section-title">
+            <h2>Berita</h2>
+            <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+        </div>
+        <div class="row gy-4 gy-lg-0">
+            <?php foreach ($informasi as $item) : ?>
+                <div class="col-12 col-lg-4">
+                    <article>
+                        <div class="card border-0">
+                            <figure class="card-img-top m-0 overflow-hidden bsb-overlay-hover">
+                                <a href="<?= base_url('berita/' . $item['slug']) ?>">
+                                    <img class="img-fluid bsb-scale bsb-hover-scale-up" loading="lazy" src="<?= base_url('uploads/berita/' . $item['gambar']) ?>" alt="<?= $item['kategori'] ?>">
+                                </a>
+                                <figcaption>
+                                    <i class="bi bi-eye-fill"></i>
+                                    <h4 class="h6 text-white bsb-hover-fadeInRight mt-2">Selengkapnya ...</h4>
+                                </figcaption>
+                            </figure>
+                            <div class="card-body border bg-white p-4">
+                                <div class="entry-header mb-3">
+                                    <h2 class="card-title entry-title h4 mb-0">
+                                        <a class="link-dark text-decoration-none" href="<?= base_url('berita/' . $item['slug']) ?>"><?= $item['judul'] ?></a>
+                                    </h2>
+                                </div>
+                                <p class="card-text entry-summary text-secondary">
+                                    <?= substr(strip_tags($item['isi']), 0, 150) ?>...
+                                </p>
+                            </div>
+                            <div class="card-footer border border-top-0 bg-white p-4">
+                                <ul class="entry-meta list-unstyled d-flex align-items-center m-0">
+                                    <li>
+                                        <a class="fs-7 link-secondary text-decoration-none d-flex align-items-center" href="#!">
+                                            <i class="bi bi-calendar-check-fill"></i>
+                                            <span class="ms-2 fs-7"><?= date('d M Y', strtotime($item['tgl_publikasi'])) ?></span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+
 <?= $this->endSection() ?>

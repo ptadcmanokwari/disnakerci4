@@ -114,7 +114,7 @@
                 <p>Proses pembuatan kartu kuning dimulai dengan pendaftaran akun untuk selanjutnya mengisi formulir Ak/1 dan mengunggah dokumen. Adapun dokumen yang dibutuhkan diantaranya: Pas Foto, KTP, Ijazah Terakhir, Transkrip Nilai, Riwayat Hidup, SKCK dan Suket. Sehat</p>
             </div>
             <div class="col-lg-3 cta-btn-container text-center d-flex align-items-center justify-content-end">
-                <a class="cta-btn text-center btn btn-secondary" href="<?php base_url(); ?>registrasi_pencaker">Buat Akun Sekarang</a>
+                <a class="cta-btn text-center btn btn-secondary" href="<?= url_to('register') ?>">Buat Akun Sekarang</a>
             </div>
         </div>
 

@@ -1,107 +1,59 @@
 <?= $this->extend('frontend/template') ?>
-
 <?= $this->section('content') ?>
-<style>
-    #listBerita {
-        border: 1px solid #116db6;
-        border-radius: 10px;
-    }
-</style>
+
 <section id="breadcrumbs" class="breadcrumbs">
     <div class="container">
-
         <div class="d-flex justify-content-between align-items-center">
-            <h2>About</h2>
-            <ol>
-                <li><a href="index.html">Home</a></li>
-                <li>About</li>
-            </ol>
         </div>
-
     </div>
 </section>
-<section id="blog" class="blog">
-    <div class="container" data-aos="fade-up">
+
+<section class="py-3 py-md-5">
+    <div class="container overflow-hidden">
         <div class="section-title">
             <h2>Pengumuman</h2>
             <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
         </div>
-        <div class="row mt-4">
-            <div class="col-lg-8">
-                <?php if (empty($informasi)) : ?>
-                    <p class="text-center text-muted">Belum ada data untuk ditampilkan di halaman ini.</p>
-                <?php else : ?>
-                    <?php foreach ($informasi as $info) : ?>
-                        <div id="listBerita" class="row py-2 my-2">
-                            <div class="col-lg-4">
-                                <div class="entry-img">
-                                    <img src="<?= base_url('uploads/pengumuman/' . $info['gambar']); ?>" alt="" class="img-fluid">
+        <div class="row gy-4 gy-lg-0">
+            <?php foreach ($informasi as $item) : ?>
+                <div class="col-12 col-lg-4">
+                    <article>
+                        <div class="card border-0">
+                            <figure class="card-img-top m-0 overflow-hidden bsb-overlay-hover">
+                                <a href="<?= base_url('pengumuman/' . $item['slug']) ?>">
+                                    <img class="img-fluid bsb-scale bsb-hover-scale-up" loading="lazy" src="<?= base_url('uploads/pengumuman/' . $item['gambar']) ?>" alt="<?= $item['kategori'] ?>">
+                                </a>
+                                <figcaption>
+                                    <i class="bi bi-eye-fill"></i>
+                                    <h4 class="h6 text-white bsb-hover-fadeInRight mt-2">Selengkapnya ...</h4>
+                                </figcaption>
+                            </figure>
+                            <div class="card-body border bg-white p-4">
+                                <div class="entry-header mb-3">
+                                    <h2 class="card-title entry-title h4 mb-0">
+                                        <a class="link-dark text-decoration-none" href="<?= base_url('pengumuman/' . $item['slug']) ?>"><?= $item['judul'] ?></a>
+                                    </h2>
                                 </div>
+                                <p class="card-text entry-summary text-secondary">
+                                    <?= substr(strip_tags($item['isi']), 0, 150) ?>...
+                                </p>
                             </div>
-                            <article class="col-lg-8 entry py-0 shadow-none">
-                                <h2 class="entry-title">
-                                    <a href="<?= base_url('informasi/' . $info['slug']); ?>"><?= $info['judul']; ?></a>
-                                </h2>
-                                <div class="entry-meta">
-                                    <ul>
-                                        <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="#"><?= $info['users_id']; ?></a></li>
-                                        <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="#"><time datetime="<?= $info['tgl_publikasi']; ?>"><?= date('M d, Y', strtotime($info['tgl_publikasi'])); ?></time></a></li>
-                                    </ul>
-                                </div>
-                                <div class="entry-content">
-                                    <p>
-                                        <?= character_limiter($info['isi'], 150); ?>
-                                    </p>
-                                    <div class="read-more">
-                                        <a href="<?= base_url('informasi/' . $info['slug']); ?>">Read More</a>
-                                    </div>
-                                </div>
-                            </article>
+                            <div class="card-footer border border-top-0 bg-white p-4">
+                                <ul class="entry-meta list-unstyled d-flex align-items-center m-0">
+                                    <li>
+                                        <a class="fs-7 link-secondary text-decoration-none d-flex align-items-center" href="#!">
+                                            <i class="bi bi-calendar-check-fill"></i>
+                                            <span class="ms-2 fs-7"><?= date('d M Y', strtotime($item['tgl_publikasi'])) ?></span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                    <?php endforeach; ?>
-
-                    <div class="blog-pagination d-flex justify-content-center">
-                        <?php if ($pager) : ?>
-                            <?= $pager->links() ?>
-                        <?php endif; ?>
-                    </div>
-                <?php endif; ?>
-            </div>
-
-
-            <div class="col-lg-4 py-0">
-                <div class="sidebar py-0">
-                    <h3 class="sidebar-title">Pengumuman Terbaru</h3>
-                    <div class="sidebar-item recent-posts">
-                        <?php if (empty($recentPosts)) : ?>
-                            <p class="text-muted">Belum ada data untuk ditampilkan di halaman ini.</p>
-                        <?php else : ?>
-                            <?php foreach ($recentPosts as $post) : ?>
-                                <div class="post-item clearfix">
-                                    <img src="<?= base_url('uploads/pengumuman/' . $post['gambar']); ?>" alt="">
-                                    <h4><a href="<?= base_url('informasi/' . $post['slug']); ?>"><?= $post['judul']; ?></a></h4>
-                                    <time datetime="<?= $post['tgl_publikasi']; ?>"><?= date('M d, Y', strtotime($post['tgl_publikasi'])); ?></time>
-                                </div>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
-                    </div><!-- End sidebar recent posts-->
-
-                    <h3 class="sidebar-title">Tags</h3>
-                    <div class="sidebar-item tags">
-                        <ul>
-                            <?php if (empty($uniqueTags)) : ?>
-                                <p class="text-muted">Belum ada data untuk ditampilkan di halaman ini.</p>
-                            <?php else : ?>
-                                <?php if (isset($uniqueTags)) : ?>
-                                    <?php foreach ($uniqueTags as $tag) : ?>
-                                        <li><a href="#"><?= trim($tag); ?></a></li>
-                                    <?php endforeach; ?>
-                                <?php endif; ?>
-                            <?php endif; ?>
-                        </ul>
-                    </div><!-- End sidebar tags -->
-                </div><!-- End sidebar -->
-            </div>
+                    </article>
+                </div>
+            <?php endforeach; ?>
         </div>
+    </div>
 </section>
+
 <?= $this->endSection() ?>

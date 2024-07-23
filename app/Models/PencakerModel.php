@@ -153,15 +153,17 @@ class PencakerModel extends Model
     }
 
 
-    // Activitylogs
-
-    public function activitylogs()
+    public function validasi_ak1($code)
     {
-        $builder = $this->db->table('users');
-        $builder->select('users.id as userid, username, email, name, namalengkap, auth_groups.name as group_name, user_agent, ip_address, auth_activation_attempts.created_at');
-        $builder->join('auth_groups_users', 'auth_groups_users.user_id = users.id');
-        $builder->join('auth_groups', 'auth_groups.id = auth_groups_users.group_id');
-        $builder->join('auth_activation_attempts', 'auth_activation_attempts.user_id = users.id'); // pastikan kolom yang digunakan untuk join benar
+        $builder = $this->db->table('pencaker p');
+        $builder->select('*, DATE(tu.tglwaktu) AS tglaktifpencaker');
+        $builder->join('pencaker_dokumen pd', 'pd.pencaker_id = p.id');
+        $builder->join('dokumen d', 'd.id = pd.dokumen_id');
+        $builder->join('users u', 'u.id = p.user_id');
+        $builder->join('timeline_user tu', 'tu.user_id = u.id');
+        $builder->where('d.id', '1');
+        $builder->where('tu.timeline_id', '6');
+        $builder->where('SHA1(p.nopendaftaran)', $code);
 
         $query = $builder->get(); // eksekusi query
         return $query->getResultArray(); // ambil hasil sebagai array
