@@ -34,14 +34,7 @@
                             <div class="row">
                                 <div class="col-sm-4">
                                     <div class="form-group">
-                                        <label for="ip_address">IP Address</label>
-                                        <input type="text" name="ip_address" id="ip_address" class="form-control" value="" placeholder="Cari IP Address" />
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <label for="user">User</label><br>
+                                        <label for="user">Filter by:</label>
                                         <select name="user" id="user" class="form-control select2">
                                             <option value="">- Pilih User -</option>
                                         </select>
@@ -53,7 +46,7 @@
                                 <thead>
                                     <tr>
                                         <th>No.</th>
-                                        <th>Title</th>
+                                        <th class="w-50">Title</th>
                                         <th>User</th>
                                         <th>IP Address</th>
                                         <th>Last Login</th>
@@ -174,40 +167,24 @@
         $('.select2').select2();
 
         $.ajax({
-            url: "<?php echo base_url('admin_v2/getUsers'); ?>",
+            url: "<?php echo base_url('admin_v2/getUsersFromLogs'); ?>",
             type: "GET",
             success: function(data) {
-                var users = JSON.parse(data);
-                $('#user').select2({
-                    data: users
-                });
+                if (data.length === 0) {
+                    $('#user').html('<option value="">Belum ada data user</option>');
+                } else {
+                    $('#user').empty().append('<option value="">- Pilih User -</option>');
+                    $.each(data, function(index, user) {
+                        $('#user').append(new Option(user.text, user.id));
+                    });
+                    $('#user').select2();
+                }
             },
             error: function(xhr, status, error) {
                 console.log("AJAX error:", error);
                 console.log("Status:", xhr.status);
                 console.log("Response:", xhr.responseText);
             }
-        });
-
-        $(document).on('click', '.btn-detail-user', function() {
-            var userId = $(this).data('id');
-            var userNIK = $(this).data('nik');
-            var userName = $(this).data('namalengkap');
-            var userUsername = $(this).data('username');
-            var userEmail = $(this).data('email');
-            var userPhone = $(this).data('nohp');
-            var userUpdated = $(this).data('updated_at');
-            var userRole = $(this).data('name');
-
-            // Masukkan data ke dalam modal
-            $('#detailUserId').text(userId);
-            $('#detailUserNIK').text(userNIK);
-            $('#detailUserName').text(userName);
-            $('#detailUsername').text(userUsername);
-            $('#detailUserEmail').text(userEmail);
-            $('#detailUserPhone').text(userPhone);
-            $('#detailLogin').text(userUpdated);
-            $('#detailUserRole').text(userRole);
         });
 
         var tabelLogActivity = $('#tabelLogActivity').DataTable({
@@ -260,6 +237,5 @@
         });
     });
 </script>
-
 
 <?= $this->endSection() ?>

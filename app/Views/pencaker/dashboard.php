@@ -36,83 +36,38 @@
                         </div>
                         <div class="card-body">
                             <div class="timeline">
-                                <div class="time-label">
-                                    <span class="bg-red">10 Feb. 2014</span>
-                                </div>
-                                <div>
-                                    <i class="fas fa-envelope bg-blue"></i>
-                                    <div class="timeline-item">
-                                        <span class="time"><i class="fas fa-clock"></i> 12:05</span>
-                                        <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
+                                <?php if (empty($timelines)) : ?>
+                                    <div class="time-label">
+                                        <span class="bg-gray">No Data Available</span>
+                                    </div>
+                                <?php else : ?>
+                                    <?php foreach ($timelines as $timeline) : ?>
+                                        <div class="time-label">
+                                            <span class="bg-info"><?= date('d M. Y', strtotime($timeline['tglwaktu'])) ?></span>
+                                        </div>
+                                        <div>
+                                            <i class="fas fa-envelope bg-info"></i>
+                                            <div class="timeline-item">
+                                                <span class="time"><i class="fas fa-clock"></i> <?= date('H:i', strtotime($timeline['tglwaktu'])) ?></span>
+                                                <h3 class="timeline-header"><a href="#"><?= esc($timeline['subject']) ?></a></h3>
 
-                                        <div class="timeline-body">
-                                            Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
-                                            weebly ning heekya handango imeem plugg dopplr jibjab, movity
-                                            jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
-                                            quora plaxo ideeli hulu weebly balihoo...
+                                                <div class="timeline-body">
+                                                    <?= esc($timeline['description']) ?>
+                                                </div>
+                                                <!-- <div class="timeline-footer">
+                                                    <a class="btn btn-primary btn-sm">Read more</a>
+                                                    <a class="btn btn-danger btn-sm">Delete</a>
+                                                </div> -->
+                                            </div>
                                         </div>
-                                        <div class="timeline-footer">
-                                            <a class="btn btn-primary btn-sm">Read more</a>
-                                            <a class="btn btn-danger btn-sm">Delete</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <i class="fas fa-user bg-green"></i>
-                                    <div class="timeline-item">
-                                        <span class="time"><i class="fas fa-clock"></i> 5 mins ago</span>
-                                        <h3 class="timeline-header no-border"><a href="#">Sarah Young</a> accepted your friend request</h3>
-                                    </div>
-                                </div>
-                                <div>
-                                    <i class="fas fa-comments bg-yellow"></i>
-                                    <div class="timeline-item">
-                                        <span class="time"><i class="fas fa-clock"></i> 27 mins ago</span>
-                                        <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>
-                                        <div class="timeline-body">
-                                            Take me to your leader!
-                                            Switzerland is small and neutral!
-                                            We are more like Germany, ambitious and misunderstood!
-                                        </div>
-                                        <div class="timeline-footer">
-                                            <a class="btn btn-warning btn-sm">View comment</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="time-label">
-                                    <span class="bg-green">3 Jan. 2014</span>
-                                </div>
-                                <div>
-                                    <i class="fa fa-camera bg-purple"></i>
-                                    <div class="timeline-item">
-                                        <span class="time"><i class="fas fa-clock"></i> 2 days ago</span>
-                                        <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
-                                        <div class="timeline-body">
-                                            <img src="https://placehold.it/150x100" alt="...">
-                                            <img src="https://placehold.it/150x100" alt="...">
-                                            <img src="https://placehold.it/150x100" alt="...">
-                                            <img src="https://placehold.it/150x100" alt="...">
-                                            <img src="https://placehold.it/150x100" alt="...">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <i class="fas fa-video bg-maroon"></i>
-                                    <div class="timeline-item">
-                                        <span class="time"><i class="fas fa-clock"></i> 5 days ago</span>
-                                        <h3 class="timeline-header"><a href="#">Mr. Doe</a> shared a video</h3>
-                                        <div class="timeline-body">
-                                        </div>
-                                        <div class="timeline-footer">
-                                            <a href="#" class="btn btn-sm bg-maroon">See comments</a>
-                                        </div>
-                                    </div>
-                                </div>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
                                 <div>
                                     <i class="fas fa-clock bg-gray"></i>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -128,7 +83,7 @@
                                 </div>
                             <?php elseif ($id_pencaker['keterangan_status'] == 'Verifikasi') : ?>
                                 <div class="alert alert-info" role="alert">
-                                    Dokumen Anda sudah dikirim untuk diverifikasi oleh Admin Disnaker.
+                                    Silakan menunggu maksimal 3x24 jam untuk proses verifikasi. Silakan terus memantau linimasa dan juga pastikan WhatsApp selalu aktif untuk mendapatkan informasi terkait proses verifikasi bilamana didapati data dan dokumen yang diunggah tidak sesuai atau salah. Setelah diverifikasi, status ini akan berubah menjadi <strong>Validasi</strong>.
                                 </div>
                             <?php else : ?>
                                 <p>
@@ -144,7 +99,7 @@
                             </p>
                             <?php if ($id_pencaker['keterangan_status'] != 'Validasi') : ?>
                                 <form id="verificationForm">
-                                    <input type="hidden" class="form-control" name="id_pencaker" id="id_pencaker" readonly value="<?= $id_pencaker['id']; ?>">
+                                    <input type="text" class="form-control" name="id_pencaker" id="id_pencaker" readonly value="<?= $id_pencaker['id']; ?>">
                                     <input type="hidden" id="mintaVerifikasi" name="mintaverifikasi" value="Verifikasi">
                                     <button id="verifyLink" class="btn btn-primary <?= $isDataComplete && $isDocumentComplete ? '' : 'btn btn-secondary disabled' ?>" title="Verifikasi Data">Minta Verifikasi Data</button>
                                 </form>
@@ -163,7 +118,6 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
-
 <script>
     $(document).ready(function() {
         $('#verifyLink').on('click', function(event) {
@@ -191,15 +145,23 @@
                         type: 'POST',
                         data: formData,
                         success: function(response) {
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Berhasil!',
-                                text: 'Semua informasi tentang Anda telah dikirim untuk selanjutnya diverifikasi.',
-                            }).then((result) => {
-                                if (result.isConfirmed) {
-                                    location.reload();
-                                }
-                            });
+                            if (response.status == 'success') {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Berhasil!',
+                                    text: response.message,
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        location.reload();
+                                    }
+                                });
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Eror!',
+                                    text: response.message,
+                                });
+                            }
                         },
                         error: function(xhr, status, error) {
                             Swal.fire({

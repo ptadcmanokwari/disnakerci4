@@ -17,6 +17,7 @@ use App\Models\JabatanModel;
 use App\Models\PerusahaanModel;
 use App\Models\SettingsModel;
 use App\Models\ActivitylogsModel;
+use App\Models\TimelineModel;
 
 use Endroid\QrCode\QrCode;
 use Endroid\QrCode\Writer\PngWriter;
@@ -41,7 +42,7 @@ class Pencaker extends Controller
         $activityLogsModel = new ActivitylogsModel();
 
         // Ambil log aktivitas berdasarkan user ID
-        $logs = $activityLogsModel->getLogsByUser($userId);
+        $logs = $activityLogsModel->getActivityLogs();
 
         $pencakerModel = new PencakerModel();
         $id_pencaker = $pencakerModel->getStatusByUserId($user['id']);
@@ -51,13 +52,16 @@ class Pencaker extends Controller
         $isDataComplete = $pencakerModel->isDataComplete($userId);
         $isDocumentComplete = $dokumenPencaker->isDocumentComplete($userId);
 
+        $timelines = $pencakerModel->get_timeline();
+
         $data = [
             'title' => 'Dashboard Pencaker',
             'user' => $user,
             'id_pencaker' => $id_pencaker,
             'isDocumentComplete' => $isDocumentComplete,
             'isDataComplete' => $isDataComplete,
-            'logs' => $logs
+            'logs' => $logs,
+            'timelines' => $timelines
         ];
 
         return $this->loadView('pencaker/dashboard', $data);
@@ -74,12 +78,12 @@ class Pencaker extends Controller
             $lastNoUrut = intval($lastEntry['nopendaftaran']);
             $nourut = $lastNoUrut + 1;
         } else {
-            $nourut = 1;  // Cek jika kode belum terdapat pada tabel
+            $nourut = 1;
         }
 
         $tgl = date('dmY');
         $batas = str_pad($nourut, 6, "0", STR_PAD_LEFT);
-        $nopendaftaran = "9202" . $tgl . $batas;  // Format kode
+        $nopendaftaran = "9202" . $tgl . $batas;
         return $nopendaftaran;
     }
 
@@ -215,7 +219,6 @@ class Pencaker extends Controller
         return $qrName;
     }
 
-
     public function validasi_ak1($code)
     {
         $pencakerModel = new PencakerModel();
@@ -301,12 +304,8 @@ class Pencaker extends Controller
         // Ambil pencaker_id dari request
         $pencaker_id = $this->request->getPost('pencaker_id');
 
-        // Ambil data pendidikan dengan join ke tabel jenjang_pendidikan
-        $pendidikan = $pendidikanModel->select('pendidikan_pencaker.*, jenjang_pendidikan.jenjang')
-            ->join('jenjang_pendidikan', 'pendidikan_pencaker.jenjang_pendidikan_id = jenjang_pendidikan.id', 'left')
-            ->where('pendidikan_pencaker.pencaker_id', $pencaker_id)
-            ->orderBy('jenjang_pendidikan.id', 'ASC')
-            ->findAll();
+        // Panggil metode dari model
+        $pendidikan = $pendidikanModel->getPendidikanByPencakerId($pencaker_id);
 
         $data = [];
         $no = 1;
@@ -320,18 +319,19 @@ class Pencaker extends Controller
                 'ipk' => $pd['ipk'],
                 'keterampilan' => $pd['keterampilan'],
                 'aksi' => '<div class="btn-group" role="group" aria-label="Actions">
-                           <button class="btn btn-primary btn-sm editPendidikan" data-id="' . $pd['id'] . '" data-pencaker_id="' . $pd['pencaker_id'] . '" title="Edit Pendidikan">
-                               <i class="bi bi-pencil-fill"></i>
-                           </button>
-                           <button class="btn btn-danger btn-sm deletePendidikan" data-id="' . $pd['id'] . '" title="Hapus Pendidikan">
-                               <i class="bi bi-trash"></i>
-                           </button>
-                       </div>'
+                       <button class="btn btn-primary btn-sm editPendidikan" data-id="' . $pd['id'] . '" data-pencaker_id="' . $pd['pencaker_id'] . '" title="Edit Pendidikan">
+                           <i class="bi bi-pencil-fill"></i>
+                       </button>
+                       <button class="btn btn-danger btn-sm deletePendidikan" data-id="' . $pd['id'] . '" title="Hapus Pendidikan">
+                           <i class="bi bi-trash"></i>
+                       </button>
+                   </div>'
             ];
         }
 
         echo json_encode(["data" => $data]);
     }
+
 
     public function get_pendidikan_by_id()
     {
@@ -912,19 +912,16 @@ class Pencaker extends Controller
         }
     }
 
-
     public function pengaturan()
     {
         $userId = user()->id; // Mengambil user ID dari sesi
+        $dokumenId = 1; // ID dokumen yang diinginkan
 
-        $db = \Config\Database::connect();
-        $builder = $db->table('pencaker_dokumen');
-        $builder->select('pencaker_dokumen.namadokumen');
-        $builder->where('pencaker_dokumen.pencaker_id', $userId);
-        $builder->where('pencaker_dokumen.dokumen_id', 1, 'pencaker_id', $userId); // Kondisi untuk mengambil dokumen dengan ID 1
-        $query = $builder->get();
+        // Load model
+        $pencakerModel = new PencakerModel();
 
-        $dokumen = $query->getRow(); // Mengambil satu baris hasil query
+        // Panggil metode dari model
+        $dokumen = $pencakerModel->getDokumenByUserId($userId, $dokumenId);
 
         $data = [
             'title' => 'Pengaturan Profile',
@@ -937,6 +934,7 @@ class Pencaker extends Controller
     public function minta_verifikasi()
     {
         $pencakerModel = new PencakerModel();
+        $usersModel = new UsersModel();
         $userId = $this->request->getPost('id_pencaker');
 
         if (!$userId) {
@@ -958,9 +956,14 @@ class Pencaker extends Controller
                 $pencakerModel->insert($data);
             }
 
-            // Ambil data nomor telepon dan nama lengkap dari request
-            $phoneNumber = '081248803652';
-            $namaLengkap = 'OMPAY';
+            // Ambil data nomor telepon dan nama lengkap dari tabel users
+            $user = $usersModel->find($userId);
+            if (!$user) {
+                return $this->response->setStatusCode(400)->setJSON(['status' => 'error', 'message' => 'Data pengguna tidak ditemukan.']);
+            }
+
+            $phoneNumber = $user['nohp'];
+            $namaLengkap = $user['namalengkap'];
 
             // Format pesan yang akan dikirim
             $message = "*Notifikasi disnakertransmkw.com*" . PHP_EOL . PHP_EOL .
@@ -977,6 +980,14 @@ class Pencaker extends Controller
             $admin = $settingsModel->getValueByKey('whatsapp_admin');
 
             // Kirim pesan WhatsApp menggunakan API Zenziva
+            log_message('debug', 'Sending WhatsApp message with data: ' . json_encode([
+                'userkey' => $userKey,
+                'passkey' => $passKey,
+                'to' => $phoneNumber,
+                'message' => $message,
+                'admin' => $admin
+            ]));
+
             $response = $this->sendWhatsAppMessage($phoneNumber, $message, $userKey, $passKey, $admin);
 
             if ($response && isset($response['status']) && $response['status'] == 'success') {
@@ -998,24 +1009,29 @@ class Pencaker extends Controller
             'userkey' => $userKey,
             'passkey' => $passKey,
             'to' => $phoneNumber,
-            'message' => $message
+            'message' => $message,
+            'admin' => $admin
         ];
 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $options = [
+            'http' => [
+                'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method'  => 'POST',
+                'content' => http_build_query($data),
+            ],
+        ];
 
-        $response = curl_exec($ch);
+        $context  = stream_context_create($options);
+        $result = file_get_contents($url, false, $context);
 
-        if (curl_errno($ch)) {
-            log_message('error', 'Curl error: ' . curl_error($ch));
+        if ($result === FALSE) {
+            log_message('error', 'Error sending WhatsApp message: ' . json_encode($data));
+            return ['status' => 'error', 'message' => 'Failed to send message'];
         }
 
-        curl_close($ch);
+        $response = json_decode($result, true);
 
-        return json_decode($response, true);
+        return $response;
     }
 
 
@@ -1027,7 +1043,7 @@ class Pencaker extends Controller
         $userId = user()->id;
 
         // Ambil log aktivitas berdasarkan user ID
-        $logs = $activityLogsModel->getLogsByUser($userId);
+        $logs = $activityLogsModel->getActivityLogs();
 
         // Contoh: Mengembalikan data sebagai response JSON
         return $this->response->setJSON($logs);

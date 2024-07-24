@@ -12,7 +12,7 @@ class DokumenPencakerModel extends Model
 
     public function isDocumentComplete($pencaker_id)
     {
-        $requiredDokumenIds = [1, 2, 3, 4, 5, 6, 7];
+        $requiredDokumenIds = [1, 2, 3];
 
         foreach ($requiredDokumenIds as $dokumen_id) {
             $data = $this->where('pencaker_id', $pencaker_id)

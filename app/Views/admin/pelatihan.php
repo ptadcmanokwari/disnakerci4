@@ -249,6 +249,7 @@
         // Event listener untuk tombol hapus
         $('#tabelPelatihan').on('click', '.btn-delete', function() {
             var id = $(this).data('id');
+            var judul = $(this).data('judul');
             var row = $(this).closest('tr');
 
             // Tampilkan SweetAlert untuk konfirmasi
@@ -266,7 +267,8 @@
                         url: '<?= base_url('admin_v2/hapus_pelatihan') ?>',
                         type: 'POST',
                         data: {
-                            id: id
+                            id: id,
+                            judul: judul
                         },
                         success: function(response) {
                             // Tidak perlu JSON.parse di sini, karena respons sudah berupa JSON

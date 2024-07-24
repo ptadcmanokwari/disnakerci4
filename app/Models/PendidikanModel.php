@@ -14,8 +14,17 @@ class PendidikanModel extends Model
 
     public function getPendidikanStatistik()
     {
-        $db = \Config\Database::connect();
-        $query = $db->query("SELECT jp.jenjang, (SELECT COUNT(pd.id) FROM pendidikan_pencaker pd WHERE pd.jenjang_pendidikan_id=jp.id) AS total FROM jenjang_pendidikan jp");
+        $query = $this->db->query("SELECT jp.jenjang, (SELECT COUNT(pd.id) FROM pendidikan_pencaker pd WHERE pd.jenjang_pendidikan_id=jp.id) AS total FROM jenjang_pendidikan jp");
         return $query->getResult();
+    }
+
+
+    public function getPendidikanByPencakerId($pencakerId)
+    {
+        return $this->select('pendidikan_pencaker.*, jenjang_pendidikan.jenjang')
+            ->join('jenjang_pendidikan', 'pendidikan_pencaker.jenjang_pendidikan_id = jenjang_pendidikan.id', 'left')
+            ->where('pendidikan_pencaker.pencaker_id', $pencakerId)
+            ->orderBy('jenjang_pendidikan.id', 'ASC')
+            ->findAll();
     }
 }

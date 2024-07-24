@@ -665,7 +665,7 @@ class Admin extends BaseController
                         </a>
                         <button class="btn btn-warning btn-sm btn-edit" data-edit_id="' . $item['id'] . '"  data-edit_judul="' . htmlspecialchars($item['judul']) . '" data-edit_isi="' . htmlspecialchars($item['isi']) . '" data-edit_tags="' . $item['tags'] . '" data-edit_gambar="' . $item['gambar'] . '" data-toggle="modal"  data-toggle="modal" data-target="#ubahPelatihanModal"> <i class="bi bi-pencil-square"></i>
                         </button>
-                        <button class="btn btn-danger btn-sm btn-delete" data-id="' . $item['id'] . '">
+                        <button class="btn btn-danger btn-sm btn-delete" data-id="' . $item['id'] . '" data-judul="' . $item['judul'] . '">
                             <i class="bi bi-trash"></i>
                         </button>
                     </div>'
@@ -675,15 +675,176 @@ class Admin extends BaseController
         echo json_encode(["data" => $data]);
     }
 
+    // public function update_status_pelatihan()
+    // {
+    //     $id = $this->request->getJSON()->id;
+    //     $status = $this->request->getJSON()->status;
+
+    //     $model = new FrontendModel();
+    //     $update = $model->update($id, ['status' => $status]);
+
+    //     if ($update) {
+    //         return $this->response->setJSON(['success' => true]);
+    //     } else {
+    //         return $this->response->setJSON(['success' => false]);
+    //     }
+    // }
+
+    // public function save_pelatihan()
+    // {
+    //     $validation = \Config\Services::validation();
+    //     $validation->setRules([
+    //         'kategori' => 'required|max_length[255]',
+    //         'file' => 'uploaded[file]|is_image[file]',
+    //         'judul' => 'required',
+    //         'isi' => 'required',
+    //         'tags' => 'required',
+    //         'status' => 'required|in_list[0,1]',
+    //         'users_id' => 'required|integer'
+    //     ]);
+
+    //     if (!$validation->withRequest($this->request)->run()) {
+    //         return $this->response->setJSON(['success' => false, 'errors' => $validation->getErrors()]);
+    //     }
+
+    //     $file = $this->request->getFile('file');
+
+    //     if ($file->isValid() && !$file->hasMoved()) {
+    //         $newName = $file->getRandomName();
+    //         $file->move(FCPATH . 'uploads/pelatihan/', $newName);
+
+    //         // Jika berhasil pindah, simpan ke database
+    //         $categoryModel = new FrontendModel();
+    //         $categoryModel->save([
+    //             'kategori' => $this->request->getPost('kategori'),
+    //             'judul' => $this->request->getPost('judul'),
+    //             'isi' => $this->request->getPost('isi'),
+    //             'tags' => $this->request->getPost('tags'),
+    //             'tgl_publikasi' => date('Y-m-d H:i:s'), // Tanggal saat ini
+    //             'gambar' => $newName,
+    //             'status' => $this->request->getPost('status'),
+    //             'slug' => url_title($this->request->getPost('judul'), '-', true),
+    //             'users_id' => $this->request->getPost('users_id')
+    //         ]);
+
+    //         return $this->response->setJSON(['success' => true]);
+    //     } else {
+    //         return $this->response->setJSON(['success' => false, 'errors' => 'File upload failed.']);
+    //     }
+    // }
+
+
+    // public function update_pelatihan()
+    // {
+    //     $model = new FrontendModel();
+
+    //     $id = $this->request->getPost('id');
+    //     $judul = $this->request->getPost('judul');
+    //     $isi = $this->request->getPost('isi');
+    //     $tags = $this->request->getPost('tags');
+    //     $kategori = 'pelatihan';
+    //     $status = 1;
+    //     $users_id = 1;
+
+    //     $validation = \Config\Services::validation();
+    //     $validation->setRules([
+    //         'judul' => 'required',
+    //         'isi' => 'required',
+    //         'tags' => 'required',
+    //     ]);
+
+    //     if (!$validation->withRequest($this->request)->run()) {
+    //         return $this->response->setJSON(['success' => false, 'errors' => $validation->getErrors()]);
+    //     }
+
+    //     $data = [
+    //         'judul' => $judul,
+    //         'isi' => $isi,
+    //         'tags' => $tags,
+    //         'kategori' => $kategori,
+    //         'status' => $status,
+    //         'users_id' => $users_id,
+    //     ];
+
+    //     $file = $this->request->getFile('file');
+    //     if ($file && $file->isValid() && !$file->hasMoved()) {
+    //         // Ambil data gambar lama
+    //         $current_data = $model->find($id);
+    //         $current_gambar = $current_data['gambar'];
+
+    //         // Hapus gambar lama jika ada
+    //         if (!empty($current_gambar)) {
+    //             $path = FCPATH . 'uploads/pelatihan/' . $current_gambar;
+    //             if (file_exists($path)) {
+    //                 unlink($path);
+    //             }
+    //         }
+
+    //         // Proses upload gambar baru
+    //         $newName = $file->getRandomName();
+    //         $file->move(FCPATH . 'uploads/pelatihan/', $newName);
+    //         $data['gambar'] = $newName;
+    //     }
+
+    //     $model->update($id, $data);
+
+    //     return $this->response->setJSON(['success' => true]);
+    // }
+
+    // public function hapus_pelatihan()
+    // {
+    //     $id = $this->request->getPost('id');
+    //     $model = new FrontendModel();
+
+    //     // Ambil nama file gambar yang akan dihapus
+    //     $pelatihan = $model->find($id);
+    //     $gambar = $pelatihan['gambar'];
+
+    //     // Hapus gambar dari direktori
+    //     if (!empty($gambar) && file_exists(FCPATH . 'uploads/pelatihan/' . $gambar)) {
+    //         unlink(FCPATH . 'uploads/pelatihan/' . $gambar);
+    //     }
+
+    //     // Hapus pelatihan dari database
+    //     if ($model->delete($id)) {
+    //         // Berhasil menghapus, kembalikan respons JSON sukses
+    //         return $this->response->setJSON(['status' => 'success'])->setStatusCode(200);
+    //     } else {
+    //         // Gagal menghapus, kembalikan respons JSON error
+    //         return $this->response->setJSON(['status' => 'error'])->setStatusCode(500);
+    //     }
+    // }
+
     public function update_status_pelatihan()
     {
         $id = $this->request->getJSON()->id;
         $status = $this->request->getJSON()->status;
 
         $model = new FrontendModel();
+        $activityModel = new ActivitylogsModel();
+
+        // Ambil pelatihan sebelum update
+        $pelatihan = $model->find($id);
+        if (!$pelatihan) {
+            return $this->response->setJSON(['success' => false, 'message' => 'Pelatihan tidak ditemukan']);
+        }
+
+        $oldStatus = $pelatihan['status'];
+
+        // Update status
         $update = $model->update($id, ['status' => $status]);
 
         if ($update) {
+            // Rekam aktivitas
+            $activityMessage = sprintf(
+                'User #%d mengubah status pelatihan dengan ID: %d dari %d ke %d',
+                user_id(),
+                $id,
+                $oldStatus,
+                $status
+            );
+            $activityModel->add($activityMessage, user_id(), $this->request->getIPAddress());
+
             return $this->response->setJSON(['success' => true]);
         } else {
             return $this->response->setJSON(['success' => false]);
@@ -713,19 +874,29 @@ class Admin extends BaseController
             $newName = $file->getRandomName();
             $file->move(FCPATH . 'uploads/pelatihan/', $newName);
 
-            // Jika berhasil pindah, simpan ke database
+            // Simpan ke database
             $categoryModel = new FrontendModel();
-            $categoryModel->save([
+            $data = [
                 'kategori' => $this->request->getPost('kategori'),
                 'judul' => $this->request->getPost('judul'),
                 'isi' => $this->request->getPost('isi'),
                 'tags' => $this->request->getPost('tags'),
-                'tgl_publikasi' => date('Y-m-d H:i:s'), // Tanggal saat ini
+                'tgl_publikasi' => date('Y-m-d H:i:s'),
                 'gambar' => $newName,
                 'status' => $this->request->getPost('status'),
                 'slug' => url_title($this->request->getPost('judul'), '-', true),
                 'users_id' => $this->request->getPost('users_id')
-            ]);
+            ];
+            $categoryModel->save($data);
+
+            // Rekam aktivitas
+            $activityModel = new ActivitylogsModel();
+            $activityMessage = sprintf(
+                'User #%d mengunggah pelatihan baru dengan judul: "%s"',
+                user_id(),
+                $this->request->getPost('judul')
+            );
+            $activityModel->add($activityMessage, user_id(), $this->request->getIPAddress());
 
             return $this->response->setJSON(['success' => true]);
         } else {
@@ -737,6 +908,7 @@ class Admin extends BaseController
     public function update_pelatihan()
     {
         $model = new FrontendModel();
+        $activityModel = new ActivitylogsModel();
 
         $id = $this->request->getPost('id');
         $judul = $this->request->getPost('judul');
@@ -757,6 +929,11 @@ class Admin extends BaseController
             return $this->response->setJSON(['success' => false, 'errors' => $validation->getErrors()]);
         }
 
+        // Ambil data lama
+        $current_data = $model->find($id);
+        $current_judul = $current_data['judul'];
+        $current_gambar = $current_data['gambar'];
+
         $data = [
             'judul' => $judul,
             'isi' => $isi,
@@ -768,10 +945,6 @@ class Admin extends BaseController
 
         $file = $this->request->getFile('file');
         if ($file && $file->isValid() && !$file->hasMoved()) {
-            // Ambil data gambar lama
-            $current_data = $model->find($id);
-            $current_gambar = $current_data['gambar'];
-
             // Hapus gambar lama jika ada
             if (!empty($current_gambar)) {
                 $path = FCPATH . 'uploads/pelatihan/' . $current_gambar;
@@ -788,16 +961,37 @@ class Admin extends BaseController
 
         $model->update($id, $data);
 
+        // Rekam aktivitas
+        // $activityMessage = sprintf(
+        //     'User #%d memperbarui pelatihan "%s"',
+        //     user_id(),
+        //     $id,
+        //     $judul
+        // );
+        $activityMessage = sprintf(
+            'User #%d memperbarui pelatihan "%s"',
+            user_id(),
+            $this->request->getPost('judul')
+        );
+        $activityModel->add($activityMessage, user_id(), $this->request->getIPAddress());
+
         return $this->response->setJSON(['success' => true]);
     }
+
 
     public function hapus_pelatihan()
     {
         $id = $this->request->getPost('id');
+        $judul = $this->request->getPost('judul');
         $model = new FrontendModel();
+        $activityModel = new ActivitylogsModel(); // Tambahkan ini
 
         // Ambil nama file gambar yang akan dihapus
         $pelatihan = $model->find($id);
+        if (!$pelatihan) {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Pelatihan tidak ditemukan'])->setStatusCode(404);
+        }
+
         $gambar = $pelatihan['gambar'];
 
         // Hapus gambar dari direktori
@@ -807,6 +1001,10 @@ class Admin extends BaseController
 
         // Hapus pelatihan dari database
         if ($model->delete($id)) {
+            // Rekam aktivitas penghapusan pelatihan
+            $activityMessage = "User #" . user()->username . " menghapus pelatihan $judul";
+            $activityModel->add($activityMessage, user_id(), $this->request->getIPAddress());
+
             // Berhasil menghapus, kembalikan respons JSON sukses
             return $this->response->setJSON(['status' => 'success'])->setStatusCode(200);
         } else {
@@ -815,17 +1013,53 @@ class Admin extends BaseController
         }
     }
 
-
     public function activitylogs()
     {
         $data['title'] = 'Aktivitas Pengguna';
         return $this->loadView('admin/activitylogs', $data);
     }
 
+    // public function activitylogsajax()
+    // {
+    //     $activityModel = new ActivitylogsModel();
+    //     $logs = $activityModel->findAll();
+
+    //     $data = [];
+    //     foreach ($logs as $item) {
+    //         $data[] = [
+    //             "id" => $item['id'],
+    //             "title" => $item['title'],
+    //             "user" => $item['user'],
+    //             "ip_address" => $item['ip_address'],
+    //             "updated_at" => $item['updated_at'],
+    //             "aksi" => '<div class="btn-group" role="group" aria-label="Aksi">
+    //           <button class="btn btn-info btn-sm btn-detail-log" 
+    //                  data-id="' . $item['id'] . '" 
+    //                  data-ip_address="' . $item['ip_address'] . '" 
+    //                  data-title="' . $item['title'] . '" 
+    //                  data-user="' . $item['user'] . '" 
+    //                  data-updated_at="' . $item['updated_at'] . '" 
+    //                  data-toggle="modal" 
+    //                  data-target="#detailLogModal">
+    //                  <i class="bi bi-check-circle-fill"></i>
+    //              </button>
+    //           <a class="btn btn-info btn-sm btn-detail-user" data-id="' . $item['id'] . '">
+    //               <i class="bi bi-person-fill"></i>
+    //           </a>
+    //        </div>'
+    //         ];
+    //     }
+
+    //     echo json_encode(["data" => $data]);
+    // }
+
     public function activitylogsajax()
     {
         $activityModel = new ActivitylogsModel();
-        $logs = $activityModel->findAll();
+        $builder = $activityModel->builder();
+        $builder->select('activity_logs.id, activity_logs.title, users.username as user, activity_logs.ip_address, activity_logs.updated_at');
+        $builder->join('users', 'activity_logs.user = users.id');
+        $logs = $builder->get()->getResultArray();
 
         $data = [];
         foreach ($logs as $item) {
@@ -836,20 +1070,20 @@ class Admin extends BaseController
                 "ip_address" => $item['ip_address'],
                 "updated_at" => $item['updated_at'],
                 "aksi" => '<div class="btn-group" role="group" aria-label="Aksi">
-              <button class="btn btn-info btn-sm btn-detail-log" 
-                     data-id="' . $item['id'] . '" 
-                     data-ip_address="' . $item['ip_address'] . '" 
-                     data-title="' . $item['title'] . '" 
-                     data-user="' . $item['user'] . '" 
-                     data-updated_at="' . $item['updated_at'] . '" 
-                     data-toggle="modal" 
-                     data-target="#detailLogModal">
-                     <i class="bi bi-check-circle-fill"></i>
-                 </button>
-              <a class="btn btn-info btn-sm btn-detail-user" data-id="' . $item['id'] . '">
-                  <i class="bi bi-person-fill"></i>
-              </a>
-           </div>'
+                <button class="btn btn-info btn-sm btn-detail-log" 
+                       data-id="' . $item['id'] . '" 
+                       data-ip_address="' . $item['ip_address'] . '" 
+                       data-title="' . $item['title'] . '" 
+                       data-user="' . $item['user'] . '" 
+                       data-updated_at="' . $item['updated_at'] . '" 
+                       data-toggle="modal" 
+                       data-target="#detailLogModal">
+                       <i class="bi bi-check-circle-fill"></i>
+                   </button>
+                <a class="btn btn-info btn-sm btn-detail-user" data-id="' . $item['id'] . '">
+                    <i class="bi bi-person-fill"></i>
+                </a>
+            </div>'
             ];
         }
 
@@ -857,21 +1091,29 @@ class Admin extends BaseController
     }
 
 
-    public function getUsers()
+    public function getUsersFromLogs()
     {
-        $userModel = new UsersModel();
-        $users = $userModel->findAll();
-
-        $data = [];
-        foreach ($users as $user) {
-            $data[] = [
-                "id" => $user['id'],
-                "text" => $user['username']
-            ];
-        }
-
-        echo json_encode($data);
+        $activityModel = new ActivitylogsModel();
+        $users = $activityModel->getDistinctUsers();
+        return $this->response->setJSON($users);
     }
+
+
+    // public function getUsers()
+    // {
+    //     $userModel = new UsersModel();
+    //     $users = $userModel->findAll();
+
+    //     $data = [];
+    //     foreach ($users as $user) {
+    //         $data[] = [
+    //             "id" => $user['id'],
+    //             "text" => $user['username']
+    //         ];
+    //     }
+
+    //     echo json_encode($data);
+    // }
 
 
     public function users()

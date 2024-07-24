@@ -78,7 +78,8 @@ $routes->post('admin_v2/hapus_pelatihan', 'Admin::hapus_pelatihan', ['filter' =>
 $routes->get('admin_v2/activitylogs', 'Admin::activitylogs', ['filter' => 'role:administrator']);
 $routes->get('admin_v2/activitylogsajax', 'Admin::activitylogsajax', ['filter' => 'role:administrator']);
 $routes->post('admin_v2/activitylogsajax', 'Admin::activitylogsajax', ['filter' => 'role:administrator']);
-$routes->get('admin_v2/getUsers', 'Admin::getUsers', ['filter' => 'role:administrator']);
+// $routes->get('admin_v2/getUsers', 'Admin::getUsers', ['filter' => 'role:administrator']);
+$routes->get('admin_v2/getUsersFromLogs', 'Admin::getUsersFromLogs', ['filter' => 'role:administrator']);
 
 // Users
 $routes->get('admin_v2/users', 'Admin::users', ['filter' => 'role:administrator']);
@@ -184,3 +185,4 @@ $routes->get('pencaker/pengaturan', 'Pencaker::pengaturan', ['filter' => 'role:p
 $routes->get('kartu/(:num)', 'Frontend::kartu/$1');
 
 $routes->post('pencaker/minta_verifikasi', 'Pencaker::minta_verifikasi');
+$routes->get('pencaker/minta_verifikasi', 'Pencaker::minta_verifikasi');

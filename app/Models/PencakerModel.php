@@ -53,6 +53,17 @@ class PencakerModel extends Model
         return $this->where('user_id', $userId)->first();
     }
 
+    public function getDokumenByUserId($userId, $dokumenId)
+    {
+        return $this->db->table('pencaker_dokumen')
+            ->select('namadokumen')
+            ->where('pencaker_id', $userId)
+            ->where('dokumen_id', $dokumenId)
+            ->get()
+            ->getRow();
+    }
+
+
     public function countByStatus($status)
     {
         return $this->where('keterangan_status', $status)->countAllResults();
@@ -92,7 +103,6 @@ class PencakerModel extends Model
 
         return $query->getResult();
     }
-
 
     public function getNikByPencakerId($pencaker_id)
     {
@@ -164,6 +174,18 @@ class PencakerModel extends Model
         $builder->where('d.id', '1');
         $builder->where('tu.timeline_id', '6');
         $builder->where('SHA1(p.nopendaftaran)', $code);
+
+        $query = $builder->get(); // eksekusi query
+        return $query->getResultArray(); // ambil hasil sebagai array
+    }
+
+
+    public function get_timeline()
+    {
+        $builder = $this->db->table('timeline t');
+        $builder->select('t.subject, tu.tglwaktu, tu.description');
+        $builder->join('timeline_user tu', 'tu.timeline_id  = t.id');
+        $builder->join('users u', 'u.id = tu.users_id');
 
         $query = $builder->get(); // eksekusi query
         return $query->getResultArray(); // ambil hasil sebagai array
