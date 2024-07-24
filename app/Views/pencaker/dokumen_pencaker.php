@@ -25,9 +25,9 @@
                     <h3 class="card-title">Form Unggah Dokumen yang Dibutuhkan</h3>
                 </div>
                 <div class="card-body">
-                    <div class="alert alert-warning" role="alert">
+                    <!-- <div class="alert alert-warning" role="alert">
                         Dokumen yang wajib diunggah adalah <strong>Pas Foto, KTP,</strong> dan <strong>Ijazah Terakhir</strong>. Dokumen lainnya sifatnya opsional.
-                    </div>
+                    </div> -->
                     <table id="tabelDokumen" class="table table-bordered table-hover">
                         <thead>
                             <tr>

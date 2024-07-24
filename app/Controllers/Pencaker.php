@@ -17,7 +17,6 @@ use App\Models\JabatanModel;
 use App\Models\PerusahaanModel;
 use App\Models\SettingsModel;
 use App\Models\ActivitylogsModel;
-use App\Models\TimelineModel;
 
 use Endroid\QrCode\QrCode;
 use Endroid\QrCode\Writer\PngWriter;
@@ -52,7 +51,9 @@ class Pencaker extends Controller
         $isDataComplete = $pencakerModel->isDataComplete($userId);
         $isDocumentComplete = $dokumenPencaker->isDocumentComplete($userId);
 
-        $timelines = $pencakerModel->get_timeline();
+        // $timelines = $pencakerModel->get_timeline();
+        $timelines = $pencakerModel->get_timeline($userId);
+
 
         $data = [
             'title' => 'Dashboard Pencaker',
@@ -758,7 +759,7 @@ class Pencaker extends Controller
             'user' => $user,
         ];
 
-        return $this->loadView('pencaker/formdata_pencaker', $data);
+        return $this->loadView('pencaker/dokumen_pencaker', $data);
     }
 
 

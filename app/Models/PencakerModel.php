@@ -180,12 +180,13 @@ class PencakerModel extends Model
     }
 
 
-    public function get_timeline()
+    public function get_timeline($userId)
     {
         $builder = $this->db->table('timeline t');
         $builder->select('t.subject, tu.tglwaktu, tu.description');
-        $builder->join('timeline_user tu', 'tu.timeline_id  = t.id');
+        $builder->join('timeline_user tu', 'tu.timeline_id = t.id');
         $builder->join('users u', 'u.id = tu.users_id');
+        $builder->where('tu.users_id', $userId);
 
         $query = $builder->get(); // eksekusi query
         return $query->getResultArray(); // ambil hasil sebagai array
