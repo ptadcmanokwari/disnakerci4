@@ -1176,8 +1176,6 @@ class Admin extends BaseController
     }
 
 
-
-
     public function backup()
     {
         $data['title'] = 'Backup Database';

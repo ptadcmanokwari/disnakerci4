@@ -104,7 +104,7 @@ $routes->post('admin_v2/download_db', 'Admin::download_db', ['filter' => 'role:a
 $routes->get('admin_v2', 'Admin::redirectDashboard');
 $routes->get('admin_v2/dashboard', 'Admin::index');
 
-
+// Pengaturan Admin
 $routes->post('admin_v2/update_smtp', 'Admin::update_smtp');
 $routes->post('admin_v2/update_mediasosial', 'Admin::update_mediasosial');
 $routes->post('admin_v2/update_detailinstansi', 'Admin::update_detailinstansi');
