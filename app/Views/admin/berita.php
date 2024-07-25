@@ -252,6 +252,7 @@
         // Event listener untuk tombol hapus
         $('#tabelBerita').on('click', '.btn-delete', function() {
             var id = $(this).data('id');
+            var judul = $(this).data('judul');
             var row = $(this).closest('tr');
 
             Swal.fire({
@@ -267,7 +268,8 @@
                         url: '<?= base_url('admin_v2/hapus_berita') ?>',
                         type: 'POST',
                         data: {
-                            id: id
+                            id: id,
+                            judul: judul
                         },
                         success: function(response) {
                             if (response.status === 'success') {

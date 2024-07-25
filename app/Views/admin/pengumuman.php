@@ -207,6 +207,7 @@
                     html.onchange = function() {
                         var status = this.checked ? 1 : 0;
                         var id = this.getAttribute('data-id');
+                        var judul = this.getAttribute('data-judul');
 
                         // Kirim AJAX request untuk memperbarui status di server
                         fetch('<?= base_url('admin_v2/update_status_pengumuman') ?>', {
@@ -217,6 +218,7 @@
                                 },
                                 body: JSON.stringify({
                                     id: id,
+                                    judul: judul,
                                     status: status
                                 })
                             }).then(response => response.json())
@@ -252,6 +254,7 @@
         // Event listener untuk tombol hapus
         $('#tabelPengumuman').on('click', '.btn-delete', function() {
             var id = $(this).data('id');
+            var judul = $(this).data('judul');
             var row = $(this).closest('tr');
 
             // Tampilkan SweetAlert untuk konfirmasi
@@ -269,7 +272,8 @@
                         url: '<?= base_url('admin_v2/hapus_pengumuman') ?>',
                         type: 'POST',
                         data: {
-                            id: id
+                            id: id,
+                            judul: judul
                         },
                         success: function(response) {
                             // Tidak perlu JSON.parse di sini, karena respons sudah berupa JSON

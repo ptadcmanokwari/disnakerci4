@@ -6,7 +6,6 @@ use CodeIgniter\Controller;
 
 use App\Models\UsersModel;
 use App\Models\PencakerModel;
-
 use App\Models\PendidikanModel;
 use App\Models\PengalamanKerjaModel;
 use App\Models\DokumenPencakerModel;

@@ -101,12 +101,14 @@ $routes->get('admin_v2/profil_pencaker', 'Admin::profil_pencaker', ['filter' => 
 $routes->get('admin_v2/backup', 'Admin::backup', ['filter' => 'role:administrator']);
 $routes->post('admin_v2/download_db', 'Admin::download_db', ['filter' => 'role:administrator']);
 
-
-$routes->get('pencaker', 'Pencaker::index');
-$routes->get('pencaker/dashboard', 'Pencaker::index');
-
 $routes->get('admin_v2', 'Admin::redirectDashboard');
 $routes->get('admin_v2/dashboard', 'Admin::index');
+
+
+$routes->post('admin_v2/update_smtp', 'Admin::update_smtp');
+$routes->post('admin_v2/update_mediasosial', 'Admin::update_mediasosial');
+$routes->post('admin_v2/update_detailinstansi', 'Admin::update_detailinstansi');
+$routes->post('admin_v2/update_captcha', 'Admin::update_captcha');
 
 
 /**
@@ -114,6 +116,10 @@ $routes->get('admin_v2/dashboard', 'Admin::index');
  * ROUTES UNTUK PENCAKER
  * --------------------------------------------------------------------------
  */
+
+$routes->get('pencaker', 'Pencaker::index');
+$routes->get('pencaker/dashboard', 'Pencaker::index');
+
 $routes->get('pencaker', 'Pencaker::index', ['filter' => 'role:pencaker']);
 $routes->get('pencaker/dashboard', 'Pencaker::index', ['filter' => 'role:pencaker']);
 $routes->get('pencaker/profil_pencaker', 'Pencaker::profil_pencaker', ['filter' => 'role:pencaker']);
