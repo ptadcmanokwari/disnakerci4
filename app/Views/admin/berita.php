@@ -28,7 +28,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Tabel Daftar Berita</h3>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addBeritaBaruModal">
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addBeritaBaruModal">
                                 Tambah Berita Baru
                             </button>
                         </div>
@@ -92,7 +92,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                    <button type="submit" class="btn btn-primary" id="btnUnggahBerita">Unggah Berita Baru</button>
+                    <button type="submit" class="btn btn-info" id="btnUnggahBerita">Unggah Berita Baru</button>
                 </div>
             </form>
         </div>
@@ -137,7 +137,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                    <button type="submit" class="btn btn-primary">Perbarui Berita</button>
+                    <button type="submit" class="btn btn-info">Perbarui Berita</button>
                 </div>
             </form>
 

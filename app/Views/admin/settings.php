@@ -108,26 +108,26 @@
                                                 <div class="row">
                                                     <div class="col-lg-4">
                                                         <div class="form-group">
-                                                            <label for="instansi">Facebook</label>
-                                                            <input type="text" class="form-control" name="instansi" id="instansi">
+                                                            <label for="facebook">Facebook</label>
+                                                            <input type="text" class="form-control" name="facebook" id="facebook" value="<?= isset($settings['facebook']) ? esc($settings['facebook']) : '' ?>">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4">
                                                         <div class="form-group">
-                                                            <label for="email_instansi">X</label>
-                                                            <input type="email" class="form-control" name="email_instansi" id="email_instansi">
+                                                            <label for="x">X</label>
+                                                            <input type="text" class="form-control" name="x" id="x" value="<?= isset($settings['x']) ? esc($settings['x']) : '' ?>">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4">
                                                         <div class="form-group">
-                                                            <label for="alamat1">Instagram</label>
-                                                            <input type="text" class="form-control" name="alamat1" id="alamat1">
+                                                            <label for="instagram">Instagram</label>
+                                                            <input type="text" class="form-control" name="instagram" id="instagram" value="<?= isset($settings['instagram']) ? esc($settings['instagram']) : '' ?>">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4">
                                                         <div class="form-group">
-                                                            <label for="alamat2">Youtube</label>
-                                                            <input type="text" class="form-control" name="alamat2" id="alamat2">
+                                                            <label for="youtube">Youtube</label>
+                                                            <input type="text" class="form-control" name="youtube" id="youtube" value="<?= isset($settings['youtube']) ? esc($settings['youtube']) : '' ?>">
                                                         </div>
                                                     </div>
                                                 </div>

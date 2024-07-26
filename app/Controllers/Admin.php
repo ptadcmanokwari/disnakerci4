@@ -1092,7 +1092,11 @@ class Admin extends BaseController
             'smtp_protocol',
             'smtp_port',
             'google_recaptcha_secretkey',
-            'google_recaptcha_sitekey'
+            'google_recaptcha_sitekey',
+            'facebook',
+            'x',
+            'instagram',
+            'youtube'
         ])->findAll();
 
         // Transform the settings into a key-value array
@@ -1130,7 +1134,12 @@ class Admin extends BaseController
     {
         $settingsModel = new SettingsModel();
 
-        $settingsData = [];
+        $settingsData = [
+            'facebook' => $this->request->getPost('facebook'),
+            'x' => $this->request->getPost('x'),
+            'instagram' => $this->request->getPost('instagram'),
+            'youtube' => $this->request->getPost('youtube'),
+        ];
 
         foreach ($settingsData as $key => $value) {
             $settingsModel->where('key', $key)->set(['value' => $value])->update();

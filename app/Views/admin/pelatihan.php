@@ -28,7 +28,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Tabel Daftar Pelatihan</h3>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addPelatihanBaruModal">
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addPelatihanBaruModal">
                                 Tambah Pelatihan Baru
                             </button>
                         </div>
@@ -92,7 +92,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                    <button type="submit" class="btn btn-primary" id="btnUnggahPelatihan">Unggah Pelatihan Baru</button>
+                    <button type="submit" class="btn btn-info" id="btnUnggahPelatihan">Unggah Pelatihan Baru</button>
                 </div>
             </form>
         </div>
@@ -137,7 +137,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                    <button type="submit" class="btn btn-primary">Perbarui Pelatihan</button>
+                    <button type="submit" class="btn btn-info">Perbarui Pelatihan</button>
                 </div>
             </form>
 
