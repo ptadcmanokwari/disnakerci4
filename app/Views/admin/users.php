@@ -25,7 +25,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">User List</h3>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addUserBaruModal">
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addUserBaruModal">
                                 Add New User
                             </button>
                         </div>
@@ -67,7 +67,7 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 d-flex justify-content-center align-items-center">
                         <img id="detailUserImage" class="img-fluid rounded w-75" src="" alt="Gambar User">
                     </div>
                     <div class="col-lg-8">
@@ -249,6 +249,7 @@
             }
         });
 
+
         $(document).on('click', '.btn-detail-user', function() {
             var userId = $(this).data('id');
             var userNIK = $(this).data('nik');
@@ -270,16 +271,8 @@
             $('#detailLogin').text(userUpdated);
             $('#detailUserRole').text(userRole);
 
-            // Tentukan path gambar berdasarkan kondisi
-            var imagePath = '';
-            if (userImage) {
-                imagePath = '<?php echo base_url('uploads/user/'); ?>' + userImage;
-            } else {
-                imagePath = '<?php echo base_url('uploads/user/no-user.jpg'); ?>';
-            }
-
             // Tampilkan gambar user
-            $('#detailUserImage').attr('src', imagePath);
+            $('#detailUserImage').attr('src', userImage);
         });
 
 

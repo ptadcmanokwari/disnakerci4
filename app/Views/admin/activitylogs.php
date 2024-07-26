@@ -14,7 +14,7 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="<?php site_url(); ?>dashboard">Dashboard</a></li>
                         <li class="breadcrumb-item active">Log Aktivitas</li>
                     </ol>
                 </div>
@@ -76,16 +76,13 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-lg-4">
-                        <img id="detailUserImage" class="img-fluid rounded w-75" src="" alt="Gambar User">
-                    </div>
-                    <div class="col-lg-8">
+                    <div class="col-lg-12">
                         <div class="row my-2">
                             <div class="col-md-3">
                                 <span>ID</span>
                             </div>
                             <div class="col-md-9">
-                                <strong id="detailUserId"></strong>
+                                : <strong id="detailUserId"></strong>
                             </div>
                         </div>
                         <div class="row my-2">
@@ -93,7 +90,7 @@
                                 <span>Nama</span>
                             </div>
                             <div class="col-md-9">
-                                <strong id="detailUserName"></strong>
+                                : <strong id="detailUserName"></strong>
                             </div>
                         </div>
                         <div class="row my-2">
@@ -101,7 +98,7 @@
                                 <span>NIK</span>
                             </div>
                             <div class="col-md-9">
-                                <strong id="detailUserNIK"></strong>
+                                : <strong id="detailUserNIK"></strong>
                             </div>
                         </div>
                         <div class="row my-2">
@@ -109,7 +106,7 @@
                                 <span>Username</span>
                             </div>
                             <div class="col-md-9">
-                                <strong id="detailUsername"></strong>
+                                : <strong id="detailUsername"></strong>
                             </div>
                         </div>
                         <div class="row my-2">
@@ -117,7 +114,7 @@
                                 <span>Email</span>
                             </div>
                             <div class="col-md-9">
-                                <strong id="detailUserEmail"></strong>
+                                : <strong id="detailUserEmail"></strong>
                             </div>
                         </div>
                         <div class="row my-2">
@@ -125,7 +122,7 @@
                                 <span>No. HP</span>
                             </div>
                             <div class="col-md-9">
-                                <strong id="detailUserPhone"></strong>
+                                : <strong id="detailUserPhone"></strong>
                             </div>
                         </div>
                         <div class="row my-2">
@@ -133,7 +130,7 @@
                                 <span>Role</span>
                             </div>
                             <div class="col-md-9">
-                                <strong id="detailUserRole"></strong>
+                                : <strong id="detailUserRole"></strong>
                             </div>
                         </div>
                         <div class="row my-2">
@@ -141,7 +138,7 @@
                                 <span>Terakhir Login</span>
                             </div>
                             <div class="col-md-9">
-                                <strong id="detailLogin"></strong>
+                                : <strong id="detailLogin"></strong>
                             </div>
                         </div>
 
@@ -185,6 +182,27 @@
                 console.log("Status:", xhr.status);
                 console.log("Response:", xhr.responseText);
             }
+        });
+
+        $(document).on('click', '.btn-detail-log', function() {
+            var userId = $(this).data('userid');
+            var userNIK = $(this).data('nik');
+            var userName = $(this).data('namalengkap');
+            var userUsername = $(this).data('username');
+            var userEmail = $(this).data('email');
+            var userPhone = $(this).data('nohp');
+            var userUpdated = $(this).data('updated_at');
+            var userRole = $(this).data('name');
+
+            // Masukkan data ke dalam modal
+            $('#detailUserId').text(userId);
+            $('#detailUserNIK').text(userNIK);
+            $('#detailUserName').text(userName);
+            $('#detailUsername').text(userUsername);
+            $('#detailUserEmail').text(userEmail);
+            $('#detailUserPhone').text(userPhone);
+            $('#detailLogin').text(userUpdated);
+            $('#detailUserRole').text(userRole);
         });
 
         var tabelLogActivity = $('#tabelLogActivity').DataTable({

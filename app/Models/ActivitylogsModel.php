@@ -40,11 +40,15 @@ class ActivitylogsModel extends Model
     public function getActivityLogs()
     {
         $builder = $this->db->table($this->table);
-        $builder->select('activity_logs.id, activity_logs.title, users.username as user, activity_logs.ip_address, activity_logs.created_at');
+        // $builder->select('activity_logs.id, activity_logs.title, users.username as user, activity_logs.ip_address, activity_logs.created_at');
+        $builder->select('activity_logs.id, users.id as userid, namalengkap, username, name, nik, nohp, email, activity_logs.title, users.username as user, activity_logs.ip_address, activity_logs.updated_at');
         $builder->join('users', 'activity_logs.user = users.id');
+        $builder->join('auth_groups_users', 'auth_groups_users.user_id = users.id');
+        $builder->join('auth_groups', 'auth_groups.id = auth_groups_users.group_id');
         $query = $builder->get();
         return $query->getResultArray();
     }
+
 
     public function getDistinctUsers()
     {

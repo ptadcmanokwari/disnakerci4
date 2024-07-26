@@ -919,10 +919,7 @@ class Admin extends BaseController
     public function activitylogsajax()
     {
         $activityModel = new ActivitylogsModel();
-        $builder = $activityModel->builder();
-        $builder->select('activity_logs.id, activity_logs.title, users.username as user, activity_logs.ip_address, activity_logs.updated_at');
-        $builder->join('users', 'activity_logs.user = users.id');
-        $logs = $builder->get()->getResultArray();
+        $logs = $activityModel->getActivityLogs();
 
         $data = [];
         $no = 1;
@@ -935,18 +932,21 @@ class Admin extends BaseController
                 "updated_at" => $item['updated_at'],
                 "aksi" => '<div class="btn-group" role="group" aria-label="Aksi">
                 <button class="btn btn-info btn-sm btn-detail-log" 
-                       data-id="' . $item['id'] . '" 
+                       data-userid="' . $item['userid'] . '" 
                        data-ip_address="' . $item['ip_address'] . '" 
                        data-title="' . $item['title'] . '" 
+                       data-name="' . $item['name'] . '" 
                        data-user="' . $item['user'] . '" 
+                       data-namalengkap="' . $item['namalengkap'] . '" 
+                       data-nik="' . $item['nik'] . '" 
+                       data-email="' . $item['email'] . '" 
+                       data-username="' . $item['username'] . '" 
+                       data-nohp="' . $item['nohp'] . '" 
                        data-updated_at="' . $item['updated_at'] . '" 
                        data-toggle="modal" 
                        data-target="#detailLogModal">
-                       <i class="bi bi-check-circle-fill"></i>
+                       <i class="bi bi-eye-fill"></i>
                    </button>
-                <a class="btn btn-info btn-sm btn-detail-user" data-id="' . $item['id'] . '">
-                    <i class="bi bi-person-fill"></i>
-                </a>
             </div>'
             ];
         }
@@ -971,24 +971,24 @@ class Admin extends BaseController
     public function usersajax()
     {
         $usersModel = new UsersModel();
+        $pencakerModel = new PencakerModel();
         $users = $usersModel->ubah_status_user();
 
         $data = [];
-        $no = 1;  // Penomoran untuk tabel
+        $no = 1;
         foreach ($users as $user) {
-            $defaultImagePath = base_url('uploads/user/no-user.jpg');
+            $dokpasfoto = $pencakerModel->getpasfotopencaker($user->userid);
 
-            // Tentukan path gambar berdasarkan kondisi
-            $imagePath = $defaultImagePath;
-            if (!empty($user->img_type)) {
-                $imagePath = base_url('uploads/user/' . $user->img_type);
-                if (!file_exists(FCPATH . 'uploads/user/' . $user->img_type)) {
-                    $imagePath = $defaultImagePath;
+            $defaultImagePath = base_url('uploads/user/no-user.jpg');
+            $gambar = $defaultImagePath;
+
+            // Periksa apakah dokpasfoto ada dan memiliki namadokumen
+            if ($dokpasfoto && !empty($dokpasfoto['namadokumen'])) {
+                $imagePath = base_url('uploads/dokumen_pencaker/' . $dokpasfoto['nik'] . '/' . $dokpasfoto['namadokumen']);
+                if (file_exists(FCPATH . 'uploads/dokumen_pencaker/' . $dokpasfoto['nik'] . '/' . $dokpasfoto['namadokumen'])) {
+                    $gambar = $imagePath;
                 }
             }
-
-            // Format gambar untuk ditampilkan dalam tabel atau modal
-            $gambar = '<img src="' . $imagePath . '" alt="User Image" width="40">';
 
             // Format data lainnya sesuai kebutuhan
             $data[] = [
@@ -1000,37 +1000,37 @@ class Admin extends BaseController
                 "name" => $user->name,
                 "active" => '<input type="checkbox" class="js-switch" data-id="' . $user->userid . '" ' . ($user->active ? 'checked' : '') . '>',
                 "aksi" => '
-            <div class="btn-group" role="group" aria-label="Actions">
-                <button class="btn btn-info btn-sm btn-detail-user" 
-                    data-id="' . $user->userid . '"  
-                    data-email="' . htmlspecialchars($user->email) . '" 
-                    data-namalengkap="' . $user->namalengkap . '" 
-                    data-username="' . $user->username . '" 
-                    data-nik="' . $user->nik . '" 
-                    data-nohp="' . $user->nohp . '" 
-                    data-name="' . $user->name . '" 
-                    data-updated_at="' . $user->updated_at . '" 
-                    data-toggle="modal" 
-                    data-target="#detailUserModal"
-                    data-load-logs="true">
-                    <i class="bi bi-eye"></i>
-                </button>
-                <button class="btn btn-warning btn-sm btn-edit"
-                    data-edit_id="' . $user->userid . '"
-                    data-toggle="modal"
-                    data-target="#ubahUserBaruModal">
-                    <i class="bi bi-pencil-square"></i>
-                </button>
-                <button class="btn btn-danger btn-sm btn-delete" data-id="' . $user->userid . '">
-                    <i class="bi bi-trash"></i>
-                </button>
-            </div>'
+                <div class="btn-group" role="group" aria-label="Actions">
+                    <button class="btn btn-info btn-sm btn-detail-user" 
+                        data-id="' . $user->userid . '"  
+                        data-email="' . htmlspecialchars($user->email) . '" 
+                        data-namalengkap="' . $user->namalengkap . '" 
+                        data-username="' . $user->username . '" 
+                        data-nik="' . $user->nik . '" 
+                        data-nohp="' . $user->nohp . '" 
+                        data-name="' . $user->name . '" 
+                        data-updated_at="' . $user->updated_at . '" 
+                        data-gambar="' . $gambar . '" 
+                        data-toggle="modal" 
+                        data-target="#detailUserModal"
+                        data-load-logs="true">
+                        <i class="bi bi-eye"></i>
+                    </button>
+                    <button class="btn btn-warning btn-sm btn-edit"
+                        data-edit_id="' . $user->userid . '"
+                        data-toggle="modal"
+                        data-target="#ubahUserBaruModal">
+                        <i class="bi bi-pencil-square"></i>
+                    </button>
+                    <button class="btn btn-danger btn-sm btn-delete" data-id="' . $user->userid . '">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </div>'
             ];
         }
 
         echo json_encode(["data" => $data]);
     }
-
 
     public function update_status_user()
     {
