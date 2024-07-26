@@ -13,13 +13,14 @@ class Frontend extends BaseController
     {
         $pencakerModel = new PencakerModel();
         $pendidikanModel = new PendidikanModel();
+        $frontendModel = new FrontendModel();
 
+        $sliderData =  $frontendModel->getSliderData();
         $q_umur = $pencakerModel->getUmurStatistik();
 
         $q_pendidikan_terakhir = $pendidikanModel->getPendidikanStatistik();
 
         $pencaker_count = $pencakerModel->countPencaker();
-
         // Prepare data for view
         $data['c_umur'] = $q_umur;
         $data['c_pendidikan_terakhir'] = $q_pendidikan_terakhir;
@@ -28,7 +29,7 @@ class Frontend extends BaseController
         $data['sliders'] = $this->getSliders();
         $data['galleries'] = $this->getHomeGalleries();
         $data['title'] = 'Beranda - Disnakertrans Manokwari';
-
+        $data['sliderData'] = $sliderData;
         return $this->loadView('frontend/home', $data);
     }
 

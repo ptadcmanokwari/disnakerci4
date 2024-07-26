@@ -22,38 +22,44 @@
         border-radius: 10px;
     }
 </style>
+
 <section id="hero">
     <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
         <div class="carousel-inner" role="listbox">
-            <?php foreach ($sliders as $index => $slide) : ?>
-                <div class="carousel-item <?= $index === 0 ? 'active' : ''; ?>" style="background-image: url(<?= $slide['url']; ?>);">
+            <?php
+            $activeSliders = array_filter($sliderData, function ($slide) {
+                return $slide['status'] == 1;
+            });
+            $activeSliders = array_values($activeSliders);
+            $intervalSlider = 2000;
+            foreach ($activeSliders as $index => $slide) : ?>
+                <div class="carousel-item <?= $index === 0 ? 'active' : ''; ?>" data-bs-interval="<?= $intervalSlider; ?>">
+                    <img src="<?= base_url('uploads/sliders/' . $slide['gambar']); ?>" class="d-block w-100" alt="<?= $slide['judul']; ?>">
                     <div class="carousel-container">
                         <div class="carousel-content animate__animated animate__fadeInUp">
-                            <h2><?= $slide['name']; ?></h2>
-                            <p>Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
-                            <div class="text-center"><a href="" class="btn-get-started">Read More</a></div>
+                            <h2><?= $slide['judul']; ?></h2>
                         </div>
                     </div>
                 </div>
+                <?php $intervalSlider += 2000; ?>
             <?php endforeach; ?>
         </div>
-
-        <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
-        </a>
-
-        <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
-            <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
-        </a>
-
+        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
         <ol class="carousel-indicators" id="hero-carousel-indicators">
-            <?php foreach ($sliders as $index => $slide) : ?>
+            <?php foreach ($activeSliders as $index => $slide) : ?>
                 <li data-bs-target="#heroCarousel" data-bs-slide-to="<?= $index; ?>" class="<?= $index === 0 ? 'active' : ''; ?>"></li>
             <?php endforeach; ?>
         </ol>
+
     </div>
 </section>
-
 
 <section id="about-us" class="about-us">
     <div class="container" data-aos="fade-up">

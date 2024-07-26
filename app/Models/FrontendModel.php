@@ -19,6 +19,12 @@ class FrontendModel extends Model
             ->findAll();
     }
 
+    public function getSliderData()
+    {
+        return $this->where('kategori', 'slider')
+            ->findAll();
+    }
+
     public function getRecentPosts($limit = 5)
     {
         return $this->orderBy('tgl_publikasi', 'DESC')
