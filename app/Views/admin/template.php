@@ -106,6 +106,19 @@
             opacity: 0.5;
             /* atau sesuai kebutuhan */
         }
+
+        /* Dropzone */
+        .dz-preview.dz-image-preview {
+            display: none;
+        }
+
+        .dz-started.dz-max-files-reached {
+            display: none;
+        }
+
+        .dropzone {
+            color: #000 !important;
+        }
     </style>
 </head>
 
@@ -168,8 +181,8 @@
                                     <p>Pencaker</p>
                                 </a>
                             </li>
-                            <li class="nav-item <?= ($current_uri == 'berita' || $current_uri == 'pengumuman' || $current_uri == 'pelatihan') ? 'menu-open' : '' ?>">
-                                <a href="#" class="nav-link <?= ($current_uri == 'berita' || $current_uri == 'pengumuman' || $current_uri == 'pelatihan') ? 'active' : '' ?>">
+                            <li class="nav-item <?= ($current_uri == 'berita' || $current_uri == 'pengumuman' || $current_uri == 'pelatihan' || $current_uri == 'slider') ? 'menu-open' : '' ?>">
+                                <a href="#" class="nav-link <?= ($current_uri == 'berita' || $current_uri == 'pengumuman' || $current_uri == 'pelatihan' || $current_uri == 'slider') ? 'active' : '' ?>">
                                     <i class="nav-icon bi bi-info-circle-fill"></i>
                                     <p>
                                         Informasi Web
@@ -193,6 +206,12 @@
                                         <a href="<?= base_url('admin_v2/pelatihan'); ?>" class="nav-link <?= ($current_uri == 'pelatihan') ? 'active' : '' ?>">
                                             <i class="bi bi-circle nav-icon"></i>
                                             <p>Pelatihan</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="<?= base_url('admin_v2/slider'); ?>" class="nav-link <?= ($current_uri == 'slider') ? 'active' : '' ?>">
+                                            <i class="bi bi-circle nav-icon"></i>
+                                            <p>Sliders</p>
                                         </a>
                                     </li>
                                 </ul>

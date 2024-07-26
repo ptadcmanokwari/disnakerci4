@@ -3,37 +3,18 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/dropzone.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.css">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" rel="stylesheet">
 
-<style>
-    .modal-dialog {
-        overflow-y: initial !important
-    }
-
-    .modal-body {
-        height: 70vh;
-        overflow-y: auto;
-    }
-
-    .dz-preview.dz-image-preview {
-        display: none;
-    }
-
-    .dz-started.dz-max-files-reached {
-        display: none;
-    }
-</style>
 <div class="content-wrapper">
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Pelatihan</h1>
+                    <h1>Pengumuman</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="<?php site_url(); ?>dashboard">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Pelatihan</li>
+                        <li class="breadcrumb-item active">Pengumuman</li>
                     </ol>
                 </div>
             </div>
@@ -46,18 +27,18 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Tabel Daftar Pelatihan</h3>
-                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addPelatihanBaruModal">
-                                Tambah Pelatihan Baru
+                            <h3 class="card-title">Tabel Daftar Pengumuman</h3>
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addPengumumanBaruModal">
+                                Tambah Pengumuman Baru
                             </button>
                         </div>
                         <div class="card-body">
-                            <table id="tabelPelatihan" class="table table-bordered table-hover">
+                            <table id="tabelPengumuman" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
                                         <th>No.</th>
-                                        <th>Judul Pelatihan</th>
-                                        <th>Isi Pelatihan</th>
+                                        <th>Judul Pengumuman</th>
+                                        <th>Isi Pengumuman</th>
                                         <th>Gambar</th>
                                         <th>Status</th>
                                         <th>Aksi</th>
@@ -75,96 +56,108 @@
 </div>
 
 
-<!-- Modal Tambah Pelatihan -->
-<div class="modal fade" id="addPelatihanBaruModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="addPelatihanBaruModalLabel" aria-hidden="true">
+<!-- Modal Tambah Pengumuman -->
+<div class="modal fade" id="addPengumumanBaruModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="addPengumumanBaruModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addPelatihanBaruModalLabel">Modal Tambah Pelatihan Baru</h5>
+                <h5 class="modal-title" id="addPengumumanBaruModalLabel">Modal Tambah Pengumuman Baru</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form id="uploadPelatihanForm" enctype="multipart/form-data" method="post">
+            <form id="uploadPengumumanForm" enctype="multipart/form-data" method="post">
                 <div class="modal-body">
-                    <input type="hidden" class="form-control" name="kategori" id="kategori" value="pelatihan">
+                    <input type="hidden" class="form-control" name="kategori" id="kategori" value="pengumuman">
                     <div class="mb-3">
-                        <label for="judul" class="form-label">Judul Pelatihan</label>
+                        <label for="judul" class="form-label">Judul Pengumuman</label>
                         <input type="text" class="form-control" id="judul" name="judul" required>
                     </div>
                     <div class="mb-3">
-                        <span>Isi Pelatihan</span>
+                        <span>Isi Pengumuman</span>
                         <textarea id="isi" name="isi"></textarea>
                     </div>
                     <div class="mb-3">
-                        <label for="tags">Tags Pelatihan</label>
+                        <label for="tags">Tags Pengumuman</label>
                         <input type="text" class="form-control" name="tags" id="tags" required>
                     </div>
+
                     <input type="hidden" class="form-control" name="status" id="status" value="1">
                     <input type="hidden" class="form-control" name="users_id" id="users-id" value="1">
+                    <!-- 
+                    <div class="mb-3">
+                        <span>Gambar Pengumuman</span>
+                        <div id="unggahGambarBaru" class="dropzone"></div>
+                    </div> -->
 
                     <div class="mb-3">
-                        <span>Gambar Pelatihan</span>
+                        <span>Gambar Berita</span>
                         <div id="unggahGambarBaru" class="dropzone"></div>
                         <!-- Cropper Container -->
-                        <div id="addPelatihanCropper" style="display: none;">
-                            <img id="addPelatihanImage" src="" alt="Cropper">
+                        <div id="addBeritaCropper" style="display: none;">
+                            <img id="addBeritaImage" src="" alt="Cropper">
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                    <button type="submit" class="btn btn-info" id="btnUnggahPelatihan">Unggah Pelatihan Baru</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-info" id="btnUnggahPengumuman">Unggah Pengumuman Baru</button>
                 </div>
             </form>
-
         </div>
     </div>
 </div>
 
-<!-- Modal Edit Pelatihan-->
-<div class="modal fade" id="ubahPelatihanBaruModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="ubahPelatihanBaruModalLabel" aria-hidden="true">
+<!-- Modal Edit Pengumuman-->
+<div class="modal fade" id="ubahPengumumanModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="ubahPengumumanModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="ubahPelatihanBaruModalLabel">Modal Sunting Pelatihan</h5>
+                <h5 class="modal-title" id="ubahPengumumanModalLabel">Modal Sunting Pengumuman</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form id="editPelatihanForm" enctype="multipart/form-data" method="post">
+            <form id="editPengumumanForm" enctype="multipart/form-data" method="post">
                 <div class="modal-body">
                     <input type="hidden" name="edit_id" id="edit_id">
-                    <input type="hidden" class="form-control" name="edit_kategori" id="edit_kategori" value="pelatihan">
+                    <input type="hidden" class="form-control" name="edit_kategori" id="edit_kategori" value="pengumuman">
                     <div class="mb-3">
-                        <label for="edit_judul" class="form-label">Ubah Judul Pelatihan</label>
+                        <label for="edit_judul" class="form-label">Ubah Judul Pengumuman</label>
                         <input type="text" class="form-control" id="edit_judul" name="edit_judul">
                     </div>
                     <div class="mb-3">
-                        <span>Ubah Isi Pelatihan</span>
+                        <span>Ubah Isi Pengumuman</span>
                         <textarea id="edit_isi" name="edit_isi"></textarea>
                     </div>
                     <div class="mb-3">
-                        <label for="edit_tags">Ubah Tags Pelatihan</label>
+                        <label for="edit_tags">Ubah Tags Pengumuman</label>
                         <input type="text" class="form-control" name="edit_tags" id="edit_tags">
                     </div>
+
                     <input type="hidden" class="form-control" name="edit_status" id="edit_status" value="1">
                     <input type="hidden" class="form-control" name="edit_users-id" id="edit_users-id" value="1">
+
+                    <!-- <div class="mb-3">
+                        <span>Ubah Gambar</span>
+                        <div id="edit_gambar_dropzone" class="dropzone"></div>
+                        <img id="edit-gambar-preview" class="img-thumbnail mt-2" width="100">
+                    </div> -->
+
                     <div class="mb-3">
                         <span>Ubah Gambar</span>
                         <div id="edit_gambar_dropzone" class="dropzone"></div>
                         <img id="edit-gambar-preview" class="img-thumbnail mt-2" width="100">
-                        <div id="updatePelatihanCropper" style="display:none;">
-                            <img id="updatePelatihanImage" src="" style="max-width:100%;">
+                        <div id="updateBeritaCropper" style="display:none;">
+                            <img id="updateBeritaImage" src="" style="max-width:100%;">
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                    <button type="submit" class="btn btn-info">Perbarui Pelatihan</button>
+                    <button type="submit" class="btn btn-info">Perbarui Pengumuman</button>
                 </div>
             </form>
-
 
         </div>
     </div>
@@ -175,12 +168,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/dropzone.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
 
 <script>
     Dropzone.autoDiscover = false;
     $(document).ready(function() {
-        var tablePelatihan = $('#tabelPelatihan').DataTable({
+        var tabelPengumuman = $('#tabelPengumuman').DataTable({
             "processing": true,
             "serverSide": false,
             "paging": true,
@@ -191,7 +183,7 @@
             "autoWidth": false,
             "responsive": true,
             "ajax": {
-                "url": "<?php echo base_url('admin_v2/pelatihanajax'); ?>", // Sesuaikan dengan route yang benar di CodeIgniter
+                "url": "<?php echo base_url('admin_v2/pengumumanajax'); ?>", // Sesuaikan dengan route yang benar di CodeIgniter
                 "type": "POST"
             },
             "columns": [{
@@ -220,15 +212,16 @@
                         var switchery = new Switchery(html, {
                             size: 'small'
                         });
-                        html.switchery = switchery;
+                        html.switchery = switchery; // attach switchery instance to html element
                     }
 
                     html.onchange = function() {
                         var status = this.checked ? 1 : 0;
                         var id = this.getAttribute('data-id');
+                        var judul = this.getAttribute('data-judul');
 
                         // Kirim AJAX request untuk memperbarui status di server
-                        fetch('<?= base_url('admin_v2/update_status_pelatihan') ?>', {
+                        fetch('<?= base_url('admin_v2/update_status_pengumuman') ?>', {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json',
@@ -236,6 +229,7 @@
                                 },
                                 body: JSON.stringify({
                                     id: id,
+                                    judul: judul,
                                     status: status
                                 })
                             }).then(response => response.json())
@@ -265,40 +259,46 @@
             }
         });
 
+        $('#isi').summernote();
+        $('#edit_isi').summernote();
+
         // Event listener untuk tombol hapus
-        $('#tabelPelatihan').on('click', '.btn-delete', function() {
+        $('#tabelPengumuman').on('click', '.btn-delete', function() {
             var id = $(this).data('id');
             var judul = $(this).data('judul');
             var row = $(this).closest('tr');
 
+            // Tampilkan SweetAlert untuk konfirmasi
             Swal.fire({
                 title: 'Konfirmasi',
-                text: 'Apakah Anda yakin ingin menghapus Pelatihan ini?',
+                text: 'Apakah Anda yakin ingin menghapus pengumuman ini?',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonText: 'Ya, Hapus!',
                 cancelButtonText: 'Batal'
             }).then((result) => {
                 if (result.isConfirmed) {
+                    // Jika user mengonfirmasi, lakukan proses hapus via AJAX
                     $.ajax({
-                        url: '<?= base_url('admin_v2/hapus_pelatihan') ?>',
+                        url: '<?= base_url('admin_v2/hapus_pengumuman') ?>',
                         type: 'POST',
                         data: {
                             id: id,
                             judul: judul
                         },
                         success: function(response) {
+                            // Tidak perlu JSON.parse di sini, karena respons sudah berupa JSON
                             if (response.status === 'success') {
-                                tablePelatihan.ajax.reload();
+                                tabelPengumuman.ajax.reload(); // Reload tabel setelah hapus
                                 Swal.fire(
                                     'Sukses!',
-                                    'Pelatihan berhasil dihapus.',
+                                    'Pengumuman berhasil dihapus.',
                                     'success'
                                 );
                             } else {
                                 Swal.fire(
                                     'Gagal!',
-                                    'Terjadi kesalahan saat menghapus Pelatihan.',
+                                    'Terjadi kesalahan saat menghapus pengumuman.',
                                     'error'
                                 );
                             }
@@ -306,7 +306,7 @@
                         error: function() {
                             Swal.fire(
                                 'Gagal!',
-                                'Terjadi kesalahan saat menghapus Pelatihan.',
+                                'Terjadi kesalahan saat menghapus pengumuman.',
                                 'error'
                             );
                         }
@@ -316,125 +316,7 @@
         });
 
 
-        $('#isi').summernote();
-        $('#edit_isi').summernote();
-
         // Reset Modal setelah upload dan update data
-        var cropper;
-
-        const addDropzone = new Dropzone("#unggahGambarBaru", {
-            url: "<?= base_url('admin_v2/save_pelatihan') ?>",
-            autoProcessQueue: false,
-            uploadMultiple: false,
-            maxFiles: 1,
-            dictDefaultMessage: "Seret gambar ke sini untuk unggah",
-            acceptedFiles: 'image/*',
-            addRemoveLinks: true,
-            init: function() {
-                var addDropzone = this;
-
-                // Event ketika file ditambahkan
-                this.on("addedfile", function(file) {
-                    if (cropper) {
-                        cropper.destroy();
-                    }
-
-                    var reader = new FileReader();
-                    reader.onload = function(event) {
-                        var image = document.getElementById('addPelatihanImage');
-                        image.src = event.target.result;
-
-                        var cropperContainer = document.getElementById('addPelatihanCropper');
-                        cropperContainer.style.display = 'block';
-
-                        cropper = new Cropper(image, {
-                            aspectRatio: 16 / 9,
-                            viewMode: 1,
-                            responsive: true,
-                            scalable: true,
-                            zoomable: true,
-                            autoCropArea: 1,
-                            movable: true,
-                            cropBoxResizable: true,
-                            toggleDragModeOnDblclick: false,
-                            ready: function() {
-                                cropper.setCanvasData({
-                                    left: 0,
-                                    top: 0,
-                                    width: image.width,
-                                    height: image.height
-                                });
-                            }
-                        });
-                    };
-                    reader.readAsDataURL(file);
-                });
-
-                // Event ketika form disubmit
-                document.querySelector("#uploadPelatihanForm").addEventListener("submit", function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-
-                    if (addDropzone.getQueuedFiles().length > 0) {
-                        // Process cropped image
-                        var canvas = cropper.getCroppedCanvas();
-                        canvas.toBlob(function(blob) {
-                            // Create a new file with .webp extension
-                            var file = new File([blob], addDropzone.getQueuedFiles()[0].name.replace(/\.\w+$/, ".webp"), {
-                                type: 'image/webp',
-                                lastModified: Date.now()
-                            });
-
-                            // Replace old file with cropped file
-                            addDropzone.removeAllFiles();
-                            addDropzone.addFile(file);
-
-                            addDropzone.processQueue();
-                        }, 'image/webp');
-                    } else {
-                        Swal.fire('Error', 'Gambar Pelatihan belum diunggah.', 'error');
-                    }
-                });
-
-                this.on("sending", function(file, xhr, formData) {
-                    formData.append("kategori", document.querySelector("#kategori").value);
-                    formData.append("judul", document.querySelector("#judul").value);
-                    formData.append("isi", document.querySelector("#isi").value);
-                    formData.append("tags", document.querySelector("#tags").value);
-                    formData.append("status", document.querySelector("#status").value);
-                    formData.append("users_id", document.querySelector("#users-id").value);
-                });
-
-                this.on("success", function(file, response) {
-                    if (response.success) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Berhasil',
-                            text: 'Pelatihan baru telah diunggah.',
-                        }).then((result) => {
-                            $('#addPelatihanBaruModal').modal('hide');
-                            resetModal();
-                            $('#tabelPelatihan').DataTable().ajax.reload();
-                        });
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error',
-                            text: response.errors ? response.errors.join("<br>") : 'Gagal unggah Pelatihan baru.',
-                        });
-                    }
-                });
-
-                this.on("error", function(file, response) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'Gagal unggah Pelatihan baru.',
-                    });
-                });
-            }
-        });
-
         function resetModal() {
             var judul = document.getElementById('judul');
             var edit_judul = document.getElementById('edit_judul');
@@ -468,21 +350,66 @@
                 editDropzone.removeAllFiles();
             }
 
-            // Hapus Cropper jika ada
-            if (cropper) {
-                cropper.destroy();
-                cropper = null;
-            }
-
             $('#edit-gambar-preview').attr('src', '');
-
-            // Sembunyikan Cropper container
-            var croperUpdate = document.getElementById('updatePelatihanCropper');
-            croperUpdate.style.display = 'none';
-
-            var cropperTambah = document.getElementById('addPelatihanCropper');
-            cropperTambah.style.display = 'none';
         }
+
+
+        const addDropzone = new Dropzone("#unggahGambarBaru", {
+            url: "<?= base_url('admin_v2/save_pengumuman') ?>",
+            autoProcessQueue: false,
+            uploadMultiple: false,
+            maxFiles: 1,
+            dictDefaultMessage: "Seret gambar ke sini untuk unggah",
+            acceptedFiles: 'image/*',
+            addRemoveLinks: true,
+            init: function() {
+                var addDropzone = this;
+                document.querySelector("#uploadPengumumanForm").addEventListener("submit", function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (addDropzone.getQueuedFiles().length > 0) {
+                        addDropzone.processQueue();
+                    } else {
+                        Swal.fire('Error', 'Gambar pengumuman belum diunggah.', 'error');
+                    }
+                });
+                this.on("sending", function(file, xhr, formData) {
+                    formData.append("kategori", document.querySelector("#kategori").value);
+                    formData.append("judul", document.querySelector("#judul").value);
+                    formData.append("isi", document.querySelector("#isi").value);
+                    formData.append("tags", document.querySelector("#tags").value);
+                    formData.append("status", document.querySelector("#status").value);
+                    formData.append("users_id", document.querySelector("#users-id").value);
+                });
+                this.on("success", function(file, response) {
+                    if (response.success) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Berhasil',
+                            text: 'Pengumuman baru telah diunggah.',
+                        }).then((result) => {
+                            $('#addPengumumanBaruModal').modal('hide');
+                            resetModal();
+                            $('#tabelPengumuman').DataTable().ajax.reload();
+                        });
+
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: response.errors ? response.errors.join("<br>") : 'Gagal unggah pengumuman baru.',
+                        });
+                    }
+                });
+                this.on("error", function(file, response) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Gagal unggah pengumuman baru.',
+                    });
+                });
+            }
+        });
 
         $(document).on('click', '.btn-edit', function() {
             var edit_id = $(this).data('edit_id');
@@ -498,16 +425,16 @@
             $('#edit_tags').val(edit_tags);
 
             if (edit_gambar) {
-                $('#edit-gambar-preview').attr('src', '<?= base_url('uploads/pelatihan/') ?>' + edit_gambar);
+                $('#edit-gambar-preview').attr('src', '<?= base_url('uploads/pengumuman/') ?>' + edit_gambar);
             } else {
                 $('#edit-gambar-preview').attr('src', '');
             }
 
-            $('#ubahPelatihanBaruModal').modal('show');
+            $('#ubahPengumumanModal').modal('show');
         });
 
         const editDropzone = new Dropzone("#edit_gambar_dropzone", {
-            url: "<?= base_url('admin_v2/update_pelatihan') ?>",
+            url: "<?= base_url('admin_v2/update_pengumuman') ?>",
             autoProcessQueue: false,
             uploadMultiple: false,
             maxFiles: 1,
@@ -516,112 +443,54 @@
             addRemoveLinks: true,
             init: function() {
                 var editDropzone = this;
-                var cropper;
-
-                // Event ketika file ditambahkan
-                this.on("addedfile", function(file) {
-                    if (cropper) {
-                        cropper.destroy();
-                    }
-
-                    var reader = new FileReader();
-                    reader.onload = function(event) {
-                        var image = document.getElementById('updatePelatihanImage');
-                        image.src = event.target.result;
-
-                        var cropperContainer = document.getElementById('updatePelatihanCropper');
-                        cropperContainer.style.display = 'block';
-
-                        cropper = new Cropper(image, {
-                            aspectRatio: 16 / 9,
-                            viewMode: 1,
-                            responsive: true,
-                            scalable: false,
-                            zoomable: false,
-                            autoCropArea: 1,
-                            movable: true,
-                            cropBoxResizable: true,
-                            toggleDragModeOnDblclick: false,
-                            ready: function() {
-                                cropper.setCanvasData({
-                                    left: 0,
-                                    top: 0,
-                                    width: image.width,
-                                    height: image.height
-                                });
-                            }
-                        });
-                    };
-                    reader.readAsDataURL(file);
-                });
-
-                // Event ketika form disubmit
-                document.querySelector("#editPelatihanForm").addEventListener("submit", function(e) {
+                document.querySelector("#editPengumumanForm").addEventListener("submit", function(e) {
                     e.preventDefault();
                     e.stopPropagation();
-
                     if (editDropzone.getQueuedFiles().length > 0) {
-                        // Process cropped image
-                        var canvas = cropper.getCroppedCanvas();
-                        canvas.toBlob(function(blob) {
-                            // Create a new file with .webp extension
-                            var file = new File([blob], editDropzone.getQueuedFiles()[0].name.replace(/\.\w+$/, ".webp"), {
-                                type: 'image/webp',
-                                lastModified: Date.now()
-                            });
-
-                            // Replace old file with cropped file
-                            editDropzone.removeAllFiles();
-                            editDropzone.addFile(file);
-
-                            editDropzone.processQueue();
-                        }, 'image/webp');
+                        editDropzone.processQueue();
                     } else {
-                        updatePelatihanWithoutImage();
+                        updatePengumumanWithoutImage();
                     }
                 });
-
-
                 this.on("sending", function(file, xhr, formData) {
                     formData.append("id", document.querySelector("#edit_id").value);
                     formData.append("judul", document.querySelector("#edit_judul").value);
                     formData.append("isi", document.querySelector("#edit_isi").value);
                     formData.append("tags", document.querySelector("#edit_tags").value);
                 });
-
                 this.on("success", function(file, response) {
                     if (response.success) {
                         Swal.fire({
                             icon: 'success',
                             title: 'Berhasil',
-                            text: 'Pelatihan telah diperbarui.',
+                            text: 'Pengumuman telah diperbarui.',
                         }).then((result) => {
-                            $('#ubahPelatihanBaruModal').modal('hide');
+                            $('#ubahPengumumanModal').modal('hide');
                             resetModal();
-                            $('#tabelPelatihan').DataTable().ajax.reload();
+                            $('#tabelPengumuman').DataTable().ajax.reload();
                         });
+
                     } else {
                         Swal.fire({
                             icon: 'error',
                             title: 'Error',
-                            text: response.errors ? response.errors.join("<br>") : 'Gagal memperbarui Pelatihan.',
+                            text: response.errors ? response.errors.join("<br>") : 'Gagal memperbarui pengumuman.',
                         });
                     }
                 });
-
                 this.on("error", function(file, response) {
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',
-                        text: 'Gagal memperbarui Pelatihan.',
+                        text: 'Gagal memperbarui pengumuman.',
                     });
                 });
             }
         });
 
-        function updatePelatihanWithoutImage() {
+        function updatePengumumanWithoutImage() {
             $.ajax({
-                url: "<?= base_url('admin_v2/update_pelatihan') ?>",
+                url: "<?= base_url('admin_v2/update_pengumuman') ?>",
                 type: 'POST',
                 data: {
                     id: document.querySelector("#edit_id").value,
@@ -634,17 +503,17 @@
                         Swal.fire({
                             icon: 'success',
                             title: 'Berhasil',
-                            text: 'Pelatihan telah diperbarui.',
+                            text: 'Pengumuman telah diperbarui.',
                         }).then((result) => {
-                            $('#ubahPelatihanBaruModal').modal('hide');
+                            $('#ubahPengumumanModal').modal('hide');
                             resetModal();
-                            $('#tabelPelatihan').DataTable().ajax.reload();
+                            $('#tabelPengumuman').DataTable().ajax.reload();
                         });
                     } else {
                         Swal.fire({
                             icon: 'error',
                             title: 'Error',
-                            text: response.errors ? response.errors.join("<br>") : 'Gagal memperbarui Pelatihan.',
+                            text: response.errors ? response.errors.join("<br>") : 'Gagal memperbarui pengumuman.',
                         });
                     }
                 },
@@ -652,7 +521,7 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',
-                        text: 'Gagal memperbarui Pelatihan.',
+                        text: 'Gagal memperbarui pengumuman.',
                     });
                 }
             });

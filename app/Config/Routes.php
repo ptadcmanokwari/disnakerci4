@@ -57,6 +57,16 @@ $routes->post('admin_v2/update_berita', 'Admin::update_berita', ['filter' => 'ro
 $routes->post('admin_v2/update_status_berita', 'Admin::update_status_berita', ['filter' => 'role:administrator']);
 $routes->post('admin_v2/hapus_berita', 'Admin::hapus_berita', ['filter' => 'role:administrator']);
 
+// Routes Slider
+$routes->get('admin_v2/slider', 'Admin::slider', ['filter' => 'role:administrator']);
+$routes->get('admin_v2/sliderajax', 'Admin::sliderajax', ['filter' => 'role:administrator']);
+$routes->post('admin_v2/sliderajax', 'Admin::sliderajax', ['filter' => 'role:administrator']);
+$routes->get('admin_v2/save_slider', 'Admin::save_slider', ['filter' => 'role:administrator']);
+$routes->post('admin_v2/save_slider', 'Admin::save_slider', ['filter' => 'role:administrator']);
+$routes->post('admin_v2/update_slider', 'Admin::update_slider', ['filter' => 'role:administrator']);
+$routes->post('admin_v2/update_status_slider', 'Admin::update_status_slider', ['filter' => 'role:administrator']);
+$routes->post('admin_v2/hapus_slider', 'Admin::hapus_slider', ['filter' => 'role:administrator']);
+
 // Routes Pengumuman
 $routes->get('admin_v2/pengumuman', 'Admin::pengumuman', ['filter' => 'role:administrator']);
 $routes->get('admin_v2/pengumumanajax', 'Admin::pengumumanajax', ['filter' => 'role:administrator']);

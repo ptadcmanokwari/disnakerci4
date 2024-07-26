@@ -294,7 +294,7 @@ class Admin extends BaseController
                         <a href="' . base_url('admin/detail_berita/' . $item['id']) . '" class="btn btn-info btn-sm">
                             <i class="bi bi-eye"></i>
                         </a>
-                        <button class="btn btn-warning btn-sm btn-edit" data-edit_id="' . $item['id'] . '"  data-edit_judul="' . htmlspecialchars($item['judul']) . '" data-edit_isi="' . htmlspecialchars($item['isi']) . '" data-edit_tags="' . $item['tags'] . '" data-edit_gambar="' . $item['gambar'] . '" data-toggle="modal"  data-toggle="modal" data-target="#ubahBeritaBaruModal"> <i class="bi bi-pencil-square"></i>
+                        <button class="btn btn-primary btn-sm btn-edit" data-edit_id="' . $item['id'] . '"  data-edit_judul="' . htmlspecialchars($item['judul']) . '" data-edit_isi="' . htmlspecialchars($item['isi']) . '" data-edit_tags="' . $item['tags'] . '" data-edit_gambar="' . $item['gambar'] . '" data-toggle="modal"  data-toggle="modal" data-target="#ubahBeritaBaruModal"> <i class="bi bi-pencil-square"></i>
                         </button>
                         <button class="btn btn-danger btn-sm btn-delete" data-id="' . $item['id'] . '"  data-judul="' . $item['judul'] . '">
                             <i class="bi bi-trash"></i>
@@ -351,12 +351,12 @@ class Admin extends BaseController
             $categoryModel->save([
                 'kategori' => $this->request->getPost('kategori'),
                 'judul' => $this->request->getPost('judul'),
-                'isi' => $this->request->getPost('isi'),
-                'tags' => $this->request->getPost('tags'),
+                'isi' => '-',
+                'tags' => '-',
                 'tgl_publikasi' => date('Y-m-d H:i:s'), // Tanggal saat ini
                 'gambar' => $newName,
                 'status' => $this->request->getPost('status'),
-                'slug' => url_title($this->request->getPost('judul'), '-', true),
+                'slug' => '-',
                 'users_id' => $this->request->getPost('users_id')
             ]);
 
@@ -462,6 +462,204 @@ class Admin extends BaseController
     }
 
 
+    public function slider()
+    {
+        $usersModel = new UsersModel();
+        $userId = user()->id;
+
+        // Ambil data pengguna berdasarkan user ID
+        $user = $usersModel->find($userId);
+
+        $data = [
+            'title' => 'Manajemen Slider',
+            'user' => $user,
+        ];
+
+        return $this->loadView('admin/slider', $data);
+    }
+
+    // tampilkan data di tabel slider
+    public function sliderajax()
+    {
+        $sliderModel = new FrontendModel();
+        $slider = $sliderModel->getInformasiByKategori('slider', 10, 0);
+
+        $data = [];
+        $no = 1;
+        foreach ($slider as $item) {
+            $gambar = '<img src="' . base_url('uploads/sliders/' . esc($item['gambar'])) . '" alt="' . esc($item['judul']) . '" width="100">';
+            $gambar = htmlspecialchars_decode($gambar);
+
+            $data[] = [
+                "no" => $no++,
+                "gambar" => $gambar,
+                "judul" => $item['judul'],
+                "status" => '<input type="checkbox" class="js-switch" data-id="' . $item['id'] . '" ' . ($item['status'] ? 'checked' : '') . '>',
+                "aksi" =>
+                '<div class="btn-group" role="group" aria-label="Aksi">
+                        <button class="btn btn-primary btn-sm btn-edit" data-edit_id="' . $item['id'] . '"  data-edit_judul="' . htmlspecialchars($item['judul']) . '"  data-edit_gambar="' . $item['gambar'] . '" data-toggle="modal"  data-toggle="modal" data-target="#ubahSliderBaruModal"> <i class="bi bi-pencil-square"></i>
+                        </button>
+                        <button class="btn btn-danger btn-sm btn-delete" data-id="' . $item['id'] . '"  data-judul="' . $item['judul'] . '">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </div>'
+            ];
+        }
+
+        echo json_encode(["data" => $data]);
+    }
+
+    // toggle switchery
+    public function update_status_slider()
+    {
+        $id = $this->request->getJSON()->id;
+        $status = $this->request->getJSON()->status;
+
+        $model = new FrontendModel();
+        $update = $model->update($id, ['status' => $status]);
+
+        if ($update) {
+            return $this->response->setJSON(['success' => true]);
+        } else {
+            return $this->response->setJSON(['success' => false]);
+        }
+    }
+
+    // Simpan slider unggahan baru
+    public function save_slider()
+    {
+        $validation = \Config\Services::validation();
+        $validation->setRules([
+            'kategori' => 'required|max_length[255]',
+            'file' => 'uploaded[file]|is_image[file]',
+            'judul' => 'required',
+            // 'isi' => 'required',
+            // 'tags' => 'required',
+            'status' => 'required|in_list[0,1]',
+            'users_id' => 'required'
+        ]);
+
+        if (!$validation->withRequest($this->request)->run()) {
+            return $this->response->setJSON(['success' => false, 'errors' => $validation->getErrors()]);
+        }
+
+        $file = $this->request->getFile('file');
+
+        if ($file->isValid() && !$file->hasMoved()) {
+            $newName = $file->getRandomName();
+            $file->move(FCPATH . 'uploads/sliders/', $newName);
+
+            // Jika berhasil pindah, simpan ke database
+            $categoryModel = new FrontendModel();
+            $categoryModel->save([
+                'kategori' => $this->request->getPost('kategori'),
+                'judul' => $this->request->getPost('judul'),
+                'isi' => '-',
+                'tags' => '-',
+                'tgl_publikasi' => date('Y-m-d H:i:s'), // Tanggal saat ini
+                'gambar' => $newName,
+                'status' => $this->request->getPost('status'),
+                'slug' => '-',
+                'users_id' => $this->request->getPost('users_id'),
+            ]);
+
+            return $this->response->setJSON(['success' => true]);
+        } else {
+            return $this->response->setJSON(['success' => false, 'errors' => 'File upload failed.']);
+        }
+    }
+
+
+    // Sunting berita
+    public function update_slider()
+    {
+        $model = new FrontendModel();
+
+        $id = $this->request->getPost('id');
+        $judul = $this->request->getPost('judul');
+        $kategori = 'slider';
+        $status = 1;
+        $users_id = $this->request->getPost('edit_users-id');
+
+        $validation = \Config\Services::validation();
+        $validation->setRules([
+            'judul' => 'required',
+        ]);
+
+        if (!$validation->withRequest($this->request)->run()) {
+            return $this->response->setJSON(['success' => false, 'errors' => $validation->getErrors()]);
+        }
+
+        $data = [
+            'judul' => $judul,
+            'kategori' => $kategori,
+            'status' => $status,
+            'users_id' => $users_id,
+        ];
+
+        $file = $this->request->getFile('file');
+        if ($file && $file->isValid() && !$file->hasMoved()) {
+            // Ambil data gambar lama
+            $current_data = $model->find($id);
+            $current_gambar = $current_data['gambar'];
+
+            // Hapus gambar lama jika ada
+            if (!empty($current_gambar)) {
+                $path = FCPATH . 'uploads/sliders/' . $current_gambar;
+                if (file_exists($path)) {
+                    unlink($path);
+                }
+            }
+
+            // Proses upload gambar baru
+            $newName = $file->getRandomName();
+            $file->move(FCPATH . 'uploads/sliders/', $newName);
+            $data['gambar'] = $newName;
+        }
+
+        $model->update($id, $data);
+
+        return $this->response->setJSON(['success' => true]);
+    }
+
+
+    public function hapus_slider()
+    {
+        $id = $this->request->getPost('id');
+        // $judul = $this->request->getPost('judul');
+        $model = new FrontendModel();
+
+        $slider = $model->find($id);
+        if (!$slider) {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Berita tidak ditemukan'])->setStatusCode(404);
+        }
+
+        // Hapus gambar dari direktori jika ada
+        $gambar = $slider['gambar'];
+        if (!empty($gambar)) {
+            $path = FCPATH . 'uploads/sliders/' . $gambar;
+            if (file_exists($path)) {
+                unlink($path);
+            }
+        }
+
+        if ($model->delete($id)) {
+            $activityModel = new ActivitylogsModel();
+            $activityMessage = sprintf(
+                'User #%d menghapus slider dengan judul: "%s"',
+                user_id(),
+                $this->request->getPost('judul')
+            );
+            $activityModel->add($activityMessage, user_id(), $this->request->getIPAddress());
+
+            return $this->response->setJSON(['status' => 'success'])->setStatusCode(200);
+        } else {
+            return $this->response->setJSON(['status' => 'error'])->setStatusCode(500);
+        }
+    }
+
+
+
     public function pengumuman()
     {
         $data['title'] = 'Manajemen Pengumuman';
@@ -490,7 +688,7 @@ class Admin extends BaseController
                         <a href="' . base_url('admin/detail_pengumuman/' . $item['id']) . '" class="btn btn-info btn-sm">
                             <i class="bi bi-eye"></i>
                         </a>
-                        <button class="btn btn-warning btn-sm btn-edit" data-edit_id="' . $item['id'] . '"  data-edit_judul="' . htmlspecialchars($item['judul']) . '" data-edit_isi="' . htmlspecialchars($item['isi']) . '" data-edit_tags="' . $item['tags'] . '" data-edit_gambar="' . $item['gambar'] . '" data-toggle="modal"  data-toggle="modal" data-target="#ubahPengumumanModal"> <i class="bi bi-pencil-square"></i>
+                        <button class="btn btn-primary btn-sm btn-edit" data-edit_id="' . $item['id'] . '"  data-edit_judul="' . htmlspecialchars($item['judul']) . '" data-edit_isi="' . htmlspecialchars($item['isi']) . '" data-edit_tags="' . $item['tags'] . '" data-edit_gambar="' . $item['gambar'] . '" data-toggle="modal"  data-toggle="modal" data-target="#ubahPengumumanModal"> <i class="bi bi-pencil-square"></i>
                         </button>
                         <button class="btn btn-danger btn-sm btn-delete" data-id="' . $item['id'] . '" data-judul="' . $item['judul'] . '">
                             <i class="bi bi-trash"></i>
@@ -706,7 +904,7 @@ class Admin extends BaseController
                         <a href="' . base_url('admin/detail_pelatihan/' . $item['id']) . '" class="btn btn-info btn-sm">
                             <i class="bi bi-eye"></i>
                         </a>
-                        <button class="btn btn-warning btn-sm btn-edit" data-edit_id="' . $item['id'] . '"  data-edit_judul="' . htmlspecialchars($item['judul']) . '" data-edit_isi="' . htmlspecialchars($item['isi']) . '" data-edit_tags="' . $item['tags'] . '" data-edit_gambar="' . $item['gambar'] . '" data-toggle="modal"  data-toggle="modal" data-target="#ubahPelatihanModal"> <i class="bi bi-pencil-square"></i>
+                        <button class="btn btn-primary btn-sm btn-edit" data-edit_id="' . $item['id'] . '"  data-edit_judul="' . htmlspecialchars($item['judul']) . '" data-edit_isi="' . htmlspecialchars($item['isi']) . '" data-edit_tags="' . $item['tags'] . '" data-edit_gambar="' . $item['gambar'] . '" data-toggle="modal"  data-toggle="modal" data-target="#ubahPelatihanModal"> <i class="bi bi-pencil-square"></i>
                         </button>
                         <button class="btn btn-danger btn-sm btn-delete" data-id="' . $item['id'] . '" data-judul="' . $item['judul'] . '">
                             <i class="bi bi-trash"></i>

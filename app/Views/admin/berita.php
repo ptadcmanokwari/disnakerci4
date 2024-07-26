@@ -3,7 +3,26 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/dropzone.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" rel="stylesheet">
 
+<style>
+    .modal-dialog {
+        overflow-y: initial !important
+    }
+
+    .modal-body {
+        height: 70vh;
+        overflow-y: auto;
+    }
+
+    .dz-preview.dz-image-preview {
+        display: none;
+    }
+
+    .dz-started.dz-max-files-reached {
+        display: none;
+    }
+</style>
 <div class="content-wrapper">
     <section class="content-header">
         <div class="container-fluid">
@@ -81,20 +100,24 @@
                         <label for="tags">Tags Berita</label>
                         <input type="text" class="form-control" name="tags" id="tags" required>
                     </div>
-
                     <input type="hidden" class="form-control" name="status" id="status" value="1">
                     <input type="hidden" class="form-control" name="users_id" id="users-id" value="1">
 
                     <div class="mb-3">
                         <span>Gambar Berita</span>
                         <div id="unggahGambarBaru" class="dropzone"></div>
+                        <!-- Cropper Container -->
+                        <div id="addBeritaCropper" style="display: none;">
+                            <img id="addBeritaImage" src="" alt="Cropper">
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                     <button type="submit" class="btn btn-info" id="btnUnggahBerita">Unggah Berita Baru</button>
                 </div>
             </form>
+
         </div>
     </div>
 </div>
@@ -125,14 +148,15 @@
                         <label for="edit_tags">Ubah Tags Berita</label>
                         <input type="text" class="form-control" name="edit_tags" id="edit_tags">
                     </div>
-
                     <input type="hidden" class="form-control" name="edit_status" id="edit_status" value="1">
                     <input type="hidden" class="form-control" name="edit_users-id" id="edit_users-id" value="1">
-
                     <div class="mb-3">
                         <span>Ubah Gambar</span>
                         <div id="edit_gambar_dropzone" class="dropzone"></div>
                         <img id="edit-gambar-preview" class="img-thumbnail mt-2" width="100">
+                        <div id="updateBeritaCropper" style="display:none;">
+                            <img id="updateBeritaImage" src="" style="max-width:100%;">
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -141,6 +165,7 @@
                 </div>
             </form>
 
+
         </div>
     </div>
 </div>
@@ -148,15 +173,8 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/dropzone.min.js"></script>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.js"></script>
-
-<script>
-    $(function() {
-        $('#isi').summernote();
-        $('#edit_isi').summernote();
-    })
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
 
 <script>
     Dropzone.autoDiscover = false;
@@ -246,9 +264,6 @@
             }
         });
 
-
-
-
         // Event listener untuk tombol hapus
         $('#tabelBerita').on('click', '.btn-delete', function() {
             var id = $(this).data('id');
@@ -300,7 +315,125 @@
         });
 
 
+        $('#isi').summernote();
+        $('#edit_isi').summernote();
+
         // Reset Modal setelah upload dan update data
+        var cropper;
+
+        const addDropzone = new Dropzone("#unggahGambarBaru", {
+            url: "<?= base_url('admin_v2/save_berita') ?>",
+            autoProcessQueue: false,
+            uploadMultiple: false,
+            maxFiles: 1,
+            dictDefaultMessage: "Seret gambar ke sini untuk unggah",
+            acceptedFiles: 'image/*',
+            addRemoveLinks: true,
+            init: function() {
+                var addDropzone = this;
+
+                // Event ketika file ditambahkan
+                this.on("addedfile", function(file) {
+                    if (cropper) {
+                        cropper.destroy();
+                    }
+
+                    var reader = new FileReader();
+                    reader.onload = function(event) {
+                        var image = document.getElementById('addBeritaImage');
+                        image.src = event.target.result;
+
+                        var cropperContainer = document.getElementById('addBeritaCropper');
+                        cropperContainer.style.display = 'block';
+
+                        cropper = new Cropper(image, {
+                            aspectRatio: 16 / 9,
+                            viewMode: 1,
+                            responsive: true,
+                            scalable: false,
+                            zoomable: false,
+                            autoCropArea: 1,
+                            movable: true,
+                            cropBoxResizable: true,
+                            toggleDragModeOnDblclick: false,
+                            ready: function() {
+                                cropper.setCanvasData({
+                                    left: 0,
+                                    top: 0,
+                                    width: image.width,
+                                    height: image.height
+                                });
+                            }
+                        });
+                    };
+                    reader.readAsDataURL(file);
+                });
+
+                // Event ketika form disubmit
+                document.querySelector("#uploadBeritaForm").addEventListener("submit", function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    if (addDropzone.getQueuedFiles().length > 0) {
+                        // Process cropped image
+                        var canvas = cropper.getCroppedCanvas();
+                        canvas.toBlob(function(blob) {
+                            // Create a new file with .webp extension
+                            var file = new File([blob], addDropzone.getQueuedFiles()[0].name.replace(/\.\w+$/, ".webp"), {
+                                type: 'image/webp',
+                                lastModified: Date.now()
+                            });
+
+                            // Replace old file with cropped file
+                            addDropzone.removeAllFiles();
+                            addDropzone.addFile(file);
+
+                            addDropzone.processQueue();
+                        }, 'image/webp');
+                    } else {
+                        Swal.fire('Error', 'Gambar berita belum diunggah.', 'error');
+                    }
+                });
+
+                this.on("sending", function(file, xhr, formData) {
+                    formData.append("kategori", document.querySelector("#kategori").value);
+                    formData.append("judul", document.querySelector("#judul").value);
+                    formData.append("isi", document.querySelector("#isi").value);
+                    formData.append("tags", document.querySelector("#tags").value);
+                    formData.append("status", document.querySelector("#status").value);
+                    formData.append("users_id", document.querySelector("#users-id").value);
+                });
+
+                this.on("success", function(file, response) {
+                    if (response.success) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Berhasil',
+                            text: 'Berita baru telah diunggah.',
+                        }).then((result) => {
+                            $('#addBeritaBaruModal').modal('hide');
+                            resetModal();
+                            $('#tabelBerita').DataTable().ajax.reload();
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: response.errors ? response.errors.join("<br>") : 'Gagal unggah berita baru.',
+                        });
+                    }
+                });
+
+                this.on("error", function(file, response) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Gagal unggah berita baru.',
+                    });
+                });
+            }
+        });
+
         function resetModal() {
             var judul = document.getElementById('judul');
             var edit_judul = document.getElementById('edit_judul');
@@ -334,66 +467,21 @@
                 editDropzone.removeAllFiles();
             }
 
-            $('#edit-gambar-preview').attr('src', '');
-        }
-
-
-        const addDropzone = new Dropzone("#unggahGambarBaru", {
-            url: "<?= base_url('admin_v2/save_berita') ?>",
-            autoProcessQueue: false,
-            uploadMultiple: false,
-            maxFiles: 1,
-            dictDefaultMessage: "Seret gambar ke sini untuk unggah",
-            acceptedFiles: 'image/*',
-            addRemoveLinks: true,
-            init: function() {
-                var addDropzone = this;
-                document.querySelector("#uploadBeritaForm").addEventListener("submit", function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    if (addDropzone.getQueuedFiles().length > 0) {
-                        addDropzone.processQueue();
-                    } else {
-                        Swal.fire('Error', 'Gambar berita belum diunggah.', 'error');
-                    }
-                });
-                this.on("sending", function(file, xhr, formData) {
-                    formData.append("kategori", document.querySelector("#kategori").value);
-                    formData.append("judul", document.querySelector("#judul").value);
-                    formData.append("isi", document.querySelector("#isi").value);
-                    formData.append("tags", document.querySelector("#tags").value);
-                    formData.append("status", document.querySelector("#status").value);
-                    formData.append("users_id", document.querySelector("#users-id").value);
-                });
-                this.on("success", function(file, response) {
-                    if (response.success) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Berhasil',
-                            text: 'Berita baru telah diunggah.',
-                        }).then((result) => {
-                            $('#addBeritaBaruModal').modal('hide');
-                            resetModal();
-                            $('#tabelBerita').DataTable().ajax.reload();
-                        });
-
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error',
-                            text: response.errors ? response.errors.join("<br>") : 'Gagal unggah berita baru.',
-                        });
-                    }
-                });
-                this.on("error", function(file, response) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'Gagal unggah berita baru.',
-                    });
-                });
+            // Hapus Cropper jika ada
+            if (cropper) {
+                cropper.destroy();
+                cropper = null;
             }
-        });
+
+            $('#edit-gambar-preview').attr('src', '');
+
+            // Sembunyikan Cropper container
+            var croperUpdate = document.getElementById('updateBeritaCropper');
+            croperUpdate.style.display = 'none';
+
+            var cropperTambah = document.getElementById('addBeritaCropper');
+            cropperTambah.style.display = 'none';
+        }
 
         $(document).on('click', '.btn-edit', function() {
             var edit_id = $(this).data('edit_id');
@@ -427,21 +515,79 @@
             addRemoveLinks: true,
             init: function() {
                 var editDropzone = this;
+                var cropper;
+
+                // Event ketika file ditambahkan
+                this.on("addedfile", function(file) {
+                    if (cropper) {
+                        cropper.destroy();
+                    }
+
+                    var reader = new FileReader();
+                    reader.onload = function(event) {
+                        var image = document.getElementById('updateBeritaImage');
+                        image.src = event.target.result;
+
+                        var cropperContainer = document.getElementById('updateBeritaCropper');
+                        cropperContainer.style.display = 'block';
+
+                        cropper = new Cropper(image, {
+                            aspectRatio: 16 / 9,
+                            viewMode: 1,
+                            responsive: true,
+                            scalable: false,
+                            zoomable: false,
+                            autoCropArea: 1,
+                            movable: true,
+                            cropBoxResizable: true,
+                            toggleDragModeOnDblclick: false,
+                            ready: function() {
+                                cropper.setCanvasData({
+                                    left: 0,
+                                    top: 0,
+                                    width: image.width,
+                                    height: image.height
+                                });
+                            }
+                        });
+                    };
+                    reader.readAsDataURL(file);
+                });
+
+                // Event ketika form disubmit
                 document.querySelector("#editBeritaForm").addEventListener("submit", function(e) {
                     e.preventDefault();
                     e.stopPropagation();
+
                     if (editDropzone.getQueuedFiles().length > 0) {
-                        editDropzone.processQueue();
+                        // Process cropped image
+                        var canvas = cropper.getCroppedCanvas();
+                        canvas.toBlob(function(blob) {
+                            // Create a new file with .webp extension
+                            var file = new File([blob], editDropzone.getQueuedFiles()[0].name.replace(/\.\w+$/, ".webp"), {
+                                type: 'image/webp',
+                                lastModified: Date.now()
+                            });
+
+                            // Replace old file with cropped file
+                            editDropzone.removeAllFiles();
+                            editDropzone.addFile(file);
+
+                            editDropzone.processQueue();
+                        }, 'image/webp');
                     } else {
                         updateBeritaWithoutImage();
                     }
                 });
+
+
                 this.on("sending", function(file, xhr, formData) {
                     formData.append("id", document.querySelector("#edit_id").value);
                     formData.append("judul", document.querySelector("#edit_judul").value);
                     formData.append("isi", document.querySelector("#edit_isi").value);
                     formData.append("tags", document.querySelector("#edit_tags").value);
                 });
+
                 this.on("success", function(file, response) {
                     if (response.success) {
                         Swal.fire({
@@ -453,7 +599,6 @@
                             resetModal();
                             $('#tabelBerita').DataTable().ajax.reload();
                         });
-
                     } else {
                         Swal.fire({
                             icon: 'error',
@@ -462,6 +607,7 @@
                         });
                     }
                 });
+
                 this.on("error", function(file, response) {
                     Swal.fire({
                         icon: 'error',
