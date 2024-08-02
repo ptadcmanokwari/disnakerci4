@@ -25,9 +25,9 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">User List</h3>
-                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addUserBaruModal">
+                            <!-- <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addUserBaruModal">
                                 Add New User
-                            </button>
+                            </button> -->
                         </div>
                         <div class="card-body">
                             <table id="tabelUsers" class="table table-bordered table-hover">
@@ -189,7 +189,8 @@
                     "data": "name"
                 },
                 {
-                    "data": "active"
+                    "data": "active",
+                    "className": "text-center"
                 },
                 {
                     "data": "aksi"

@@ -14,24 +14,24 @@
             <div class="col-lg-8 entries">
                 <article class="entry entry-single">
                     <div class="entry-img">
-                        <img src="<?= base_url('uploads/berita/' . $berita['gambar']) ?>" alt="<?= $berita['judul'] ?>" class="w-100">
+                        <img src="<?= base_url('uploads/pelatihan/' . $pelatihan['gambar']) ?>" alt="<?= $pelatihan['judul'] ?>" class="w-100">
                     </div>
                     <h2 class="entry-title">
-                        <?= $berita['judul'] ?>
+                        <?= $pelatihan['judul'] ?>
                     </h2>
                     <div class="entry-meta">
                         <ul>
-                            <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="#"><?= $berita['users_id'] ?></a></li>
-                            <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="#"><time datetime="<?= $berita['tgl_publikasi'] ?>"><?= date('M d, Y', strtotime($berita['tgl_publikasi'])) ?></time></a></li>
+                            <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="#"><?= $pelatihan['users_id'] ?></a></li>
+                            <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="#"><time datetime="<?= $pelatihan['tgl_publikasi'] ?>"><?= date('M d, Y', strtotime($pelatihan['tgl_publikasi'])) ?></time></a></li>
                         </ul>
                     </div>
                     <div class="entry-content">
-                        <?= $berita['isi'] ?>
+                        <?= $pelatihan['isi'] ?>
                     </div>
                     <div class="entry-footer">
                         <i class="bi bi-folder"></i>
                         <ul class="cats">
-                            <li><a href="#"><?= $berita['kategori'] ?></a></li>
+                            <li><a href="#"><?= $pelatihan['kategori'] ?></a></li>
                         </ul>
                         <i class="bi bi-tags"></i>
                         <ul class="tags">
@@ -45,14 +45,14 @@
 
             <div class="col-lg-4">
                 <div class="sidebar">
-                    <h3 class="sidebar-title">Berita Lainnya</h3>
+                    <h3 class="sidebar-title">Pelatihan Lainnya</h3>
                     <div class="sidebar-item recent-posts">
                         <?php if (empty($recentPosts)) : ?>
                             <p class="text-muted">Belum ada data untuk ditampilkan di halaman ini.</p>
                         <?php else : ?>
                             <?php foreach ($recentPosts as $post) : ?>
                                 <div class="post-item clearfix">
-                                    <img src="<?= base_url('uploads/berita/' . $post['gambar']); ?>" alt="<?= $post['judul']; ?>">
+                                    <img src="<?= base_url('uploads/pelatihan/' . $post['gambar']); ?>" alt="<?= $post['judul']; ?>">
                                     <h4><a href="<?= $post['slug']; ?>"><?= substr(strip_tags($post['judul']), 0, 50) ?> ...</a></h4>
                                     <time datetime="<?= $post['tgl_publikasi']; ?>"><?= date('M d, Y', strtotime($post['tgl_publikasi'])); ?></time>
                                 </div>
@@ -77,6 +77,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </section>
 <?= $this->endSection() ?>

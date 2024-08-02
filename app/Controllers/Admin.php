@@ -286,17 +286,17 @@ class Admin extends BaseController
             $data[] = [
                 "no" => $no++,
                 "judul" => $item['judul'],
-                "isi" => $item['isi'],
+                "isi" => substr(strip_tags($item['isi']), 0, 250) . ' ...',
                 "gambar" => $gambar,
                 "status" => '<input type="checkbox" class="js-switch" data-id="' . $item['id'] . '" ' . ($item['status'] ? 'checked' : '') . '>',
                 "aksi" =>
                 '<div class="btn-group" role="group" aria-label="Aksi">
-                        <a href="' . base_url('admin/detail_berita/' . $item['id']) . '" class="btn btn-info btn-sm">
+                        <a href="' . base_url('berita/detail_berita/' . $item['slug']) . '" class="btn btn-info btn-sm" title="Detail Berita">
                             <i class="bi bi-eye"></i>
                         </a>
-                        <button class="btn btn-primary btn-sm btn-edit" data-edit_id="' . $item['id'] . '"  data-edit_judul="' . htmlspecialchars($item['judul']) . '" data-edit_isi="' . htmlspecialchars($item['isi']) . '" data-edit_tags="' . $item['tags'] . '" data-edit_gambar="' . $item['gambar'] . '" data-toggle="modal"  data-toggle="modal" data-target="#ubahBeritaBaruModal"> <i class="bi bi-pencil-square"></i>
+                        <button class="btn btn-primary btn-sm btn-edit" data-edit_id="' . $item['id'] . '"  data-edit_judul="' . htmlspecialchars($item['judul']) . '" data-edit_isi="' . htmlspecialchars($item['isi']) . '" data-edit_tags="' . $item['tags'] . '" data-edit_gambar="' . $item['gambar'] . '" data-toggle="modal"  data-toggle="modal" data-target="#ubahBeritaBaruModal" title="Ubah Berita" > <i class="bi bi-pencil-square"></i>
                         </button>
-                        <button class="btn btn-danger btn-sm btn-delete" data-id="' . $item['id'] . '"  data-judul="' . $item['judul'] . '">
+                        <button class="btn btn-danger btn-sm btn-delete" data-id="' . $item['id'] . '"  data-judul="' . $item['judul'] . '" title="Hapus Berita" >
                             <i class="bi bi-trash"></i>
                         </button>
                     </div>'
@@ -325,6 +325,9 @@ class Admin extends BaseController
     // Simpan berita unggahan baru
     public function save_berita()
     {
+        // $usersModel = new UsersModel();
+        // $userId = user()->id;
+
         $validation = \Config\Services::validation();
         $validation->setRules([
             'kategori' => 'required|max_length[255]',
@@ -332,8 +335,6 @@ class Admin extends BaseController
             'judul' => 'required',
             'isi' => 'required',
             'tags' => 'required',
-            'status' => 'required|in_list[0,1]',
-            'users_id' => 'required|integer'
         ]);
 
         if (!$validation->withRequest($this->request)->run()) {
@@ -351,13 +352,13 @@ class Admin extends BaseController
             $categoryModel->save([
                 'kategori' => $this->request->getPost('kategori'),
                 'judul' => $this->request->getPost('judul'),
-                'isi' => '-',
-                'tags' => '-',
-                'tgl_publikasi' => date('Y-m-d H:i:s'), // Tanggal saat ini
+                'isi' => $this->request->getPost('isi'),
+                'tags' => $this->request->getPost('tags'),
+                'tgl_publikasi' => date('Y-m-d H:i:s'),
                 'gambar' => $newName,
                 'status' => $this->request->getPost('status'),
-                'slug' => '-',
-                'users_id' => $this->request->getPost('users_id')
+                'slug' => url_title($this->request->getPost('judul'), '-', true),
+                'users_id' => user()->id,
             ]);
 
             return $this->response->setJSON(['success' => true]);
@@ -378,7 +379,7 @@ class Admin extends BaseController
         $tags = $this->request->getPost('tags');
         $kategori = 'berita';
         $status = 1;
-        $users_id = 1;
+        $users_id = user()->id;
 
         $validation = \Config\Services::validation();
         $validation->setRules([
@@ -494,12 +495,12 @@ class Admin extends BaseController
                 "no" => $no++,
                 "gambar" => $gambar,
                 "judul" => $item['judul'],
-                "status" => '<input type="checkbox" class="js-switch" data-id="' . $item['id'] . '" ' . ($item['status'] ? 'checked' : '') . '>',
+                "status" => '<div class="text-center"><input type="checkbox" class="js-switch" data-id="' . $item['id'] . '" ' . ($item['status'] ? 'checked' : '') . '></div>',
                 "aksi" =>
                 '<div class="btn-group" role="group" aria-label="Aksi">
-                        <button class="btn btn-primary btn-sm btn-edit" data-edit_id="' . $item['id'] . '"  data-edit_judul="' . htmlspecialchars($item['judul']) . '"  data-edit_gambar="' . $item['gambar'] . '" data-toggle="modal"  data-toggle="modal" data-target="#ubahSliderBaruModal"> <i class="bi bi-pencil-square"></i>
+                        <button class="btn btn-primary btn-sm btn-edit" data-edit_id="' . $item['id'] . '"  data-edit_judul="' . htmlspecialchars($item['judul']) . '"  data-edit_gambar="' . $item['gambar'] . '" data-toggle="modal"  data-toggle="modal" data-target="#ubahSliderBaruModal" title="Ubah Slider"> <i class="bi bi-pencil-square"></i>
                         </button>
-                        <button class="btn btn-danger btn-sm btn-delete" data-id="' . $item['id'] . '"  data-judul="' . $item['judul'] . '">
+                        <button class="btn btn-danger btn-sm btn-delete" data-id="' . $item['id'] . '"  data-judul="' . $item['judul'] . '" title="Hapus Slider">
                             <i class="bi bi-trash"></i>
                         </button>
                     </div>'
@@ -680,17 +681,18 @@ class Admin extends BaseController
             $data[] = [
                 "no" => $no++,
                 "judul" => $item['judul'],
-                "isi" => $item['isi'],
+                // "isi" => $item['isi'],
+                "isi" => substr(strip_tags($item['isi']), 0, 250) . ' ...',
                 "gambar" => $gambar,
                 "status" => '<input type="checkbox" class="js-switch" data-judul="' . $item['judul'] . '"  data-id="' . $item['id'] . '" ' . ($item['status'] ? 'checked' : '') . '>',
                 "aksi" =>
                 '<div class="btn-group" role="group" aria-label="Aksi">
-                        <a href="' . base_url('admin/detail_pengumuman/' . $item['id']) . '" class="btn btn-info btn-sm">
+                        <a href="' . base_url('pengumuman/detail_pengumuman/' . $item['slug']) . '" class="btn btn-info btn-sm" title="Detail Pengumuman">
                             <i class="bi bi-eye"></i>
                         </a>
-                        <button class="btn btn-primary btn-sm btn-edit" data-edit_id="' . $item['id'] . '"  data-edit_judul="' . htmlspecialchars($item['judul']) . '" data-edit_isi="' . htmlspecialchars($item['isi']) . '" data-edit_tags="' . $item['tags'] . '" data-edit_gambar="' . $item['gambar'] . '" data-toggle="modal"  data-toggle="modal" data-target="#ubahPengumumanModal"> <i class="bi bi-pencil-square"></i>
+                        <button class="btn btn-primary btn-sm btn-edit" data-edit_id="' . $item['id'] . '"  data-edit_judul="' . htmlspecialchars($item['judul']) . '" data-edit_isi="' . htmlspecialchars($item['isi']) . '" data-edit_tags="' . $item['tags'] . '" data-edit_gambar="' . $item['gambar'] . '" data-toggle="modal"  data-toggle="modal" data-target="#ubahPengumumanModal"  title="Ubah Pengumuman"> <i class="bi bi-pencil-square"></i>
                         </button>
-                        <button class="btn btn-danger btn-sm btn-delete" data-id="' . $item['id'] . '" data-judul="' . $item['judul'] . '">
+                        <button class="btn btn-danger btn-sm btn-delete" data-id="' . $item['id'] . '" data-judul="' . $item['judul'] . '" title="Hapus Pengumuman">
                             <i class="bi bi-trash"></i>
                         </button>
                     </div>'
@@ -733,7 +735,6 @@ class Admin extends BaseController
             'isi' => 'required',
             'tags' => 'required',
             'status' => 'required|in_list[0,1]',
-            'users_id' => 'required|integer'
         ]);
 
         if (!$validation->withRequest($this->request)->run()) {
@@ -757,7 +758,7 @@ class Admin extends BaseController
                 'gambar' => $newName,
                 'status' => $this->request->getPost('status'),
                 'slug' => url_title($this->request->getPost('judul'), '-', true),
-                'users_id' => $this->request->getPost('users_id')
+                'users_id' => user()->id,
             ]);
 
             $activityModel = new ActivitylogsModel();
@@ -785,7 +786,7 @@ class Admin extends BaseController
         $tags = $this->request->getPost('tags');
         $kategori = 'pengumuman';
         $status = 1;
-        $users_id = 1;
+        $users_id = user()->id;
 
         $validation = \Config\Services::validation();
         $validation->setRules([
@@ -896,17 +897,18 @@ class Admin extends BaseController
             $data[] = [
                 "no" => $no++,
                 "judul" => $item['judul'],
-                "isi" => $item['isi'],
+                // "isi" => $item['isi'],
+                "isi" => substr(strip_tags($item['isi']), 0, 250) . ' ...',
                 "gambar" => $gambar,
                 "status" => '<input type="checkbox" class="js-switch" data-id="' . $item['id'] . '" ' . ($item['status'] ? 'checked' : '') . '>',
                 "aksi" =>
                 '<div class="btn-group" role="group" aria-label="Aksi">
-                        <a href="' . base_url('admin/detail_pelatihan/' . $item['id']) . '" class="btn btn-info btn-sm">
+                        <a href="' . base_url('pelatihan/detail_pelatihan/' . $item['slug']) . '" class="btn btn-info btn-sm" title="Detail Pelatihan">
                             <i class="bi bi-eye"></i>
                         </a>
-                        <button class="btn btn-primary btn-sm btn-edit" data-edit_id="' . $item['id'] . '"  data-edit_judul="' . htmlspecialchars($item['judul']) . '" data-edit_isi="' . htmlspecialchars($item['isi']) . '" data-edit_tags="' . $item['tags'] . '" data-edit_gambar="' . $item['gambar'] . '" data-toggle="modal"  data-toggle="modal" data-target="#ubahPelatihanModal"> <i class="bi bi-pencil-square"></i>
+                        <button class="btn btn-primary btn-sm btn-edit" data-edit_id="' . $item['id'] . '"  data-edit_judul="' . htmlspecialchars($item['judul']) . '" data-edit_isi="' . htmlspecialchars($item['isi']) . '" data-edit_tags="' . $item['tags'] . '" data-edit_gambar="' . $item['gambar'] . '" data-toggle="modal"  data-toggle="modal" data-target="#ubahPelatihanModal" title="Ubah Pelatihan"> <i class="bi bi-pencil-square"></i>
                         </button>
-                        <button class="btn btn-danger btn-sm btn-delete" data-id="' . $item['id'] . '" data-judul="' . $item['judul'] . '">
+                        <button class="btn btn-danger btn-sm btn-delete" data-id="' . $item['id'] . '" data-judul="' . $item['judul'] . '" title="Hapus Pelatihan">
                             <i class="bi bi-trash"></i>
                         </button>
                     </div>'
@@ -962,7 +964,6 @@ class Admin extends BaseController
             'isi' => 'required',
             'tags' => 'required',
             'status' => 'required|in_list[0,1]',
-            'users_id' => 'required|integer'
         ]);
 
         if (!$validation->withRequest($this->request)->run()) {
@@ -986,7 +987,7 @@ class Admin extends BaseController
                 'gambar' => $newName,
                 'status' => $this->request->getPost('status'),
                 'slug' => url_title($this->request->getPost('judul'), '-', true),
-                'users_id' => $this->request->getPost('users_id')
+                'users_id' => user()->id,
             ];
             $categoryModel->save($data);
 
@@ -1017,7 +1018,7 @@ class Admin extends BaseController
         $tags = $this->request->getPost('tags');
         $kategori = 'pelatihan';
         $status = 1;
-        $users_id = 1;
+        $users_id = user()->id;
 
         $validation = \Config\Services::validation();
         $validation->setRules([
@@ -1128,7 +1129,7 @@ class Admin extends BaseController
                 "user" => $item['user'],
                 "ip_address" => $item['ip_address'],
                 "updated_at" => $item['updated_at'],
-                "aksi" => '<div class="btn-group" role="group" aria-label="Aksi">
+                "aksi" => '<div class="btn-group text-center" role="group" aria-label="Aksi">
                 <button class="btn btn-info btn-sm btn-detail-log" 
                        data-userid="' . $item['userid'] . '" 
                        data-ip_address="' . $item['ip_address'] . '" 
@@ -1142,7 +1143,7 @@ class Admin extends BaseController
                        data-nohp="' . $item['nohp'] . '" 
                        data-updated_at="' . $item['updated_at'] . '" 
                        data-toggle="modal" 
-                       data-target="#detailLogModal">
+                       data-target="#detailLogModal" title="Detail Log" >
                        <i class="bi bi-eye-fill"></i>
                    </button>
             </div>'
@@ -1196,9 +1197,9 @@ class Admin extends BaseController
                 "username" => $user->username,
                 "updated_at" => $user->updated_at,
                 "name" => $user->name,
-                "active" => '<input type="checkbox" class="js-switch" data-id="' . $user->userid . '" ' . ($user->active ? 'checked' : '') . '>',
+                "active" => '<div class="text-center"><input type="checkbox" class="js-switch" data-id="' . $user->userid . '" ' . ($user->active ? 'checked' : '') . '></div>',
                 "aksi" => '
-                <div class="btn-group" role="group" aria-label="Actions">
+                <div class="btn-group text-center" role="group" aria-label="Actions">
                     <button class="btn btn-info btn-sm btn-detail-user" 
                         data-id="' . $user->userid . '"  
                         data-email="' . htmlspecialchars($user->email) . '" 
@@ -1211,16 +1212,11 @@ class Admin extends BaseController
                         data-gambar="' . $gambar . '" 
                         data-toggle="modal" 
                         data-target="#detailUserModal"
-                        data-load-logs="true">
+                        data-load-logs="true" 
+                        title="Detail User">
                         <i class="bi bi-eye"></i>
                     </button>
-                    <button class="btn btn-warning btn-sm btn-edit"
-                        data-edit_id="' . $user->userid . '"
-                        data-toggle="modal"
-                        data-target="#ubahUserBaruModal">
-                        <i class="bi bi-pencil-square"></i>
-                    </button>
-                    <button class="btn btn-danger btn-sm btn-delete" data-id="' . $user->userid . '">
+                    <button class="btn btn-danger btn-sm btn-delete" data-id="' . $user->userid . '" title="Hapus User">
                         <i class="bi bi-trash"></i>
                     </button>
                 </div>'
@@ -1294,7 +1290,8 @@ class Admin extends BaseController
             'facebook',
             'x',
             'instagram',
-            'youtube'
+            'youtube',
+            'maps'
         ])->findAll();
 
         // Transform the settings into a key-value array
@@ -1357,6 +1354,7 @@ class Admin extends BaseController
             'company_name' => $this->request->getPost('company_name'),
             'company_email' => $this->request->getPost('company_email'),
             'company_whatsapp' => $this->request->getPost('company_whatsapp'),
+            'maps' => $this->request->getPost('maps'),
         ];
 
         foreach ($settingsData as $key => $value) {

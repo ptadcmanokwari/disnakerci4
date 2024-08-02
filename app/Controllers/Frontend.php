@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\FrontendModel;
 use App\Models\PencakerModel;
 use App\Models\PendidikanModel;
+use App\Models\SettingsModel;
 use App\Helpers\QrCodeHelper;
 
 class Frontend extends BaseController
@@ -136,97 +137,160 @@ class Frontend extends BaseController
         return $galleries;
     }
 
+    // public function berita(): string
+    // {
+    //     $informasiModel = new FrontendModel();
+
+    //     // Pagination configuration
+    //     $perPage = 3;
+    //     $currentPage = $this->request->getVar('page') ? (int)$this->request->getVar('page') : 1;
+
+    //     // Ambil data informasi berita
+    //     $kategori = 'Berita'; // Kategori yang ingin ditampilkan
+    //     $totalRows = $informasiModel->countInformasiByKategori($kategori);
+
+    //     // Pagination setup
+    //     $data['informasi'] = $informasiModel->getInformasiByKategori($kategori, $perPage, ($currentPage - 1) * $perPage);
+    //     $data['kategori'] = $informasiModel->getKategoriCount();
+
+    //     // Ambil berita terbaru berdasarkan kategori
+    //     $data['recentPosts'] = $informasiModel->getRecentPostsByKategori($kategori);
+
+    //     // Ambil daftar tags dari semua informasi
+    //     $tagsArray = [];
+    //     foreach ($data['informasi'] as $info) {
+    //         $tagsArray = array_merge($tagsArray, explode(',', $info['tags']));
+    //     }
+    //     $data['uniqueTags'] = array_unique($tagsArray);
+
+    //     $data['title'] = 'Pengumuman- Disnakertrans Manokwari';
+
+    //     // Set pager jika ada data
+    //     if (!empty($data['informasi'])) {
+    //         $data['pager'] = $informasiModel->pager;
+    //     }
+    //     return $this->loadView('frontend/beritama', $data);
+    // }
+
     public function berita(): string
     {
         $informasiModel = new FrontendModel();
 
-        // Pagination configuration
-        $perPage = 3;
+        $perPage = 6;
         $currentPage = $this->request->getVar('page') ? (int)$this->request->getVar('page') : 1;
 
-        // Ambil data informasi berita
-        $kategori = 'Berita'; // Kategori yang ingin ditampilkan
-        $totalRows = $informasiModel->countInformasiByKategori($kategori);
+        $kategori = 'berita'; // Kategori yang ingin ditampilkan
 
-        // Pagination setup
-        $data['informasi'] = $informasiModel->getInformasiByKategori($kategori, $perPage, ($currentPage - 1) * $perPage);
+        $data['informasi'] = $informasiModel->getInformasiByKategoriFront($kategori, $perPage, $currentPage);
         $data['kategori'] = $informasiModel->getKategoriCount();
 
-        // Ambil berita terbaru berdasarkan kategori
+        // Menggunakan metode yang telah diubah untuk mengambil nama user
         $data['recentPosts'] = $informasiModel->getRecentPostsByKategori($kategori);
 
-        // Ambil daftar tags dari semua informasi
         $tagsArray = [];
         foreach ($data['informasi'] as $info) {
             $tagsArray = array_merge($tagsArray, explode(',', $info['tags']));
         }
         $data['uniqueTags'] = array_unique($tagsArray);
 
-        $data['title'] = 'Pengumuman- Disnakertrans Manokwari';
+        $data['title'] = 'Pengumuman - Disnakertrans Manokwari';
+        $data['pager'] = $informasiModel->pager;
 
-        // Set pager jika ada data
-        if (!empty($data['informasi'])) {
-            $data['pager'] = $informasiModel->pager;
-        }
         return $this->loadView('frontend/beritama', $data);
+    }
+
+
+
+    public function detail_berita($slug): string
+    {
+        $informasiModel = new FrontendModel();
+
+        // Ambil data detail berita berdasarkan slug
+        $berita = $informasiModel->where('slug', $slug)->first();
+
+        if (!$berita) {
+            echo ('Berita tidak ditemukan');
+        }
+
+        $data['berita'] = $berita;
+        $data['title'] = $berita['judul'] . ' - Disnakertrans Manokwari';
+
+        // Ambil berita terbaru berdasarkan kategori yang sama
+        $kategori = 'berita'; // Asumsi kategori 'Berita'
+        $data['recentPosts'] = $informasiModel->getRecentPostsByKategori($kategori);
+
+        // Ambil daftar tags dari berita ini
+        $tagsArray = explode(',', $berita['tags']);
+        $data['uniqueTags'] = array_unique($tagsArray);
+
+        return $this->loadView('frontend/detail_berita', $data);
     }
 
     public function pengumuman(): string
     {
         $informasiModel = new FrontendModel();
 
-        // Pagination configuration
-        $perPage = 3;
+        $perPage = 6;
         $currentPage = $this->request->getVar('page') ? (int)$this->request->getVar('page') : 1;
 
-        // Ambil data informasi berita
-        $kategori = 'Pengumuman'; // Kategori yang ingin ditampilkan
-        $totalRows = $informasiModel->countInformasiByKategori($kategori);
+        $kategori = 'pengumuman'; // Kategori yang ingin ditampilkan
 
-        // Pagination setup
-        $data['informasi'] = $informasiModel->getInformasiByKategori($kategori, $perPage, ($currentPage - 1) * $perPage);
+        $data['informasi'] = $informasiModel->getInformasiByKategoriFront($kategori, $perPage, $currentPage);
         $data['kategori'] = $informasiModel->getKategoriCount();
 
-        // Ambil berita terbaru berdasarkan kategori
+        // Menggunakan metode yang telah diubah untuk mengambil nama user
         $data['recentPosts'] = $informasiModel->getRecentPostsByKategori($kategori);
 
-        // Ambil daftar tags dari semua informasi
         $tagsArray = [];
         foreach ($data['informasi'] as $info) {
             $tagsArray = array_merge($tagsArray, explode(',', $info['tags']));
         }
         $data['uniqueTags'] = array_unique($tagsArray);
 
-        $data['title'] = 'Pengumuman- Disnakertrans Manokwari';
+        $data['title'] = 'Pengumuman - Disnakertrans Manokwari';
+        $data['pager'] = $informasiModel->pager;
 
-        // Set pager jika ada data
-        if (!empty($data['informasi'])) {
-            $data['pager'] = $informasiModel->pager;
-        }
         return $this->loadView('frontend/pengumuman', $data);
+    }
+
+    public function detail_pengumuman($slug): string
+    {
+        $informasiModel = new FrontendModel();
+
+        $pengumuman = $informasiModel->where('slug', $slug)->first();
+
+        if (!$pengumuman) {
+            echo ('pengumuman tidak ditemukan');
+        }
+
+        $data['pengumuman'] = $pengumuman;
+        $data['title'] = $pengumuman['judul'] . ' - Disnakertrans Manokwari';
+
+        $kategori = 'pengumuman';
+        $data['recentPosts'] = $informasiModel->getRecentPostsByKategori($kategori);
+
+        // Ambil daftar tags dari pengumuman ini
+        $tagsArray = explode(',', $pengumuman['tags']);
+        $data['uniqueTags'] = array_unique($tagsArray);
+
+        return $this->loadView('frontend/detail_pengumuman', $data);
     }
 
     public function pelatihan(): string
     {
-
         $informasiModel = new FrontendModel();
 
-        // Pagination configuration
-        $perPage = 3;
+        $perPage = 6;
         $currentPage = $this->request->getVar('page') ? (int)$this->request->getVar('page') : 1;
 
-        // Ambil data informasi berita
-        $kategori = 'Pelatihan'; // Kategori yang ingin ditampilkan
-        $totalRows = $informasiModel->countInformasiByKategori($kategori);
+        $kategori = 'pelatihan'; // Kategori yang ingin ditampilkan
 
-        // Pagination setup
-        $data['informasi'] = $informasiModel->getInformasiByKategori($kategori, $perPage, ($currentPage - 1) * $perPage);
+        $data['informasi'] = $informasiModel->getInformasiByKategoriFront($kategori, $perPage, $currentPage);
         $data['kategori'] = $informasiModel->getKategoriCount();
 
-        // Ambil berita terbaru berdasarkan kategori
+        // Menggunakan metode yang telah diubah untuk mengambil nama user
         $data['recentPosts'] = $informasiModel->getRecentPostsByKategori($kategori);
 
-        // Ambil daftar tags dari semua informasi
         $tagsArray = [];
         foreach ($data['informasi'] as $info) {
             $tagsArray = array_merge($tagsArray, explode(',', $info['tags']));
@@ -234,13 +298,32 @@ class Frontend extends BaseController
         $data['uniqueTags'] = array_unique($tagsArray);
 
         $data['title'] = 'Pelatihan - Disnakertrans Manokwari';
-
-        // Set pager jika ada data
-        if (!empty($data['informasi'])) {
-            $data['pager'] = $informasiModel->pager;
-        }
+        $data['pager'] = $informasiModel->pager;
 
         return $this->loadView('frontend/pelatihan', $data);
+    }
+
+    public function detail_pelatihan($slug): string
+    {
+        $informasiModel = new FrontendModel();
+
+        $pelatihan = $informasiModel->where('slug', $slug)->first();
+
+        if (!$pelatihan) {
+            echo ('pelatihan tidak ditemukan');
+        }
+
+        $data['pelatihan'] = $pelatihan;
+        $data['title'] = $pelatihan['judul'] . ' - Disnakertrans Manokwari';
+
+        $kategori = 'pelatihan';
+        $data['recentPosts'] = $informasiModel->getRecentPostsByKategori($kategori);
+
+        // Ambil daftar tags dari pelatihan ini
+        $tagsArray = explode(',', $pelatihan['tags']);
+        $data['uniqueTags'] = array_unique($tagsArray);
+
+        return $this->loadView('frontend/detail_pelatihan', $data);
     }
 
     public function kartu_ak1(): string
@@ -257,7 +340,24 @@ class Frontend extends BaseController
 
     public function kontak(): string
     {
+        $settingsModel = new SettingsModel();
+        $webSettings = $settingsModel->whereIn('key', [
+            'company_phone1',
+            'company_phone2',
+            'company_address',
+            'company_email',
+            'company_whatsapp',
+            'maps'
+        ])->findAll();
+
+        // Transform the settings into a key-value array
+        $settings = [];
+        foreach ($webSettings as $setting) {
+            $settings[$setting['key']] = $setting['value'];
+        }
+
         $data['title'] = 'Kontak - Disnakertrans Manokwari';
+        $data['settings'] = $settings;
         return $this->loadView('frontend/kontak', $data);
     }
 

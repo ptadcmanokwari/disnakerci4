@@ -38,7 +38,6 @@
 
     <!-- Template Main CSS File -->
     <link href="<?= base_url(); ?>frontend/assets/css/style.css" rel="stylesheet">
-    <link href="<?= base_url(); ?>frontend/assets/css/custom-informasi-frontend.css" rel="stylesheet">
 
     <script src="<?= base_url('frontend/jquery/jquery.min.js') ?>"></script>
     <!-- =======================================================
@@ -80,7 +79,7 @@
                     <li><a <?= ($current_uris['segment_1'] == 'profil') ? 'class="active"' : '' ?> href="<?= base_url('profil'); ?>">Profil</a></li>
 
                     <li class="dropdown">
-                        <a <?= in_array($current_uris['segment_1'], ['urusan_transmigrasi', 'urusan_tenaga_kerja']) ? 'class="active"' : '' ?> href="#"><span>Urusan-Urusan</span> <i class="bi bi-chevron-down"></i></a>
+                        <a <?= in_array($current_uris['segment_1'], ['urusan_transmigrasi', 'urusan_tenaga_kerja']) ? 'class="active"' : '' ?> href="#"><span>Unit Kerja</span> <i class="bi bi-chevron-down"></i></a>
                         <ul>
                             <li><a <?= ($current_uris['segment_1'] == 'urusan_transmigrasi') ? 'class="active"' : '' ?> href="<?= base_url('urusan_transmigrasi'); ?>">Urusan Transmigrasi</a></li>
                             <li><a <?= ($current_uris['segment_1'] == 'urusan_tenaga_kerja') ? 'class="active"' : '' ?> href="<?= base_url('urusan_tenaga_kerja'); ?>">Urusan Tenaga Kerja</a></li>

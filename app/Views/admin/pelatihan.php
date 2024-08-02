@@ -361,8 +361,8 @@
                                 cropper.setCanvasData({
                                     left: 0,
                                     top: 0,
-                                    width: image.width,
-                                    height: image.height
+                                    width: 100,
+                                    height: 'auto'
                                 });
                             }
                         });
@@ -546,8 +546,8 @@
                                 cropper.setCanvasData({
                                     left: 0,
                                     top: 0,
-                                    width: image.width,
-                                    height: image.height
+                                    width: 100,
+                                    height: 'auto'
                                 });
                             }
                         });

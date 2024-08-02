@@ -168,7 +168,8 @@
                     "data": "judul"
                 },
                 {
-                    "data": "status"
+                    "data": "status",
+                    "className": "text-center"
                 },
                 {
                     "data": "aksi"
@@ -304,7 +305,7 @@
                         cropperContainer.style.display = 'block';
 
                         cropper = new Cropper(image, {
-                            aspectRatio: 16 / 9,
+                            aspectRatio: 2 / 1,
                             viewMode: 1,
                             responsive: true,
                             scalable: false,
@@ -317,8 +318,8 @@
                                 cropper.setCanvasData({
                                     left: 0,
                                     top: 0,
-                                    width: image.width,
-                                    height: image.height
+                                    width: 100,
+                                    height: 'auto'
                                 });
                             }
                         });

@@ -582,11 +582,8 @@ class Pencaker extends Controller
     public function save_data_perusahaan_tujuan()
     {
         $perusahaanModel = new PerusahaanModel();
-        $pencakerModel = new PencakerModel(); // Tambahkan model PencakerModel
-
-        // $id = $this->request->getPost('id');  // Ambil id perusahaan jika ada
+        $pencakerModel = new PencakerModel();
         $pencaker_id = $this->request->getPost('pencaker_id');
-        // $user_id = $this->request->getPost('user_id'); // Dapatkan user_id dari form
 
         $dataPerusahaan = [
             'nama_perusahaan' => $this->request->getPost('nama_perusahaan'),

@@ -17,11 +17,15 @@ $routes->get('profil', 'Frontend::profil');
 $routes->get('urusan_transmigrasi', 'Frontend::transmigrasi');
 $routes->get('urusan_tenaga_kerja', 'Frontend::tenaga_kerja');
 $routes->get('berita', 'Frontend::berita');
+$routes->get('berita/detail_berita/(:segment)', 'Frontend::detail_berita/$1');
+
 $routes->get('pengumuman', 'Frontend::pengumuman');
+$routes->get('pengumuman/detail_pengumuman/(:segment)', 'Frontend::detail_pengumuman/$1');
 $routes->get('pelatihan', 'Frontend::pelatihan');
+$routes->get('pelatihan/detail_pelatihan/(:segment)', 'Frontend::detail_pelatihan/$1');
 $routes->get('kartu_ak1', 'Frontend::kartu_ak1');
 $routes->get('kontak', 'Frontend::kontak');
-
+$routes->get('/', 'Settings::index');
 
 /**
  * --------------------------------------------------------------------------

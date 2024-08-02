@@ -406,12 +406,12 @@ h6 {
   background: rgba(4, 4, 4, 0.7);
   padding: 20px;
   color: #fff;
-  border-top: 5px solid #116db6;
+  border-radius: 10px;
 }
 
 #hero .carousel-content h2 {
   color: #fff;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   font-size: 28px;
   font-weight: 700;
 }
@@ -642,9 +642,11 @@ section {
 --------------------------------------------------------------*/
 .services .icon-box {
   text-align: center;
-  padding: 70px 20px 80px 20px;
+  /* padding: 70px 20px 80px 20px; */
+  padding: 15px;
   transition: all ease-in-out 0.3s;
   background: #fff;
+  border-radius: 15px;
 }
 
 .services .icon-box .icon {
@@ -1577,7 +1579,8 @@ section {
 
 .blog .entry .entry-img {
   max-height: 440px;
-  margin: -30px -30px 20px -30px;
+  /* margin: -30px -30px 20px -30px; */
+  margin: 15px 0;
   overflow: hidden;
 }
 
@@ -1911,14 +1914,21 @@ section {
   justify-content: center;
 }
 
-.blog .blog-pagination li.active,
-.blog .blog-pagination li:hover {
+.blog .blog-pagination li.active {
   background: #116db6;
+  border-radius: 5px;
 }
 
-.blog .blog-pagination li.active a,
-.blog .blog-pagination li:hover a {
+.blog .blog-pagination li:hover {
+  color: #116db6 !important;
+}
+
+.blog .blog-pagination li.active a {
   color: #fff;
+}
+
+.blog .blog-pagination li:hover a {
+  color: #116db6;
 }
 
 .blog .sidebar {

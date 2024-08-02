@@ -88,6 +88,12 @@
                                                             <input type="text" class="form-control" name="company_whatsapp" id="company_whatsapp" value="<?= isset($settings['company_whatsapp']) ? esc($settings['company_whatsapp']) : '' ?>">
                                                         </div>
                                                     </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <label for="maps">Maps</label>
+                                                            <input type="text" class="form-control" name="maps" id="maps" value="<?= isset($settings['maps']) ? esc($settings['maps']) : '' ?>">
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="card-footer">

@@ -100,8 +100,6 @@
                         <label for="tags">Tags Berita</label>
                         <input type="text" class="form-control" name="tags" id="tags" required>
                     </div>
-                    <input type="hidden" class="form-control" name="status" id="status" value="1">
-                    <input type="hidden" class="form-control" name="users_id" id="users-id" value="1">
 
                     <div class="mb-3">
                         <span>Gambar Berita</span>
@@ -360,8 +358,8 @@
                                 cropper.setCanvasData({
                                     left: 0,
                                     top: 0,
-                                    width: image.width,
-                                    height: image.height
+                                    width: 100,
+                                    height: 'auto'
                                 });
                             }
                         });
@@ -400,8 +398,6 @@
                     formData.append("judul", document.querySelector("#judul").value);
                     formData.append("isi", document.querySelector("#isi").value);
                     formData.append("tags", document.querySelector("#tags").value);
-                    formData.append("status", document.querySelector("#status").value);
-                    formData.append("users_id", document.querySelector("#users-id").value);
                 });
 
                 this.on("success", function(file, response) {
@@ -545,8 +541,8 @@
                                 cropper.setCanvasData({
                                     left: 0,
                                     top: 0,
-                                    width: image.width,
-                                    height: image.height
+                                    width: 100,
+                                    height: 'auto'
                                 });
                             }
                         });

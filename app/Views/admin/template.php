@@ -119,6 +119,18 @@
         .dropzone {
             color: #000 !important;
         }
+
+        /* span.cropper-view-box img {
+            width: 100% !important;
+            height: auto !important;
+            transform: none;
+        }
+
+        .cropper-canvas,
+        .cropper-canvas img.cropper-hide {
+            width: 100% !important;
+            height: auto !important;
+        } */
     </style>
 </head>
 

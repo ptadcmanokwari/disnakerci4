@@ -19,7 +19,7 @@ class User extends Controller
 
         // Mengambil data users dari model
         $users = $usersModel->findAll();
-        $totalFilteredRecords = $usersModel->countAll();
+        // $totalFilteredRecords = $usersModel->countAll();
 
         $data = [];
         $no = 1;
@@ -49,7 +49,7 @@ class User extends Controller
                 "name" => $user['name'],
                 "email" => $user['email'],
                 "role" => $user['role'],
-                "last_login" => $user['updated_at'], // Di sini saya mengasumsikan 'updated_at' adalah waktu login terakhir
+                "last_login" => $user['updated_at'],
                 "status" => '<input type="checkbox" class="js-switch" data-id="' . $user['id'] . '" ' . ($user['status'] ? 'checked' : '') . '>',
                 "aksi" =>
                 '<div class="btn-group" role="group" aria-label="Actions">
