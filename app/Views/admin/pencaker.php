@@ -133,7 +133,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <input type="hidden" name="usersid">
+                    <input type="text" id="usersid" name="usersid">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                     <button type="button" id="saveVerifikasi" class="btn btn-primary">Simpan</button>
                 </div>
@@ -295,7 +295,7 @@
             console.log("Nomor Pendaftaran:", nopendaftaran);
 
             // Contoh: Isi modal dengan data yang diambil
-            $('#VerValModal').find('#id').val(id);
+            $('#VerValModal').find('#usersid').val(id);
             $('#VerValModal').find('#namalengkap').val(namalengkap);
             $('#VerValModal').find('#nopendaftaran').val(nopendaftaran);
 
@@ -310,6 +310,34 @@
             } else {
                 $('#pesanVerifikasi').addClass('hide').hide();
             }
+        });
+
+
+        $('#saveVerifikasi').click(function() {
+            var formData = {
+                id: $('#VerValModal #usersid').val(),
+                statusverifikasi: $('#VerValModal #statusverifikasi').val(),
+                jenis_dokumen: $('input[name="jenis_dokumen[]"]:checked').map(function() {
+                    return this.value;
+                }).get(),
+                pesan: $('#VerValModal #pesan').val(),
+                usersid: $('#VerValModal input[name="usersid"]').val()
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: '<?= base_url('admin_v2/saveVerifikasi') ?>',
+                data: formData,
+                success: function(response) {
+                    // Lakukan sesuatu setelah data berhasil disimpan, seperti menutup modal atau me-refresh halaman
+                    $('#VerValModal').modal('hide');
+                    location.reload();
+                },
+                error: function(xhr, status, error) {
+                    // Tangani error jika ada
+                    console.log(error);
+                }
+            });
         });
     });
 </script>

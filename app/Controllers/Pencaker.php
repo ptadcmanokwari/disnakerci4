@@ -16,6 +16,8 @@ use App\Models\JabatanModel;
 use App\Models\PerusahaanModel;
 use App\Models\SettingsModel;
 use App\Models\ActivitylogsModel;
+use App\Models\VerifikasiModel;
+use App\Models\TimelineuserModel;
 
 use Endroid\QrCode\QrCode;
 use Endroid\QrCode\Writer\PngWriter;
@@ -27,7 +29,6 @@ class Pencaker extends Controller
         helper('whatsapp');
         // $this->settingsModel = new SettingsModel();
     }
-
 
     public function index()
     {
@@ -50,9 +51,12 @@ class Pencaker extends Controller
         $isDataComplete = $pencakerModel->isDataComplete($userId);
         $isDocumentComplete = $dokumenPencaker->isDocumentComplete($userId);
 
+        // Ambil data verifikasi berdasarkan user ID
+        $verifikasiModel = new VerifikasiModel();
+        $verifikasiData = $verifikasiModel->where('users_id', $userId)->first();
+
         // $timelines = $pencakerModel->get_timeline();
         $timelines = $pencakerModel->get_timeline($userId);
-
 
         $data = [
             'title' => 'Dashboard Pencaker',
@@ -61,7 +65,8 @@ class Pencaker extends Controller
             'isDocumentComplete' => $isDocumentComplete,
             'isDataComplete' => $isDataComplete,
             'logs' => $logs,
-            'timelines' => $timelines
+            'timelines' => $timelines,
+            'verifikasiData' => $verifikasiData // Tambahkan data verifikasi ke array data
         ];
 
         return $this->loadView('pencaker/dashboard', $data);
@@ -102,6 +107,7 @@ class Pencaker extends Controller
         $user = $usersModel->find($userId);
         $pencakerModel = new PencakerModel();
 
+        $status = $pencakerModel->getStatusByUserId($user['id']);
         $id_pencaker = $pencakerModel->get_pencaker_id_by_user_id($user['id']);
 
         // Dapatkan nomor pendaftaran yang di-generate oleh sistem
@@ -112,6 +118,7 @@ class Pencaker extends Controller
             'jenjang' => $jenjang,
             'user' => $user,
             'nopendaftaran' => $nopendaftaran,
+            'status' => $status,
             'bahasa' => $bahasa,
             'id_pencaker' => $id_pencaker
         ];
@@ -122,6 +129,7 @@ class Pencaker extends Controller
     public function save_data_tujuan()
     {
         $pencakerModel = new PencakerModel();
+        $timelineModel = new TimelineuserModel();
 
         $userId = $this->request->getPost('id_pencaker');
 
@@ -140,6 +148,15 @@ class Pencaker extends Controller
             // Insert a new record
             $pencakerModel->insert($data);
         }
+
+        $timelineData = [
+            'timeline_id' => 2,
+            'description' => 'Tahap ini anda harus mengisi/melengkapi formulir AK-1 pada menu Profil Pencari Kerja',
+            'tglwaktu' => date('Y-m-d H:i:s'),
+            'users_id' => $userId
+        ];
+
+        $timelineModel->insert($timelineData);
 
         return $this->response->setStatusCode(200)->setBody('Data berhasil disimpan');
     }
@@ -644,6 +661,7 @@ class Pencaker extends Controller
     public function save_catatan_pengantar()
     {
         $pencakerModel = new PencakerModel();
+        $timelineModel = new TimelineuserModel(); // Pastikan Anda sudah membuat model ini
 
         $userId = $this->request->getPost('id_pencaker');
         $catatanPengantar = $this->request->getPost('catatan_pengantar');
@@ -673,18 +691,22 @@ class Pencaker extends Controller
             $pencakerModel->insert($data);
         }
 
+        // Tambahkan entri di tabel timeline_user
+        $timelineData = [
+            'timeline_id' => 3,
+            'description' => 'Tahap ini anda harus mengunggah berkas/dokumen sebagai syarat kelengkapan pengajuan pembuatan Kartu Pencari Kerja',
+            'tglwaktu' => date('Y-m-d H:i:s'), // Waktu saat data diubah
+            'users_id' => $userId
+        ];
+
+        $timelineModel->insert($timelineData);
+
         return $this->response->setJSON([
             'status' => 'success',
-            'message' => 'Catatan pengantar berhasil disimpan.',
+            'message' => 'Catatan pengantar berhasil disimpan dan timeline diperbarui.',
         ]);
     }
 
-    public function get_catatan_pengantar_by_id($id)
-    {
-        $pencakerModel = new PencakerModel();
-        $data = $pencakerModel->where('user_id', $id)->first();
-        return $this->response->setJSON($data);
-    }
 
     public function save_bahasa()
     {
@@ -747,12 +769,16 @@ class Pencaker extends Controller
         $userId = user()->id;
         $user = $usersModel->find($userId);
 
+        $pencakerModel = new PencakerModel();
+        $id_pencaker = $pencakerModel->getStatusByUserId($user['id']);
+
         $dokumenModel = new DokumenModel();
         $jenis_dokumen = $dokumenModel->findAll();
         $data = [
             'title' => 'Review Data dan Dokumen Pencari Kerja',
             'jenis_dok' => $jenis_dokumen,
             'user' => $user,
+            'id_pencaker' => $id_pencaker,
         ];
 
         return $this->loadView('pencaker/dokumen_pencaker', $data);
@@ -763,17 +789,23 @@ class Pencaker extends Controller
     {
         $dokumenModel = new DokumenModel();
         $dokumenPencakerModel = new DokumenPencakerModel();
+        $pencakerModel = new PencakerModel();
 
+        $userId = user()->id;
         $dokumen = $dokumenModel->findAll();
+        $id_pencaker = $pencakerModel->getStatusByUserId($userId);
+        $isVerifikasi = ($id_pencaker['keterangan_status'] == 'Verifikasi' || $id_pencaker['keterangan_status'] == 'Validasi' || $id_pencaker['keterangan_status'] = 'Aktif');
 
         $data = [];
         $no = 1;
 
         foreach ($dokumen as $dok) {
-
             $pencakerDokumen = $dokumenPencakerModel->where('dokumen_id', $dok['id'])
-                ->where('pencaker_id', user()->id)
+                ->where('pencaker_id', $userId)
                 ->first();
+
+            $disableClass = $isVerifikasi ? ' disabled' : '';
+            $disableAttr = $isVerifikasi ? 'disabled' : '';
 
             if ($pencakerDokumen) {
                 // Dapatkan NIK dari pengguna yang sedang login
@@ -787,13 +819,13 @@ class Pencaker extends Controller
                     "nama" => $pencakerDokumen['namadokumen'],
                     "tgl" => $pencakerDokumen['tgl_upload'],
                     "aksi" => '<div class="btn-group" role="group" aria-label="Actions">
-                           <a href="' . $fileUrl . '" target="_blank" class="btn btn-info btn-sm" title="Detail Dokumen">
-                               <i class="bi bi-search"></i>
-                           </a>
-                           <button class="btn btn-danger btn-sm deleteDokumen" data-id="' . $pencakerDokumen['id'] . '" title="Hapus Dokumen">
-                               <i class="bi bi-trash"></i>
-                           </button>
-                       </div>'
+                       <a href="' . $fileUrl . '" target="_blank" class="btn btn-info btn-sm' . $disableClass . '" title="Detail Dokumen" ' . $disableAttr . '>
+                           <i class="bi bi-search"></i>
+                       </a>
+                       <button class="btn btn-danger btn-sm deleteDokumen' . $disableClass . '" data-id="' . $pencakerDokumen['id'] . '" title="Hapus Dokumen" ' . $disableAttr . '>
+                           <i class="bi bi-trash"></i>
+                       </button>
+                   </div>'
                 ];
             } else {
                 $data[] = [
@@ -802,10 +834,10 @@ class Pencaker extends Controller
                     "nama" => '-',
                     "tgl" => '-',
                     "aksi" => '<div class="btn-group" role="group" aria-label="Actions">
-                           <a data-id="' . $dok['id'] . '"  data-jenis="' . $dok['jenis_dokumen'] . '"  data-toggle="modal" data-target="#uploadDokumenModal" class="btn btn-success btn-sm uplodDokumenBTN" title="Upload Dokumen">
-                               <i class="bi bi-upload"></i>
-                           </a>
-                       </div>'
+                       <a data-id="' . $dok['id'] . '" data-jenis="' . $dok['jenis_dokumen'] . '" data-toggle="modal" data-target="#uploadDokumenModal" class="btn btn-success btn-sm uplodDokumenBTN' . $disableClass . '" title="Upload Dokumen" ' . $disableAttr . '>
+                           <i class="bi bi-upload"></i>
+                       </a>
+                   </div>'
                 ];
             }
         }
@@ -928,9 +960,81 @@ class Pencaker extends Controller
         return $this->loadView('pencaker/myprofile', $data);
     }
 
+    // public function minta_verifikasi()
+    // {
+    //     $pencakerModel = new PencakerModel();
+    //     $usersModel = new UsersModel();
+    //     $userId = $this->request->getPost('id_pencaker');
+
+    //     if (!$userId) {
+    //         return $this->response->setStatusCode(400)->setJSON(['status' => 'error', 'message' => 'User ID tidak ditemukan.']);
+    //     }
+
+    //     $data = [
+    //         'keterangan_status' => $this->request->getPost('keterangan_status'),
+    //     ];
+
+    //     try {
+    //         // Update status di database
+    //         $existingPencaker = $pencakerModel->where('user_id', $userId)->first();
+
+    //         if ($existingPencaker) {
+    //             $pencakerModel->update($existingPencaker['id'], $data);
+    //         } else {
+    //             $data['user_id'] = $userId;
+    //             $pencakerModel->insert($data);
+    //         }
+
+    //         // Ambil data nomor telepon dan nama lengkap dari tabel users
+    //         $user = $usersModel->find($userId);
+    //         if (!$user) {
+    //             return $this->response->setStatusCode(400)->setJSON(['status' => 'error', 'message' => 'Data pengguna tidak ditemukan.']);
+    //         }
+
+    //         $phoneNumber = $user['nohp'];
+    //         $namaLengkap = $user['namalengkap'];
+
+    //         // Format pesan yang akan dikirim
+    //         $message = "*Notifikasi disnakertransmkw.com*" . PHP_EOL . PHP_EOL .
+    //             "Hi, *" . $namaLengkap . "*," . PHP_EOL .
+    //             "Data dan dokumen Anda telah berhasil dikirim untuk diverifikasi." .
+    //             "Selanjutnya, silakan menunggu notifikasi validasi dari Sistem Disnakertrans Manokwari." . PHP_EOL . PHP_EOL .
+    //             "*<noreply>*";
+
+    //         $settingsModel = new SettingsModel();
+
+    //         // Ambil userkey dan passkey dari settings
+    //         $userKey = $settingsModel->getValueByKey('whatsapp_userkey');
+    //         $passKey = $settingsModel->getValueByKey('whatsapp_passkey');
+    //         $admin = $settingsModel->getValueByKey('whatsapp_admin');
+
+    //         // Kirim pesan WhatsApp menggunakan API Zenziva
+    //         log_message('debug', 'Sending WhatsApp message with data: ' . json_encode([
+    //             'userkey' => $userKey,
+    //             'passkey' => $passKey,
+    //             'to' => $phoneNumber,
+    //             'message' => $message,
+    //             'admin' => $admin
+    //         ]));
+
+    //         $response = $this->sendWhatsAppMessage($phoneNumber, $message, $userKey, $passKey, $admin);
+
+    //         if ($response && isset($response['status']) && $response['status'] == 'success') {
+    //             return $this->response->setJSON(['status' => 'success', 'message' => 'Data berhasil disimpan dan notifikasi dikirim']);
+    //         } else {
+    //             log_message('error', 'Gagal mengirim notifikasi: ' . json_encode($response));
+    //             return $this->response->setStatusCode(500)->setJSON(['status' => 'error', 'message' => 'Data berhasil disimpan tapi notifikasi gagal dikirim']);
+    //         }
+    //     } catch (\Exception $e) {
+    //         log_message('error', 'Kesalahan saat menyimpan data atau mengirim notifikasi: ' . $e->getMessage());
+    //         return $this->response->setStatusCode(500)->setJSON(['status' => 'error', 'message' => 'Terjadi kesalahan saat menyimpan data atau mengirim notifikasi.']);
+    //     }
+    // }
+
     public function minta_verifikasi()
     {
         $pencakerModel = new PencakerModel();
+        $timelineModel = new TimelineuserModel(); // Buat model untuk tabel timeline_user
         $usersModel = new UsersModel();
         $userId = $this->request->getPost('id_pencaker');
 
@@ -943,7 +1047,7 @@ class Pencaker extends Controller
         ];
 
         try {
-            // Update status di database
+            // Update status di tabel pencaker
             $existingPencaker = $pencakerModel->where('user_id', $userId)->first();
 
             if ($existingPencaker) {
@@ -953,7 +1057,7 @@ class Pencaker extends Controller
                 $pencakerModel->insert($data);
             }
 
-            // Ambil data nomor telepon dan nama lengkap dari tabel users
+            // Ambil data pengguna
             $user = $usersModel->find($userId);
             if (!$user) {
                 return $this->response->setStatusCode(400)->setJSON(['status' => 'error', 'message' => 'Data pengguna tidak ditemukan.']);
@@ -961,6 +1065,16 @@ class Pencaker extends Controller
 
             $phoneNumber = $user['nohp'];
             $namaLengkap = $user['namalengkap'];
+
+            // Tambahkan entri di tabel timeline_user
+            $timelineData = [
+                'timeline_id' => 4,
+                'description' => 'Tahap ini anda menunggu proses verifikasi data oleh tim Disnakertrans Kab. Manokwari',
+                'tglwaktu' => date('Y-m-d H:i:s'), // Waktu saat data diubah
+                'users_id' => $userId
+            ];
+
+            $timelineModel->insert($timelineData);
 
             // Format pesan yang akan dikirim
             $message = "*Notifikasi disnakertransmkw.com*" . PHP_EOL . PHP_EOL .
@@ -1027,6 +1141,15 @@ class Pencaker extends Controller
         }
 
         $response = json_decode($result, true);
+
+        // Debug log for API response
+        log_message('debug', 'WhatsApp API response: ' . json_encode($response));
+
+        // Check if the response contains an error
+        if (isset($response['status']) && $response['status'] !== 'success') {
+            log_message('error', 'WhatsApp API returned error: ' . json_encode($response));
+            return ['status' => 'error', 'message' => 'Failed to send message'];
+        }
 
         return $response;
     }

@@ -26,6 +26,10 @@
                     <article class="entry p-2 card">
                         <div class="entry-img mt-0">
                             <img src="<?= base_url('uploads/pelatihan/' . $item['gambar']) ?>" alt="<?= $item['judul'] ?>" class="img-fluid">
+                            <a href="<?= base_url('pelatihan/detail_pelatihan/' . $item['slug']) ?>" class="overlay text-info">
+                                <i class="bi bi-eye"></i>
+                                <span>Baca Selengkapnya</span>
+                            </a>
                         </div>
                         <h2 class="entry-title">
                             <a href="<?= base_url('pelatihan/detail_pelatihan/' . $item['slug']) ?>"><?= substr(strip_tags($item['judul']), 0, 40) ?> ...</a>

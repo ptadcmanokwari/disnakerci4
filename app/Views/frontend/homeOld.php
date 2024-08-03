@@ -421,7 +421,7 @@
         <div class="faq-list">
             <ul>
                 <li data-aos="fade-up">
-                    <a data-bs-toggle="collapse" class="collapse px-0" data-bs-target="#faq-list-1">Bagaimana caranya membuat kartu pencari kerja (Kartu Ak/1)? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                    <a data-bs-toggle="collapse" class="collapse px-0" data-bs-target="#faq-list-1">Bagaimana caranya membuat kartu pencari kerja (Kartu Ak/1)? <i class="bi bi-plus icon-show"></i><i class="bi bi-dash icon-close"></i></a>
                     <div id="faq-list-1" class="collapse show" data-bs-parent=".faq-list">
                         <p>
                             Pada website disnakertransmkw.com, pilih menu Layanan - Kartu Pencari Kerja (Kartu Ak/1), kemudian membuat akun dan menyiapkan berkas berupa file Ijazah terakhir, KTP, Riwayat Hidup, SKCK, Surat Keterangan Kesehatan.
@@ -430,7 +430,7 @@
                 </li>
 
                 <li data-aos="fade-up" data-aos-delay="100">
-                    <a data-bs-toggle="collapse" data-bs-target="#faq-list-2" class="collapsed px-0">Bagaimana cara memperoleh informasi terkait lowongan pekerjaan di wilayah Kab. Manokwari? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                    <a data-bs-toggle="collapse" data-bs-target="#faq-list-2" class="collapsed px-0">Bagaimana cara memperoleh informasi terkait lowongan pekerjaan di wilayah Kab. Manokwari? <i class="bi bi-plus icon-show"></i><i class="bi bi-dash icon-close"></i></a>
                     <div id="faq-list-2" class="collapse" data-bs-parent=".faq-list">
                         <p>
                             Cari sendiri lah
@@ -439,7 +439,7 @@
                 </li>
 
                 <li data-aos="fade-up" data-aos-delay="200">
-                    <a data-bs-toggle="collapse" data-bs-target="#faq-list-3" class="collapsed px-0">Apakah setelah mendapatkan pekerjaan, harus melapor ke Disnakertrans? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                    <a data-bs-toggle="collapse" data-bs-target="#faq-list-3" class="collapsed px-0">Apakah setelah mendapatkan pekerjaan, harus melapor ke Disnakertrans? <i class="bi bi-plus icon-show"></i><i class="bi bi-dash icon-close"></i></a>
                     <div id="faq-list-3" class="collapse" data-bs-parent=".faq-list">
                         <p>
                             Mmbetullll sekali.
@@ -448,7 +448,7 @@
                 </li>
 
                 <li data-aos="fade-up" data-aos-delay="300">
-                    <a data-bs-toggle="collapse" data-bs-target="#faq-list-4" class="collapsed px-0">Apakah ada program pelatihan/magang yang diselenggarakan Disnakertrans? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                    <a data-bs-toggle="collapse" data-bs-target="#faq-list-4" class="collapsed px-0">Apakah ada program pelatihan/magang yang diselenggarakan Disnakertrans? <i class="bi bi-plus icon-show"></i><i class="bi bi-dash icon-close"></i></a>
                     <div id="faq-list-4" class="collapse" data-bs-parent=".faq-list">
                         <p>
                             Kayaknya tidak ada deh.

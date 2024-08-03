@@ -60,6 +60,39 @@
         #header a.btn.btn-primary.mx-4.p-2.text-white:hover {
             color: #fff !important;
         }
+
+        #blog .entry-img {
+            position: relative;
+        }
+
+        #blog .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        #blog .entry-img:hover .overlay {
+            opacity: 1;
+        }
+
+        #blog .overlay i {
+            font-size: 2rem;
+        }
+
+        #blog .overlay span {
+            margin-top: 0.5rem;
+            font-size: 1.2rem;
+        }
     </style>
 </head>
 

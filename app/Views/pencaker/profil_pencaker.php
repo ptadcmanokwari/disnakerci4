@@ -55,6 +55,13 @@
                     <h3 class="card-title">Informasi Profil Pencari Kerja</h3>
                 </div>
                 <div class="card-body">
+                    <?php if ($status['keterangan_status'] == 'Verifikasi') : ?>
+                        <div class="row">
+                            <div class="alert alert-warning" role="alert">
+                                Data Anda saat ini sedang diverifikasi, Anda tidak dapat mengubah data kembali!
+                            </div>
+                        </div>
+                    <?php endif; ?>
                     <div class="row">
                         <div class="col-lg-3 col-5 col-sm-3">
                             <div class="nav flex-column nav-tabs h-100" id="vert-tabs-tab" role="tablist" aria-orientation="vertical">
@@ -104,7 +111,7 @@
                                                 </div>
                                             </div>
                                             <div class="card-footer">
-                                                <button type="button" id="btnSave1" class="btn btn-flat btn-primary">Selanjutnya</button>
+                                                <button type="button" id="btnSave1" class="btn btn-flat btn-primary" <?php if ($status['keterangan_status'] == 'Verifikasi') : ?>disabled <?php endif; ?>>Selanjutnya</button>
                                             </div>
                                         </form>
                                     </div>
@@ -252,7 +259,7 @@
                                             </div>
                                             <div class="card-footer">
                                                 <button type="button" id="btnback1" class="btn btn-flat btn-secondary">Sebelumnya</button>
-                                                <button type="button" id="btnSave2" class="btn btn-flat btn-primary">Selanjutnya</button>
+                                                <button type="button" id="btnSave2" class="btn btn-flat btn-primary" <?php if ($status['keterangan_status'] == 'Verifikasi') : ?>disabled <?php endif; ?>>Selanjutnya</button>
                                             </div>
                                         </form>
                                     </div>
@@ -318,8 +325,8 @@
 
                                                                 <div class="col-12 col-sm-12 col-md-12 col-lg-12 ">
                                                                     <div class="ml-auto">
-                                                                        <button type="button" id="btnSavePendidikan" class="btn btn-primary btn-sm"><i class="fas fa-save"></i> Simpan</button>
-                                                                        <button type="button" id="btnUpdatePendidikan" class="btn btn-primary btn-sm hide"><i class="fas fa-edit"></i> Perbarui</button>
+                                                                        <button type="button" id="btnSavePendidikan" class="btn btn-primary btn-sm" <?php if ($status['keterangan_status'] == 'Verifikasi') : ?>disabled <?php endif; ?>><i class="fas fa-save"></i> Simpan</button>
+                                                                        <button type="button" id="btnUpdatePendidikan" class="btn btn-primary btn-sm hide" <?php if ($status['keterangan_status'] == 'Verifikasi') : ?>disabled <?php endif; ?>><i class="fas fa-edit"></i> Perbarui</button>
                                                                         <input type="hidden" name="idpendidikan">
                                                                     </div>
                                                                 </div>
@@ -352,7 +359,7 @@
                                         </div>
                                         <div class="card-footer">
                                             <button type="button" id="btnback2" class="btn btn-flat btn-secondary">Sebelumnya</button>
-                                            <button type="button" id="btnSave3" class="btn btn-flat btn-primary">Selanjutnya</button>
+                                            <button type="button" id="btnSave3" class="btn btn-flat btn-primary" <?php if ($status['keterangan_status'] == 'Verifikasi') : ?>disabled <?php endif; ?>>Selanjutnya</button>
                                         </div>
                                     </div>
                                 </div>
@@ -401,7 +408,7 @@
 
                                         <div class="card-footer">
                                             <button type="button" id="btnback3" class="btn btn-flat btn-secondary">Sebelumnya</button>
-                                            <button type="button" id="btnSave4" class="btn btn-flat btn-primary">Selanjutnya</button>
+                                            <button type="button" id="btnSave4" class="btn btn-flat btn-primary" <?php if ($status['keterangan_status'] == 'Verifikasi') : ?>disabled <?php endif; ?>>Selanjutnya</button>
                                         </div>
 
                                     </div>
@@ -463,8 +470,8 @@
                                                             </div>
                                                             <div class="col-12 col-sm-12 col-md-12 col-lg-12 ">
                                                                 <div class="ml-auto">
-                                                                    <button type="button" id="btnSavePekerjaan" class="btn btn-primary btn-sm"><i class="fas fa-save"></i> Simpan</button>
-                                                                    <button type="button" id="btnUpdatePekerjaan" class="btn btn-primary btn-sm hide"><i class="fas fa-edit"></i> Perbarui</button>
+                                                                    <button type="button" id="btnSavePekerjaan" class="btn btn-primary btn-sm" <?php if ($status['keterangan_status'] == 'Verifikasi') : ?>disabled <?php endif; ?>><i class="fas fa-save"></i> Simpan</button>
+                                                                    <button type="button" id="btnUpdatePekerjaan" class="btn btn-primary btn-sm hide" <?php if ($status['keterangan_status'] == 'Verifikasi') : ?>disabled <?php endif; ?>><i class="fas fa-edit"></i> Perbarui</button>
                                                                     <input type="hidden" name="idpekerjaan">
                                                                 </div>
                                                             </div>
@@ -499,7 +506,7 @@
                                     </div>
                                     <div class="card-footer">
                                         <button type="button" id="btnback4" class="btn btn-flat btn-secondary">Sebelumnya</button>
-                                        <button type="button" id="btnSave5" class="btn btn-flat btn-primary">Selanjutnya</button>
+                                        <button type="button" id="btnSave5" class="btn btn-flat btn-primary" <?php if ($status['keterangan_status'] == 'Verifikasi') : ?>disabled <?php endif; ?>>Selanjutnya</button>
                                     </div>
                                 </div>
                             </div>
@@ -557,7 +564,7 @@
                                         </div>
                                         <div class="card-footer">
                                             <button type="button" id="btnback8" class="btn btn-flat btn-secondary">Sebelumnya</button>
-                                            <button type="button" id="btnSave9" class="btn btn-flat btn-primary">Selanjutnya</button>
+                                            <button type="button" id="btnSave9" class="btn btn-flat btn-primary" <?php if ($status['keterangan_status'] == 'Verifikasi') : ?>disabled <?php endif; ?>>Selanjutnya</button>
                                         </div>
                                     </form>
                                 </div>
@@ -611,7 +618,7 @@
                                     </div>
                                     <div class="card-footer">
                                         <button type="button" id="btnback6" class="btn btn-flat btn-secondary">Sebelumnya</button>
-                                        <button type="button" id="btnSave7" class="btn btn-flat btn-primary">Selanjutnya</button>
+                                        <button type="button" id="btnSave7" class="btn btn-flat btn-primary" <?php if ($status['keterangan_status'] == 'Verifikasi') : ?>disabled <?php endif; ?>>Selanjutnya</button>
                                     </div>
                                 </div>
                             </div>
@@ -644,7 +651,7 @@
                                         </div>
                                         <div class="card-footer">
                                             <button type="button" id="btnback7" class="btn btn-flat btn-secondary">Sebelumnya</button>
-                                            <button type="button" id="btnSave8" class="btn btn-flat btn-primary">Selesai</button>
+                                            <button type="button" id="btnSave8" class="btn btn-flat btn-primary" <?php if ($status['keterangan_status'] == 'Verifikasi') : ?>disabled <?php endif; ?>>Selesai</button>
                                         </div>
                                     </form>
                                 </div>
@@ -1318,46 +1325,50 @@
 <script>
     $(document).ready(function() {
         // Catatan Tambahan
-        $('#btnSave8').on('click', function() {
-            var formData = {
-                id_pencaker: $('#id_pencaker').val(),
-                catatan_pengantar: $('#catatan_pengantar').val(),
-            };
+        $(document).ready(function() {
+            $('#btnSave8').on('click', function() {
+                var formData = {
+                    id_pencaker: $('#id_pencaker').val(),
+                    catatan_pengantar: $('#catatan_pengantar').val(),
+                };
 
-            $.ajax({
-                url: '<?= site_url("pencaker/save_catatan_pengantar") ?>',
-                type: 'POST',
-                data: formData,
-                dataType: 'json',
-                success: function(response) {
-                    if (response.status === 'success') {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Sukses!',
-                            text: response.message,
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                // Anda dapat menambahkan logika setelah data berhasil disimpan, misalnya mengarahkan ke halaman lain
-                            }
-                        });
-                    } else {
+                $.ajax({
+                    url: '<?= site_url("pencaker/save_catatan_pengantar") ?>',
+                    type: 'POST',
+                    data: formData,
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Sukses!',
+                                text: response.message,
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    // Redirect ke halaman yang diinginkan
+                                    window.location.href = '<?= site_url("pencaker/dokumen_pencaker") ?>';
+                                }
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Gagal!',
+                                text: response.message,
+                            });
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error: ' + status + ' - ' + error);
                         Swal.fire({
                             icon: 'error',
-                            title: 'Gagal!',
-                            text: response.message,
+                            title: 'Error!',
+                            text: 'Terjadi kesalahan saat menyimpan data.',
                         });
                     }
-                },
-                error: function(xhr, status, error) {
-                    console.error('Error: ' + status + ' - ' + error);
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error!',
-                        text: 'Terjadi kesalahan saat menyimpan data.',
-                    });
-                }
+                });
             });
         });
+
 
         // Fungsi untuk mengisi form dengan data yang diambil dari server
         function fillForm(data) {

@@ -1,6 +1,5 @@
 <?= $this->extend('frontend/template') ?>
 <?= $this->section('content') ?>
-
 <section id="breadcrumbs" class="breadcrumbs">
     <div class="container">
         <div class="d-flex justify-content-between align-items-center">
@@ -24,8 +23,12 @@
             <?php foreach ($informasi as $item) : ?>
                 <div class="col-lg-4 entries mt-3">
                     <article class="entry p-2 card">
-                        <div class="entry-img mt-0">
+                        <div class="entry-img mt-0 position-relative">
                             <img src="<?= base_url('uploads/berita/' . $item['gambar']) ?>" alt="<?= $item['judul'] ?>" class="img-fluid">
+                            <a href="<?= base_url('berita/detail_berita/' . $item['slug']) ?>" class="overlay text-info">
+                                <i class="bi bi-eye"></i>
+                                <span>Baca Selengkapnya</span>
+                            </a>
                         </div>
                         <h2 class="entry-title">
                             <a href="<?= base_url('berita/detail_berita/' . $item['slug']) ?>"><?= substr(strip_tags($item['judul']), 0, 40) ?> ...</a>
@@ -49,6 +52,7 @@
                     </article>
                 </div>
             <?php endforeach; ?>
+
         </div>
         <div class="row mt-4">
             <div class="blog-pagination">

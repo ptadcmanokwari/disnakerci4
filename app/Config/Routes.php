@@ -40,6 +40,8 @@ $routes->get('admin_v2/pencaker', 'Admin::pencaker', ['filter' => 'role:administ
 $routes->get('admin_v2/pencakerajax', 'Admin::pencakerajax', ['filter' => 'role:administrator']);
 $routes->post('admin_v2/pencakerajax', 'Admin::pencakerajax', ['filter' => 'role:administrator']);
 $routes->post('admin_v2/update_status_pencaker', 'Admin::update_status_pencaker', ['filter' => 'role:administrator']);
+$routes->post('admin_v2/saveVerifikasi', 'Admin::saveVerifikasi', ['filter' => 'role:administrator']);
+
 $routes->post('admin_v2/hapus_pencaker', 'Admin::hapus_pencaker', ['filter' => 'role:administrator']);
 $routes->get('admin_v2/hapus_pencaker', 'Admin::hapus_pencaker', ['filter' => 'role:administrator']);
 $routes->get('admin_v2/detail_pencaker/(:num)', 'Admin::detail_pencaker/$1', ['filter' => 'role:administrator']);

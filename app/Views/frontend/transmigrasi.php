@@ -109,7 +109,7 @@
                 <div class="faq-list px-0">
                     <ul>
                         <li data-aos="fade-up">
-                            <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-1">Seksi Perencanaan dan Pencadangan Tanah Transmigrasi <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                            <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-1">Seksi Perencanaan dan Pencadangan Tanah Transmigrasi <i class="bi bi-plus icon-show"></i><i class="bi bi-dash icon-close"></i></a>
                             <div id="faq-list-1" class="collapse show" data-bs-parent=".faq-list">
                                 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                                     <div class="carousel-inner">
@@ -136,7 +136,7 @@
                         </li>
 
                         <li data-aos="fade-up" data-aos-delay="100">
-                            <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-2" class="collapsed">Seksi Pembangunan Transmigrasi <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                            <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-2" class="collapsed">Seksi Pembangunan Transmigrasi <i class="bi bi-plus icon-show"></i><i class="bi bi-dash icon-close"></i></a>
                             <div id="faq-list-2" class="collapse" data-bs-parent=".faq-list">
                                 <p>
                                     Kepala Seksi Pembangunan Permukiman Transmigrasi mempunyai tugas membantu Kepala Bidang dalam merencanakan, melaksanakan dan melaporkan kegiatan Seksi Pembangunan Permukiman Transmigrasi. Dalam menjalankan tugas, Kepala Seksi Pembangunan Permukiman Transmigrasi menyelenggarakan fungsi:
@@ -152,7 +152,7 @@
                         </li>
 
                         <li data-aos="fade-up" data-aos-delay="200">
-                            <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-3" class="collapsed">Seksi Persebaran Penduduk <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                            <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-3" class="collapsed">Seksi Persebaran Penduduk <i class="bi bi-plus icon-show"></i><i class="bi bi-dash icon-close"></i></a>
                             <div id="faq-list-3" class="collapse" data-bs-parent=".faq-list">
                                 <p>
                                     Kepala Seksi Penataan Persebaran Penduduk mempunyai tugas membantu Kepala Bidang dalam merencanakan, melaksanakan dan melaporkan kegiatan Seksi Penataan Persebaran Penduduk. Dalam menjalankan tugas, Kepala Seksi Penataan Persebaran Penduduk menyelenggarakan fungsi:
@@ -190,7 +190,7 @@
                 <div class="faq-list px-0">
                     <ul>
                         <li data-aos="fade-up">
-                            <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-1">Seksi Pendaftaran dan Seleksi Transmigrasi <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                            <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-1">Seksi Pendaftaran dan Seleksi Transmigrasi <i class="bi bi-plus icon-show"></i><i class="bi bi-dash icon-close"></i></a>
                             <div id="faq-list-1" class="collapse show" data-bs-parent=".faq-list">
                                 <p>Seksi Pendaftaran Seleksi dan Penempatan Transmigrasi mempunyai tugas pokok melaksanakan pendaftaran seleksi dan penempatan transmigrasi dengan beberapa fungsi, diantaranya:</p>
                                 <ul>
@@ -203,7 +203,7 @@
                         </li>
 
                         <li data-aos="fade-up" data-aos-delay="100">
-                            <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-2" class="collapsed">Seksi Pengembangan Kawasan Transmigrasi <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                            <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-2" class="collapsed">Seksi Pengembangan Kawasan Transmigrasi <i class="bi bi-plus icon-show"></i><i class="bi bi-dash icon-close"></i></a>
                             <div id="faq-list-2" class="collapse" data-bs-parent=".faq-list">
                                 <p>
                                     Kepala Seksi Pembangunan Permukiman Transmigrasi mempunyai tugas membantu Kepala Bidang dalam merencanakan, melaksanakan dan melaporkan kegiatan Seksi Pembangunan Permukiman Transmigrasi. Dalam menjalankan tugas, Kepala Seksi Pembangunan Permukiman Transmigrasi menyelenggarakan fungsi:
@@ -219,7 +219,7 @@
                         </li>
 
                         <li data-aos="fade-up" data-aos-delay="200">
-                            <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-3" class="collapsed">Seksi Pembinaan Penduduk <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                            <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-3" class="collapsed">Seksi Pembinaan Penduduk <i class="bi bi-plus icon-show"></i><i class="bi bi-dash icon-close"></i></a>
                             <div id="faq-list-3" class="collapse" data-bs-parent=".faq-list">
                                 <p>
                                     Kepala Seksi Penataan Persebaran Penduduk mempunyai tugas membantu Kepala Bidang dalam merencanakan, melaksanakan dan melaporkan kegiatan Seksi Penataan Persebaran Penduduk. Dalam menjalankan tugas, Kepala Seksi Penataan Persebaran Penduduk menyelenggarakan fungsi:

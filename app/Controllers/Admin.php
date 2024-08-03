@@ -9,6 +9,8 @@ use App\Models\PencakerModel;
 use App\Models\ActivitylogsModel;
 use App\Models\DatabaseModel;
 use App\Models\SettingsModel;
+use App\Models\VerifikasiModel;
+use App\Models\TimelineuserModel;
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
@@ -263,6 +265,83 @@ class Admin extends BaseController
             return $this->response->setJSON(['status' => 'error', 'message' => 'Gagal menghapus pencaker'])->setStatusCode(500);
         }
     }
+
+
+    public function saveVerifikasi()
+    {
+        $pencakerModel = new PencakerModel();
+        $verifikasiModel = new VerifikasiModel();
+        $timelineModel = new TimelineuserModel(); // Tambahkan model timeline_user
+
+        $id = $this->request->getPost('id');
+        $statusverifikasi = $this->request->getPost('statusverifikasi');
+        $pesan = $this->request->getPost('pesan');
+        $usersid = $this->request->getPost('usersid');
+
+        // Tentukan status keterangan berdasarkan opsi yang dipilih
+        switch ($statusverifikasi) {
+            case 'ver_tidaklengkap':
+                $keterangan_status = 'Re-Verifikasi';
+                break;
+            case 'ver_lengkap':
+                $keterangan_status = 'Validasi';
+                break;
+            case 'ver_valid':
+                $keterangan_status = 'Aktif';
+                break;
+            default:
+                $keterangan_status = '';
+        }
+
+        // Update keterangan_status di tabel pencaker
+        $pencakerModel->update($id, ['keterangan_status' => $keterangan_status]);
+
+        // Periksa apakah data verifikasi sudah ada untuk user ini
+        $existingVerifikasi = $verifikasiModel->where('users_id', $usersid)->first();
+
+        if ($existingVerifikasi) {
+            // Update data verifikasi yang ada
+            $verifikasiData = [
+                'tglwaktu' => date('Y-m-d H:i:s'),
+                'pesan' => $pesan,
+                'status_pesan' => $keterangan_status
+            ];
+            $verifikasiModel->update($existingVerifikasi['id'], $verifikasiData);
+        } else {
+            // Insert data verifikasi baru
+            $verifikasiData = [
+                'tglwaktu' => date('Y-m-d H:i:s'),
+                'pesan' => $pesan,
+                'users_id' => $usersid,
+                'status_pesan' => $keterangan_status
+            ];
+            $verifikasiModel->insert($verifikasiData);
+        }
+
+        // Kirim data ke tabel timeline_user jika statusnya "Telah Diverifikasi" atau "ver_lengkap"
+        if ($statusverifikasi == 'ver_lengkap') {
+            $timelineData = [
+                'timeline_id' => 5,
+                'description' => 'Silahkan datang ke kantor Disnakertrans Kab. Manokwari untuk mengambil Kartu Pencari Kerja (Kartu Kuning) dengan menunjukkan dokumen asli yang sebelumnya telah anda unggah di sistem disnakertransmkw.com',
+                'tglwaktu' => date('Y-m-d H:i:s'), // Waktu saat data diubah
+                'users_id' => $usersid
+            ];
+            $timelineModel->insert($timelineData);
+        }
+
+        if ($statusverifikasi == 'ver_valid') {
+            $timelineData = [
+                'timeline_id' => 6,
+                'description' => 'Anda telah resmi terdaftar sebagai Pencari Kerja (Aktif) di Disnakertrans Manokwari. Kami mohon untuk kembali melapor setiap 6 (enam) bulan sekali melalui panel Pencaker pada website disnakertransmkw.com.',
+                'tglwaktu' => date('Y-m-d H:i:s'), // Waktu saat data diubah
+                'users_id' => $usersid
+            ];
+            $timelineModel->insert($timelineData);
+        }
+
+        return $this->response->setJSON(['success' => true]);
+    }
+
 
 
     public function berita()

@@ -25,9 +25,11 @@
                     <h3 class="card-title">Form Unggah Dokumen yang Dibutuhkan</h3>
                 </div>
                 <div class="card-body">
-                    <!-- <div class="alert alert-warning" role="alert">
-                        Dokumen yang wajib diunggah adalah <strong>Pas Foto, KTP,</strong> dan <strong>Ijazah Terakhir</strong>. Dokumen lainnya sifatnya opsional.
-                    </div> -->
+                    <?php if ($id_pencaker['keterangan_status'] == 'Verifikasi') : ?>
+                        <div class="alert alert-warning" role="alert">
+                            Data Anda saat ini sedang diverifikasi, Anda tidak dapat mengunggah/mengedit dokumen!
+                        </div>
+                    <?php endif; ?>
                     <table id="tabelDokumen" class="table table-bordered table-hover">
                         <thead>
                             <tr>
