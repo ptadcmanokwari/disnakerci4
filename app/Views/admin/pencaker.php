@@ -133,7 +133,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <input type="text" id="usersid" name="usersid">
+                    <input type="hidden" id="usersid" name="usersid">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                     <button type="button" id="saveVerifikasi" class="btn btn-primary">Simpan</button>
                 </div>

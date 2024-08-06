@@ -104,7 +104,6 @@
         .disabled-link {
             pointer-events: none;
             opacity: 0.5;
-            /* atau sesuai kebutuhan */
         }
 
         /* Dropzone */
@@ -119,26 +118,12 @@
         .dropzone {
             color: #000 !important;
         }
-
-        /* span.cropper-view-box img {
-            width: 100% !important;
-            height: auto !important;
-            transform: none;
-        }
-
-        .cropper-canvas,
-        .cropper-canvas img.cropper-hide {
-            width: 100% !important;
-            height: auto !important;
-        } */
     </style>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed">
     <div class="wrapper">
-        <!-- <nav class="main-header navbar navbar-expand navbar-white navbar-light"> -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light" id="navbar">
-            <!-- <nav class="main-header navbar navbar-expand navbar-dark navbar-dark"> -->
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
@@ -162,6 +147,7 @@
                 </a>
             </ul>
         </nav>
+
 
         <aside class="main-sidebar sidebar-dark-info elevation-4">
             <?php if (in_groups('administrator')) : ?>
@@ -335,17 +321,14 @@
                 localStorage.setItem('mode', mode);
             }
 
-            // Set mode based on saved preference
             var savedMode = localStorage.getItem('mode');
             setMode(savedMode ? savedMode : 'light');
 
-            // Toggle mode on switch change
             $('#mode-switch').change(function() {
                 var mode = $(this).prop('checked') ? 'dark' : 'light';
                 setMode(mode);
             });
 
-            // Also toggle mode on icon click
             $('#dark-mode-toggle').on('click', function(e) {
                 e.preventDefault();
                 var currentMode = $('body').hasClass('dark-mode') ? 'dark' : 'light';

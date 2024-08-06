@@ -73,23 +73,43 @@
                                 <div class="active tab-pane" id="activity">
                                     <div class="card-body">
                                         <div class="timeline">
-                                            <?php if (isset($logs) && !empty($logs)) : ?>
-                                                <?php foreach ($logs as $log) : ?>
+                                            <?php if (empty($timelines)) : ?>
+                                                <div class="text-center">
+                                                    <p>Belum ada data untuk ditampilkan</p>
+                                                </div>
+                                            <?php else : ?>
+                                                <?php foreach ($timelines as $timeline) : ?>
                                                     <div class="time-label">
-                                                        <span class="bg-green"><?php echo date('d M. Y', strtotime($log['created_at'])); ?></span>
+                                                        <span class="bg-info"><?= date('d M. Y', strtotime($timeline['tglwaktu'])) ?></span>
                                                     </div>
                                                     <div>
-                                                        <i class="fas fa-envelope bg-blue"></i>
+                                                        <i class="fas fa-envelope bg-info"></i>
                                                         <div class="timeline-item">
-                                                            <span class="time"><i class="fas fa-clock"></i> <?php echo date('H:i', strtotime($log['created_at'])); ?></span>
-                                                            <h3 class="timeline-header"><a href="#"><?php echo $log['user']; ?></a> <?php echo $log['title']; ?></h3>
+                                                            <span class="time"><i class="fas fa-clock"></i> <?= date('H:i', strtotime($timeline['tglwaktu'])) ?></span>
+                                                            <h3 class="timeline-header"><a href="#"><?= esc($timeline['subject']) ?></a></h3>
+
+                                                            <div class="row p-3">
+                                                                <div class="col-lg-11">
+                                                                    <div class="timeline-body">
+                                                                        <?= esc($timeline['description']) ?>
+                                                                        <?php if ($id_pencaker['keterangan_status'] == 'Re-Verifikasi' && $timeline['timeline_id'] == 4) : ?>
+                                                                            <div class="alert alert-danger mt-3">
+                                                                                <?php echo $verifikasiData['pesan']; ?>
+                                                                            </div>
+                                                                        <?php endif; ?>
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-1 d-flex justify-content-center align-items-center">
+                                                                    <div class="timeline-footer">
+                                                                        <i class="bi bi-check-lg text-success"></i>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
                                                         </div>
                                                     </div>
                                                 <?php endforeach; ?>
-                                            <?php else : ?>
-                                                <div class="time-label">
-                                                    <span class="bg-gray">No activity logs found</span>
-                                                </div>
                                             <?php endif; ?>
                                             <div>
                                                 <i class="fas fa-clock bg-gray"></i>

@@ -73,8 +73,6 @@
                         <label for="judul" class="form-label">Judul Slider</label>
                         <input type="text" class="form-control" id="judul" name="judul" required>
                     </div>
-                    <input type="hidden" class="form-control" name="status" id="status" value="1">
-                    <input type="hidden" class="form-control" name="users_id" id="users_id" disabled value="<?= user()->id; ?>">
 
                     <div class="mb-3">
                         <span>Gambar Slider</span>
@@ -113,8 +111,7 @@
                         <label for="edit_judul" class="form-label">Ubah Judul Slider</label>
                         <input type="text" class="form-control" id="edit_judul" name="edit_judul">
                     </div>
-                    <input type="hidden" class="form-control" name="edit_status" id="edit_status" value="1">
-                    <input type="hidden" class="form-control" name="edit_users-id" id="edit_users-id" value="<?= user()->id; ?>">
+
                     <div class="mb-3">
                         <span>Ubah Gambar</span>
                         <div id="edit_gambar_dropzone" class="dropzone"></div>
@@ -361,8 +358,6 @@
                 this.on("sending", function(file, xhr, formData) {
                     formData.append("kategori", document.querySelector("#kategori").value);
                     formData.append("judul", document.querySelector("#judul").value);
-                    formData.append("status", document.querySelector("#status").value);
-                    formData.append("users_id", document.querySelector("#users_id").value);
                 });
 
                 this.on("success", function(file, response) {

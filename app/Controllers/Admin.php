@@ -145,21 +145,21 @@ class Admin extends BaseController
             $vervalDisabled = ($pc['keterangan_status'] === 'Registrasi' || $isDisabled) ? 'disabled' : '';
 
             // Tentukan kondisi tombol untuk Kartu AK/1
-            $kartuDisabled = ($pc['keterangan_status'] === 'Validasi' && !$isDisabled) ? '' : 'disabled-link';
+            $kartuDisabled = ($pc['keterangan_status'] === 'Validasi' && !$isDisabled) ? 'disabled-link' : '';
 
             // Tentukan kondisi tombol untuk Detail Pencaker
             $detailDisabled = ($isDisabled) ? 'disabled-link' : '';
 
             $data[] = [
                 "verval" => '<button class="btn btn-secondary btn-sm btn-verval" ' . $vervalDisabled . '
-                    title="Verifikasi/Validasi Pencaker"
-                     data-id="' . $pc['id'] . '" 
-                     data-namalengkap="' . $pc['namalengkap'] . '" 
-                     data-nopendaftaran="' . $pc['nopendaftaran'] . '" 
-                     data-toggle="modal" 
-                     data-target="#VerVal">
-                     <i class="bi bi-check-circle-fill"></i>
-                 </button>',
+                title="Verifikasi/Validasi Pencaker"
+                 data-id="' . $pc['id'] . '" 
+                 data-namalengkap="' . $pc['namalengkap'] . '" 
+                 data-nopendaftaran="' . $pc['nopendaftaran'] . '" 
+                 data-toggle="modal" 
+                 data-target="#VerVal">
+                 <i class="bi bi-check-circle-fill"></i>
+             </button>',
                 "img" => $gambar,
                 "namalengkap" => $pc['namalengkap'],
                 "nopendaftaran" => $pc['nopendaftaran'],
@@ -168,16 +168,16 @@ class Admin extends BaseController
                 "email" =>  $pc['email'],
                 "keterangan_status" => $pc['keterangan_status'],
                 "aksi" => '<div class="btn-group" role="group" aria-label="Actions">
-                   <a href="' . base_url('admin_v2/detail_pencaker/' . $pc['id']) . '" target="_blank" class="btn btn-info btn-sm ' . $detailDisabled . '" title="Detail Pencaker">
-                       <i class="bi bi-search"></i>
-                   </a>
-                   <a href="' . base_url('admin_v2/kartu_ak1/' . $pc['id']) . '" target="_blank" class="btn btn-success btn-sm ' . $kartuDisabled . '" title="Kartu AK/1">
-                       <i class="bi bi-person-vcard-fill"></i>
-                   </a>
-                   <button class="btn btn-danger btn-sm btn-delete" data-id="' . $pc['id'] . '" ' . $isDisabled . ' title="Hapus Pencaker">
-                       <i class="bi bi-trash"></i>
-                   </button>
-               </div>'
+               <a href="' . base_url('admin_v2/detail_pencaker/' . $pc['id']) . '" target="_blank" class="btn btn-info btn-sm ' . $detailDisabled . '" title="Detail Pencaker">
+                   <i class="bi bi-search"></i>
+               </a>
+               <a href="' . base_url('admin_v2/kartu_ak1/' . $pc['id']) . '" target="_blank" class="btn btn-success btn-sm ' . $kartuDisabled . '" title="Kartu AK/1">
+                   <i class="bi bi-person-vcard-fill"></i>
+               </a>
+               <button class="btn btn-danger btn-sm btn-delete" data-id="' . $pc['id'] . '" ' . $isDisabled . ' title="Hapus Pencaker">
+                   <i class="bi bi-trash"></i>
+               </button>
+           </div>'
             ];
         }
 
@@ -613,10 +613,6 @@ class Admin extends BaseController
             'kategori' => 'required|max_length[255]',
             'file' => 'uploaded[file]|is_image[file]',
             'judul' => 'required',
-            // 'isi' => 'required',
-            // 'tags' => 'required',
-            'status' => 'required|in_list[0,1]',
-            'users_id' => 'required'
         ]);
 
         if (!$validation->withRequest($this->request)->run()) {
@@ -638,9 +634,9 @@ class Admin extends BaseController
                 'tags' => '-',
                 'tgl_publikasi' => date('Y-m-d H:i:s'), // Tanggal saat ini
                 'gambar' => $newName,
-                'status' => $this->request->getPost('status'),
+                'status' => 1,
                 'slug' => '-',
-                'users_id' => $this->request->getPost('users_id'),
+                'users_id' => user()->id,
             ]);
 
             return $this->response->setJSON(['success' => true]);
@@ -659,7 +655,7 @@ class Admin extends BaseController
         $judul = $this->request->getPost('judul');
         $kategori = 'slider';
         $status = 1;
-        $users_id = $this->request->getPost('edit_users-id');
+        $users_id = user()->id;
 
         $validation = \Config\Services::validation();
         $validation->setRules([

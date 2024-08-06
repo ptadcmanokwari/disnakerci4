@@ -450,7 +450,7 @@ class AuthController extends Controller
 		$pencakerData = [
 			'namalengkap' => $this->request->getPost('namalengkap'),
 			'email' => $this->request->getPost('email'),
-			'nopendaftaran' => '-', // Sesuaikan dengan cara Anda mendapatkan no pendaftaran
+			'nopendaftaran' => '-',
 			'user_id' => $userId,
 			'keterangan_status' => 'Registrasi'
 		];
@@ -462,7 +462,7 @@ class AuthController extends Controller
 		$timelineUserModel = model(TimelineuserModel::class);
 		$timelineUserData = [
 			'timeline_id' => 1,
-			'tglwaktu' => date('Y-m-d H:i:s'), // atau sesuaikan dengan format waktu yang Anda butuhkan
+			'tglwaktu' => date('Y-m-d H:i:s'),
 			'description' => 'Selamat Datang! Anda telah berhasil masuk ke panel pencaker. Tahap selanjutnya, Anda diwajibkan mengisi/melengkapi formulir AK-1 pada menu Profil Pencari Kerja dan mengunggah dokumen pada menu Upload Dokumen panel ini.',
 			'users_id' => $userId
 		];

@@ -101,7 +101,7 @@
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed">
     <div class="wrapper">
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light" id="navbar">
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
@@ -110,10 +110,11 @@
 
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-                        <i class="fas fa-th-large"></i>
+                    <a class="nav-link" href="#" id="dark-mode-toggle">
+                        <i class="bi bi-moon-stars-fill"></i>
                     </a>
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link" href="#" role="button">
                         <span><strong>Hi, <?php echo user()->username; ?></strong></span>
@@ -203,24 +204,38 @@
     <script src="<?php echo base_url('adminltev31/dist/js/demo.js'); ?>"></script>
 
     <script>
-        $(function() {
-            $("#example1").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        $(document).ready(function() {
+            function setMode(mode) {
+                if (mode === 'dark') {
+                    $('body').addClass('dark-mode');
+                    $('#mode-icon').removeClass('bi-sun-fill').addClass('bi-moon-stars-fill');
+                    $('#mode-switch').prop('checked', true).change();
+                    $('#navbar').removeClass('navbar-white navbar-light').addClass('navbar-dark navbar-dark');
+                } else {
+                    $('body').removeClass('dark-mode');
+                    $('#mode-icon').removeClass('bi-moon-stars-fill').addClass('bi-sun-fill');
+                    $('#mode-switch').prop('checked', false).change();
+                    $('#navbar').removeClass('navbar-dark navbar-dark').addClass('navbar-white navbar-light');
+                }
+                localStorage.setItem('mode', mode);
+            }
 
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
+            // Set mode based on saved preference
+            var savedMode = localStorage.getItem('mode');
+            setMode(savedMode ? savedMode : 'light');
+
+            // Toggle mode on switch change
+            $('#mode-switch').change(function() {
+                var mode = $(this).prop('checked') ? 'dark' : 'light';
+                setMode(mode);
             });
 
+            // Also toggle mode on icon click
+            $('#dark-mode-toggle').on('click', function(e) {
+                e.preventDefault();
+                var currentMode = $('body').hasClass('dark-mode') ? 'dark' : 'light';
+                setMode(currentMode === 'dark' ? 'light' : 'dark');
+            });
         });
     </script>
 </body>

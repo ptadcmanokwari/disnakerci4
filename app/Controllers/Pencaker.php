@@ -18,6 +18,8 @@ use App\Models\SettingsModel;
 use App\Models\ActivitylogsModel;
 use App\Models\VerifikasiModel;
 use App\Models\TimelineuserModel;
+use App\Models\LaporpencakerModel;
+use App\Models\LaporkerjaModel;
 
 use Endroid\QrCode\QrCode;
 use Endroid\QrCode\Writer\PngWriter;
@@ -764,7 +766,7 @@ class Pencaker extends Controller
     // Upload Dokumen
     public function dokumen_pencaker()
     {
-        // Paket paneggil data user dari tabel Users agar bisa diparsing dalam halaman view formdata_pencaker
+        // Paket panggil data user dari tabel Users agar bisa diparsing dalam halaman view formdata_pencaker
         $usersModel = new UsersModel();
         $userId = user()->id;
         $user = $usersModel->find($userId);
@@ -794,7 +796,7 @@ class Pencaker extends Controller
         $userId = user()->id;
         $dokumen = $dokumenModel->findAll();
         $id_pencaker = $pencakerModel->getStatusByUserId($userId);
-        $isVerifikasi = ($id_pencaker['keterangan_status'] == 'Verifikasi' || $id_pencaker['keterangan_status'] == 'Validasi' || $id_pencaker['keterangan_status'] = 'Aktif');
+        $isVerifikasi = ($id_pencaker['keterangan_status'] == 'Verifikasi' || $id_pencaker['keterangan_status'] == 'Validasi' || $id_pencaker['keterangan_status'] == 'Aktif');
 
         $data = [];
         $no = 1;
@@ -808,9 +810,7 @@ class Pencaker extends Controller
             $disableAttr = $isVerifikasi ? 'disabled' : '';
 
             if ($pencakerDokumen) {
-                // Dapatkan NIK dari pengguna yang sedang login
                 $nik = user()->nik;
-                // Buat URL dengan menyertakan folder NIK
                 $fileUrl = base_url('uploads/dokumen_pencaker/' . $nik . '/' . $pencakerDokumen['namadokumen']);
 
                 $data[] = [
@@ -943,98 +943,34 @@ class Pencaker extends Controller
 
     public function pengaturan()
     {
-        $userId = user()->id; // Mengambil user ID dari sesi
-        $dokumenId = 1; // ID dokumen yang diinginkan
 
-        // Load model
+        $usersModel = new UsersModel();
+        $userId = user()->id;
+        $user = $usersModel->find($userId);
+
+        $userId = user()->id;
         $pencakerModel = new PencakerModel();
+        $id_pencaker = $pencakerModel->getStatusByUserId($user['id']);
+        $timelines = $pencakerModel->get_timeline($userId);
 
-        // Panggil metode dari model
+        $dokumenId = 1;
         $dokumen = $pencakerModel->getDokumenByUserId($userId, $dokumenId);
+
 
         $data = [
             'title' => 'Pengaturan Profile',
             'dokumen' => $dokumen,
+            'timelines' => $timelines,
+            'id_pencaker' => $id_pencaker,
         ];
 
         return $this->loadView('pencaker/myprofile', $data);
     }
 
-    // public function minta_verifikasi()
-    // {
-    //     $pencakerModel = new PencakerModel();
-    //     $usersModel = new UsersModel();
-    //     $userId = $this->request->getPost('id_pencaker');
-
-    //     if (!$userId) {
-    //         return $this->response->setStatusCode(400)->setJSON(['status' => 'error', 'message' => 'User ID tidak ditemukan.']);
-    //     }
-
-    //     $data = [
-    //         'keterangan_status' => $this->request->getPost('keterangan_status'),
-    //     ];
-
-    //     try {
-    //         // Update status di database
-    //         $existingPencaker = $pencakerModel->where('user_id', $userId)->first();
-
-    //         if ($existingPencaker) {
-    //             $pencakerModel->update($existingPencaker['id'], $data);
-    //         } else {
-    //             $data['user_id'] = $userId;
-    //             $pencakerModel->insert($data);
-    //         }
-
-    //         // Ambil data nomor telepon dan nama lengkap dari tabel users
-    //         $user = $usersModel->find($userId);
-    //         if (!$user) {
-    //             return $this->response->setStatusCode(400)->setJSON(['status' => 'error', 'message' => 'Data pengguna tidak ditemukan.']);
-    //         }
-
-    //         $phoneNumber = $user['nohp'];
-    //         $namaLengkap = $user['namalengkap'];
-
-    //         // Format pesan yang akan dikirim
-    //         $message = "*Notifikasi disnakertransmkw.com*" . PHP_EOL . PHP_EOL .
-    //             "Hi, *" . $namaLengkap . "*," . PHP_EOL .
-    //             "Data dan dokumen Anda telah berhasil dikirim untuk diverifikasi." .
-    //             "Selanjutnya, silakan menunggu notifikasi validasi dari Sistem Disnakertrans Manokwari." . PHP_EOL . PHP_EOL .
-    //             "*<noreply>*";
-
-    //         $settingsModel = new SettingsModel();
-
-    //         // Ambil userkey dan passkey dari settings
-    //         $userKey = $settingsModel->getValueByKey('whatsapp_userkey');
-    //         $passKey = $settingsModel->getValueByKey('whatsapp_passkey');
-    //         $admin = $settingsModel->getValueByKey('whatsapp_admin');
-
-    //         // Kirim pesan WhatsApp menggunakan API Zenziva
-    //         log_message('debug', 'Sending WhatsApp message with data: ' . json_encode([
-    //             'userkey' => $userKey,
-    //             'passkey' => $passKey,
-    //             'to' => $phoneNumber,
-    //             'message' => $message,
-    //             'admin' => $admin
-    //         ]));
-
-    //         $response = $this->sendWhatsAppMessage($phoneNumber, $message, $userKey, $passKey, $admin);
-
-    //         if ($response && isset($response['status']) && $response['status'] == 'success') {
-    //             return $this->response->setJSON(['status' => 'success', 'message' => 'Data berhasil disimpan dan notifikasi dikirim']);
-    //         } else {
-    //             log_message('error', 'Gagal mengirim notifikasi: ' . json_encode($response));
-    //             return $this->response->setStatusCode(500)->setJSON(['status' => 'error', 'message' => 'Data berhasil disimpan tapi notifikasi gagal dikirim']);
-    //         }
-    //     } catch (\Exception $e) {
-    //         log_message('error', 'Kesalahan saat menyimpan data atau mengirim notifikasi: ' . $e->getMessage());
-    //         return $this->response->setStatusCode(500)->setJSON(['status' => 'error', 'message' => 'Terjadi kesalahan saat menyimpan data atau mengirim notifikasi.']);
-    //     }
-    // }
-
     public function minta_verifikasi()
     {
         $pencakerModel = new PencakerModel();
-        $timelineModel = new TimelineuserModel(); // Buat model untuk tabel timeline_user
+        $timelineModel = new TimelineuserModel();
         $usersModel = new UsersModel();
         $userId = $this->request->getPost('id_pencaker');
 
@@ -1070,7 +1006,7 @@ class Pencaker extends Controller
             $timelineData = [
                 'timeline_id' => 4,
                 'description' => 'Tahap ini anda menunggu proses verifikasi data oleh tim Disnakertrans Kab. Manokwari',
-                'tglwaktu' => date('Y-m-d H:i:s'), // Waktu saat data diubah
+                'tglwaktu' => date('Y-m-d H:i:s'),
                 'users_id' => $userId
             ];
 
@@ -1158,17 +1094,156 @@ class Pencaker extends Controller
     public function activity_by_user()
     {
         $activityLogsModel = new ActivitylogsModel();
-
-        // Misalnya user ID didapat dari session atau request
         $userId = user()->id;
 
-        // Ambil log aktivitas berdasarkan user ID
         $logs = $activityLogsModel->getActivityLogs();
 
-        // Contoh: Mengembalikan data sebagai response JSON
         return $this->response->setJSON($logs);
     }
 
+    public function lapor_pencari_kerja()
+    {
+        $validationRules = [
+            'nama_perusahaan' => 'required',
+            'bidang_perusahaan' => 'required',
+            'jabatan' => 'required',
+            'no_telp' => 'required',
+            'alamat' => 'required',
+        ];
+
+        if (!$this->validate($validationRules)) {
+            $response['success'] = false;
+            $response['errors'] = $this->validator->getErrors();
+            return $this->response->setJSON($response);
+        }
+
+        $users_id = user()->id;
+        $pencakerModel = new PencakerModel();
+        $laporpencakerModel = new LaporpencakerModel();
+        $pencaker = $pencakerModel->where('user_id', $users_id)->first();
+        $nourutlapor = $laporpencakerModel->nomorUrutLaporPencaker($pencaker['id']);
+        $status_kerja = $this->request->getPost('status_kerja');
+
+        $data1 = [
+            'tglwaktu' => date("Y-m-d H:i:s"),
+            'status_kerja' => $status_kerja,
+            'urut_lapor' => $nourutlapor,
+            'pencaker_id' => $pencaker['id']
+        ];
+
+        $laporpencakerModel->insert($data1);
+        $idlaporanpencaker = $laporpencakerModel->insertID();
+
+        if ($status_kerja == 'sudah') {
+            $data2 = [
+                'nama_perusahaan' => $this->request->getPost('nama_perusahaan'),
+                'bidang_perusahaan' => $this->request->getPost('bidang_perusahaan'),
+                'jabatan' => $this->request->getPost('jabatan'),
+                'no_telp' => $this->request->getPost('no_telp'),
+                'alamat' => $this->request->getPost('alamat'),
+                'lapor_pencaker_id' => $idlaporanpencaker,
+            ];
+
+            $laporKerjaModel = new LaporkerjaModel();
+            $laporKerjaModel->insert($data2);
+        } else {
+            $data2 = [
+                'nama_perusahaan' => '-',
+                'bidang_perusahaan' => '-',
+                'jabatan' => '-',
+                'no_telp' => '-',
+                'alamat' => '-',
+                'lapor_pencaker_id' => $idlaporanpencaker,
+            ];
+
+            $laporKerjaModel = new LaporkerjaModel();
+            $laporKerjaModel->insert($data2);
+        }
+
+        $res = [];
+        if ($idlaporanpencaker) {
+            $res['hasil'] = 'sukses';
+            $res['status'] = true;
+        } else {
+            $res['hasil'] = 'gagal';
+            $res['status'] = false;
+        }
+        return $this->response->setJSON($res);
+    }
+
+
+    public function get_lapor_pencaker()
+    {
+        $laporpencakerModel = new LaporpencakerModel();
+        $pencaker_id = user()->id;
+
+        // DataTables Parameters
+        $start = intval($this->request->getGet('start'));
+        $length = intval($this->request->getGet('length'));
+        $searchValue = $this->request->getGet('search')['value'];
+
+        // Get total records
+        $totalRecords = $laporpencakerModel->where('pencaker_id', $pencaker_id)->countAllResults();
+
+        // Get filtered records
+        if ($searchValue) {
+            $laporpencakerModel->like('lapor_kerja.nama_perusahaan', $searchValue)
+                ->orLike('lapor_kerja.bidang_perusahaan', $searchValue)
+                ->orLike('lapor_kerja.jabatan', $searchValue)
+                ->orLike('lapor_kerja.no_telp', $searchValue)
+                ->orLike('lapor_kerja.alamat', $searchValue);
+        }
+
+        $filteredRecords = $laporpencakerModel->where('pencaker_id', $pencaker_id)->countAllResults();
+
+        // Get data with join
+        if ($searchValue) {
+            $laporpencakerModel->like('lapor_kerja.nama_perusahaan', $searchValue)
+                ->orLike('lapor_kerja.bidang_perusahaan', $searchValue)
+                ->orLike('lapor_kerja.jabatan', $searchValue)
+                ->orLike('lapor_kerja.no_telp', $searchValue)
+                ->orLike('lapor_kerja.alamat', $searchValue);
+        }
+
+        $laporKerja = $laporpencakerModel->join('lapor_kerja', 'lapor_kerja.lapor_pencaker_id = lapor_pencaker.id')
+            ->where('lapor_pencaker.pencaker_id', $pencaker_id)
+            ->limit($length, $start)
+            ->findAll();
+
+        $data = [];
+        foreach ($laporKerja as $lapor) {
+            $status_pekerjaan = $lapor['status_kerja'] === 'sudah' ?
+                '<a href="#" class="view-details" data-id="' . $lapor['id'] . '">Sudah Bekerja</a>' :
+                'Belum Bekerja';
+
+            $data[] = [
+                'urut_lapor' => '<div class="text-center">' . $lapor['urut_lapor'] . '</div>',
+                'tanggal_melapor' => '<div class="text-center">' . $lapor['tglwaktu'] . '</div>',
+                'status_pekerjaan' => '<div class="text-center">' . $status_pekerjaan . '</div>'
+            ];
+        }
+
+        $response = [
+            'draw' => intval($this->request->getGet('draw')),
+            'recordsTotal' => $totalRecords,
+            'recordsFiltered' => $filteredRecords,
+            'data' => $data
+        ];
+
+        return $this->response->setJSON($response);
+    }
+
+    public function detail_lapor_kerja($id)
+    {
+        $laporKerjaModel = new LaporkerjaModel();
+        $detail = $laporKerjaModel->find($id);
+
+        if ($detail) {
+            return $this->response->setJSON($detail);
+        } else {
+            return $this->response->setJSON(['error' => 'Data tidak ditemukan']);
+        }
+    }
 
     private function loadView(string $viewName, array $data = []): string
     {

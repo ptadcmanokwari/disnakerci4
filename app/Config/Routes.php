@@ -208,3 +208,7 @@ $routes->get('kartu/(:num)', 'Frontend::kartu/$1');
 
 $routes->post('pencaker/minta_verifikasi', 'Pencaker::minta_verifikasi');
 $routes->get('pencaker/minta_verifikasi', 'Pencaker::minta_verifikasi');
+$routes->post('pencaker/lapor_pencari_kerja', 'Pencaker::lapor_pencari_kerja');
+$routes->get('pencaker/get_lapor_pencaker', 'Pencaker::get_lapor_pencaker');
+// $routes->get('pencaker/detail_lapor_kerja', 'Pencaker::detail_lapor_kerja');
+$routes->get('pencaker/detail_lapor_kerja/(:num)', 'Pencaker::detail_lapor_kerja/$1');

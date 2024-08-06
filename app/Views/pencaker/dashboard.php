@@ -37,19 +37,8 @@
                         <div class="card-body">
                             <div class="timeline">
                                 <?php if (empty($timelines)) : ?>
-                                    <div class="time-label">
-                                        <span class="bg-info"><?= date('d M. Y', strtotime($timeline['tglwaktu'])) ?></span>
-                                    </div>
-                                    <div>
-                                        <i class="fas fa-envelope bg-info"></i>
-                                        <div class="timeline-item">
-                                            <span class="time"><i class="fas fa-clock"></i> <?= date('H:i', strtotime($timeline['tglwaktu'])) ?></span>
-                                            <h3 class="timeline-header"><a href="#"><?= esc($timeline['subject']) ?></a></h3>
-
-                                            <div class="timeline-body">
-                                                <?= esc($timeline['description']) ?>
-                                            </div>
-                                        </div>
+                                    <div class="text-center">
+                                        <p>Belum ada data untuk ditampilkan</p>
                                     </div>
                                 <?php else : ?>
                                     <?php foreach ($timelines as $timeline) : ?>
@@ -146,12 +135,12 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table">
+                                    <table id="laporKerjaTable" class="table">
                                         <thead>
                                             <tr>
-                                                <th scope="col">Periode Laporan</th>
-                                                <th scope="col">Tanggal Melapor</th>
-                                                <th scope="col">Status Pekerjaan</th>
+                                                <th class="text-center" scope="col">Periode</th>
+                                                <th class="text-center" scope="col">Tanggal Melapor</th>
+                                                <th class="text-center" scope="col">Status Pekerjaan</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -162,17 +151,14 @@
                         </div>
                     <?php endif; ?>
                 </div>
-
             </div>
-
-
         </div>
     </section>
 </div>
 
 
 <div class="modal fade" id="LaporModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="LaporModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="VerValModalLabel">Laporan Pencari Kerja</h5>
@@ -180,14 +166,16 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form>
+            <form id="formLaporPekerjaan">
                 <div class="modal-body">
                     <input type="hidden" class="form-control" name="id_pencaker" id="id_pencaker" disabled value="<?= $id_pencaker['id']; ?>">
                     <div class="row" id="statusLapor">
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 mb-2">
                             <span>Apakah Anda telah memperoleh pekerjaan?</span>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="status_pekerjaan" id="sudah" value="sudah">
+                                <input class="form-check-input" type="radio" name="status_kerja" id="sudah" value="sudah">
                                 <label class="form-check-label" for="sudah">
                                     Ya, sudah bekerja.
                                 </label>
@@ -195,7 +183,7 @@
                         </div>
                         <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-2">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="status_pekerjaan" id="belum" value="belum">
+                                <input class="form-check-input" type="radio" name="status_kerja" id="belum" value="belum">
                                 <label class="form-check-label" for="belum">
                                     Belum Bekerja.
                                 </label>
@@ -205,47 +193,99 @@
                     <hr>
                     <div id="formLapor" class="form-group mt-3 hide">
                         <div class="row">
-                            <div class="col-lg-6">
+                            <div class="alert alert-success w-100" role="alert">
+                                Jika sudah bekerja, lengkapi data di bawah ini!
+                            </div>
+                            <div class="col-lg-12">
                                 <div class="form-group m-0">
-                                    <label class="col-form-label w-100" for="nama_perushaaan">Nama Perusahaan/Instansi/Badan Hukum</label>
-                                    <input type="text" class="form-control" id="nama_perushaaan" name="nama_perushaaan">
+                                    <label class="col-form-label w-100" for="nama_perusahaan">Nama Perusahaan/Instansi/Badan Hukum</label>
+                                    <input type="text" class="form-control" id="nama_perusahaan" name="nama_perusahaan">
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-12">
                                 <div class="form-group m-0">
-                                    <label class="col-form-label w-100" for="bidang_pekerjaan">Bidang Pekerjaan</label>
-                                    <input type="text" class="form-control" id="bidang_pekerjaan" name="bidang_pekerjaan">
+                                    <label class="col-form-label w-100" for="bidang_perusahaan">Bidang Pekerjaan</label>
+                                    <input type="text" class="form-control" id="bidang_perusahaan" name="bidang_perusahaan">
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-12">
                                 <div class="form-group m-0">
-                                    <label class="col-form-label w-100" for="nohp_perusahaan">No. Telp. Perusahaan</label>
-                                    <input type="text" class="form-control" id="nohp_perusahaan" name="nohp_perusahaan">
+                                    <label class="col-form-label w-100" for="no_telp">No. Telp. Perusahaan</label>
+                                    <input type="text" class="form-control" id="no_telp" name="no_telp">
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-12">
                                 <div class="form-group m-0">
-                                    <label class="col-form-label w-100" for="jabatan">Jabatan</label>
+                                    <label class="col-form-label w-100" for="jabatan">Jabatan Anda</label>
                                     <input type="text" class="form-control" id="jabatan" name="jabatan">
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="form-group m-0">
-                                    <label class="col-form-label" for="alamat_perusahaan">Alamat</label>
-                                    <textarea type="text" class="form-control form-control-sm" name="alamat_perusahaan" id="alamat_perusahaan"></textarea>
+                                    <label class="col-form-label" for="alamat">Alamat Perusahaan</label>
+                                    <textarea type="text" class="form-control" name="alamat" id="alamat"></textarea>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                        <button type="button" id="saveVerifikasi" class="btn btn-primary">Simpan</button>
+                        <button type="button" id="saveVerifikasi" class="btn btn-primary">Simpan Data</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+<!-- Modal Detail -->
+<div class="modal fade" id="detailModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="detailModalLabel">Detail Perusahaan</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped">
+                    <tbody>
+                        <tr>
+                            <td class="w-45">Nama Perusahaan</td>
+                            <td class="w-5">:</td>
+                            <td class="w-50" id="detail_nama_perusahaan"></td>
+                        </tr>
+                        <tr>
+                            <td>Bidang Perusahaan</td>
+                            <td>:</td>
+                            <td id="detail_bidang_perusahaan"></td>
+                        </tr>
+                        <tr>
+                            <td>Jabatan</td>
+                            <td>:</td>
+                            <td id="detail_jabatan"></td>
+                        </tr>
+                        <tr>
+                            <td>No. Telepon Perusahaan</td>
+                            <td>:</td>
+                            <td id="detail_no_telp"></td>
+                        </tr>
+                        <tr>
+                            <td>Alamat Perusahaan</td>
+                            <td>:</td>
+                            <td id="detail_alamat"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
@@ -368,6 +408,133 @@
                 $('#formLapor').addClass('hide').hide();
             }
         });
+
+        $('#saveVerifikasi').on('click', function() {
+            // Cek apakah status kerja sudah dipilih
+            var statusKerja = $('input[name="status_kerja"]:checked').val();
+            if (!statusKerja) {
+                Swal.fire({
+                    title: 'Peringatan!',
+                    text: 'Silakan pilih status kerja.',
+                    icon: 'warning',
+                    confirmButtonText: 'OK'
+                });
+                return;
+            }
+
+            // Jika status kerja adalah 'sudah', pastikan semua field di formLapor diisi
+            if (statusKerja === 'sudah') {
+                var namaPerusahaan = $('#nama_perusahaan').val().trim();
+                var bidangPerusahaan = $('#bidang_perusahaan').val().trim();
+                var noTelp = $('#no_telp').val().trim();
+                var jabatan = $('#jabatan').val().trim();
+                var alamat = $('#alamat').val().trim();
+
+                if (!namaPerusahaan || !bidangPerusahaan || !noTelp || !jabatan || !alamat) {
+                    Swal.fire({
+                        title: 'Peringatan!',
+                        text: 'Harap lengkapi semua data yang diperlukan.',
+                        icon: 'warning',
+                        confirmButtonText: 'OK'
+                    });
+                    return;
+                }
+            }
+
+            var formData = $('#formLaporPekerjaan').serialize();
+
+            $.ajax({
+                url: '<?= base_url('pencaker/lapor_pencari_kerja') ?>',
+                type: 'POST',
+                data: formData,
+                dataType: 'json',
+                success: function(response) {
+                    if (response.status) {
+                        Swal.fire({
+                            title: 'Berhasil!',
+                            text: 'Laporan berhasil disimpan',
+                            icon: 'success',
+                            confirmButtonText: 'OK'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                $('#formLaporPekerjaan')[0].reset(); // Reset form
+                                $('#formLapor').addClass('hide'); // Hide additional form
+                                $('#LaporModal').modal('hide'); // Hide modal
+                                $('#laporKerjaTable').DataTable().ajax.reload(); // Reload table
+                            }
+                        });
+                    } else {
+                        Swal.fire({
+                            title: 'Gagal!',
+                            text: 'Laporan gagal disimpan',
+                            icon: 'error',
+                            confirmButtonText: 'OK'
+                        });
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr.responseText);
+                    Swal.fire({
+                        title: 'Kesalahan!',
+                        text: 'Terjadi kesalahan. Silakan coba lagi.',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
+                }
+            });
+        });
+
+
+        $('#laporKerjaTable').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url: '<?= base_url('pencaker/get_lapor_pencaker') ?>',
+                type: 'GET'
+            },
+            columns: [{
+                    data: 'urut_lapor'
+                },
+                {
+                    data: 'tanggal_melapor'
+                },
+                {
+                    data: 'status_pekerjaan'
+                }
+            ],
+            searching: false,
+            lengthChange: false,
+            ordering: false
+        });
+
+        $('#laporKerjaTable').on('click', '.view-details', function(e) {
+            e.preventDefault();
+
+            var id = $(this).data('id');
+            $.ajax({
+                url: '<?= base_url('pencaker/detail_lapor_kerja') ?>/' + id,
+                method: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    if (response.error) {
+                        alert('Data tidak ditemukan');
+                    } else {
+                        $('#detail_nama_perusahaan').text(response.nama_perusahaan);
+                        $('#detail_bidang_perusahaan').text(response.bidang_perusahaan);
+                        $('#detail_jabatan').text(response.jabatan);
+                        $('#detail_no_telp').text(response.no_telp);
+                        $('#detail_alamat').text(response.alamat);
+
+                        $('#detailModal').modal('show');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr.responseText);
+                    alert('Terjadi kesalahan. Silakan coba lagi.');
+                }
+            });
+        });
+
     });
 </script>
 
