@@ -1245,6 +1245,41 @@ class Pencaker extends Controller
         }
     }
 
+
+    public function check_usia_laporan()
+    {
+        $users_id = user()->id;
+        $laporpencakerModel = new LaporpencakerModel();
+
+        // Ambil laporan terakhir berdasarkan urutan
+        $laporanTerakhir = $laporpencakerModel
+            ->where('pencaker_id', $users_id)
+            ->orderBy('urut_lapor', 'DESC')
+            ->first();
+
+        if ($laporanTerakhir) {
+            $tglLaporanTerakhir = new \DateTime($laporanTerakhir['tglwaktu']);
+            $tglSekarang = new \DateTime();
+            $interval = $tglLaporanTerakhir->diff($tglSekarang);
+
+            // Menghitung selisih dalam bulan
+            $totalBulan = $interval->y * 12 + $interval->m;
+
+            if ($totalBulan < 6) {
+                $tglBolehLapor = $tglLaporanTerakhir->modify('+6 months')->format('Y-m-d');
+                return $this->response->setJSON([
+                    'status' => false,
+                    'message' => 'Anda sudah pernah melapor sebelumnya. Anda dapat melapor kembali pada tanggal ' . $tglBolehLapor
+                ]);
+            }
+        }
+
+        return $this->response->setJSON(['status' => true]);
+    }
+
+
+
+
     private function loadView(string $viewName, array $data = []): string
     {
         $uri = service('uri');

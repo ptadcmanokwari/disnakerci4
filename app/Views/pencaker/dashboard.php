@@ -131,9 +131,10 @@
                         <div class="card card-default">
                             <div class="card-header">
                                 <h3 class="card-title">Laporan Pencari Kerja</h3>
-                                <button class="btn btn-primary" data-toggle="modal" data-target="#LaporModal">Lapor</button>
+                                <button class="btn btn-primary" id="btnLapor" data-toggle="modal" data-target="#LaporModal" disabled>Lapor</button>
                             </div>
                             <div class="card-body">
+                                <div id="alertContainer"></div> <!-- Container for the alert message -->
                                 <div class="table-responsive">
                                     <table id="laporKerjaTable" class="table">
                                         <thead>
@@ -409,8 +410,9 @@
             }
         });
 
+        checkUsiaLaporan();
+
         $('#saveVerifikasi').on('click', function() {
-            // Cek apakah status kerja sudah dipilih
             var statusKerja = $('input[name="status_kerja"]:checked').val();
             if (!statusKerja) {
                 Swal.fire({
@@ -422,7 +424,6 @@
                 return;
             }
 
-            // Jika status kerja adalah 'sudah', pastikan semua field di formLapor diisi
             if (statusKerja === 'sudah') {
                 var namaPerusahaan = $('#nama_perusahaan').val().trim();
                 var bidangPerusahaan = $('#bidang_perusahaan').val().trim();
@@ -461,6 +462,7 @@
                                 $('#formLapor').addClass('hide'); // Hide additional form
                                 $('#LaporModal').modal('hide'); // Hide modal
                                 $('#laporKerjaTable').DataTable().ajax.reload(); // Reload table
+                                checkUsiaLaporan(); // Re-check usia laporan
                             }
                         });
                     } else {
@@ -484,6 +486,31 @@
             });
         });
 
+        function checkUsiaLaporan() {
+            $.ajax({
+                url: '<?= base_url('pencaker/check_usia_laporan') ?>',
+                type: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    if (response.status) {
+                        $('#btnLapor').prop('disabled', false);
+                        $('#alertContainer').html('');
+                    } else {
+                        $('#btnLapor').prop('disabled', true);
+                        $('#alertContainer').html('<div class="alert alert-warning" role="alert">' + response.message + '</div>');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr.responseText);
+                    Swal.fire({
+                        title: 'Kesalahan!',
+                        text: 'Terjadi kesalahan. Silakan coba lagi.',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
+                }
+            });
+        }
 
         $('#laporKerjaTable').DataTable({
             processing: true,
