@@ -26,7 +26,23 @@ class UsersModel extends Model
         'force_pass_reset',
         'permissions',
         'deleted_at',
+        'created_at',
     ];
+
+    // public function getLatestUsers($userId, $limit = 5)
+    // {
+    //     return $this->where('id', $userId)
+    //         ->orderBy('created_at', 'DESC')
+    //         ->limit($limit)
+    //         ->findAll();
+    // }
+
+    public function getLatestUsers($limit = 5)
+    {
+        return $this->orderBy('created_at', 'DESC')
+            ->limit($limit)
+            ->findAll();
+    }
 
     public function saveUser($data)
     {

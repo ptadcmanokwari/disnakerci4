@@ -33,6 +33,7 @@ class Admin extends BaseController
     public function index()
     {
         $pencakerModel = new PencakerModel();
+        $userModel = new UsersModel();
         $pendidikanData = $pencakerModel->countByPendidikan();
         $usiaData = $pencakerModel->countByUsia();
 
@@ -57,6 +58,10 @@ class Admin extends BaseController
             }
         }
 
+        // Mengambil user_id menggunakan user()->id
+        $users = $userModel->getLatestUsers();
+        $verifikasiusers = $pencakerModel->getLatestPencaker();
+
         $data = [
             'title' => 'Dashboard',
             'registrasi_count' => $pencakerModel->countByStatus('Registrasi'),
@@ -74,11 +79,14 @@ class Admin extends BaseController
             'currentYear' => $currentYear,
             'months' => json_encode(array_values($months)),
             'laki_data' => json_encode(array_values($lakiData)),
-            'perempuan_data' => json_encode(array_values($perempuanData))
+            'perempuan_data' => json_encode(array_values($perempuanData)),
+            'users' => $users,
+            'verifikasiusers' => $verifikasiusers,
         ];
 
         return $this->loadView('admin/dashboard', $data);
     }
+
 
     public function redirectDashboard()
     {

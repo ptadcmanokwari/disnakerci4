@@ -191,4 +191,12 @@ class PencakerModel extends Model
         $query = $builder->get(); // eksekusi query
         return $query->getResultArray(); // ambil hasil sebagai array
     }
+
+    public function getLatestPencaker($limit = 5)
+    {
+        return $this->where('keterangan_status', 'Verifikasi')
+            ->orderBy('id', 'DESC')
+            ->limit($limit)
+            ->findAll();
+    }
 }
