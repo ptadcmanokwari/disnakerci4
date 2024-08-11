@@ -132,6 +132,11 @@
 
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
+                    <a class="nav-link" href="<?php echo base_url('/') ?>" target="_blank">
+                        <i class="bi bi-globe"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="#" id="dark-mode-toggle">
                         <i class="bi bi-moon-stars-fill"></i>
                     </a>

@@ -139,7 +139,6 @@
 
                     <?php else : ?>
                         <li><a class="btn btn-primary mx-4 p-2 text-white" href="<?= base_url('login'); ?>">Masuk</a></li>
-
                     <?php endif; ?>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>

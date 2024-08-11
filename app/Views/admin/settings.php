@@ -91,7 +91,7 @@
                                                     <div class="col-lg-12">
                                                         <div class="form-group">
                                                             <label for="maps">Maps</label>
-                                                            <input type="text" class="form-control" name="maps" id="maps" value="<?= isset($settings['maps']) ? esc($settings['maps']) : '' ?>">
+                                                            <textarea class="form-control" name="maps" id="maps"><?= isset($settings['maps']) ? esc($settings['maps']) : '' ?></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -102,6 +102,7 @@
                                         </form>
                                     </div>
                                 </div>
+
                                 <div class="tab-pane fade" id="pengaturanMedia" role="tabpanel" aria-labelledby="pengaturanMedia-tab">
                                     <div class="card">
                                         <?php if (session()->getFlashdata('success')) : ?>

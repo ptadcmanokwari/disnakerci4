@@ -1720,7 +1720,7 @@ section {
 }
 
 .blog .entry .entry-footer i {
-  color: #5e5e5e;
+  color: #116db6;
   display: inline;
 }
 
@@ -1938,21 +1938,22 @@ section {
   justify-content: center;
 }
 
+
 .blog .blog-pagination li.active {
   background: #116db6;
   border-radius: 5px;
-}
-
-.blog .blog-pagination li:hover {
-  color: #116db6 !important;
+  color: #fff !important;
 }
 
 .blog .blog-pagination li.active a {
-  color: #fff;
+  color: #fff !important;
 }
 
-.blog .blog-pagination li:hover a {
+
+
+.blog .blog-pagination li a:hover {
   color: #116db6;
+  font-weight: bold;
 }
 
 .blog .sidebar {

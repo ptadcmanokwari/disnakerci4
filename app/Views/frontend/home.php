@@ -1,6 +1,8 @@
 <?= $this->extend('frontend/template') ?>
 
 <?= $this->section('content') ?>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
 
 <style>
     .cta {
@@ -20,6 +22,10 @@
         color: #fff;
         transition: 0.4s;
         border-radius: 10px;
+    }
+
+    #team .owl-nav {
+        display: none;
     }
 </style>
 
@@ -208,7 +214,17 @@
                 <p>Proses pembuatan kartu kuning dimulai dengan pendaftaran akun untuk selanjutnya mengisi formulir Ak/1 dan mengunggah dokumen. Adapun dokumen yang dibutuhkan diantaranya: Pas Foto, KTP, Ijazah Terakhir, Transkrip Nilai, Riwayat Hidup, SKCK dan Suket. Sehat</p>
             </div>
             <div class="col-lg-3 cta-btn-container text-center d-flex align-items-center justify-content-end">
-                <a class="cta-btn text-center btn btn-secondary" href="<?= url_to('register') ?>">Buat Akun Sekarang</a>
+
+                <?php if (logged_in()) : ?>
+                    <?php if (in_groups('administrator')) : ?>
+                        <a class="btn-buy btn btn-success text-center" href="<?= url_to('admin_v2/dashboard') ?>">Masuk Panel Admin</a>
+                    <?php elseif (in_groups('pencaker')) : ?>
+                        <a class="btn-buy btn btn-success text-center" href="<?= url_to('pencaker/dashboard') ?>">Masuk Panel Pencaker</a>
+                    <?php endif; ?>
+                <?php else : ?>
+                    <a class="cta-btn text-center btn btn-secondary" href="<?= url_to('register') ?>">Buat Akun Sekarang</a>
+                <?php endif; ?>
+
             </div>
         </div>
 
@@ -317,9 +333,8 @@
             </div>
         </div>
     </div>
-</section><!-- End Skills Section -->
+</section>
 
-<!-- ======= Portfolio Section ======= -->
 <section id="portfolio" class="portfolio">
     <div class="container">
         <div class="section-title">
@@ -362,8 +377,8 @@
             <h2>Tim <strong>Kerja</strong></h2>
             <p>Orang-orang hebat yang siap melayani Anda.</p>
         </div>
-        <div class="row">
-            <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+        <div class="owl-carousel owl-theme">
+            <div class="item">
                 <div class="member" data-aos="fade-up">
                     <div class="member-img">
                         <img src="<?= base_url(); ?>uploads/team/kadis.jpg" class="img-fluid" alt="">
@@ -380,8 +395,7 @@
                     </div>
                 </div>
             </div>
-
-            <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+            <div class="item">
                 <div class="member" data-aos="fade-up" data-aos-delay="100">
                     <div class="member-img">
                         <img src="<?= base_url(); ?>uploads/team/sekdis.jpg" class="img-fluid" alt="">
@@ -399,7 +413,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+            <div class="item">
                 <div class="member" data-aos="fade-up" data-aos-delay="200">
                     <div class="member-img">
                         <img src="<?= base_url(); ?>uploads/team/kabid_pentaker.jpg" class="img-fluid" alt="">
@@ -417,7 +431,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+            <div class="item">
                 <div class="member" data-aos="fade-up" data-aos-delay="300">
                     <div class="member-img">
                         <img src="<?= base_url(); ?>uploads/team/kabid_p2kt.jpg" class="img-fluid" alt="">
@@ -434,7 +448,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+            <div class="item">
                 <div class="member" data-aos="fade-up" data-aos-delay="300">
                     <div class="member-img">
                         <img src="<?= base_url(); ?>uploads/team/kabid_hubin.jpeg" class="img-fluid" alt="">
@@ -504,4 +518,30 @@
 
     </div>
 </section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $(".owl-carousel").owlCarousel({
+            items: 4, // jumlah item yang ditampilkan dalam satu tampilan
+            loop: true, // mengulang carousel secara berulang
+            margin: 10, // jarak antar item
+            nav: true, // menampilkan navigasi (sebelumnya dan selanjutnya)
+            responsive: {
+                0: {
+                    items: 1
+                },
+                300: {
+                    items: 2
+                },
+                600: {
+                    items: 3
+                },
+                1000: {
+                    items: 4
+                }
+            }
+        });
+    });
+</script>
+
 <?= $this->endSection() ?>

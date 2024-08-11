@@ -44,7 +44,7 @@
             <div class="col-xl-4 col-md-4 d-flex align-items-stretch aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
                 <div class="icon-box">
                     <div class="col-md-12 py-3 d-flex justify-content-center align-items-center ">
-                        <img class="w-100" src="https://thumbs.dreamstime.com/b/online-registration-sign-up-concept-young-people-signing-login-to-account-user-interface-secure-password-modern-vector-194944767.jpg" alt="">
+                        <img class="w-100" src="<?= base_url(); ?>uploads/registrasi.webp" alt="Registrasi">
                     </div>
                     <h4>1. Registrasi Akun</h4>
                     <p class="text-dark">Buat akun baru dengan mengisi Nama Lengkap, NIK (Nomor Induk Kependudukan), Email, dan nomor HP/Whatsapp.</p>
@@ -54,7 +54,7 @@
             <div class="col-xl-4 col-md-4 d-flex align-items-stretch mt-md-0 aos-init aos-animate" data-aos="zoom-in" data-aos-delay="200">
                 <div class="icon-box">
                     <div class="col-md-12 py-3 d-flex justify-content-center align-items-center ">
-                        <img class="w-100" src="https://cdni.iconscout.com/illustration/premium/thumb/online-form-filling-4488741-3757136.png" alt="">
+                        <img class="w-100" src="<?= base_url(); ?>uploads/isi_form.webp" alt="Isi Form">
                     </div>
                     <h4>2. Isi Aplikasi</h4>
                     <p class="text-dark">Lengkapi form Ak/1 dan unggah dokumen kelengkapan persyaratan pencari kerja, diantaranya: Pas Foto, KTP, Ijazah Terakhir, Transkrip Nilai, Riwayat Hidup, SKCK, dan Surat Keterangan Kesehatan.</p>
@@ -64,7 +64,7 @@
             <div class="col-xl-4 col-md-4 d-flex align-items-stretch mt-xl-0 aos-init aos-animate" data-aos="zoom-in" data-aos-delay="300">
                 <div class="icon-box">
                     <div class="col-md-12 py-3 d-flex justify-content-center align-items-center ">
-                        <img class="w-100" src="https://disnakertransmkw.com/assets/frontend/assets/img/office.jpg" alt="">
+                        <img class="w-100" src="<?= base_url(); ?>uploads/office.jpg" alt="Kantor Disnakertrans Manokwari">
                     </div>
                     <h4>3. Datang Ke Kantor</h4>
                     <p class="text-dark">Mendatangi kantor Disnakertrans Kab. Manokwari untuk mengambil Kartu Pencari Kerja (Kartu Ak/1) dengan syarat menunjukkan dokumen asli yang telah diunggah di sistem.</p>
@@ -75,7 +75,16 @@
 
         <div class="row mt-5">
             <div class="col-xl-12 col-md-12 d-flex align-items-center justify-content-center">
-                <a class="btn-buy btn btn-primary text-center" href="<?= url_to('register') ?>">Buat Akun Sekarang</a>
+                <?php if (logged_in()) : ?>
+                    <?php if (in_groups('administrator')) : ?>
+                        <a class="btn-buy btn btn-success text-center" href="<?= url_to('admin_v2/dashboard') ?>">Masuk Panel Admin</a>
+                    <?php elseif (in_groups('pencaker')) : ?>
+                        <a class="btn-buy btn btn-success text-center" href="<?= url_to('pencaker/dashboard') ?>">Masuk Panel Pencaker</a>
+                    <?php endif; ?>
+                <?php else : ?>
+                    <a class="btn-buy btn btn-primary text-center" href="<?= url_to('register') ?>">Buat Akun Sekarang</a>
+                <?php endif; ?>
+
             </div>
         </div>
 
