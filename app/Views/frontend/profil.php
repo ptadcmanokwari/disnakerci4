@@ -1,5 +1,6 @@
 <?= $this->extend('frontend/template') ?>
 <?= $this->section('content') ?>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox@3.1.0/dist/css/glightbox.min.css">
 
 <section id="breadcrumbs" class="breadcrumbs">
     <div class="container">
@@ -76,11 +77,17 @@
 
         <div class="section-title mt-4">
             <h2>Struktur Organisasi</h2>
-            <a class="lsb-preview" href="#">
-                <img class="w-100 lsb-preview border rounded" src="<?php echo base_url('uploads/'); ?>STRUKTUR_DISNAKERTRANS.jpg" alt="Struktur Organisasi">
+            <a class="glightbox" href="<?php echo base_url('uploads/'); ?>STRUKTUR_DISNAKERTRANS.jpg" data-gallery="gallery1" data-type="image">
+                <img class="w-100 border rounded" src="<?php echo base_url('uploads/'); ?>STRUKTUR_DISNAKERTRANS.jpg" alt="Struktur Organisasi">
             </a>
         </div>
 
     </div>
-</section><!-- End Contact Section -->
+</section>
+<script src="https://cdn.jsdelivr.net/npm/glightbox@3.1.0/dist/js/glightbox.min.js"></script>
+<script>
+    const lightbox = GLightbox({
+        selector: '.glightbox'
+    });
+</script>
 <?= $this->endSection() ?>

@@ -1,5 +1,6 @@
 <?= $this->extend('frontend/template') ?>
 <?= $this->section('content') ?>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox@3.1.0/dist/css/glightbox.min.css">
 
 <section id="breadcrumbs" class="breadcrumbs">
     <div class="container">
@@ -154,12 +155,10 @@
             <?php foreach ($galleries as $category => $images) : ?>
                 <?php foreach ($images as $image) : ?>
                     <div class="col-lg-4 col-md-6 portfolio-item filter-<?= $category; ?>">
-                        <img src="<?= $image['url']; ?>" class="img-fluid" alt="">
+                        <img src="<?= $image['url']; ?>" class="img-fluid portfolio-lightbox preview-link">
                         <div class="portfolio-info">
                             <h4><?= $image['name']; ?></h4>
                             <p><?= ucfirst($category); ?></p>
-                            <a href="<?= $image['url']; ?>" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="<?= $image['name']; ?>"><i class="bx bx-plus"></i></a>
-                            <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
                         </div>
                     </div>
                 <?php endforeach; ?>
@@ -167,5 +166,10 @@
         </div>
     </div>
 </section>
-
+<script src="https://cdn.jsdelivr.net/npm/glightbox@3.1.0/dist/js/glightbox.min.js"></script>
+<script>
+    const lightbox = GLightbox({
+        selector: '.glightbox'
+    });
+</script>
 <?= $this->endSection() ?>
