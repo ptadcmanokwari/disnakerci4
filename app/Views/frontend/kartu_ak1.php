@@ -36,7 +36,7 @@
         <div class="row mb-3">
             <div class="section-title">
                 <h2>Kartu Pencari Kerja (Kartu AK/1)</h2>
-                <p>Yuk, hanya dengan 3 langkah berikut ini Anda dapat dengan mudah membuat Kartu Pencari Kerja (Kartu Ak/1).</p>
+                <p>Kartu Ak/1 adalah kartu tanda pencari kerja yang sering disebut pula dengan kartu kuning. Kartu ini dikeluarkan oleh lembaga pemerintah, Dinas Ketenagakerjaan atau Disnaker, yang dibuat dengan tujuan untuk pendataan para pencari kerja. Yuk, hanya dengan 3 langkah berikut ini Anda dapat dengan mudah membuat Kartu Pencari Kerja (Kartu Ak/1).</p>
             </div>
         </div>
 

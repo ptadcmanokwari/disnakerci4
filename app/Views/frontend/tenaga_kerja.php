@@ -35,20 +35,20 @@
     </div>
 </section>
 
-<section id="about-us" class="about-us section-bg">
+<section id="about-us" class="about-us section-bg bg-secondary text-light">
     <div class="container" data-aos="fade-up">
         <div class="row content">
-            <div class="col-lg-6">
+            <div class="col-lg-5">
                 <h4>Bidang Pelatihan dan Penempatan Angkatan Kerja</h4>
                 <p>Bidang Pelatihan dan Penempatan Tenaga Kerja mempunyai tugas:</p>
                 <ul>
-                    <li><i class="ri-check-double-line"></i> Melakukan koordinasi perencanaan, pelaksanaan, pengendalian, bimbingan, konsultasi Bidang Pelatihan Kerja dan Penempatan Kerja;</li>
-                    <li><i class="ri-check-double-line"></i> Merumuskan sasaran kegiatan di Bidang Pelatihan Kerja dan Penempatan Kerja;</li>
-                    <li><i class="ri-check-double-line"></i> Melakukan pembinaan dan pengaturan perluasan lapangan kerja dan kesempatan kerja bagi tenaga kerja mandiri di pedesaan dan perkotaan; dan .</li>
-                    <li><i class="ri-check-double-line"></i> Melaksanakan tugas kedinasan lain sesuai perintah atasan.</li>
+                    <li><i class="ri-check-double-line text-light"></i> Melakukan koordinasi perencanaan, pelaksanaan, pengendalian, bimbingan, konsultasi Bidang Pelatihan Kerja dan Penempatan Kerja;</li>
+                    <li><i class="ri-check-double-line text-light"></i> Merumuskan sasaran kegiatan di Bidang Pelatihan Kerja dan Penempatan Kerja;</li>
+                    <li><i class="ri-check-double-line text-light"></i> Melakukan pembinaan dan pengaturan perluasan lapangan kerja dan kesempatan kerja bagi tenaga kerja mandiri di pedesaan dan perkotaan; dan .</li>
+                    <li><i class="ri-check-double-line text-light"></i> Melaksanakan tugas kedinasan lain sesuai perintah atasan.</li>
                 </ul>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-7">
                 <img class="img-fluid w-100" src="<?php echo base_url(); ?>/uploads/develpment-planning.png">
             </div>
         </div>
@@ -78,15 +78,12 @@
     </div>
 </section>
 
-<section id="about-us" class="about-us section-bg">
-    <div class="container" data-aos="fade-up">
-        <div class="row content">
-            <div class="col-lg-6">
+<section id="cta" class="cta bg-dark text-light">
+    <div class="container aos-init aos-animate" data-aos="zoom-in">
+        <div class="row">
+            <div class="col-lg-12">
                 <h4>PERBUP RESTRIBUSI IMTA</h4>
-                <P>UNTUK PERBUP RESTRIBUSI IMTA TELAH BERGANTI NAMA MENJADI RPTKA SESUAI PERATURAN PEMERINTAH NOMOR 34 TAHUN 2021, DAN UNTUK PERATURAN DAERAH MASIH DIBAHAS OLEH BALEGDA TINGKAT PROVINSI PAPUA BARAT</P>
-            </div>
-            <div class="col-lg-6">
-                <img class="img-fluid w-100" src="<?php echo base_url(); ?>/uploads/develpment-planning.png">
+                <P>Peraturan Bupati terkait Retribusi Izin Mempekerjakan Tenaga Kerja Asing (IMTA) telah berganti nama menjadi Rencana Penggunaan Tenaga Kerja Asing (RPTKA) sesuai dengan Peraturan Pemerintah (PP) Nomor 34 Tahun 2021 tentang Penggunaan Tenaga Kerja Asing. Sementara itu, Peraturan Daerah masih dibahas oleh Badan Legislasi Daerah tingkat Provinsi Papua Barat.</P>
             </div>
         </div>
 

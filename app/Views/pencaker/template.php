@@ -125,9 +125,9 @@
                         <span><strong>Hi, <?php echo user()->username; ?></strong></span>
                     </a>
                 </li>
-                <a class="btn-sm btn btn-danger text-white p-2 m-0" href="<?php echo base_url('logout'); ?>">
+                <button class="btn-sm btn btn-danger text-white p-2 m-0" id="logoutButton">
                     <i class="bi bi-box-arrow-right"></i> Logout
-                </a>
+                </button>
             </ul>
         </nav>
 
@@ -240,6 +240,25 @@
                 e.preventDefault();
                 var currentMode = $('body').hasClass('dark-mode') ? 'dark' : 'light';
                 setMode(currentMode === 'dark' ? 'light' : 'dark');
+            });
+        });
+
+        // Event handler untuk logout dengan konfirmasi
+        document.getElementById('logoutButton').addEventListener('click', function(event) {
+            event.preventDefault();
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: "Anda akan keluar dari sistem!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, logout!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "<?php echo base_url('logout'); ?>";
+                }
             });
         });
     </script>

@@ -27,6 +27,16 @@
     #team .owl-nav {
         display: none;
     }
+
+    section#services .container.aos-init.aos-animate {
+        background-color: #116db6;
+        padding: 15px;
+        border-radius: 15px;
+    }
+
+    hr {
+        margin: 5px 0;
+    }
 </style>
 
 <section id="hero">
@@ -39,7 +49,7 @@
                         <h2 class="text-center">Selamat Datang di <span>Website</span></h2>
                         <h1 class="text-center">DISNAKERTRANS MANOKWARI</h1>
                         <p class="text-center"> Jalan Percetakan Negara - Sanggeng <br> Manokwari - Papua Barat</p>
-                        <div class="text-center"><a href="<?= url_to('register') ?>" class="btn-get-started">REGISTRASI PENCAKER</a></div>
+                        <div class="text-center"><a href="<?= base_url('kartu_ak1') ?>" class="btn-get-started">KARTU PENCARI KERJA (KARTU AK/1)</a></div>
                     </div>
                 </div>
             </div>
@@ -89,7 +99,7 @@
             <div class="col-lg-4 d-flex justify-content-center align-items-center">
                 <div class="section-title text-white" style="flex-direction: column;">
                     <h2>Layanan Kami</h2>
-                    <p>Layanan Kartu Pencari Kerja, Pengaduan, Pemagangan, Pelatihan & Sertifikasi</p>
+                    <p>Dapatkan kemudahan akses ke berbagai layanan kami. Berpartisipasilah! Kami menanti Anda!</p>
                 </div>
             </div>
             <div class="col-lg-8">
@@ -142,7 +152,7 @@
                                 <i class="bx bx-layer"></i>
                             </div>
                             <h4><a>Pelatihan & Sertifikasi</a></h4>
-                            <p>Memberikan bekal keterampilan profesional bagi angkatan kerja sehingga dapat membuka peluang kerja sendiri dan berwirausaha secara mandiri.</p>
+                            <p>Memungkinkan angkatan kerja membuka peluang kerja sendiri dan berwirausaha secara mandiri.</p>
                         </div>
                     </div>
                 </div>
@@ -235,8 +245,8 @@
     <div class="container" data-aos="fade-up">
         <div class="section-title">
             <h2>Statistik Pencari Kerja</h2>
-            <p class="fst-italic">
-                Berikut ini ditampilkan statistik pencari kerja di Kab. Manokwari.
+            <p>
+                Statistik pencari kerja di Kabupaten Manokwari berdasarkan Jenjang Pendidikan Terakhir dan Rentang Umur
             </p>
         </div>
         <div class="row">
@@ -471,52 +481,62 @@
 
 <section id="faq" class="faq section-bg">
     <div class="container" data-aos="fade-up">
-        <div class="section-title">
-            <h2>PALING SERING DITANYAKAN</h2>
-            <p>Berikut kami himpun beberapa pertanyaan yang paling sering ditanyakan ke kantor Disnakertrans Kab. Manokwari</p>
+        <div class="row">
+            <div class="col-lg-4 d-flex justify-content-center align-items-center">
+                <div class="section-title">
+                    <h3><strong>Pertanyaan yang sering ditanyakan user</strong></h3>
+                    <p class="text-secondary mt-3">Temukan jawaban untuk pertanyaan yang sering ditanyakan seputar layanan yang disediakan oleh Disnakertrans Kab. Manokwari</p>
+                    <hr>
+                    <p class="mt-5">Tidak menemukan pertanyaan yang dicari?
+                        <a href="<?php echo base_url('kontak'); ?>"><strong>Kunjungi Pusat Bantuan</strong></a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-lg-8 d-flex justify-content-center align-items-center">
+                <div class="faq-list">
+                    <ul>
+                        <li data-aos="fade-up">
+                            <a data-bs-toggle="collapse" class="collapse px-0" data-bs-target="#faq-list-1">Bagaimana caranya membuat kartu pencari kerja (Kartu Ak/1)? <i class="bi bi-arrow-down-short icon-show"></i><i class="bi bi-arrow-up-short icon-close"></i></a>
+                            <div id="faq-list-1" class="collapse show" data-bs-parent=".faq-list">
+                                <p class="text-secondary">
+                                    Pada website disnakertransmkw.com, pilih menu Layanan - Kartu Pencari Kerja (Kartu Ak/1), kemudian membuat akun dan menyiapkan berkas berupa file Ijazah terakhir, KTP, Riwayat Hidup, SKCK, Surat Keterangan Kesehatan.
+                                </p>
+                            </div>
+                        </li>
+                        <hr>
+
+                        <li data-aos="fade-up" data-aos-delay="100">
+                            <a data-bs-toggle="collapse" data-bs-target="#faq-list-2" class="collapsed px-0">Bagaimana cara memperoleh informasi lowongan pekerjaan di wilayah Manokwari? <i class="bi bi-arrow-down-short icon-show"></i><i class="bi bi-arrow-up-short icon-close"></i></a>
+                            <div id="faq-list-2" class="collapse" data-bs-parent=".faq-list">
+                                <p class="text-secondary">
+                                    Cari sendiri lah
+                                </p>
+                            </div>
+                        </li>
+
+                        <hr>
+                        <li data-aos="fade-up" data-aos-delay="200">
+                            <a data-bs-toggle="collapse" data-bs-target="#faq-list-3" class="collapsed px-0">Apakah setelah mendapatkan pekerjaan, harus melapor ke Disnakertrans? <i class="bi bi-arrow-down-short icon-show"></i><i class="bi bi-arrow-up-short icon-close"></i></a>
+                            <div id="faq-list-3" class="collapse" data-bs-parent=".faq-list">
+                                <p class="text-secondary">
+                                    Mmbetullll sekali.
+                                </p>
+                            </div>
+                        </li>
+                        <hr>
+                        <li data-aos="fade-up" data-aos-delay="300">
+                            <a data-bs-toggle="collapse" data-bs-target="#faq-list-4" class="collapsed px-0">Apakah ada program pelatihan/magang yang diselenggarakan Disnakertrans? <i class="bi bi-arrow-down-short icon-show"></i><i class="bi bi-arrow-up-short icon-close"></i></a>
+                            <div id="faq-list-4" class="collapse" data-bs-parent=".faq-list">
+                                <p class="text-secondary">
+                                    Kayaknya ada deh.
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-
-        <div class="faq-list">
-            <ul>
-                <li data-aos="fade-up">
-                    <a data-bs-toggle="collapse" class="collapse px-0" data-bs-target="#faq-list-1">Bagaimana caranya membuat kartu pencari kerja (Kartu Ak/1)? <i class="bi bi-plus icon-show"></i><i class="bi bi-dash icon-close"></i></a>
-                    <div id="faq-list-1" class="collapse show" data-bs-parent=".faq-list">
-                        <p>
-                            Pada website disnakertransmkw.com, pilih menu Layanan - Kartu Pencari Kerja (Kartu Ak/1), kemudian membuat akun dan menyiapkan berkas berupa file Ijazah terakhir, KTP, Riwayat Hidup, SKCK, Surat Keterangan Kesehatan.
-                        </p>
-                    </div>
-                </li>
-
-                <li data-aos="fade-up" data-aos-delay="100">
-                    <a data-bs-toggle="collapse" data-bs-target="#faq-list-2" class="collapsed px-0">Bagaimana cara memperoleh informasi terkait lowongan pekerjaan di wilayah Kab. Manokwari? <i class="bi bi-plus icon-show"></i><i class="bi bi-dash icon-close"></i></a>
-                    <div id="faq-list-2" class="collapse" data-bs-parent=".faq-list">
-                        <p>
-                            Cari sendiri lah
-                        </p>
-                    </div>
-                </li>
-
-                <li data-aos="fade-up" data-aos-delay="200">
-                    <a data-bs-toggle="collapse" data-bs-target="#faq-list-3" class="collapsed px-0">Apakah setelah mendapatkan pekerjaan, harus melapor ke Disnakertrans? <i class="bi bi-plus icon-show"></i><i class="bi bi-dash icon-close"></i></a>
-                    <div id="faq-list-3" class="collapse" data-bs-parent=".faq-list">
-                        <p>
-                            Mmbetullll sekali.
-                        </p>
-                    </div>
-                </li>
-
-                <li data-aos="fade-up" data-aos-delay="300">
-                    <a data-bs-toggle="collapse" data-bs-target="#faq-list-4" class="collapsed px-0">Apakah ada program pelatihan/magang yang diselenggarakan Disnakertrans? <i class="bi bi-plus icon-show"></i><i class="bi bi-dash icon-close"></i></a>
-                    <div id="faq-list-4" class="collapse" data-bs-parent=".faq-list">
-                        <p>
-                            Kayaknya ada deh.
-                        </p>
-                    </div>
-                </li>
-            </ul>
-        </div>
-
-    </div>
 </section>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 <script>

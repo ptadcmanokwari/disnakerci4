@@ -147,9 +147,9 @@
                         <span><strong>Hi, <?php echo user()->username; ?></strong></span>
                     </a>
                 </li>
-                <a class="btn-sm btn btn-danger text-white p-2 m-0" href="<?php echo base_url('logout'); ?>">
+                <button class="btn-sm btn btn-danger text-white p-2 m-0" id="logoutButton">
                     <i class="bi bi-box-arrow-right"></i> Logout
-                </a>
+                </button>
             </ul>
         </nav>
 
@@ -308,9 +308,10 @@
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="<?php echo base_url('adminltev31/dist/js/adminlte.min.js'); ?>"></script>
     <script src="<?php echo base_url('adminltev31/dist/js/demo.js'); ?>"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         $(document).ready(function() {
+            // Fungsi untuk mode gelap dan terang
             function setMode(mode) {
                 if (mode === 'dark') {
                     $('body').addClass('dark-mode');
@@ -326,23 +327,43 @@
                 localStorage.setItem('mode', mode);
             }
 
+            // Set mode berdasarkan nilai yang disimpan di localStorage
             var savedMode = localStorage.getItem('mode');
             setMode(savedMode ? savedMode : 'light');
 
+            // Event handler untuk switch mode
             $('#mode-switch').change(function() {
                 var mode = $(this).prop('checked') ? 'dark' : 'light';
                 setMode(mode);
             });
 
+            // Event handler untuk toggle mode
             $('#dark-mode-toggle').on('click', function(e) {
                 e.preventDefault();
                 var currentMode = $('body').hasClass('dark-mode') ? 'dark' : 'light';
                 setMode(currentMode === 'dark' ? 'light' : 'dark');
             });
+
+            // Event handler untuk logout dengan konfirmasi
+            document.getElementById('logoutButton').addEventListener('click', function(event) {
+                event.preventDefault();
+                Swal.fire({
+                    title: 'Apakah Anda yakin?',
+                    text: "Anda akan keluar dari sistem!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya, logout!',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "<?php echo base_url('logout'); ?>";
+                    }
+                });
+            });
         });
     </script>
-
-
 </body>
 
 </html>
