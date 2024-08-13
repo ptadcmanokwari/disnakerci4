@@ -58,6 +58,7 @@
                                         <th>No.</th>
                                         <th>Judul Pelatihan</th>
                                         <th>Isi Pelatihan</th>
+                                        <th>Jenis Pelatihan</th>
                                         <th>Gambar</th>
                                         <th>Status</th>
                                         <th>Aksi</th>
@@ -87,28 +88,62 @@
             </div>
             <form id="uploadPelatihanForm" enctype="multipart/form-data" method="post">
                 <div class="modal-body">
-                    <input type="hidden" class="form-control" name="kategori" id="kategori" value="pelatihan">
-                    <div class="mb-3">
-                        <label for="judul" class="form-label">Judul Pelatihan</label>
-                        <input type="text" class="form-control" id="judul" name="judul" required>
-                    </div>
-                    <div class="mb-3">
-                        <span>Isi Pelatihan</span>
-                        <textarea id="isi" name="isi"></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="tags">Tags Pelatihan</label>
-                        <input type="text" class="form-control" name="tags" id="tags" required>
-                    </div>
-                    <input type="hidden" class="form-control" name="status" id="status" value="1">
-                    <input type="hidden" class="form-control" name="users_id" id="users-id" value="1">
-
-                    <div class="mb-3">
-                        <span>Gambar Pelatihan</span>
-                        <div id="unggahGambarBaru" class="dropzone"></div>
-                        <!-- Cropper Container -->
-                        <div id="addPelatihanCropper" style="display: none;">
-                            <img id="addPelatihanImage" src="" alt="Cropper">
+                    <div class="row">
+                        <input type="hidden" class="form-control" name="kategori" id="kategori" value="pelatihan">
+                        <input type="hidden" class="form-control" name="status" id="status" value="1">
+                        <input type="hidden" class="form-control" name="users_id" id="users-id" value="1">
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label for="judul" class="form-label">Judul Pelatihan</label>
+                                <input type="text" class="form-control" id="judul" name="judul" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <span>Deskripsi Pelatihan</span>
+                                <textarea id="isi" name="isi"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="alert alert-warning" role="alert">
+                                Pilih opsi Lainnya ... pada bagian Jenis Pelatihan berikut jika ingin menambahkan jenis pelatihan baru!
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="mb-3">
+                                <div class="form-group">
+                                    <label for="jenis_pelatihan_kode">Jenis Pelatihan</label>
+                                    <select name="jenis_pelatihan_kode" id="jenis_pelatihan_kode" class="w-100 form-control" onchange="showInput(this)">
+                                        <option value="">- Pilih -</option>
+                                        <?php foreach ($jenis_pelatihan as $pelatihan) : ?>
+                                            <option value="<?= $pelatihan['kode']; ?>"><?= $pelatihan['pelatihan']; ?></option>
+                                        <?php endforeach; ?>
+                                        <option value="lainnya">Lainnya ...</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div id="inputLainnya" style="display: none;">
+                                <label for="new_jenis_pelatihan">Jenis Pelatihan Baru</label>
+                                <input type="text" name="new_jenis_pelatihan" id="new_jenis_pelatihan" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label for="link" class="form-label">Link Pelatihan (Google Form, dll.)</label>
+                                <input type="text" class="form-control" id="link" name="link" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <span>Gambar Pelatihan</span>
+                                <div id="unggahGambarBaru" class="dropzone"></div>
+                                <!-- Cropper Container -->
+                                <div id="addPelatihanCropper" style="display: none;">
+                                    <img id="addPelatihanImage" src="" alt="Cropper">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -145,8 +180,15 @@
                         <textarea id="edit_isi" name="edit_isi"></textarea>
                     </div>
                     <div class="mb-3">
-                        <label for="edit_tags">Ubah Tags Pelatihan</label>
-                        <input type="text" class="form-control" name="edit_tags" id="edit_tags">
+                        <label for="edit_jenis_pelatihan" class="form-label">Ubah Jenis Pelatihan</label>
+                        <select class="form-control" id="edit_jenis_pelatihan" name="edit_jenis_pelatihan">
+                            <!-- Options will be dynamically loaded here -->
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="edit_link" class="form-label">Ubah Link Pelatihan (Google Form, dll.)</label>
+                        <input type="text" class="form-control" id="edit_link" name="edit_link">
                     </div>
                     <input type="hidden" class="form-control" name="edit_status" id="edit_status" value="1">
                     <input type="hidden" class="form-control" name="edit_users-id" id="edit_users-id" value="1">
@@ -202,6 +244,9 @@
                 },
                 {
                     "data": "isi"
+                },
+                {
+                    "data": "pelatihan"
                 },
                 {
                     "data": "gambar"
@@ -357,14 +402,6 @@
                             movable: true,
                             cropBoxResizable: true,
                             toggleDragModeOnDblclick: false,
-                            ready: function() {
-                                cropper.setCanvasData({
-                                    left: 0,
-                                    top: 0,
-                                    width: 100,
-                                    height: 'auto'
-                                });
-                            }
                         });
                     };
                     reader.readAsDataURL(file);
@@ -397,12 +434,19 @@
                 });
 
                 this.on("sending", function(file, xhr, formData) {
+                    var jenisPelatihanKode = document.querySelector("#jenis_pelatihan_kode").value;
                     formData.append("kategori", document.querySelector("#kategori").value);
                     formData.append("judul", document.querySelector("#judul").value);
                     formData.append("isi", document.querySelector("#isi").value);
-                    formData.append("tags", document.querySelector("#tags").value);
+                    formData.append("jenis_pelatihan_kode", jenisPelatihanKode);
                     formData.append("status", document.querySelector("#status").value);
+                    formData.append("link", document.querySelector("#link").value);
                     formData.append("users_id", document.querySelector("#users-id").value);
+
+                    if (jenisPelatihanKode === 'lainnya') {
+                        var newJenisPelatihan = document.querySelector("#new_jenis_pelatihan").value;
+                        formData.append("new_jenis_pelatihan", newJenisPelatihan);
+                    }
                 });
 
                 this.on("success", function(file, response) {
@@ -435,13 +479,16 @@
             }
         });
 
+
         function resetModal() {
             var judul = document.getElementById('judul');
             var edit_judul = document.getElementById('edit_judul');
+            var new_jenis_pelatihan = document.getElementById('new_jenis_pelatihan');
+            var jenis_pelatihan_kode = document.getElementById('jenis_pelatihan_kode');
+            var edit_jenis_pelatihan_kode = document.getElementById('edit_jenis_pelatihan_kode');
+            var link = document.getElementById('link');
             var isi = $('#isi');
             var edit_isi = $('#edit_isi');
-            var tags = document.getElementById('tags');
-            var edit_tags = document.getElementById('edit_tags');
 
             if (judul) {
                 judul.value = '';
@@ -455,11 +502,17 @@
             if (edit_isi) {
                 edit_isi.summernote('code', '');
             }
-            if (tags) {
-                tags.value = '';
+            if (link) {
+                link.value = '';
             }
-            if (edit_tags) {
-                edit_tags.value = '';
+            if (new_jenis_pelatihan) {
+                new_jenis_pelatihan.value = '';
+            }
+            if (jenis_pelatihan_kode) {
+                jenis_pelatihan_kode.value = '';
+            }
+            if (edit_jenis_pelatihan_kode) {
+                edit_jenis_pelatihan_kode.value = '';
             }
             if (addDropzone) {
                 addDropzone.removeAllFiles();
@@ -488,14 +541,14 @@
             var edit_id = $(this).data('edit_id');
             var edit_judul = $(this).data('edit_judul');
             var edit_isi = $(this).data('edit_isi');
-            var edit_tags = $(this).data('edit_tags');
             var edit_gambar = $(this).data('edit_gambar');
-
+            var edit_kode_pelatihan = $(this).data('edit_kode');
+            var edit_link = $(this).data('edit_link');
             // Set data ke dalam modal
             $('#edit_id').val(edit_id);
             $('#edit_judul').val(edit_judul);
+            $('#edit_link').val(edit_link);
             $('#edit_isi').summernote('code', edit_isi);
-            $('#edit_tags').val(edit_tags);
 
             if (edit_gambar) {
                 $('#edit-gambar-preview').attr('src', '<?= base_url('uploads/pelatihan/') ?>' + edit_gambar);
@@ -503,8 +556,27 @@
                 $('#edit-gambar-preview').attr('src', '');
             }
 
+            // Populate the dropdown
+            $.ajax({
+                url: '<?= base_url('admin_v2/get_jenis_pelatihan') ?>', // URL to fetch the list of pelatihan
+                method: 'GET',
+                success: function(response) {
+                    var dropdown = $('#edit_jenis_pelatihan');
+                    dropdown.empty(); // Clear any existing options
+
+                    $.each(response, function(index, item) {
+                        dropdown.append('<option value="' + item.kode + '">' + item.pelatihan + '</option>');
+                    });
+
+                    // Set the selected pelatihan
+                    dropdown.val(edit_kode_pelatihan);
+                }
+            });
+
             $('#ubahPelatihanBaruModal').modal('show');
         });
+
+
 
         const editDropzone = new Dropzone("#edit_gambar_dropzone", {
             url: "<?= base_url('admin_v2/update_pelatihan') ?>",
@@ -586,8 +658,10 @@
                     formData.append("id", document.querySelector("#edit_id").value);
                     formData.append("judul", document.querySelector("#edit_judul").value);
                     formData.append("isi", document.querySelector("#edit_isi").value);
-                    formData.append("tags", document.querySelector("#edit_tags").value);
+                    formData.append("link", document.querySelector("#edit_link").value);
+                    formData.append("jenis_pelatihan_kode", document.querySelector("#edit_jenis_pelatihan").value); // Add jenis_pelatihan here
                 });
+
 
                 this.on("success", function(file, response) {
                     if (response.success) {
@@ -620,15 +694,19 @@
         });
 
         function updatePelatihanWithoutImage() {
+            var formData = new FormData();
+            formData.append("id", document.querySelector("#edit_id").value);
+            formData.append("judul", document.querySelector("#edit_judul").value);
+            formData.append("isi", document.querySelector("#edit_isi").value);
+            formData.append("link", document.querySelector("#edit_link").value);
+            formData.append("jenis_pelatihan_kode", document.querySelector("#edit_jenis_pelatihan").value);
+
             $.ajax({
                 url: "<?= base_url('admin_v2/update_pelatihan') ?>",
-                type: 'POST',
-                data: {
-                    id: document.querySelector("#edit_id").value,
-                    judul: document.querySelector("#edit_judul").value,
-                    isi: document.querySelector("#edit_isi").value,
-                    tags: document.querySelector("#edit_tags").value
-                },
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
                 success: function(response) {
                     if (response.success) {
                         Swal.fire({
@@ -648,7 +726,7 @@
                         });
                     }
                 },
-                error: function() {
+                error: function(response) {
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',
@@ -657,6 +735,18 @@
                 }
             });
         }
+
     });
+</script>
+
+<script>
+    function showInput(select) {
+        var inputLainnya = document.getElementById('inputLainnya');
+        if (select.value === 'lainnya') {
+            inputLainnya.style.display = 'block';
+        } else {
+            inputLainnya.style.display = 'none';
+        }
+    }
 </script>
 <?= $this->endSection() ?>

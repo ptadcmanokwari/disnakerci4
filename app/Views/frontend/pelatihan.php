@@ -14,14 +14,14 @@
 
         <div class="section-title">
             <h2>Pelatihan</h2>
-            <?php if (empty($informasi)) : ?>
+            <?php if (empty($pelatihan)) : ?>
                 <p>Belum ada data untuk ditampilkan</p>
             <?php else : ?>
                 <p>Temukan pelatihan paling populer tentang Dianas Ketenagakerjaan dan Transmigrasi Kabupaten Manokwari</p>
             <?php endif; ?>
         </div>
         <div class="row d-flex align-items-center justify-content-center">
-            <?php foreach ($informasi as $item) : ?>
+            <?php foreach ($pelatihan as $item) : ?>
                 <div class="col-lg-4 entries mt-3">
                     <article class="entry p-2 card">
                         <div class="entry-img mt-0">
@@ -45,7 +45,7 @@
                                 <li class="d-flex align-items-center"><i class="bi bi-person"></i><?= $item['namalengkap']; ?></li>
                                 <li class="d-flex align-items-center">
                                     <i class="bi bi-calendar"></i>
-                                    <time datetime="<?= $item['tgl_publikasi']; ?>"><?= date('M d, Y', strtotime($item['tgl_publikasi'])); ?>
+                                    <time datetime="<?= $item['tanggal']; ?>"><?= date('M d, Y', strtotime($item['tanggal'])); ?>
                                     </time>
                                 </li>
                             </ul>
@@ -54,15 +54,7 @@
                 </div>
             <?php endforeach; ?>
         </div>
-        <div class="row mt-4">
-            <div class="blog-pagination">
-                <ul class="justify-content-center">
-                    <?php if ($pager) : ?>
-                        <li><?= $pager->links() ?></li>
-                    <?php endif; ?>
-                </ul>
-            </div>
-        </div>
+
     </div>
 </section>
 

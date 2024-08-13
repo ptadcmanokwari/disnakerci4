@@ -40,6 +40,7 @@
     <link href="<?= base_url(); ?>frontend/assets/css/style.css" rel="stylesheet">
 
     <script src="<?= base_url('frontend/jquery/jquery.min.js') ?>"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox@3.1.0/dist/css/glightbox.min.css">
     <!-- =======================================================
   * Template Name: Company
   * Template URL: https://bootstrapmade.com/company-free-html-bootstrap-template/
@@ -252,7 +253,12 @@
 
     <!-- Template Main JS File -->
     <script src="<?= base_url(); ?>frontend/assets/js/main.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/glightbox@3.1.0/dist/js/glightbox.min.js"></script>
+    <script>
+        const lightbox = GLightbox({
+            selector: '.glightbox'
+        });
+    </script>
 </body>
 
 </html>

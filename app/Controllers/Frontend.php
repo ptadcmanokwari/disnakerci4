@@ -6,6 +6,7 @@ use App\Models\FrontendModel;
 use App\Models\PencakerModel;
 use App\Models\PendidikanModel;
 use App\Models\SettingsModel;
+use App\Models\PelatihanModel;
 use App\Helpers\QrCodeHelper;
 
 class Frontend extends BaseController
@@ -278,53 +279,31 @@ class Frontend extends BaseController
 
     public function pelatihan(): string
     {
-        $informasiModel = new FrontendModel();
+        $pelatihanModel = new PelatihanModel();
 
-        $perPage = 6;
-        $currentPage = $this->request->getVar('page') ? (int)$this->request->getVar('page') : 1;
+        $pelatihan = $pelatihanModel->get_all_pelatihan_by_penulis();
 
-        $kategori = 'pelatihan'; // Kategori yang ingin ditampilkan
-
-        $data['informasi'] = $informasiModel->getInformasiByKategoriFront($kategori, $perPage, $currentPage);
-        $data['kategori'] = $informasiModel->getKategoriCount();
-
-        // Menggunakan metode yang telah diubah untuk mengambil nama user
-        $data['recentPosts'] = $informasiModel->getRecentPostsByKategori($kategori);
-
-        $tagsArray = [];
-        foreach ($data['informasi'] as $info) {
-            $tagsArray = array_merge($tagsArray, explode(',', $info['tags']));
-        }
-        $data['uniqueTags'] = array_unique($tagsArray);
 
         $data['title'] = 'Pelatihan - Disnakertrans Manokwari';
-        $data['pager'] = $informasiModel->pager;
+        $data['pelatihan'] = $pelatihan;
 
         return $this->loadView('frontend/pelatihan', $data);
     }
 
     public function detail_pelatihan($slug): string
     {
-        $informasiModel = new FrontendModel();
+        $pelatihanModel = new PelatihanModel();
 
-        $pelatihan = $informasiModel->where('slug', $slug)->first();
+        // Ambil detail pelatihan berdasarkan slug dan gabungkan dengan tabel terkait
+        $pelatihan = $pelatihanModel->get_pelatihan_by_slug($slug);
 
-        if (!$pelatihan) {
-            echo ('pelatihan tidak ditemukan');
-        }
 
         $data['pelatihan'] = $pelatihan;
         $data['title'] = $pelatihan['judul'] . ' - Disnakertrans Manokwari';
 
-        $kategori = 'pelatihan';
-        $data['recentPosts'] = $informasiModel->getRecentPostsByKategori($kategori);
-
-        // Ambil daftar tags dari pelatihan ini
-        $tagsArray = explode(',', $pelatihan['tags']);
-        $data['uniqueTags'] = array_unique($tagsArray);
-
         return $this->loadView('frontend/detail_pelatihan', $data);
     }
+
 
     public function kartu_ak1(): string
     {

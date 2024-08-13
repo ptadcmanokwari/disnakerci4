@@ -1,7 +1,5 @@
 <?= $this->extend('frontend/template') ?>
 <?= $this->section('content') ?>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox@3.1.0/dist/css/glightbox.min.css">
-
 <section id="breadcrumbs" class="breadcrumbs">
     <div class="container">
         <div class="d-flex justify-content-between align-items-center">
@@ -166,10 +164,4 @@
         </div>
     </div>
 </section>
-<script src="https://cdn.jsdelivr.net/npm/glightbox@3.1.0/dist/js/glightbox.min.js"></script>
-<script>
-    const lightbox = GLightbox({
-        selector: '.glightbox'
-    });
-</script>
 <?= $this->endSection() ?>

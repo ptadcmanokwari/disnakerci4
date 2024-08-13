@@ -90,6 +90,7 @@ $routes->post('admin_v2/save_pelatihan', 'Admin::save_pelatihan', ['filter' => '
 $routes->post('admin_v2/update_pelatihan', 'Admin::update_pelatihan', ['filter' => 'role:administrator']);
 $routes->post('admin_v2/update_status_pelatihan', 'Admin::update_status_pelatihan', ['filter' => 'role:administrator']);
 $routes->post('admin_v2/hapus_pelatihan', 'Admin::hapus_pelatihan', ['filter' => 'role:administrator']);
+$routes->get('admin_v2/get_jenis_pelatihan', 'Admin::get_jenis_pelatihan', ['filter' => 'role:administrator']);
 
 $routes->get('admin_v2/activitylogs', 'Admin::activitylogs', ['filter' => 'role:administrator']);
 $routes->get('admin_v2/activitylogsajax', 'Admin::activitylogsajax', ['filter' => 'role:administrator']);

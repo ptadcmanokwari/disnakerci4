@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="<?php echo base_url('adminltev31/plugins/summernote/summernote-bs4.min.css'); ?>">
     <style>
         ul.nav.nav-treeview a.nav-link {
-            padding-left: 40px;
+            padding-left: 35px;
         }
 
         .card-header {

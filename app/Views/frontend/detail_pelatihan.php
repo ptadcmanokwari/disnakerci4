@@ -1,6 +1,11 @@
 <?= $this->extend('frontend/template') ?>
 <?= $this->section('content') ?>
-
+<style>
+    .btn-info {
+        background-color: #116db6;
+        border: 0;
+    }
+</style>
 <section id="breadcrumbs" class="breadcrumbs">
     <div class="container">
         <div class="d-flex justify-content-between align-items-center">
@@ -21,31 +26,27 @@
                     </h2>
                     <div class="entry-meta">
                         <ul>
-                            <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="#"><?= $pelatihan['users_id'] ?></a></li>
-                            <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="#"><time datetime="<?= $pelatihan['tgl_publikasi'] ?>"><?= date('M d, Y', strtotime($pelatihan['tgl_publikasi'])) ?></time></a></li>
+                            <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="#"><?= $pelatihan['namalengkap'] ?></a></li>
+                            <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="#"><time datetime="<?= $pelatihan['tanggal'] ?>"><?= date('M d, Y', strtotime($pelatihan['tanggal'])) ?></time></a></li>
+                            <li class="d-flex align-items-center"><i class="bi bi-tag"></i> <a href="#"><?= $pelatihan['pelatihan'] ?></a></li>
                         </ul>
                     </div>
-                    <div class="entry-content">
+                    <hr>
+                    <div class="entry-content mb-4">
                         <?= $pelatihan['isi'] ?>
-                    </div>
-                    <div class="entry-footer">
-                        <i class="bi bi-folder"></i>
-                        <ul class="cats">
-                            <li><a href="#"><?= $pelatihan['kategori'] ?></a></li>
-                        </ul>
-                        <i class="bi bi-tags"></i>
-                        <ul class="tags">
-                            <?php foreach ($uniqueTags as $tag) : ?>
-                                <li><a href="#"><?= $tag ?></a></li>
-                            <?php endforeach; ?>
-                        </ul>
                     </div>
                 </article>
             </div>
 
             <div class="col-lg-4">
                 <div class="sidebar">
-                    <h3 class="sidebar-title">Pelatihan Lainnya</h3>
+                    <hr>
+                    <h3 class="sidebar-title">Join Pelatihan</h3>
+                    <p class="text-secondary">Anda dapat mengikuti pelatihan ini dengan cara klik tombol di bawah ini.</p>
+                    <a href="<?= $pelatihan['link'] ?>" class="btn btn-info text-light text-small mt-3" target="_blank"><i class="bi bi-paperclip mx-2"></i>Bergabung Sekarang</a>
+
+                    <hr>
+                    <h3 class="sidebar-title mt-3">Pelatihan Lainnya</h3>
                     <div class="sidebar-item recent-posts">
                         <?php if (empty($recentPosts)) : ?>
                             <p class="text-muted">Belum ada data untuk ditampilkan di halaman ini.</p>
@@ -54,25 +55,10 @@
                                 <div class="post-item clearfix">
                                     <img src="<?= base_url('uploads/pelatihan/' . $post['gambar']); ?>" alt="<?= $post['judul']; ?>">
                                     <h4><a href="<?= $post['slug']; ?>"><?= substr(strip_tags($post['judul']), 0, 50) ?> ...</a></h4>
-                                    <time datetime="<?= $post['tgl_publikasi']; ?>"><?= date('M d, Y', strtotime($post['tgl_publikasi'])); ?></time>
+                                    <time datetime="<?= $post['tanggal']; ?>"><?= date('M d, Y', strtotime($post['tanggal'])); ?></time>
                                 </div>
                             <?php endforeach; ?>
                         <?php endif; ?>
-                    </div>
-
-                    <h3 class="sidebar-title">Tags</h3>
-                    <div class="sidebar-item tags">
-                        <ul>
-                            <?php if (empty($uniqueTags)) : ?>
-                                <p class="text-muted">Belum ada data untuk ditampilkan di halaman ini.</p>
-                            <?php else : ?>
-                                <?php if (isset($uniqueTags)) : ?>
-                                    <?php foreach ($uniqueTags as $tag) : ?>
-                                        <li><a href="#"><?= trim($tag); ?></a></li>
-                                    <?php endforeach; ?>
-                                <?php endif; ?>
-                            <?php endif; ?>
-                        </ul>
                     </div>
                 </div>
             </div>

@@ -98,7 +98,7 @@
         <div class="row">
             <div class="col-lg-4 d-flex justify-content-center align-items-center">
                 <div class="section-title text-white" style="flex-direction: column;">
-                    <h2>Layanan Kami</h2>
+                    <h1><strong>Layanan Kami</strong></h1>
                     <p>Dapatkan kemudahan akses ke berbagai layanan kami. Berpartisipasilah! Kami menanti Anda!</p>
                 </div>
             </div>
@@ -366,12 +366,10 @@
             <?php foreach ($galleries as $category => $images) : ?>
                 <?php foreach ($images as $image) : ?>
                     <div class="col-lg-4 col-md-6 portfolio-item filter-<?= $category; ?>">
-                        <img src="<?= $image['url']; ?>" class="img-fluid" alt="">
+                        <img src="<?= $image['url']; ?>" class="img-fluid portfolio-lightbox preview-link">
                         <div class="portfolio-info">
                             <h4><?= $image['name']; ?></h4>
                             <p><?= ucfirst($category); ?></p>
-                            <a href="<?= $image['url']; ?>" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="<?= $image['name']; ?>"><i class="bx bx-plus"></i></a>
-                            <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
                         </div>
                     </div>
                 <?php endforeach; ?>
@@ -484,7 +482,7 @@
         <div class="row">
             <div class="col-lg-4 d-flex justify-content-center align-items-center">
                 <div class="section-title">
-                    <h3><strong>Pertanyaan yang sering ditanyakan user</strong></h3>
+                    <h3><strong class="text-info">Pertanyaan yang sering ditanyakan user</strong></h3>
                     <p class="text-secondary mt-3">Temukan jawaban untuk pertanyaan yang sering ditanyakan seputar layanan yang disediakan oleh Disnakertrans Kab. Manokwari</p>
                     <hr>
                     <p class="mt-5">Tidak menemukan pertanyaan yang dicari?

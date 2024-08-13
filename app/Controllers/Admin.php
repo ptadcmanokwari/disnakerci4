@@ -11,6 +11,8 @@ use App\Models\DatabaseModel;
 use App\Models\SettingsModel;
 use App\Models\VerifikasiModel;
 use App\Models\TimelineuserModel;
+use App\Models\PelatihanModel;
+use App\Models\JenispelatihanModel;
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
@@ -960,16 +962,45 @@ class Admin extends BaseController
     }
 
 
+    // public function pelatihan()
+    // {
+
+    //     $pelatihanModel = new JenispelatihanModel();
+    //     $pelatihan = $pelatihanModel->findAll();
+
+    //     $data['title'] = 'Manajemen Pelatihan';
+    //     $data['jenis_pelatihan'] = $pelatihan;
+    //     return $this->loadView('admin/pelatihan', $data);
+    // }
+
     public function pelatihan()
     {
+        $pelatihanModel = new JenispelatihanModel();
+
+        if ($this->request->getMethod() === 'post') {
+            $jenisPelatihanKode = $this->request->getPost('jenis_pelatihan_kode');
+            $newJenisPelatihan = $this->request->getPost('new_jenis_pelatihan');
+
+            // Jika ada input baru dari field teks
+            if ($jenisPelatihanKode === 'lainnya' && !empty($newJenisPelatihan)) {
+                $pelatihanModel->insert(['pelatihan' => $newJenisPelatihan]);
+            }
+
+            return redirect()->to(current_url())->with('message', 'Jenis pelatihan berhasil ditambahkan.');
+        }
+
+        $pelatihan = $pelatihanModel->findAll();
+
         $data['title'] = 'Manajemen Pelatihan';
+        $data['jenis_pelatihan'] = $pelatihan;
+
         return $this->loadView('admin/pelatihan', $data);
     }
 
     public function pelatihanajax()
     {
-        $pelatihanModel = new FrontendModel();
-        $pelatihan = $pelatihanModel->getInformasiByKategori('pelatihan', 10, 0);
+        $pelatihanModel = new PelatihanModel();
+        $pelatihan = $pelatihanModel->get_all_pelatihan();
 
         $data = [];
         $no = 1;
@@ -980,21 +1011,30 @@ class Admin extends BaseController
             $data[] = [
                 "no" => $no++,
                 "judul" => $item['judul'],
-                // "isi" => $item['isi'],
-                "isi" => substr(strip_tags($item['isi']), 0, 250) . ' ...',
+                "isi" => substr(strip_tags($item['isi']), 0, 150) . ' ...',
+                "pelatihan" => $item['pelatihan'],
                 "gambar" => $gambar,
                 "status" => '<input type="checkbox" class="js-switch" data-id="' . $item['id'] . '" ' . ($item['status'] ? 'checked' : '') . '>',
                 "aksi" =>
                 '<div class="btn-group" role="group" aria-label="Aksi">
-                        <a href="' . base_url('pelatihan/detail_pelatihan/' . $item['slug']) . '" class="btn btn-info btn-sm" title="Detail Pelatihan">
-                            <i class="bi bi-eye"></i>
-                        </a>
-                        <button class="btn btn-primary btn-sm btn-edit" data-edit_id="' . $item['id'] . '"  data-edit_judul="' . htmlspecialchars($item['judul']) . '" data-edit_isi="' . htmlspecialchars($item['isi']) . '" data-edit_tags="' . $item['tags'] . '" data-edit_gambar="' . $item['gambar'] . '" data-toggle="modal"  data-toggle="modal" data-target="#ubahPelatihanModal" title="Ubah Pelatihan"> <i class="bi bi-pencil-square"></i>
-                        </button>
-                        <button class="btn btn-danger btn-sm btn-delete" data-id="' . $item['id'] . '" data-judul="' . $item['judul'] . '" title="Hapus Pelatihan">
-                            <i class="bi bi-trash"></i>
-                        </button>
-                    </div>'
+                    <a href="' . base_url('pelatihan/detail_pelatihan/' . $item['slug']) . '" class="btn btn-info btn-sm" title="Detail Pelatihan">
+                        <i class="bi bi-eye"></i>
+                    </a>
+                    <button class="btn btn-primary btn-sm btn-edit" 
+                        data-edit_id="' . $item['id'] . '"  
+                        data-edit_judul="' . htmlspecialchars($item['judul']) . '" 
+                        data-edit_isi="' . htmlspecialchars($item['isi']) . '" 
+                        data-edit_gambar="' . $item['gambar'] . '" 
+                        data-edit_kode="' . $item['kode'] . '"
+                        data-edit_link="' . $item['link'] . '"
+                        data-toggle="modal" 
+                        data-target="#ubahPelatihanModal" title="Ubah Pelatihan"> 
+                        <i class="bi bi-pencil-square"></i>
+                    </button>
+                    <button class="btn btn-danger btn-sm btn-delete" data-id="' . $item['id'] . '" data-judul="' . $item['judul'] . '" title="Hapus Pelatihan">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </div>'
             ];
         }
 
@@ -1006,7 +1046,7 @@ class Admin extends BaseController
         $id = $this->request->getJSON()->id;
         $status = $this->request->getJSON()->status;
 
-        $model = new FrontendModel();
+        $model = new PelatihanModel();
         $activityModel = new ActivitylogsModel();
 
         // Ambil pelatihan sebelum update
@@ -1045,7 +1085,8 @@ class Admin extends BaseController
             'file' => 'uploaded[file]|is_image[file]',
             'judul' => 'required',
             'isi' => 'required',
-            'tags' => 'required',
+            'jenis_pelatihan_kode' => 'required',
+            'link' => 'required',
             'status' => 'required|in_list[0,1]',
         ]);
 
@@ -1053,6 +1094,21 @@ class Admin extends BaseController
             return $this->response->setJSON(['success' => false, 'errors' => $validation->getErrors()]);
         }
 
+        // Proses input jenis pelatihan baru jika ada
+        $jenisPelatihanKode = $this->request->getPost('jenis_pelatihan_kode');
+        if ($jenisPelatihanKode === 'lainnya') {
+            $newJenisPelatihan = $this->request->getPost('new_jenis_pelatihan');
+            if (!empty($newJenisPelatihan)) {
+                // Simpan jenis pelatihan baru ke database
+                $jenisPelatihanModel = new JenispelatihanModel();
+                $jenisPelatihanModel->insert(['pelatihan' => $newJenisPelatihan]);
+                $jenisPelatihanKode = $jenisPelatihanModel->getInsertID(); // Dapatkan kode yang baru diinsert
+            } else {
+                return $this->response->setJSON(['success' => false, 'errors' => ['new_jenis_pelatihan' => 'Jenis pelatihan baru harus diisi']]);
+            }
+        }
+
+        // Proses file upload
         $file = $this->request->getFile('file');
 
         if ($file->isValid() && !$file->hasMoved()) {
@@ -1060,19 +1116,20 @@ class Admin extends BaseController
             $file->move(FCPATH . 'uploads/pelatihan/', $newName);
 
             // Simpan ke database
-            $categoryModel = new FrontendModel();
+            $pelatihan = new PelatihanModel();
             $data = [
                 'kategori' => $this->request->getPost('kategori'),
                 'judul' => $this->request->getPost('judul'),
                 'isi' => $this->request->getPost('isi'),
-                'tags' => $this->request->getPost('tags'),
-                'tgl_publikasi' => date('Y-m-d H:i:s'),
+                'tanggal' => date('Y-m-d H:i:s'),
+                'jenis_pelatihan_kode' => $jenisPelatihanKode,
                 'gambar' => $newName,
                 'status' => $this->request->getPost('status'),
+                'link' => $this->request->getPost('link'),
                 'slug' => url_title($this->request->getPost('judul'), '-', true),
                 'users_id' => user()->id,
             ];
-            $categoryModel->save($data);
+            $pelatihan->save($data);
 
             // Rekam aktivitas
             $activityModel = new ActivitylogsModel();
@@ -1090,15 +1147,24 @@ class Admin extends BaseController
     }
 
 
+    public function get_jenis_pelatihan()
+    {
+        $model = new JenispelatihanModel();
+        $data = $model->findAll();
+
+        return $this->response->setJSON($data);
+    }
+
     public function update_pelatihan()
     {
-        $model = new FrontendModel();
+        $model = new PelatihanModel();
         $activityModel = new ActivitylogsModel();
 
         $id = $this->request->getPost('id');
         $judul = $this->request->getPost('judul');
         $isi = $this->request->getPost('isi');
-        $tags = $this->request->getPost('tags');
+        $link = $this->request->getPost('link');
+        $jenis_pelatihan_kode = $this->request->getPost('jenis_pelatihan_kode');
         $kategori = 'pelatihan';
         $status = 1;
         $users_id = user()->id;
@@ -1107,7 +1173,8 @@ class Admin extends BaseController
         $validation->setRules([
             'judul' => 'required',
             'isi' => 'required',
-            'tags' => 'required',
+            'link' => 'required',
+            'jenis_pelatihan_kode' => 'required',
         ]);
 
         if (!$validation->withRequest($this->request)->run()) {
@@ -1122,7 +1189,8 @@ class Admin extends BaseController
         $data = [
             'judul' => $judul,
             'isi' => $isi,
-            'tags' => $tags,
+            'link' => $link,
+            'jenis_pelatihan_kode' => $jenis_pelatihan_kode, // Simpan jenis pelatihan
             'kategori' => $kategori,
             'status' => $status,
             'users_id' => $users_id,
@@ -1157,11 +1225,12 @@ class Admin extends BaseController
     }
 
 
+
     public function hapus_pelatihan()
     {
         $id = $this->request->getPost('id');
         $judul = $this->request->getPost('judul');
-        $model = new FrontendModel();
+        $model = new PelatihanModel();
         $activityModel = new ActivitylogsModel(); // Tambahkan ini
 
         // Ambil nama file gambar yang akan dihapus
