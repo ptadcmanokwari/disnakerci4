@@ -57,7 +57,7 @@
                                     <tr>
                                         <th>No.</th>
                                         <th>Judul Pelatihan</th>
-                                        <th>Isi Pelatihan</th>
+                                        <th>Deskripsi Pelatihan</th>
                                         <th>Jenis Pelatihan</th>
                                         <th>Gambar</th>
                                         <th>Status</th>
@@ -89,7 +89,6 @@
             <form id="uploadPelatihanForm" enctype="multipart/form-data" method="post">
                 <div class="modal-body">
                     <div class="row">
-                        <input type="hidden" class="form-control" name="kategori" id="kategori" value="pelatihan">
                         <input type="hidden" class="form-control" name="status" id="status" value="1">
                         <input type="hidden" class="form-control" name="users_id" id="users-id" value="1">
                         <div class="col-lg-12">
@@ -101,7 +100,13 @@
                         <div class="col-lg-12">
                             <div class="mb-3">
                                 <span>Deskripsi Pelatihan</span>
-                                <textarea id="isi" name="isi"></textarea>
+                                <textarea id="deskripsi" name="deskripsi"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <span>Materi Pelatihan</span>
+                                <textarea id="materi" name="materi"></textarea>
                             </div>
                         </div>
                         <div class="col-lg-12">
@@ -129,10 +134,16 @@
                                 <input type="text" name="new_jenis_pelatihan" id="new_jenis_pelatihan" class="form-control">
                             </div>
                         </div>
-                        <div class="col-lg-12">
+                        <div class="col-lg-6">
                             <div class="mb-3">
-                                <label for="link" class="form-label">Link Pelatihan (Google Form, dll.)</label>
+                                <label for="link" class="form-label">Link IKuti Pelatihan (Google Form, dll.)</label>
                                 <input type="text" class="form-control" id="link" name="link" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="mb-3">
+                                <label for="tgl_pelatihan" class="form-label">Tanggal Pelatihan</label>
+                                <input type="datetime-local" class="form-control" id="tgl_pelatihan" name="tgl_pelatihan" required>
                             </div>
                         </div>
                         <div class="col-lg-12">
@@ -170,34 +181,58 @@
             <form id="editPelatihanForm" enctype="multipart/form-data" method="post">
                 <div class="modal-body">
                     <input type="hidden" name="edit_id" id="edit_id">
-                    <input type="hidden" class="form-control" name="edit_kategori" id="edit_kategori" value="pelatihan">
-                    <div class="mb-3">
-                        <label for="edit_judul" class="form-label">Ubah Judul Pelatihan</label>
-                        <input type="text" class="form-control" id="edit_judul" name="edit_judul">
-                    </div>
-                    <div class="mb-3">
-                        <span>Ubah Isi Pelatihan</span>
-                        <textarea id="edit_isi" name="edit_isi"></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="edit_jenis_pelatihan" class="form-label">Ubah Jenis Pelatihan</label>
-                        <select class="form-control" id="edit_jenis_pelatihan" name="edit_jenis_pelatihan">
-                            <!-- Options will be dynamically loaded here -->
-                        </select>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="edit_link" class="form-label">Ubah Link Pelatihan (Google Form, dll.)</label>
-                        <input type="text" class="form-control" id="edit_link" name="edit_link">
-                    </div>
                     <input type="hidden" class="form-control" name="edit_status" id="edit_status" value="1">
                     <input type="hidden" class="form-control" name="edit_users-id" id="edit_users-id" value="1">
-                    <div class="mb-3">
-                        <span>Ubah Gambar</span>
-                        <div id="edit_gambar_dropzone" class="dropzone"></div>
-                        <img id="edit-gambar-preview" class="img-thumbnail mt-2" width="100">
-                        <div id="updatePelatihanCropper" style="display:none;">
-                            <img id="updatePelatihanImage" src="" style="max-width:100%;">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label for="edit_judul" class="form-label">Ubah Judul Pelatihan</label>
+                                <input type="text" class="form-control" id="edit_judul" name="edit_judul">
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <span>Ubah Deskripsi Pelatihan</span>
+                                <textarea id="edit_deskripsi" name="edit_deskripsi"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="col-lg-12">
+                                <div class="mb-3">
+                                    <span>Ubah Materi Pelatihan</span>
+                                    <textarea id="edit_materi" name="edit_materi"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label for="edit_jenis_pelatihan" class="form-label">Ubah Jenis Pelatihan</label>
+                                <select class="form-control" id="edit_jenis_pelatihan" name="edit_jenis_pelatihan">
+                                    <!-- Options will be dynamically loaded here -->
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="mb-3">
+                                <label for="edit_link" class="form-label">Ubah Link Pelatihan (Google Form, dll.)</label>
+                                <input type="text" class="form-control" id="edit_link" name="edit_link">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="mb-3">
+                                <label for="edit_tgl_pelatihan" class="form-label">Tanggal Pelatihan</label>
+                                <input type="datetime-local" class="form-control" id="edit_tgl_pelatihan" name="edit_tgl_pelatihan" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <span>Ubah Gambar</span>
+                                <div id="edit_gambar_dropzone" class="dropzone"></div>
+                                <img id="edit-gambar-preview" class="img-thumbnail mt-2" width="100">
+                                <div id="updatePelatihanCropper" style="display:none;">
+                                    <img id="updatePelatihanImage" src="" style="max-width:100%;">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -243,7 +278,7 @@
                     "data": "judul"
                 },
                 {
-                    "data": "isi"
+                    "data": "deskripsi"
                 },
                 {
                     "data": "pelatihan"
@@ -361,8 +396,10 @@
         });
 
 
-        $('#isi').summernote();
-        $('#edit_isi').summernote();
+        $('#deskripsi').summernote();
+        $('#edit_deskripsi').summernote();
+        $('#materi').summernote();
+        $('#edit_materi').summernote();
 
         // Reset Modal setelah upload dan update data
         var cropper;
@@ -435,9 +472,10 @@
 
                 this.on("sending", function(file, xhr, formData) {
                     var jenisPelatihanKode = document.querySelector("#jenis_pelatihan_kode").value;
-                    formData.append("kategori", document.querySelector("#kategori").value);
                     formData.append("judul", document.querySelector("#judul").value);
-                    formData.append("isi", document.querySelector("#isi").value);
+                    formData.append("deskripsi", document.querySelector("#deskripsi").value);
+                    formData.append("materi", document.querySelector("#materi").value);
+                    formData.append("tgl_pelatihan", document.querySelector("#tgl_pelatihan").value);
                     formData.append("jenis_pelatihan_kode", jenisPelatihanKode);
                     formData.append("status", document.querySelector("#status").value);
                     formData.append("link", document.querySelector("#link").value);
@@ -487,8 +525,12 @@
             var jenis_pelatihan_kode = document.getElementById('jenis_pelatihan_kode');
             var edit_jenis_pelatihan_kode = document.getElementById('edit_jenis_pelatihan_kode');
             var link = document.getElementById('link');
-            var isi = $('#isi');
-            var edit_isi = $('#edit_isi');
+            var deskripsi = $('#deskripsi');
+            var materi = $('#materi');
+            var edit_materi = $('#edit_materi');
+            var tgl_pelatihan = $('#tgl_pelatihan');
+            var edit_tgl_pelatihan = $('#edit_tgl_pelatihan');
+            var edit_deskripsi = $('#edit_deskripsi');
 
             if (judul) {
                 judul.value = '';
@@ -496,11 +538,17 @@
             if (edit_judul) {
                 edit_judul.value = '';
             }
-            if (isi) {
-                isi.summernote('code', '');
+            if (deskripsi) {
+                deskripsi.summernote('code', '');
             }
-            if (edit_isi) {
-                edit_isi.summernote('code', '');
+            if (materi) {
+                materi.summernote('code', '');
+            }
+            if (edit_materi) {
+                edit_materi.summernote('code', '');
+            }
+            if (edit_deskripsi) {
+                edit_deskripsi.summernote('code', '');
             }
             if (link) {
                 link.value = '';
@@ -510,6 +558,12 @@
             }
             if (jenis_pelatihan_kode) {
                 jenis_pelatihan_kode.value = '';
+            }
+            if (tgl_pelatihan) {
+                tgl_pelatihan.value = '';
+            }
+            if (edit_tgl_pelatihan) {
+                edit_tgl_pelatihan.value = '';
             }
             if (edit_jenis_pelatihan_kode) {
                 edit_jenis_pelatihan_kode.value = '';
@@ -540,7 +594,9 @@
         $(document).on('click', '.btn-edit', function() {
             var edit_id = $(this).data('edit_id');
             var edit_judul = $(this).data('edit_judul');
-            var edit_isi = $(this).data('edit_isi');
+            var edit_deskripsi = $(this).data('edit_deskripsi');
+            var edit_materi = $(this).data('edit_materi');
+            var edit_tgl_pelatihan = $(this).data('edit_tgl_pelatihan');
             var edit_gambar = $(this).data('edit_gambar');
             var edit_kode_pelatihan = $(this).data('edit_kode');
             var edit_link = $(this).data('edit_link');
@@ -548,7 +604,9 @@
             $('#edit_id').val(edit_id);
             $('#edit_judul').val(edit_judul);
             $('#edit_link').val(edit_link);
-            $('#edit_isi').summernote('code', edit_isi);
+            $('#edit_tgl_pelatihan').val(edit_tgl_pelatihan);
+            $('#edit_deskripsi').summernote('code', edit_deskripsi);
+            $('#edit_materi').summernote('code', edit_materi);
 
             if (edit_gambar) {
                 $('#edit-gambar-preview').attr('src', '<?= base_url('uploads/pelatihan/') ?>' + edit_gambar);
@@ -657,8 +715,10 @@
                 this.on("sending", function(file, xhr, formData) {
                     formData.append("id", document.querySelector("#edit_id").value);
                     formData.append("judul", document.querySelector("#edit_judul").value);
-                    formData.append("isi", document.querySelector("#edit_isi").value);
+                    formData.append("deskripsi", document.querySelector("#edit_deskripsi").value);
+                    formData.append("materi", document.querySelector("#edit_materi").value);
                     formData.append("link", document.querySelector("#edit_link").value);
+                    formData.append("tgl_pelatihan", document.querySelector("#edit_tgl_pelatihan").value);
                     formData.append("jenis_pelatihan_kode", document.querySelector("#edit_jenis_pelatihan").value); // Add jenis_pelatihan here
                 });
 
@@ -697,8 +757,10 @@
             var formData = new FormData();
             formData.append("id", document.querySelector("#edit_id").value);
             formData.append("judul", document.querySelector("#edit_judul").value);
-            formData.append("isi", document.querySelector("#edit_isi").value);
+            formData.append("deskripsi", document.querySelector("#edit_deskripsi").value);
+            formData.append("materi", document.querySelector("#edit_materi").value);
             formData.append("link", document.querySelector("#edit_link").value);
+            formData.append("tgl_pelatihan", document.querySelector("#edit_tgl_pelatihan").value);
             formData.append("jenis_pelatihan_kode", document.querySelector("#edit_jenis_pelatihan").value);
 
             $.ajax({

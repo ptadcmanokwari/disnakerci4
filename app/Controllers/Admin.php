@@ -961,18 +961,6 @@ class Admin extends BaseController
         }
     }
 
-
-    // public function pelatihan()
-    // {
-
-    //     $pelatihanModel = new JenispelatihanModel();
-    //     $pelatihan = $pelatihanModel->findAll();
-
-    //     $data['title'] = 'Manajemen Pelatihan';
-    //     $data['jenis_pelatihan'] = $pelatihan;
-    //     return $this->loadView('admin/pelatihan', $data);
-    // }
-
     public function pelatihan()
     {
         $pelatihanModel = new JenispelatihanModel();
@@ -1011,7 +999,7 @@ class Admin extends BaseController
             $data[] = [
                 "no" => $no++,
                 "judul" => $item['judul'],
-                "isi" => substr(strip_tags($item['isi']), 0, 150) . ' ...',
+                "deskripsi" => substr(strip_tags($item['deskripsi']), 0, 150) . ' ...',
                 "pelatihan" => $item['pelatihan'],
                 "gambar" => $gambar,
                 "status" => '<input type="checkbox" class="js-switch" data-id="' . $item['id'] . '" ' . ($item['status'] ? 'checked' : '') . '>',
@@ -1023,10 +1011,12 @@ class Admin extends BaseController
                     <button class="btn btn-primary btn-sm btn-edit" 
                         data-edit_id="' . $item['id'] . '"  
                         data-edit_judul="' . htmlspecialchars($item['judul']) . '" 
-                        data-edit_isi="' . htmlspecialchars($item['isi']) . '" 
+                        data-edit_deskripsi="' . htmlspecialchars($item['deskripsi']) . '" 
+                        data-edit_materi="' . htmlspecialchars($item['materi']) . '" 
                         data-edit_gambar="' . $item['gambar'] . '" 
                         data-edit_kode="' . $item['kode'] . '"
-                        data-edit_link="' . $item['link'] . '"
+                        data-edit_link="' . $item['link'] . '" 
+                        data-edit_tgl_pelatihan="' . $item['tgl_pelatihan'] . '" 
                         data-toggle="modal" 
                         data-target="#ubahPelatihanModal" title="Ubah Pelatihan"> 
                         <i class="bi bi-pencil-square"></i>
@@ -1081,10 +1071,11 @@ class Admin extends BaseController
     {
         $validation = \Config\Services::validation();
         $validation->setRules([
-            'kategori' => 'required|max_length[255]',
             'file' => 'uploaded[file]|is_image[file]',
             'judul' => 'required',
-            'isi' => 'required',
+            'deskripsi' => 'required',
+            'tgl_pelatihan' => 'required',
+            'materi' => 'required',
             'jenis_pelatihan_kode' => 'required',
             'link' => 'required',
             'status' => 'required|in_list[0,1]',
@@ -1118,9 +1109,10 @@ class Admin extends BaseController
             // Simpan ke database
             $pelatihan = new PelatihanModel();
             $data = [
-                'kategori' => $this->request->getPost('kategori'),
                 'judul' => $this->request->getPost('judul'),
-                'isi' => $this->request->getPost('isi'),
+                'deskripsi' => $this->request->getPost('deskripsi'),
+                'materi' => $this->request->getPost('materi'),
+                'tgl_pelatihan' => $this->request->getPost('tgl_pelatihan'),
                 'tanggal' => date('Y-m-d H:i:s'),
                 'jenis_pelatihan_kode' => $jenisPelatihanKode,
                 'gambar' => $newName,
@@ -1162,17 +1154,20 @@ class Admin extends BaseController
 
         $id = $this->request->getPost('id');
         $judul = $this->request->getPost('judul');
-        $isi = $this->request->getPost('isi');
+        $deskripsi = $this->request->getPost('deskripsi');
+        $materi = $this->request->getPost('materi');
+        $tgl_pelatihan = $this->request->getPost('tgl_pelatihan');
         $link = $this->request->getPost('link');
         $jenis_pelatihan_kode = $this->request->getPost('jenis_pelatihan_kode');
-        $kategori = 'pelatihan';
         $status = 1;
         $users_id = user()->id;
 
         $validation = \Config\Services::validation();
         $validation->setRules([
             'judul' => 'required',
-            'isi' => 'required',
+            'deskripsi' => 'required',
+            'materi' => 'required',
+            'tgl_pelatihan' => 'required',
             'link' => 'required',
             'jenis_pelatihan_kode' => 'required',
         ]);
@@ -1188,10 +1183,11 @@ class Admin extends BaseController
 
         $data = [
             'judul' => $judul,
-            'isi' => $isi,
+            'deskripsi' => $deskripsi,
+            'materi' => $materi,
+            'tgl_pelatihan' => $tgl_pelatihan,
             'link' => $link,
             'jenis_pelatihan_kode' => $jenis_pelatihan_kode, // Simpan jenis pelatihan
-            'kategori' => $kategori,
             'status' => $status,
             'users_id' => $users_id,
         ];

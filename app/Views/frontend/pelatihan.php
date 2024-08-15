@@ -36,7 +36,7 @@
                         </h2>
                         <div class="entry-content">
                             <p class="mb-0">
-                                <?= substr(strip_tags($item['isi']), 0, 100) ?> ...
+                                <?= substr(strip_tags($item['deskripsi']), 0, 100) ?> ...
                             </p>
                         </div>
                         <hr>

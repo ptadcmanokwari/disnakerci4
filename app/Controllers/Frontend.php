@@ -294,15 +294,20 @@ class Frontend extends BaseController
     {
         $pelatihanModel = new PelatihanModel();
 
-        // Ambil detail pelatihan berdasarkan slug dan gabungkan dengan tabel terkait
+        // Ambil detail pelatihan berdasarkan slug
         $pelatihan = $pelatihanModel->get_pelatihan_by_slug($slug);
 
+        // Ambil pelatihan lain yang memiliki jenis_pelatihan_kode yang sama, kecuali pelatihan yang sedang ditampilkan
+        $recentPosts = $pelatihanModel->get_pelatihan_by_jenis($pelatihan['jenis_pelatihan_kode'], $pelatihan['id']);
 
         $data['pelatihan'] = $pelatihan;
+        $data['recentPosts'] = $recentPosts;
         $data['title'] = $pelatihan['judul'] . ' - Disnakertrans Manokwari';
 
         return $this->loadView('frontend/detail_pelatihan', $data);
     }
+
+
 
 
     public function kartu_ak1(): string
