@@ -25,6 +25,8 @@ $routes->get('pelatihan', 'Frontend::pelatihan');
 $routes->get('pelatihan/detail_pelatihan/(:segment)', 'Frontend::detail_pelatihan/$1');
 $routes->get('kartu_ak1', 'Frontend::kartu_ak1');
 $routes->get('kontak', 'Frontend::kontak');
+$routes->post('kontak_kami', 'Frontend::kontak_kami');
+
 $routes->get('/', 'Settings::index');
 
 /**

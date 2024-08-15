@@ -8,6 +8,7 @@ use App\Models\PendidikanModel;
 use App\Models\SettingsModel;
 use App\Models\PelatihanModel;
 use App\Helpers\QrCodeHelper;
+use Config\Services;
 
 class Frontend extends BaseController
 {
@@ -343,6 +344,53 @@ class Frontend extends BaseController
         $data['title'] = 'Kontak - Disnakertrans Manokwari';
         $data['settings'] = $settings;
         return $this->loadView('frontend/kontak', $data);
+    }
+
+    public function kontak_kami()
+    {
+
+        // Validasi input
+        $validation =  Services::validation();
+        $validation->setRules([
+            'name' => 'required|alpha_space',
+            'email' => 'required|valid_email',
+            'subject' => 'required',
+            'message' => 'required'
+        ]);
+
+        if (!$validation->withRequest($this->request)->run()) {
+            // Jika validasi gagal, kirimkan pesan error kembali ke view
+            return $this->response->setJSON([
+                'status' => 'error',
+                'errors' => $validation->getErrors()
+            ]);
+        }
+
+        // Sanitasi input
+        $name = htmlspecialchars($this->request->getPost('name'), ENT_QUOTES, 'UTF-8');
+        $email = htmlspecialchars($this->request->getPost('email'), ENT_QUOTES, 'UTF-8');
+        $subject = htmlspecialchars($this->request->getPost('subject'), ENT_QUOTES, 'UTF-8');
+        $message = htmlspecialchars($this->request->getPost('message'), ENT_QUOTES, 'UTF-8');
+
+        // Proses pengiriman email
+        $emailService = Services::email();
+
+        $emailService->setFrom($email, $name);
+        $emailService->setTo('info@siripabar.com');
+        $emailService->setSubject($subject);
+        $emailService->setMessage($message);
+
+        if ($emailService->send()) {
+            return $this->response->setJSON([
+                'status' => 'success',
+                'message' => 'Pesan berhasil dikirim.'
+            ]);
+        } else {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Gagal mengirim pesan. Silakan coba lagi.'
+            ]);
+        }
     }
 
     public function login(): string
