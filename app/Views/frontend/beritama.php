@@ -44,9 +44,11 @@
                                 <li class="d-flex align-items-center"><i class="bi bi-person"></i><?= $item['namalengkap']; ?></li>
                                 <li class="d-flex align-items-center">
                                     <i class="bi bi-calendar"></i>
-                                    <time datetime="<?= $item['tgl_publikasi']; ?>"><?= date('M d, Y', strtotime($item['tgl_publikasi'])); ?>
+                                    <time datetime="<?= tanggal_indo($item['tgl_publikasi']); ?>"><?= tanggal_indo($item['tgl_publikasi']); ?>
                                     </time>
+
                                 </li>
+                                <li class="d-flex align-items-center"><i class="bi bi-eye"></i> <?= $item['views'] ?></li>
                             </ul>
                         </div>
                     </article>

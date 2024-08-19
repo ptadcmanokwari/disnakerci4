@@ -9,7 +9,17 @@ class FrontendModel extends Model
     protected $table = 'informasi';
     protected $primaryKey = 'id';
     protected $allowedFields = [
-        'kategori', 'judul', 'isi', 'tags', 'tgl_publikasi', 'gambar', 'status', 'slug', 'users_id'
+        'kategori',
+        'judul',
+        'isi',
+        'tags',
+        'link',
+        'tgl_publikasi',
+        'gambar',
+        'status',
+        'slug',
+        'users_id',
+        'views'
     ];
 
     public function getKategoriCount()
@@ -61,6 +71,15 @@ class FrontendModel extends Model
             ->paginate($limit, 'default', $page);
     }
 
+    public function get_informasi_by_slug($slug)
+    {
+        return $this->select('informasi.*, users.namalengkap')
+            ->join('users', 'users.id = informasi.users_id')
+            ->where('informasi.slug', $slug)
+            ->first();
+    }
+
+
     public function countInformasiByKategori($kategori)
     {
         return $this->where('kategori', $kategori)
@@ -72,10 +91,12 @@ class FrontendModel extends Model
         return $this->db->table('informasi')->where('id', $id)->update($data);
     }
 
-    public function incrementViews($id)
+    public function incrementViews($id, $kategori)
     {
-        $this->set('views', 'views + 1', FALSE)
+        return $this->db->table($this->table)
+            ->set('views', 'views + 1', FALSE)
             ->where('id', $id)
+            ->where('kategori', $kategori)
             ->update();
     }
 }

@@ -203,17 +203,20 @@ class Frontend extends BaseController
 
 
 
-    public function detail_berita($slug): string
+    public function detail_berita($slug)
     {
         $informasiModel = new FrontendModel();
 
         // Ambil data detail berita berdasarkan slug
-        $berita = $informasiModel->where('slug', $slug)->first();
+        $berita = $informasiModel->get_informasi_by_slug($slug);
 
         if (!$berita) {
             echo ('Berita tidak ditemukan');
+            return;
         }
 
+        // Update jumlah views
+        $informasiModel->incrementViews($berita['id'], 'berita');
         $data['berita'] = $berita;
         $data['title'] = $berita['judul'] . ' - Disnakertrans Manokwari';
 
@@ -227,6 +230,7 @@ class Frontend extends BaseController
 
         return $this->loadView('frontend/detail_berita', $data);
     }
+
 
     public function pengumuman(): string
     {
@@ -259,11 +263,14 @@ class Frontend extends BaseController
     {
         $informasiModel = new FrontendModel();
 
-        $pengumuman = $informasiModel->where('slug', $slug)->first();
+        // Panggil method di model untuk mendapatkan data pengumuman
+        $pengumuman = $informasiModel->get_informasi_by_slug($slug);
 
         if (!$pengumuman) {
-            echo ('pengumuman tidak ditemukan');
+            echo ('Pengumuman tidak ditemukan');
         }
+
+        $informasiModel->incrementViews($pengumuman['id'], 'pengumuman');
 
         $data['pengumuman'] = $pengumuman;
         $data['title'] = $pengumuman['judul'] . ' - Disnakertrans Manokwari';
@@ -278,12 +285,13 @@ class Frontend extends BaseController
         return $this->loadView('frontend/detail_pengumuman', $data);
     }
 
+
+
     public function pelatihan(): string
     {
         $pelatihanModel = new PelatihanModel();
 
         $pelatihan = $pelatihanModel->get_all_pelatihan_by_penulis();
-
 
         $data['title'] = 'Pelatihan - Disnakertrans Manokwari';
         $data['pelatihan'] = $pelatihan;
@@ -298,6 +306,11 @@ class Frontend extends BaseController
         // Ambil detail pelatihan berdasarkan slug
         $pelatihan = $pelatihanModel->get_pelatihan_by_slug($slug);
 
+        if ($pelatihan) {
+            // Increment views hanya untuk artikel yang diklik
+            $pelatihanModel->incrementViews($pelatihan['id']);
+        }
+
         // Ambil pelatihan lain yang memiliki jenis_pelatihan_kode yang sama, kecuali pelatihan yang sedang ditampilkan
         $recentPosts = $pelatihanModel->get_pelatihan_by_jenis($pelatihan['jenis_pelatihan_kode'], $pelatihan['id']);
 
@@ -307,8 +320,6 @@ class Frontend extends BaseController
 
         return $this->loadView('frontend/detail_pelatihan', $data);
     }
-
-
 
 
     public function kartu_ak1(): string
