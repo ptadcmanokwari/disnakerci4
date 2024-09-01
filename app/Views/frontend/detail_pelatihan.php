@@ -128,6 +128,13 @@
                         <p>Ringkasan umum materi yang akan kamu pelajari, sebagai berikut:</p>
                         <?= $pelatihan['materi'] ?>
                     </div>
+
+                    <div class="entry-footer">
+                        <i class="bi bi-folder"></i>
+                        <ul class="cats">
+                            <li><?= $pelatihan['pelatihan'] ?></li>
+                        </ul>
+                    </div>
                 </article>
             </div>
 
@@ -171,7 +178,7 @@
 
                     <div class="card p-3">
                         <div class="card-header px-0">
-                            <h3 class="sidebar-title mt-3">Pelatihan Lainnya</h3>
+                            <h3 class="sidebar-title mt-3">Pelatihan Sejenis</h3>
                             <?php if (!empty($recentPosts)) : ?>
                                 <p class="text-secondary">Di bawah ini adalah pelatihan dengan jenis yang sama.</p>
                             <?php endif; ?>
@@ -184,7 +191,7 @@
                                     <?php foreach ($recentPosts as $post) : ?>
                                         <div class="post-item clearfix">
                                             <img src="<?= base_url('uploads/pelatihan/' . $post['gambar']); ?>" alt="<?= $post['judul']; ?>">
-                                            <h4><a href="<?= base_url('pelatihan/' . $post['slug']); ?>"><?= substr(strip_tags($post['judul']), 0, 40) ?> ...</a></h4>
+                                            <h4><a href="<?= base_url('pelatihan/detail_pelatihan/' . $post['slug']); ?>"><?= substr(strip_tags($post['judul']), 0, 40) ?> ...</a></h4>
                                             <time datetime="<?= $post['tanggal']; ?>"><?= date('M d, Y', strtotime($post['tanggal'])); ?></time>
                                         </div>
                                         <hr>

@@ -22,6 +22,7 @@ class FrontendModel extends Model
         'views'
     ];
 
+
     public function getKategoriCount()
     {
         return $this->select('kategori, COUNT(*) as count')
@@ -98,5 +99,14 @@ class FrontendModel extends Model
             ->where('id', $id)
             ->where('kategori', $kategori)
             ->update();
+    }
+
+    public function getInformasiByTag($tag)
+    {
+        return $this->select('informasi.*, users.namalengkap')
+            ->join('users', 'users.id = informasi.users_id')
+            ->like('informasi.tags', $tag)
+            ->orderBy('informasi.tgl_publikasi', 'DESC')
+            ->findAll();
     }
 }

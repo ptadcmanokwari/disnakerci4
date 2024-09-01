@@ -18,9 +18,12 @@ $routes->get('urusan_transmigrasi', 'Frontend::transmigrasi');
 $routes->get('urusan_tenaga_kerja', 'Frontend::tenaga_kerja');
 $routes->get('berita', 'Frontend::berita');
 $routes->get('berita/detail_berita/(:segment)', 'Frontend::detail_berita/$1');
+$routes->get('berita/tag_berita/(:any)', 'Frontend::tag_berita/$1');
 
 $routes->get('pengumuman', 'Frontend::pengumuman');
 $routes->get('pengumuman/detail_pengumuman/(:segment)', 'Frontend::detail_pengumuman/$1');
+$routes->get('pengumuman/tag_pengumuman/(:any)', 'Frontend::tag_pengumuman/$1');
+
 $routes->get('pelatihan', 'Frontend::pelatihan');
 $routes->get('pelatihan/detail_pelatihan/(:segment)', 'Frontend::detail_pelatihan/$1');
 $routes->get('kartu_ak1', 'Frontend::kartu_ak1');
@@ -99,6 +102,21 @@ $routes->get('admin_v2/activitylogsajax', 'Admin::activitylogsajax', ['filter' =
 $routes->post('admin_v2/activitylogsajax', 'Admin::activitylogsajax', ['filter' => 'role:administrator']);
 // $routes->get('admin_v2/getUsers', 'Admin::getUsers', ['filter' => 'role:administrator']);
 $routes->get('admin_v2/getUsersFromLogs', 'Admin::getUsersFromLogs', ['filter' => 'role:administrator']);
+
+// Gallery
+$routes->get('admin_v2/galeri', 'Admin::galeri', ['filter' => 'role:administrator']);
+$routes->get('admin_v2/galeriajax', 'Admin::galeriajax', ['filter' => 'role:administrator']);
+$routes->post('admin_v2/galeriajax', 'Admin::galeriajax', ['filter' => 'role:administrator']);
+$routes->post('admin_v2/save_galeri', 'Admin::save_galeri', ['filter' => 'role:administrator']);
+$routes->post('admin_v2/update_galeri', 'Admin::update_galeri', ['filter' => 'role:administrator']);
+$routes->post('admin_v2/update_status_galeri', 'Admin::update_status_galeri', ['filter' => 'role:administrator']);
+$routes->post('admin_v2/hapus_galeri', 'Admin::hapus_galeri', ['filter' => 'role:administrator']);
+$routes->get('admin_v2/get_jenis_galeri', 'Admin::get_jenis_galeri', ['filter' => 'role:administrator']);
+
+
+$routes->post('admin_v2/updateGaleri', 'Admin::updateGaleri', ['filter' => 'role:administrator']);
+$routes->post('admin_v2/deleteGaleri', 'Admin::deleteGaleri', ['filter' => 'role:administrator']);
+
 
 // Users
 $routes->get('admin_v2/users', 'Admin::users', ['filter' => 'role:administrator']);

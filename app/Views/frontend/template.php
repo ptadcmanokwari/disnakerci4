@@ -137,7 +137,6 @@
                     <li><a <?= ($current_uris['segment_1'] == 'kontak') ? 'class="active"' : '' ?> href="<?= base_url('kontak'); ?>">Kontak</a></li>
                     <?php if (logged_in()) : ?>
                         <li><a class="btn btn-danger mx-4 p-2 text-white" href="<?= base_url('logout'); ?>">Logout</a></li>
-
                     <?php else : ?>
                         <li><a class="btn btn-primary mx-4 p-2 text-white" href="<?= base_url('login'); ?>">Masuk</a></li>
                     <?php endif; ?>
@@ -146,10 +145,10 @@
             </nav><!-- .navbar -->
 
             <div class="header-social-links d-flex">
-                <a href="#" class="twitter"><i class="bu bi-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bu bi-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bu bi-instagram"></i></a>
-                <a href="#" class="linkedin"><i class="bu bi-linkedin"></i></i></a>
+                <a href="https://x.com/" target="_blank" class="twitter"><i class="bu bi-twitter"></i></a>
+                <a href="https://www.facebook.com/" target="_blank" class="facebook"><i class="bu bi-facebook"></i></a>
+                <a href="https://www.instagram.com/" target="_blank" class="instagram"><i class="bu bi-instagram"></i></a>
+                <a href="https://www.youtube.com/" target="_blank" class="youtube"><i class="bu bi-youtube"></i></i></a>
             </div>
 
         </div>

@@ -35,12 +35,12 @@
                     <div class="entry-footer">
                         <i class="bi bi-folder"></i>
                         <ul class="cats">
-                            <li><a href="#"><?= $berita['kategori'] ?></a></li>
+                            <li><?= $berita['kategori'] ?></li>
                         </ul>
                         <i class="bi bi-tags"></i>
                         <ul class="tags">
                             <?php foreach ($uniqueTags as $tag) : ?>
-                                <li><a href="#"><?= $tag ?></a></li>
+                                <li><a href="<?= base_url('berita/tag_berita/' . trim($tag)) ?>"><?= trim($tag) ?></a></li>
                             <?php endforeach; ?>
                         </ul>
                     </div>
@@ -73,7 +73,7 @@
                             <?php else : ?>
                                 <?php if (isset($uniqueTags)) : ?>
                                     <?php foreach ($uniqueTags as $tag) : ?>
-                                        <li><a href="#"><?= trim($tag); ?></a></li>
+                                        <li><a href="<?= base_url('berita/tag_berita/' . trim($tag)) ?>"><?= trim($tag) ?></a></li>
                                     <?php endforeach; ?>
                                 <?php endif; ?>
                             <?php endif; ?>

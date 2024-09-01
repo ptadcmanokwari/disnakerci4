@@ -1626,6 +1626,9 @@ section {
 .blog .entry .entry-meta {
   margin-bottom: 15px;
   color: #777777;
+  font-size: 14px;
+  /* display: flex;
+  justify-content: center; */
 }
 
 .blog .entry .entry-meta ul {
@@ -1645,6 +1648,7 @@ section {
   font-size: 16px;
   margin-right: 8px;
   line-height: 0;
+  color: #116db6;
 }
 
 .blog .entry .entry-meta a {

@@ -19,6 +19,9 @@
     <link rel="stylesheet" href="<?php echo base_url('adminltev31/dist/css/adminlte.min.css'); ?>">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="<?php echo base_url('adminltev31/plugins/summernote/summernote-bs4.min.css'); ?>">
+
+    <link rel="stylesheet" href="<?php echo base_url('adminltev31/plugins/ekko-lightbox/ekko-lightbox.css'); ?>">
+
     <style>
         ul.nav.nav-treeview a.nav-link {
             padding-left: 35px;
@@ -184,8 +187,8 @@
                                     <p>Pencaker</p>
                                 </a>
                             </li>
-                            <li class="nav-item <?= ($current_uri == 'berita' || $current_uri == 'pengumuman' || $current_uri == 'pelatihan' || $current_uri == 'slider') ? 'menu-open' : '' ?>">
-                                <a href="#" class="nav-link <?= ($current_uri == 'berita' || $current_uri == 'pengumuman' || $current_uri == 'pelatihan' || $current_uri == 'slider') ? 'active' : '' ?>">
+                            <li class="nav-item <?= ($current_uri == 'galeri' || $current_uri == 'berita' || $current_uri == 'pengumuman' || $current_uri == 'pelatihan' || $current_uri == 'slider') ? 'menu-open' : '' ?>">
+                                <a href="#" class="nav-link <?= ($current_uri == 'galeri' || $current_uri == 'berita' || $current_uri == 'pengumuman' || $current_uri == 'pelatihan' || $current_uri == 'slider') ? 'active' : '' ?>">
                                     <i class="nav-icon bi bi-info-circle-fill"></i>
                                     <p>
                                         Informasi Web
@@ -215,6 +218,12 @@
                                         <a href="<?= base_url('admin_v2/slider'); ?>" class="nav-link <?= ($current_uri == 'slider') ? 'active' : '' ?>">
                                             <i class="bi bi-circle nav-icon"></i>
                                             <p>Sliders</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="<?= base_url('admin_v2/galeri'); ?>" class="nav-link <?= ($current_uri == 'galeri') ? 'active' : '' ?>">
+                                            <i class="bi bi-circle nav-icon"></i>
+                                            <p>Galeri</p>
                                         </a>
                                     </li>
                                 </ul>
@@ -309,6 +318,11 @@
     <script src="<?php echo base_url('adminltev31/dist/js/adminlte.min.js'); ?>"></script>
     <script src="<?php echo base_url('adminltev31/dist/js/demo.js'); ?>"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="<?php echo base_url('adminltev31/plugins/ekko-lightbox/ekko-lightbox.min.js'); ?>"></script>
+    <script src="<?php echo base_url('adminltev31/plugins/filterizr/jquery.filterizr.min.js'); ?>"></script>
+
+
     <script>
         $(document).ready(function() {
             // Fungsi untuk mode gelap dan terang
@@ -363,6 +377,25 @@
                 });
             });
         });
+    </script>
+
+    <script>
+        $(function() {
+            $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+                event.preventDefault();
+                $(this).ekkoLightbox({
+                    alwaysShowClose: true
+                });
+            });
+
+            $('.filter-container').filterizr({
+                gutterPixels: 3
+            });
+            $('.btn[data-filter]').on('click', function() {
+                $('.btn[data-filter]').removeClass('active');
+                $(this).addClass('active');
+            });
+        })
     </script>
 </body>
 

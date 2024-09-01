@@ -231,6 +231,52 @@ class Frontend extends BaseController
         return $this->loadView('frontend/detail_berita', $data);
     }
 
+    public function tag_berita($tag)
+    {
+        $informasiModel = new FrontendModel();
+
+        $data['title'] = 'tag: ' . $tag;
+
+        // Mengambil semua informasi berdasarkan tag
+        $data['informasi'] = $informasiModel->getInformasiByTag($tag);
+
+        // Mengambil daftar tag unik
+        $tagsArray = [];
+        foreach ($data['informasi'] as $info) {
+            $tagsArray = array_merge($tagsArray, explode(',', $info['tags']));
+        }
+        $data['uniqueTags'] = array_unique($tagsArray);
+
+        // Mengambil berita terbaru
+        $kategori = 'berita';
+        $data['recentPosts'] = $informasiModel->getRecentPostsByKategori($kategori);
+
+        return $this->loadView('frontend/tag_berita', $data);
+    }
+
+    public function tag_pengumuman($tag)
+    {
+        $informasiModel = new FrontendModel();
+
+        $data['title'] = 'tag: ' . $tag;
+
+        // Mengambil semua informasi berdasarkan tag
+        $data['informasi'] = $informasiModel->getInformasiByTag($tag);
+
+        // Mengambil daftar tag unik
+        $tagsArray = [];
+        foreach ($data['informasi'] as $info) {
+            $tagsArray = array_merge($tagsArray, explode(',', $info['tags']));
+        }
+        $data['uniqueTags'] = array_unique($tagsArray);
+
+        // Mengambil berita terbaru
+        $kategori = 'pengumuman';
+        $data['recentPosts'] = $informasiModel->getRecentPostsByKategori($kategori);
+
+        return $this->loadView('frontend/tag_pengumuman', $data);
+    }
+
 
     public function pengumuman(): string
     {

@@ -22,6 +22,12 @@
     .dz-started.dz-max-files-reached {
         display: none;
     }
+
+    .invalid-feedback {
+        color: red;
+        font-size: 0.875em;
+        margin-top: 0.25rem;
+    }
 </style>
 <div class="content-wrapper">
     <section class="content-header">
@@ -101,14 +107,17 @@
                             <div class="mb-3">
                                 <span>Deskripsi Pelatihan</span>
                                 <textarea id="deskripsi" name="deskripsi"></textarea>
+                                <div id="error-deskripsi" class="invalid-feedback" style="display:none;"></div>
                             </div>
                         </div>
                         <div class="col-lg-12">
                             <div class="mb-3">
                                 <span>Materi Pelatihan</span>
                                 <textarea id="materi" name="materi"></textarea>
+                                <div id="error-materi" class="invalid-feedback" style="display:none;"></div>
                             </div>
                         </div>
+
                         <div class="col-lg-12">
                             <div class="alert alert-warning" role="alert">
                                 Pilih opsi Lainnya ... pada bagian Jenis Pelatihan berikut jika ingin menambahkan jenis pelatihan baru!
@@ -194,14 +203,14 @@
                             <div class="mb-3">
                                 <span>Ubah Deskripsi Pelatihan</span>
                                 <textarea id="edit_deskripsi" name="edit_deskripsi"></textarea>
+                                <div id="error-edit_deskripsi" class="invalid-feedback" style="display:none;">Deskripsi Pelatihan harus diisi.</div>
                             </div>
                         </div>
                         <div class="col-lg-12">
-                            <div class="col-lg-12">
-                                <div class="mb-3">
-                                    <span>Ubah Materi Pelatihan</span>
-                                    <textarea id="edit_materi" name="edit_materi"></textarea>
-                                </div>
+                            <div class="mb-3">
+                                <span>Ubah Materi Pelatihan</span>
+                                <textarea id="edit_materi" name="edit_materi"></textarea>
+                                <div id="error-edit_materi" class="invalid-feedback" style="display:none;">Materi Pelatihan harus diisi.</div>
                             </div>
                         </div>
                         <div class="col-lg-12">
@@ -449,17 +458,33 @@
                     e.preventDefault();
                     e.stopPropagation();
 
+                    // Validasi Summernote Deskripsi
+                    var deskripsiContent = $('#deskripsi').summernote('isEmpty');
+                    if (deskripsiContent) {
+                        $('#error-deskripsi').text('Deskripsi Pelatihan tidak boleh kosong.').show();
+                        return false;
+                    } else {
+                        $('#error-deskripsi').hide();
+                    }
+
+                    // Validasi Summernote Materi
+                    var materiContent = $('#materi').summernote('isEmpty');
+                    if (materiContent) {
+                        $('#error-materi').text('Materi Pelatihan tidak boleh kosong.').show();
+                        return false;
+                    } else {
+                        $('#error-materi').hide();
+                    }
+
+                    // Lanjutkan jika tidak ada error
                     if (addDropzone.getQueuedFiles().length > 0) {
-                        // Process cropped image
                         var canvas = cropper.getCroppedCanvas();
                         canvas.toBlob(function(blob) {
-                            // Create a new file with .webp extension
                             var file = new File([blob], addDropzone.getQueuedFiles()[0].name.replace(/\.\w+$/, ".webp"), {
                                 type: 'image/webp',
                                 lastModified: Date.now()
                             });
 
-                            // Replace old file with cropped file
                             addDropzone.removeAllFiles();
                             addDropzone.addFile(file);
 
@@ -690,6 +715,35 @@
                     e.preventDefault();
                     e.stopPropagation();
 
+                    // Validasi input Summernote
+                    var editDeskripsi = $('#edit_deskripsi').summernote('isEmpty') ? '' : $('#edit_deskripsi').val();
+                    var editMateri = $('#edit_materi').summernote('isEmpty') ? '' : $('#edit_materi').val();
+
+                    var valid = true;
+
+                    if (editDeskripsi.trim() === '') {
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Perhatian',
+                            text: 'Deskripsi Pelatihan harus diisi.',
+                        });
+                        valid = false;
+                    }
+
+                    if (editMateri.trim() === '') {
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Perhatian',
+                            text: 'Materi Pelatihan harus diisi.',
+                        });
+                        valid = false;
+                    }
+
+                    // Hentikan proses jika tidak valid
+                    if (!valid) {
+                        return;
+                    }
+
                     if (editDropzone.getQueuedFiles().length > 0) {
                         // Process cropped image
                         var canvas = cropper.getCroppedCanvas();
@@ -711,7 +765,6 @@
                     }
                 });
 
-
                 this.on("sending", function(file, xhr, formData) {
                     formData.append("id", document.querySelector("#edit_id").value);
                     formData.append("judul", document.querySelector("#edit_judul").value);
@@ -719,9 +772,8 @@
                     formData.append("materi", document.querySelector("#edit_materi").value);
                     formData.append("link", document.querySelector("#edit_link").value);
                     formData.append("tgl_pelatihan", document.querySelector("#edit_tgl_pelatihan").value);
-                    formData.append("jenis_pelatihan_kode", document.querySelector("#edit_jenis_pelatihan").value); // Add jenis_pelatihan here
+                    formData.append("jenis_pelatihan_kode", document.querySelector("#edit_jenis_pelatihan").value);
                 });
-
 
                 this.on("success", function(file, response) {
                     if (response.success) {
@@ -757,8 +809,8 @@
             var formData = new FormData();
             formData.append("id", document.querySelector("#edit_id").value);
             formData.append("judul", document.querySelector("#edit_judul").value);
-            formData.append("deskripsi", document.querySelector("#edit_deskripsi").value);
-            formData.append("materi", document.querySelector("#edit_materi").value);
+            formData.append("deskripsi", $('#edit_deskripsi').summernote('code'));
+            formData.append("materi", $('#edit_materi').summernote('code'));
             formData.append("link", document.querySelector("#edit_link").value);
             formData.append("tgl_pelatihan", document.querySelector("#edit_tgl_pelatihan").value);
             formData.append("jenis_pelatihan_kode", document.querySelector("#edit_jenis_pelatihan").value);
@@ -797,7 +849,6 @@
                 }
             });
         }
-
     });
 </script>
 

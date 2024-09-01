@@ -84,7 +84,7 @@
                     <div class="form-group">
                         <div class="col-md-12 mt-3">
                             <button id="submitBtn" type="submit" class="btn btn-info text-light w-25">
-                                <span id="btnText">Kirim Data</span>
+                                <span id="btnText">Kirim</span>
                                 <span id="btnLoading" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
                             </button>
                         </div>
