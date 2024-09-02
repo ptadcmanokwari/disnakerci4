@@ -1815,97 +1815,18 @@ class Admin extends BaseController
         return view($viewName, $data);
     }
 
-
     public function galeri()
     {
+        $galeriModel = new GaleriModel();
+
+        $data['categories'] = $galeriModel->getUniqueCategories();
+        $data['galeri'] = $galeriModel->findAll();
+
         $data['title'] = 'Manajemen Galeri';
 
         return $this->loadView('admin/galeri', $data);
     }
 
-    public function galeriajax()
-    {
-        $galeriModel = new GaleriModel();
-        $galeri = $galeriModel->getGaleri();
-
-        $data = [];
-        $no = 1;
-        foreach ($galeri as $item) {
-            $gambarArray = explode(',', $item['gambar']);
-            $gambarString = implode(' ', array_map('trim', $gambarArray));
-
-            $data[] = [
-                "no" => $no++,
-                "deskripsi" => $item['deskripsi'],
-                "kategori" => $item['kategori'],
-                "gambar" => $gambarString, // Pastikan data ini benar
-                "aksi" => '
-                <div class="btn-group" role="group" aria-label="Aksi">
-                    <button class="btn btn-danger btn-sm btn-delete" data-id="' . $item['id'] . '" title="Hapus Galeri">
-                        <i class="bi bi-trash"></i>
-                    </button>
-                    <button class="btn btn-primary btn-sm btn-edit" 
-                        data-edit_id="' . $item['id'] . '"  
-                        data-edit_deskripsi="' . $item['deskripsi'] . '" 
-                        data-edit_kategori="' . $item['kategori'] . '" 
-                        data-edit_gambar="' . trim($gambarArray[0]) . '" 
-                        data-toggle="modal" 
-                        data-target="#ubahGaleriModal" title="Ubah Galeri"> 
-                        <i class="bi bi-pencil-square"></i>
-                    </button>             
-                    <button class="btn btn-info btn-sm btn-detail-galeri" 
-                        data-id="' . $item['id'] . '"  
-                        data-deskripsi="' . $item['deskripsi'] . '" 
-                        data-kategori="' . $item['kategori'] . '" 
-                        data-gambar="' . trim($gambarArray[0]) . '" 
-                        data-toggle="modal" 
-                        data-target="#detailGaleriModal" title="Ubah Galeri"> 
-                        <i class="bi bi-eye"></i>
-                    </button>             
-                </div>'
-            ];
-        }
-
-        echo json_encode(["data" => $data]);
-    }
-
-
-
-    public function update_status_galeri()
-    {
-        $id = $this->request->getJSON()->id;
-        $status = $this->request->getJSON()->status;
-
-        $model = new GaleriModel();
-        $activityModel = new ActivitylogsModel();
-
-        // Ambil galeri sebelum update
-        $galeri = $model->find($id);
-        if (!$galeri) {
-            return $this->response->setJSON(['success' => false, 'message' => 'Galeri tidak ditemukan']);
-        }
-
-        $oldStatus = $galeri['status'];
-
-        // Update status
-        $update = $model->update($id, ['status' => $status]);
-
-        if ($update) {
-            // Rekam aktivitas
-            $activityMessage = sprintf(
-                'User #%d mengubah status galeri dengan ID: %d dari %d ke %d',
-                user_id(),
-                $id,
-                $oldStatus,
-                $status
-            );
-            $activityModel->add($activityMessage, user_id(), $this->request->getIPAddress());
-
-            return $this->response->setJSON(['success' => true]);
-        } else {
-            return $this->response->setJSON(['success' => false]);
-        }
-    }
 
     public function save_galeri()
     {
@@ -1961,63 +1882,20 @@ class Admin extends BaseController
     }
 
 
-
-    public function update_galeri()
+    public function update_status_galeri()
     {
-        $activityModel = new ActivitylogsModel();
+        $id = $this->request->getJSON()->id;
+        $status = $this->request->getJSON()->status;
+
         $model = new GaleriModel();
+        $update = $model->update($id, ['status' => $status]);
 
-        $id = $this->request->getPost('id');
-        $deskripsi = $this->request->getPost('deskripsi');
-        $kategori = $this->request->getPost('kategori');
-
-        $validation = \Config\Services::validation();
-        $validation->setRules([
-            'deskripsi' => 'required',
-            'kategori' => 'required',
-        ]);
-
-        if (!$validation->withRequest($this->request)->run()) {
-            return $this->response->setJSON(['success' => false, 'errors' => $validation->getErrors()]);
+        if ($update) {
+            return $this->response->setJSON(['success' => true]);
+        } else {
+            return $this->response->setJSON(['success' => false]);
         }
-
-        $data = [
-            'deskripsi' => $deskripsi,
-            'kategori' => $kategori,
-        ];
-
-        $file = $this->request->getFile('file');
-        if ($file && $file->isValid() && !$file->hasMoved()) {
-            $current_data = $model->find($id);
-            $current_gambar = $current_data['gambar'];
-
-            if (!empty($current_gambar)) {
-                $path = FCPATH . 'uploads/galeri/' . $current_gambar;
-                if (file_exists($path)) {
-                    unlink($path);
-                }
-            }
-
-            $newName = $file->getRandomName();
-            $file->move(FCPATH . 'uploads/galeri/', $newName);
-            $data['gambar'] = $newName;
-        }
-
-        $model->update($id, $data);
-
-
-        $activityMessage = sprintf(
-            'User #%d memperbarui pelatihan "%s"',
-            user_id(),
-            $this->request->getPost('judul')
-        );
-
-        $activityModel->add($activityMessage, user_id(), $this->request->getIPAddress());
-
-        return $this->response->setJSON(['success' => true]);
     }
-
-
 
     public function hapus_galeri()
     {
