@@ -21,14 +21,8 @@ use PhpOffice\PhpSpreadsheet\Style\Fill;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
-// use TCPDF;
-// use TCPDF_STATIC;
-use App\Libraries\Pdf;
 
-// use Myth\Auth\Models\UserModel;
-// use Myth\Auth\Entities\User;
-// use Endroid\QrCode\QrCode;
-// use Endroid\QrCode\Writer\PngWriter;
+use App\Libraries\Pdf;
 
 class Admin extends BaseController
 {
@@ -194,9 +188,6 @@ class Admin extends BaseController
 
         echo json_encode(["data" => $data]);
     }
-
-
-
 
     public function detail_pencaker($id_pencaker)
     {
@@ -415,8 +406,6 @@ class Admin extends BaseController
     // Simpan berita unggahan baru
     public function save_berita()
     {
-        // $usersModel = new UsersModel();
-        // $userId = user()->id;
 
         $validation = \Config\Services::validation();
         $validation->setRules([

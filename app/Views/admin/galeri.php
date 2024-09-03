@@ -128,7 +128,7 @@
 
                             <div class="row" id="galeriContainer">
                                 <?php foreach ($galeri as $key) : ?>
-                                    <div class="col-md-1 my-2 galeri-item" data-kategori="<?= esc($key['kategori']); ?>">
+                                    <div class="col-md-1  my-2 galeri-item" data-kategori="<?= esc($key['kategori']); ?>">
                                         <div class="image-container">
                                             <img class="w-100" src="<?= base_url(); ?>uploads/galeri/<?= esc($key['gambar']); ?>" alt="<?= esc($key['deskripsi']); ?>">
                                             <div class="overlay-buttons">

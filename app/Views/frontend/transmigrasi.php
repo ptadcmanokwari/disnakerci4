@@ -195,7 +195,7 @@
                                 <p>Seksi Pendaftaran Seleksi dan Penempatan Transmigrasi mempunyai tugas pokok melaksanakan pendaftaran seleksi dan penempatan transmigrasi dengan beberapa fungsi, diantaranya:</p>
                                 <ul>
                                     <li><i class="ri-check-double-line"></i> penyusunan rencana kerja pendaftaran, seleksi dan penempatan transmigran;</li>
-                                    <li><i class="ri-check-double-line"></i> pernyiapan aparatur, peralatan dan perlengkapan serta pendanaan untuk pelaksanaan tugas dan kegiatan seksi pendaftaran, seleksi dan </li>penempatan transmigrasi;
+                                    <li><i class="ri-check-double-line"></i> pernyiapan aparatur, peralatan dan perlengkapan serta pendanaan untuk pelaksanaan tugas dan kegiatan seksi pendaftaran, seleksi dan penempatan transmigrasi;</li>
                                     <li><i class="ri-check-double-line"></i> pemutahiran data calon transmigran lokal dan transmigrasi umum;</li>
                                     <li><i class="ri-check-double-line"></i> sosialisasi dan penyuluhan transmigrasi;</li>
                                 </ul>

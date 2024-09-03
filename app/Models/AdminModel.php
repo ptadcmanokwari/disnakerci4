@@ -13,6 +13,4 @@ class AdminModel extends Model
     {
         return $this->findAll();
     }
-
-    // Fungsi lain seperti CRUD bisa ditambahkan di sini
 }

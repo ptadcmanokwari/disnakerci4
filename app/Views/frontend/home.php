@@ -200,7 +200,7 @@
                     Dinas Tenaga Kerja dan Transmigrasi Kabupaten Manokwari telah merumuskan tujuan yang merupakan bagian integral dalam proses Rencana Strategis Dinas Tenaga Kerja Dan Transmigrasi Kabupaten Manokwari Tahun 2021 – 2025 untuk mencapai visi.
                 </p>
                 <ul>
-                    <li><i class="ri-check-double-line"></i> Mendidik dan melatih para pencari kerja agar dapat mencari nafkahnya sendiri sehingga dapat mengurangi angka pengangguran dan mengurangi </li> kemiskinan;
+                    <li><i class="ri-check-double-line"></i> Mendidik dan melatih para pencari kerja agar dapat mencari nafkahnya sendiri sehingga dapat mengurangi angka pengangguran dan mengurangi kemiskinan;</li>
                     <li><i class="ri-check-double-line"></i> Meningkatkan kerja sama hubungan industrial dan perlindungan Tenaga Kerja dengan pihak terkait;</li>
                     <li><i class="ri-check-double-line"></i> Meningkatnya Kualitas pemukiman yang layak huni, layak usaha, layak berkembang serta layak lingkungan;</li>
                     <li><i class="ri-check-double-line"></i> Meningkatkan kualitas Aparatur Dinas Nakertrans;</li>
