@@ -1826,8 +1826,6 @@ class Admin extends BaseController
 
         return $this->loadView('admin/galeri', $data);
     }
-
-
     public function save_galeri()
     {
         $validation = \Config\Services::validation();
@@ -1836,6 +1834,7 @@ class Admin extends BaseController
             'file' => 'uploaded[file]|is_image[file]',
             'kategori' => 'required',
             'status' => 'required|in_list[0,1]',
+            'halaman' => 'required',  // Validasi untuk halaman
         ]);
 
         if (!$validation->withRequest($this->request)->run()) {
@@ -1855,13 +1854,16 @@ class Admin extends BaseController
             $kategoriBaru = $this->request->getPost('kategori_baru');
 
             if ($kategori === 'lainnya' && !empty($kategoriBaru)) {
-                $kategori = $kategoriBaru;
+                // Mengganti spasi dengan underscore pada kategori baru
+                $kategori = str_replace(' ', '_', $kategoriBaru);
             }
+
             $data = [
                 'deskripsi' => $this->request->getPost('deskripsi'),
-                'kategori' => $kategori, // pastikan yang disimpan adalah kategori yang benar
+                'kategori' => $kategori,
                 'gambar' => $newName,
                 'status' => $this->request->getPost('status'),
+                'halaman' => $this->request->getPost('halaman'),  // Menyimpan nilai halaman
                 'users_id' => user()->id,
             ];
             $galeri->save($data);
@@ -1869,9 +1871,9 @@ class Admin extends BaseController
             // Rekam aktivitas
             $activityModel = new ActivitylogsModel();
             $activityMessage = sprintf(
-                'User #%d mengunggah pelatihan baru dengan judul: "%s"',
+                'User #%d mengunggah galeri baru dengan deskripsi: "%s"',
                 user_id(),
-                $this->request->getPost('judul')
+                $this->request->getPost('deskripsi')
             );
             $activityModel->add($activityMessage, user_id(), $this->request->getIPAddress());
 

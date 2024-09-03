@@ -118,11 +118,6 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-12">
-                            <div class="alert alert-warning" role="alert">
-                                Pilih opsi Lainnya ... pada bagian Jenis Pelatihan berikut jika ingin menambahkan jenis pelatihan baru!
-                            </div>
-                        </div>
                         <div class="col-lg-6">
                             <div class="mb-3">
                                 <div class="form-group">
@@ -132,7 +127,7 @@
                                         <?php foreach ($jenis_pelatihan as $pelatihan) : ?>
                                             <option value="<?= $pelatihan['kode']; ?>"><?= $pelatihan['pelatihan']; ?></option>
                                         <?php endforeach; ?>
-                                        <option value="lainnya">Lainnya ...</option>
+                                        <option value="lainnya">Lainnya (Jenis Pelatihan Baru)</option>
                                     </select>
                                 </div>
                             </div>

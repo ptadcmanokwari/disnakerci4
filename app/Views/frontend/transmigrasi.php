@@ -305,7 +305,7 @@
                 <ul id="portfolio-flters">
                     <li data-filter="*" class="filter-active">Semua</li>
                     <?php foreach ($galleries as $category => $images) : ?>
-                        <li data-filter=".filter-<?= $category; ?>"><?= ucfirst($category); ?></li>
+                        <li data-filter=".filter-<?= esc($category); ?>"><?= esc(ucfirst(str_replace('_', ' ', $category))); ?></li>
                     <?php endforeach; ?>
                 </ul>
             </div>
@@ -314,11 +314,11 @@
         <div class="row portfolio-container" data-aos="fade-up">
             <?php foreach ($galleries as $category => $images) : ?>
                 <?php foreach ($images as $image) : ?>
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-<?= $category; ?>">
-                        <img src="<?= $image['url']; ?>" class="img-fluid portfolio-lightbox preview-link">
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-<?= esc($category); ?>">
+                        <img src="<?= esc($image['url']); ?>" class="img-fluid portfolio-lightbox preview-link">
                         <div class="portfolio-info">
-                            <h4><?= $image['name']; ?></h4>
-                            <p><?= ucfirst($category); ?></p>
+                            <h4><?= esc($image['name']); ?></h4>
+                            <p><?= esc(ucfirst(str_replace('_', ' ', $category))); ?></p>
                         </div>
                     </div>
                 <?php endforeach; ?>

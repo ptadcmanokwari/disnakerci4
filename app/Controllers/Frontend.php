@@ -7,6 +7,7 @@ use App\Models\PencakerModel;
 use App\Models\PendidikanModel;
 use App\Models\SettingsModel;
 use App\Models\PelatihanModel;
+use App\Models\GaleriModel;
 use App\Helpers\QrCodeHelper;
 use Config\Services;
 
@@ -18,44 +19,39 @@ class Frontend extends BaseController
         $pendidikanModel = new PendidikanModel();
         $frontendModel = new FrontendModel();
 
-        $sliderData =  $frontendModel->getSliderData();
+        $sliderData = $frontendModel->getSliderData();
         $q_umur = $pencakerModel->getUmurStatistik();
-
         $q_pendidikan_terakhir = $pendidikanModel->getPendidikanStatistik();
-
         $pencaker_count = $pencakerModel->countPencaker();
+
         // Prepare data for view
         $data['c_umur'] = $q_umur;
         $data['c_pendidikan_terakhir'] = $q_pendidikan_terakhir;
         $data['max_umur'] = $pencaker_count;
-
         $data['sliders'] = $this->getSliders();
-        $data['galleries'] = $this->getHomeGalleries();
+        $data['galleries'] = $this->getHomeGalleries(); // Menambahkan galeri
+
         $data['title'] = 'Beranda - Disnakertrans Manokwari';
         $data['sliderData'] = $sliderData;
         return $this->loadView('frontend/home', $data);
     }
 
-    // Ambil data galeri dinamis dari folder uploads
-    private function getHomeGalleries(): array
+    public function getHomeGalleries()
     {
-        $path = WRITEPATH . '../public/uploads/tenagakerja/';
-        $directories = array_filter(glob($path . '*'), 'is_dir');
-        $galleries = [];
+        $galeriModel = new GaleriModel();
+        $galleries = $galeriModel->getGalleriesForHome();
 
-        foreach ($directories as $directory) {
-            $category = basename($directory);
-            $images = array_filter(glob($directory . '/*'), 'is_file');
-
-            foreach ($images as $image) {
-                $galleries[$category][] = [
-                    'url' => base_url('uploads/tenagakerja/' . $category . '/' . basename($image)),
-                    'name' => pathinfo($image, PATHINFO_FILENAME)
-                ];
-            }
+        // Mengelompokkan gambar berdasarkan kategori
+        $groupedGalleries = [];
+        foreach ($galleries as $galeri) {
+            $category = $galeri['kategori'];
+            $groupedGalleries[$category][] = [
+                'url' => base_url('uploads/galeri/' . $galeri['gambar']),
+                'name' => $galeri['deskripsi'],
+            ];
         }
 
-        return $galleries;
+        return $groupedGalleries;
     }
 
     // Dinamiskan SLider
@@ -85,30 +81,28 @@ class Frontend extends BaseController
 
     public function transmigrasi(): string
     {
-        $data['galleries'] = $this->getTransmigrasiGalleries();
+        $data['galleries'] = $this->getTransmigrasiGalleries(); // Menambahkan galeri
         $data['title'] = 'Urusan Transmigrasi - Disnakertrans Manokwari';
         return $this->loadView('frontend/transmigrasi', $data);
     }
 
-    private function getTransmigrasiGalleries(): array
+
+    public function getTransmigrasiGalleries()
     {
-        $path = WRITEPATH . '../public/uploads/transmigrasi/';
-        $directories = array_filter(glob($path . '*'), 'is_dir');
-        $galleries = [];
+        $galeriModel = new GaleriModel();
+        $galleries = $galeriModel->getGalleriesForTransmigrasi();
 
-        foreach ($directories as $directory) {
-            $category = basename($directory);
-            $images = array_filter(glob($directory . '/*'), 'is_file');
-
-            foreach ($images as $image) {
-                $galleries[$category][] = [
-                    'url' => base_url('uploads/transmigrasi/' . $category . '/' . basename($image)),
-                    'name' => pathinfo($image, PATHINFO_FILENAME)
-                ];
-            }
+        // Mengelompokkan gambar berdasarkan kategori
+        $groupedGalleries = [];
+        foreach ($galleries as $galeri) {
+            $category = $galeri['kategori'];
+            $groupedGalleries[$category][] = [
+                'url' => base_url('uploads/galeri/' . $galeri['gambar']),
+                'name' => $galeri['deskripsi'],
+            ];
         }
 
-        return $galleries;
+        return $groupedGalleries;
     }
 
     public function tenaga_kerja(): string
@@ -120,59 +114,22 @@ class Frontend extends BaseController
 
     private function getTenagakerjaGalleries(): array
     {
-        $path = WRITEPATH . '../public/uploads/tenagakerja/';
-        $directories = array_filter(glob($path . '*'), 'is_dir');
-        $galleries = [];
+        $galeriModel = new GaleriModel();
+        $galleries = $galeriModel->getGalleriesForTenagakerja();
 
-        foreach ($directories as $directory) {
-            $category = basename($directory);
-            $images = array_filter(glob($directory . '/*'), 'is_file');
-
-            foreach ($images as $image) {
-                $galleries[$category][] = [
-                    'url' => base_url('uploads/tenagakerja/' . $category . '/' . basename($image)),
-                    'name' => pathinfo($image, PATHINFO_FILENAME)
-                ];
-            }
+        // Mengelompokkan gambar berdasarkan kategori
+        $groupedGalleries = [];
+        foreach ($galleries as $galeri) {
+            $category = $galeri['kategori'];
+            $groupedGalleries[$category][] = [
+                'url' => base_url('uploads/galeri/' . $galeri['gambar']),
+                'name' => $galeri['deskripsi'],
+            ];
         }
 
-        return $galleries;
+        return $groupedGalleries;
     }
 
-    // public function berita(): string
-    // {
-    //     $informasiModel = new FrontendModel();
-
-    //     // Pagination configuration
-    //     $perPage = 3;
-    //     $currentPage = $this->request->getVar('page') ? (int)$this->request->getVar('page') : 1;
-
-    //     // Ambil data informasi berita
-    //     $kategori = 'Berita'; // Kategori yang ingin ditampilkan
-    //     $totalRows = $informasiModel->countInformasiByKategori($kategori);
-
-    //     // Pagination setup
-    //     $data['informasi'] = $informasiModel->getInformasiByKategori($kategori, $perPage, ($currentPage - 1) * $perPage);
-    //     $data['kategori'] = $informasiModel->getKategoriCount();
-
-    //     // Ambil berita terbaru berdasarkan kategori
-    //     $data['recentPosts'] = $informasiModel->getRecentPostsByKategori($kategori);
-
-    //     // Ambil daftar tags dari semua informasi
-    //     $tagsArray = [];
-    //     foreach ($data['informasi'] as $info) {
-    //         $tagsArray = array_merge($tagsArray, explode(',', $info['tags']));
-    //     }
-    //     $data['uniqueTags'] = array_unique($tagsArray);
-
-    //     $data['title'] = 'Pengumuman- Disnakertrans Manokwari';
-
-    //     // Set pager jika ada data
-    //     if (!empty($data['informasi'])) {
-    //         $data['pager'] = $informasiModel->pager;
-    //     }
-    //     return $this->loadView('frontend/beritama', $data);
-    // }
 
     public function berita(): string
     {

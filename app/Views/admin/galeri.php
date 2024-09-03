@@ -115,16 +115,20 @@
                                     <label for="filterKategori">Pilih Kategori:</label>
                                     <select id="filterKategori" class="form-control">
                                         <option value="Semua">Semua</option>
-                                        <?php foreach ($categories as $category) : ?>
-                                            <option value="<?= esc($category) ?>"><?= esc($category) ?></option>
-                                        <?php endforeach; ?>
+                                        <?php if (!empty($categories) && is_array($categories)) : ?>
+                                            <?php foreach ($categories as $category) : ?>
+                                                <option value="<?= esc($category) ?>"><?= esc(str_replace('_', ' ', $category)) ?></option>
+                                            <?php endforeach; ?>
+                                        <?php else : ?>
+                                            <option value="Tidak ada">Tidak ada kategori</option>
+                                        <?php endif; ?>
                                     </select>
                                 </div>
                             </div>
 
                             <div class="row" id="galeriContainer">
                                 <?php foreach ($galeri as $key) : ?>
-                                    <div class="col-md-2 my-2 galeri-item" data-kategori="<?= esc($key['kategori']); ?>">
+                                    <div class="col-md-1 my-2 galeri-item" data-kategori="<?= esc($key['kategori']); ?>">
                                         <div class="image-container">
                                             <img class="w-100" src="<?= base_url(); ?>uploads/galeri/<?= esc($key['gambar']); ?>" alt="<?= esc($key['deskripsi']); ?>">
                                             <div class="overlay-buttons">
@@ -155,7 +159,7 @@
     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addGaleriBaruModalLabel">Modal Tambah Galeri Baru</h5>
+                <h5 class="modal-title" id="addGaleriBaruModalLabel">Modal Tambah Gambar Galeri</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -166,7 +170,7 @@
                         <input type="hidden" class="form-control" name="status" id="status" value="1">
                         <div class="col-lg-12">
                             <div class="mb-3">
-                                <span>Deskripsi</span>
+                                <span>Deskripsi Gambar</span>
                                 <input type="text" class="form-control" id="deskripsi" name="deskripsi">
                             </div>
                         </div>
@@ -177,18 +181,40 @@
                                     <label for="kategori">Kategori</label>
                                     <select name="kategori" id="kategori" class="w-100 form-control" onchange="showInput(this)">
                                         <option value="">- Pilih -</option>
-                                        <?php foreach ($categories as $category): ?>
-                                            <option value="<?= esc($category) ?>"><?= esc($category) ?></option>
-                                        <?php endforeach; ?>
+                                        <?php if (!empty($categories) && is_array($categories)) : ?>
+                                            <?php foreach ($categories as $category): ?>
+                                                <option value="<?= esc($category) ?>"><?= esc(str_replace('_', ' ', $category)) ?></option>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
                                         <option value="lainnya">Lainnya (Kategori Baru)</option>
                                     </select>
+
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-lg-6">
                             <div id="inputLainnya" style="display: none;">
                                 <label for="kategori_baru">Kategori Baru</label>
                                 <input type="text" name="kategori_baru" id="kategori_baru" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <span class="">Halaman untuk Menampilkan gambar</span>
+                            <div class="form-group">
+                                <div class="custom-control custom-radio">
+                                    <input class="custom-control-input" type="radio" id="beranda" name="halaman" value="beranda">
+                                    <label for="beranda" class="custom-control-label">Galeri Beranda</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input class="custom-control-input" type="radio" id="transmigrasi" name="halaman" value="transmigrasi">
+                                    <label for="transmigrasi" class="custom-control-label">Galeri Urusan Transmigrasi</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input class="custom-control-input" type="radio" id="tenaga_kerja" name="halaman" value="tenaga_kerja">
+                                    <label for="tenaga_kerja" class="custom-control-label">Galeri Urusan Tenaga Kerja</label>
+                                </div>
                             </div>
                         </div>
 
@@ -339,9 +365,12 @@
 
                 this.on("sending", function(file, xhr, formData) {
                     var jenisKategoriKode = document.querySelector("#kategori").value;
+                    var halaman = document.querySelector('input[name="halaman"]:checked').value;
+
                     formData.append("deskripsi", document.querySelector("#deskripsi").value);
                     formData.append("kategori", jenisKategoriKode);
                     formData.append("status", document.querySelector("#status").value);
+                    formData.append("halaman", halaman); // Menambahkan nilai halaman yang dipilih
 
                     if (jenisKategoriKode === 'lainnya') {
                         var newJenisGaleri = document.querySelector("#kategori_baru").value;
@@ -356,9 +385,11 @@
                             title: 'Berhasil',
                             text: 'Galeri baru telah diunggah.',
                         }).then((result) => {
-                            $('#addGaleriBaruModal').modal('hide');
-                            resetModal();
-                            location.reload();
+                            if (result.isConfirmed) {
+                                $('#addGaleriBaruModal').modal('hide');
+                                resetModal();
+                                location.reload();
+                            }
                         });
                     } else {
                         Swal.fire({
@@ -384,6 +415,7 @@
             var deskripsi = document.getElementById('deskripsi');
             var edit_deskripsi = document.getElementById('edit_deskripsi');
             var kategori = document.getElementById('kategori');
+            var kategori_baru = document.getElementById('kategori_baru');
             var edit_kategori = document.getElementById('edit_kategori');
 
             if (deskripsi) {
@@ -395,16 +427,15 @@
             if (kategori) {
                 kategori.value = '';
             }
+            if (kategori_baru) {
+                kategori_baru.value = '';
+            }
             if (edit_kategori) {
                 edit_kategori.value = '';
             }
             if (addDropzone) {
                 addDropzone.removeAllFiles();
             }
-            if (editDropzone) {
-                editDropzone.removeAllFiles();
-            }
-
             // Hapus Cropper jika ada
             if (cropper) {
                 cropper.destroy();
