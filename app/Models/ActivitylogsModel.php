@@ -9,7 +9,6 @@ class ActivitylogsModel extends Model
     protected $table = 'activity_logs';
     protected $primaryKey = 'id';
     protected $allowedFields = ['title', 'user', 'ip_address', 'created_at', 'updated_at'];
-
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
@@ -36,7 +35,6 @@ class ActivitylogsModel extends Model
         return $this->insert($data);
     }
 
-
     public function getActivityLogs()
     {
         $builder = $this->db->table($this->table);
@@ -48,7 +46,6 @@ class ActivitylogsModel extends Model
         $query = $builder->get();
         return $query->getResultArray();
     }
-
 
     public function getDistinctUsers()
     {

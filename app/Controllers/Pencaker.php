@@ -28,8 +28,7 @@ class Pencaker extends Controller
 {
     public function __construct()
     {
-        helper('whatsapp');
-        // $this->settingsModel = new SettingsModel();
+        helper('whatsapp');;
     }
 
     public function index()
@@ -74,8 +73,6 @@ class Pencaker extends Controller
         return $this->loadView('pencaker/dashboard', $data);
     }
 
-
-    // Generate nomor pendaftaran
     public function nomorpendaftaran()
     {
         $pencakerModel = new PencakerModel();
@@ -170,7 +167,6 @@ class Pencaker extends Controller
         return $this->response->setJSON($data);
     }
 
-
     public function save_data_keterangan_umum()
     {
         $pencakerModel = new PencakerModel();
@@ -259,7 +255,6 @@ class Pencaker extends Controller
 
         echo view('frontend/validasi_ak1', $data);
     }
-
 
     public function get_data_keterangan_umum($id)
     {
@@ -351,7 +346,6 @@ class Pencaker extends Controller
         echo json_encode(["data" => $data]);
     }
 
-
     public function get_pendidikan_by_id()
     {
         $request = service('request');
@@ -398,7 +392,6 @@ class Pencaker extends Controller
         }
     }
 
-
     public function hapus_data_pendidikan()
     {
         $id = $this->request->getPost('id');
@@ -414,8 +407,6 @@ class Pencaker extends Controller
         }
     }
 
-
-    // Penglaman Kerja
     public function save_data_pengalaman_kerja()
     {
         $pengalamanKerjaModel = new PengalamanKerjaModel();
@@ -551,7 +542,6 @@ class Pencaker extends Controller
         }
     }
 
-    //  Minat Jabatan
     public function save_data_minat_jabatan()
     {
         $jabatanModel = new JabatanModel();
@@ -589,14 +579,12 @@ class Pencaker extends Controller
         return $this->response->setStatusCode(200)->setBody('Data berhasil disimpan');
     }
 
-
     public function get_data_minat_jabatan($id)
     {
         $jabatanModel = new JabatanModel();
         $data = $jabatanModel->where('pencaker_id', $id)->first();
         return $this->response->setJSON($data);
     }
-
 
     public function save_data_perusahaan_tujuan()
     {
@@ -658,8 +646,6 @@ class Pencaker extends Controller
         }
     }
 
-
-    // Data Tambahan
     public function save_catatan_pengantar()
     {
         $pencakerModel = new PencakerModel();
@@ -709,7 +695,6 @@ class Pencaker extends Controller
         ]);
     }
 
-
     public function save_bahasa()
     {
         $pencakerModel = new PencakerModel();
@@ -750,7 +735,6 @@ class Pencaker extends Controller
         ]);
     }
 
-
     public function get_bahasa_pencaker_by_id($id)
     {
         $pencakerModel = new PencakerModel();
@@ -762,8 +746,6 @@ class Pencaker extends Controller
         }
     }
 
-
-    // Upload Dokumen
     public function dokumen_pencaker()
     {
         // Paket panggil data user dari tabel Users agar bisa diparsing dalam halaman view formdata_pencaker
@@ -785,7 +767,6 @@ class Pencaker extends Controller
 
         return $this->loadView('pencaker/dokumen_pencaker', $data);
     }
-
 
     public function dokajax()
     {
@@ -844,7 +825,6 @@ class Pencaker extends Controller
 
         echo json_encode(["data" => $data]);
     }
-
 
     public function upload_dokumen()
     {
@@ -912,7 +892,6 @@ class Pencaker extends Controller
         $response['message'] = 'File berhasil diunggah.';
         return $this->response->setJSON($response);
     }
-
 
     public function hapus_dokumen()
     {
@@ -1002,7 +981,6 @@ class Pencaker extends Controller
             $phoneNumber = $user['nohp'];
             $namaLengkap = $user['namalengkap'];
 
-            // Tambahkan entri di tabel timeline_user
             $timelineData = [
                 'timeline_id' => 4,
                 'description' => 'Tahap ini anda menunggu proses verifikasi data oleh tim Disnakertrans Kab. Manokwari',
@@ -1021,7 +999,6 @@ class Pencaker extends Controller
 
             $settingsModel = new SettingsModel();
 
-            // Ambil userkey dan passkey dari settings
             $userKey = $settingsModel->getValueByKey('whatsapp_userkey');
             $passKey = $settingsModel->getValueByKey('whatsapp_passkey');
             $admin = $settingsModel->getValueByKey('whatsapp_admin');
@@ -1089,7 +1066,6 @@ class Pencaker extends Controller
 
         return $response;
     }
-
 
     public function activity_by_user()
     {
@@ -1171,7 +1147,6 @@ class Pencaker extends Controller
         return $this->response->setJSON($res);
     }
 
-
     public function get_lapor_pencaker()
     {
         $laporpencakerModel = new LaporpencakerModel();
@@ -1245,7 +1220,6 @@ class Pencaker extends Controller
         }
     }
 
-
     public function check_usia_laporan()
     {
         $users_id = user()->id;
@@ -1276,9 +1250,6 @@ class Pencaker extends Controller
 
         return $this->response->setJSON(['status' => true]);
     }
-
-
-
 
     private function loadView(string $viewName, array $data = []): string
     {

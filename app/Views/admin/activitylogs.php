@@ -1,7 +1,6 @@
 <?= $this->extend('admin/template') ?>
 <?= $this->section('content') ?>
 
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.css">
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 

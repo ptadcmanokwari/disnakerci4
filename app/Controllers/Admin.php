@@ -26,7 +26,6 @@ use App\Libraries\Pdf;
 
 class Admin extends BaseController
 {
-
     public function index()
     {
         $pencakerModel = new PencakerModel();
@@ -84,7 +83,6 @@ class Admin extends BaseController
         return $this->loadView('admin/dashboard', $data);
     }
 
-
     public function redirectDashboard()
     {
         return redirect()->to('admin_v2/dashboard');
@@ -115,7 +113,6 @@ class Admin extends BaseController
         $data['title'] = 'Manajemen Pencaker';
         return $this->loadView('admin/pencaker', $data);
     }
-
 
     public function pencakerajax()
     {
@@ -215,8 +212,6 @@ class Admin extends BaseController
         return $this->loadView('admin/review_pencaker', $data);
     }
 
-
-
     public function kartu_ak1($id_pencaker)
     {
         $pencakerModel = new PencakerModel();
@@ -236,7 +231,6 @@ class Admin extends BaseController
 
         return view('admin/kartu_ak1', $data);
     }
-
 
     public function update_status_pencaker()
     {
@@ -267,7 +261,6 @@ class Admin extends BaseController
             return $this->response->setJSON(['status' => 'error', 'message' => 'Gagal menghapus pencaker'])->setStatusCode(500);
         }
     }
-
 
     public function saveVerifikasi()
     {
@@ -344,15 +337,12 @@ class Admin extends BaseController
         return $this->response->setJSON(['success' => true]);
     }
 
-
-
     public function berita()
     {
         $data['title'] = 'Manajemen Berita';
         return $this->loadView('admin/berita', $data);
     }
 
-    // tampilkan data di tabel berita
     public function beritaajax()
     {
         $beritaModel = new FrontendModel();
@@ -387,7 +377,6 @@ class Admin extends BaseController
         echo json_encode(["data" => $data]);
     }
 
-    // toggle switchery
     public function update_status_berita()
     {
         $id = $this->request->getJSON()->id;
@@ -403,7 +392,6 @@ class Admin extends BaseController
         }
     }
 
-    // Simpan berita unggahan baru
     public function save_berita()
     {
 
@@ -446,8 +434,6 @@ class Admin extends BaseController
         }
     }
 
-
-    // Sunting berita
     public function update_berita()
     {
         $model = new FrontendModel();
@@ -505,11 +491,9 @@ class Admin extends BaseController
         return $this->response->setJSON(['success' => true]);
     }
 
-
     public function hapus_berita()
     {
         $id = $this->request->getPost('id');
-        // $judul = $this->request->getPost('judul');
         $model = new FrontendModel();
 
         $berita = $model->find($id);
@@ -541,7 +525,6 @@ class Admin extends BaseController
         }
     }
 
-
     public function slider()
     {
         $usersModel = new UsersModel();
@@ -558,7 +541,6 @@ class Admin extends BaseController
         return $this->loadView('admin/slider', $data);
     }
 
-    // tampilkan data di tabel slider
     public function sliderajax()
     {
         $sliderModel = new FrontendModel();
@@ -589,7 +571,6 @@ class Admin extends BaseController
         echo json_encode(["data" => $data]);
     }
 
-    // toggle switchery
     public function update_status_slider()
     {
         $id = $this->request->getJSON()->id;
@@ -605,7 +586,6 @@ class Admin extends BaseController
         }
     }
 
-    // Simpan slider unggahan baru
     public function save_slider()
     {
         $validation = \Config\Services::validation();
@@ -645,8 +625,6 @@ class Admin extends BaseController
         }
     }
 
-
-    // Sunting berita
     public function update_slider()
     {
         $model = new FrontendModel();
@@ -698,7 +676,6 @@ class Admin extends BaseController
         return $this->response->setJSON(['success' => true]);
     }
 
-
     public function hapus_slider()
     {
         $id = $this->request->getPost('id');
@@ -733,8 +710,6 @@ class Admin extends BaseController
             return $this->response->setJSON(['status' => 'error'])->setStatusCode(500);
         }
     }
-
-
 
     public function pengumuman()
     {
@@ -851,7 +826,6 @@ class Admin extends BaseController
         }
     }
 
-
     public function update_pengumuman()
     {
         $model = new FrontendModel();
@@ -916,7 +890,6 @@ class Admin extends BaseController
 
         return $this->response->setJSON(['success' => true]);
     }
-
 
     public function hapus_pengumuman()
     {
@@ -1127,7 +1100,6 @@ class Admin extends BaseController
         }
     }
 
-
     public function get_jenis_pelatihan()
     {
         $model = new JenispelatihanModel();
@@ -1209,8 +1181,6 @@ class Admin extends BaseController
         return $this->response->setJSON(['success' => true]);
     }
 
-
-
     public function hapus_pelatihan()
     {
         $id = $this->request->getPost('id');
@@ -1251,7 +1221,6 @@ class Admin extends BaseController
         return $this->loadView('admin/activitylogs', $data);
     }
 
-
     public function activitylogsajax()
     {
         $activityModel = new ActivitylogsModel();
@@ -1289,7 +1258,6 @@ class Admin extends BaseController
 
         echo json_encode(["data" => $data]);
     }
-
 
     public function getUsersFromLogs()
     {
@@ -1434,7 +1402,6 @@ class Admin extends BaseController
         }
     }
 
-
     public function settings()
     {
         $settingsModel = new SettingsModel();
@@ -1544,7 +1511,6 @@ class Admin extends BaseController
 
         return redirect()->to('admin_v2/settings')->with('success', 'Pengaturan Google Recaptcha berhasil diperbarui');
     }
-
 
     public function backup()
     {
@@ -1795,7 +1761,6 @@ class Admin extends BaseController
         exit;
     }
 
-
     private function loadView(string $viewName, array $data = []): string
     {
         $uri = service('uri');
@@ -1809,12 +1774,14 @@ class Admin extends BaseController
         $galeriModel = new GaleriModel();
 
         $data['categories'] = $galeriModel->getUniqueCategories();
+        $data['halaman'] = $galeriModel->getUniqueHalaman();
         $data['galeri'] = $galeriModel->findAll();
 
         $data['title'] = 'Manajemen Galeri';
 
         return $this->loadView('admin/galeri', $data);
     }
+
     public function save_galeri()
     {
         $validation = \Config\Services::validation();
@@ -1871,7 +1838,6 @@ class Admin extends BaseController
             return $this->response->setJSON(['success' => false, 'errors' => 'File upload failed.']);
         }
     }
-
 
     public function update_status_galeri()
     {

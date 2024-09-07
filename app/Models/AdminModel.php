@@ -6,9 +6,8 @@ use CodeIgniter\Model;
 
 class AdminModel extends Model
 {
-    protected $table = 'users'; // Contoh nama tabel
+    protected $table = 'users';
 
-    // Fungsi untuk mendapatkan semua data pengguna
     public function getUsers()
     {
         return $this->findAll();

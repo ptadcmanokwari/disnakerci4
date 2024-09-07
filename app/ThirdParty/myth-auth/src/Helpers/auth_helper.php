@@ -94,7 +94,6 @@ if (!function_exists('has_permission')) {
 	}
 }
 
-
 if (!function_exists('sendWhatsAppMessage')) {
 	function sendWhatsAppMessage($to, $message, $userKey, $passKey, $admin)
 	{

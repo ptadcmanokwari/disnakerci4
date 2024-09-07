@@ -22,7 +22,6 @@ class FrontendModel extends Model
         'views'
     ];
 
-
     public function getKategoriCount()
     {
         return $this->select('kategori, COUNT(*) as count')
@@ -51,7 +50,6 @@ class FrontendModel extends Model
             ->findAll($limit);
     }
 
-    // Untuk tabel admin/backend
     public function getInformasiByKategori($kategori, $limit, $page)
     {
         return $this->select('informasi.*, users.namalengkap')
@@ -61,7 +59,6 @@ class FrontendModel extends Model
             ->paginate($limit, 'default', $page);
     }
 
-    // Untuk halaman depan/frontend
     public function getInformasiByKategoriFront($kategori, $limit, $page)
     {
         return $this->select('informasi.*, users.namalengkap')
@@ -79,7 +76,6 @@ class FrontendModel extends Model
             ->where('informasi.slug', $slug)
             ->first();
     }
-
 
     public function countInformasiByKategori($kategori)
     {

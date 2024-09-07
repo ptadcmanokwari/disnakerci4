@@ -29,7 +29,6 @@ class UsersModel extends Model
         'created_at',
     ];
 
-    // Method untuk mengambil user terbaru
     public function getLatestUsers($limit = 5)
     {
         return $this->orderBy('created_at', 'DESC')
@@ -37,13 +36,11 @@ class UsersModel extends Model
             ->findAll();
     }
 
-    // Method untuk menyimpan user
     public function saveUser($data)
     {
         return $this->insert($data);
     }
 
-    // Method untuk mengambil data user beserta role-nya
     public function ubah_status_user()
     {
         $builder = $this->db->table('users');
@@ -56,16 +53,13 @@ class UsersModel extends Model
         return $query->getResult();
     }
 
-    // Method untuk mengupdate role user
     public function updateUserRole($userId, $groupId)
     {
-        // Pastikan data yang dibutuhkan tidak kosong
         if (!$userId || !$groupId) {
             return false;
         }
 
-        // Lakukan update
-        return $this->db->table('auth_groups_users') // Sesuaikan nama tabel jika berbeda
+        return $this->db->table('auth_groups_users')
             ->where('user_id', $userId)
             ->update(['group_id' => $groupId]);
     }

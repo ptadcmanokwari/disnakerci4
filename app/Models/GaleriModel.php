@@ -15,6 +15,11 @@ class GaleriModel extends Model
         return $this->distinct()->findColumn('kategori');
     }
 
+    public function getUniqueHalaman()
+    {
+        return $this->distinct()->findColumn('halaman');
+    }
+
     public function getGalleriesForHome()
     {
         return $this->where('halaman', 'beranda')

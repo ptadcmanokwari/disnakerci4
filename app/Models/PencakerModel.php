@@ -9,12 +9,30 @@ class PencakerModel extends Model
     protected $table = 'pencaker';
     protected $primaryKey = 'id';
     protected $allowedFields = [
-        'namalengkap', 'tempatlahir', 'tgllahir', 'jenkel', 'alamat', 'kodepos', 'statusnikah', 'tinggibadan', 'beratbadan',
-        'agama', 'nik', 'nohp', 'nopendaftaran', 'tujuan', 'lokasi_jabatan', 'tujuan_perusahaan', 'catatan_pengantar', 'keterampilan_bahasa',
-        'bahasa_lainnya', 'keterangan_status', 'qr_code', 'user_id'
+        'namalengkap',
+        'tempatlahir',
+        'tgllahir',
+        'jenkel',
+        'alamat',
+        'kodepos',
+        'statusnikah',
+        'tinggibadan',
+        'beratbadan',
+        'agama',
+        'nik',
+        'nohp',
+        'nopendaftaran',
+        'tujuan',
+        'lokasi_jabatan',
+        'tujuan_perusahaan',
+        'catatan_pengantar',
+        'keterampilan_bahasa',
+        'bahasa_lainnya',
+        'keterangan_status',
+        'qr_code',
+        'user_id'
     ];
 
-    // datatables server side
     public function getPencakerWithUser($filter = null)
     {
         $builder = $this->db->table($this->table);
@@ -30,10 +48,9 @@ class PencakerModel extends Model
 
     public function savePencaker($data)
     {
-        return $this->save($data); // Menyimpan data dengan menggunakan metode save
+        return $this->save($data);
     }
 
-    // Contoh method tambahan untuk mengambil statistik umur pencaker
     public function getUmurStatistik()
     {
         $db = \Config\Database::connect();
@@ -41,13 +58,11 @@ class PencakerModel extends Model
         return $query->getResult();
     }
 
-    // Contoh method tambahan untuk menghitung jumlah pencaker
     public function countPencaker()
     {
         return $this->countAll();
     }
 
-    // Status Halaman Dashboard
     public function getStatusByUserId($userId)
     {
         return $this->where('user_id', $userId)->first();
@@ -62,7 +77,6 @@ class PencakerModel extends Model
             ->get()
             ->getRow();
     }
-
 
     public function countByStatus($status)
     {
@@ -155,13 +169,11 @@ class PencakerModel extends Model
         return $builder->getRowArray();
     }
 
-    // Generasi nopendaftaran
     public function generate_nopendaftaran()
     {
         $query = $this->db->query("SELECT RIGHT(nopendaftaran, 6) AS nopendaftaran FROM pencaker ORDER BY nopendaftaran DESC LIMIT 1");
         return $query->getRowArray();
     }
-
 
     public function validasi_ak1($code)
     {
@@ -175,10 +187,9 @@ class PencakerModel extends Model
         $builder->where('tu.timeline_id', '6');
         $builder->where('SHA1(p.nopendaftaran)', $code);
 
-        $query = $builder->get(); // eksekusi query
-        return $query->getResultArray(); // ambil hasil sebagai array
+        $query = $builder->get();
+        return $query->getResultArray();
     }
-
 
     public function get_timeline($userId)
     {
@@ -188,8 +199,8 @@ class PencakerModel extends Model
         $builder->join('users u', 'u.id = tu.users_id');
         $builder->where('tu.users_id', $userId);
 
-        $query = $builder->get(); // eksekusi query
-        return $query->getResultArray(); // ambil hasil sebagai array
+        $query = $builder->get();
+        return $query->getResultArray();
     }
 
     public function getLatestPencaker($limit = 5)

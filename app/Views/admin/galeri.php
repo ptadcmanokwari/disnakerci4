@@ -112,6 +112,19 @@
                         <div class="card-body">
                             <div class="row mb-4">
                                 <div class="col-md-4">
+                                    <label for="filterHalaman">Pilih Halaman:</label>
+                                    <select id="filterHalaman" class="form-control">
+                                        <option value="Semua">Semua</option>
+                                        <?php if (!empty($halaman) && is_array($halaman)) : ?>
+                                            <?php foreach ($halaman as $hal) : ?>
+                                                <option value="<?= $hal ?>">Galeri <?= ucwords(str_replace('_', ' ', $hal)) ?></option>
+                                            <?php endforeach; ?>
+                                        <?php else : ?>
+                                            <option value="Tidak ada">Tidak ada halaman</option>
+                                        <?php endif; ?>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
                                     <label for="filterKategori">Pilih Kategori:</label>
                                     <select id="filterKategori" class="form-control">
                                         <option value="Semua">Semua</option>
@@ -128,7 +141,7 @@
 
                             <div class="row" id="galeriContainer">
                                 <?php foreach ($galeri as $key) : ?>
-                                    <div class="col-md-1  my-2 galeri-item" data-kategori="<?= esc($key['kategori']); ?>">
+                                    <div class="col-md-1  my-2 galeri-item" data-kategori="<?= esc($key['kategori']); ?>" data-halaman="<?= esc($key['halaman']); ?>">
                                         <div class="image-container">
                                             <img class="w-100" src="<?= base_url(); ?>uploads/galeri/<?= esc($key['gambar']); ?>" alt="<?= esc($key['deskripsi']); ?>">
                                             <div class="overlay-buttons">
@@ -493,6 +506,19 @@
 
             galeriItems.forEach(function(item) {
                 if (selectedCategory === "Semua" || item.getAttribute('data-kategori') === selectedCategory) {
+                    item.style.display = "block";
+                } else {
+                    item.style.display = "none";
+                }
+            });
+        });
+
+        document.getElementById('filterHalaman').addEventListener('change', function() {
+            var selectedHalaman = this.value;
+            var halamanItems = document.querySelectorAll('.galeri-item');
+
+            halamanItems.forEach(function(item) {
+                if (selectedHalaman === "Semua" || item.getAttribute('data-halaman') === selectedHalaman) {
                     item.style.display = "block";
                 } else {
                     item.style.display = "none";

@@ -28,7 +28,6 @@ class LaporpencakerModel extends Model
         return $nourut;
     }
 
-
     public function getLaporKerjaData($pencaker_id, $start, $length, $searchValue)
     {
         $builder = $this->db->table($this->table);

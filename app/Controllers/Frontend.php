@@ -54,7 +54,6 @@ class Frontend extends BaseController
         return $groupedGalleries;
     }
 
-    // Dinamiskan SLider
     private function getSliders(): array
     {
         $path = WRITEPATH . '../public/uploads/sliders/';
@@ -71,7 +70,6 @@ class Frontend extends BaseController
         return $sliders;
     }
 
-
     public function profil(): string
     {
         $data['title'] = 'Profil - Disnakertrans Manokwari';
@@ -85,7 +83,6 @@ class Frontend extends BaseController
         $data['title'] = 'Urusan Transmigrasi - Disnakertrans Manokwari';
         return $this->loadView('frontend/transmigrasi', $data);
     }
-
 
     public function getTransmigrasiGalleries()
     {
@@ -130,7 +127,6 @@ class Frontend extends BaseController
         return $groupedGalleries;
     }
 
-
     public function berita(): string
     {
         $informasiModel = new FrontendModel();
@@ -157,8 +153,6 @@ class Frontend extends BaseController
 
         return $this->loadView('frontend/beritama', $data);
     }
-
-
 
     public function detail_berita($slug)
     {
@@ -234,7 +228,6 @@ class Frontend extends BaseController
         return $this->loadView('frontend/tag_pengumuman', $data);
     }
 
-
     public function pengumuman(): string
     {
         $informasiModel = new FrontendModel();
@@ -288,8 +281,6 @@ class Frontend extends BaseController
         return $this->loadView('frontend/detail_pengumuman', $data);
     }
 
-
-
     public function pelatihan(): string
     {
         $pelatihanModel = new PelatihanModel();
@@ -323,7 +314,6 @@ class Frontend extends BaseController
 
         return $this->loadView('frontend/detail_pelatihan', $data);
     }
-
 
     public function kartu_ak1(): string
     {
@@ -428,7 +418,6 @@ class Frontend extends BaseController
 
         return view('frontend/kartu', $data); // Pastikan view path sesuai dengan struktur direktori Anda
     }
-
 
     private function loadView(string $viewName, array $data = []): string
     {

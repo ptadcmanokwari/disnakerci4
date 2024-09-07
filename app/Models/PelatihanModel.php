@@ -33,7 +33,6 @@ class PelatihanModel extends Model
         return $query->getResultArray();
     }
 
-    // Halaman Pelatihan Frontend
     public function get_all_pelatihan_by_penulis()
     {
         $builder = $this->db->table('pelatihan');
@@ -62,7 +61,7 @@ class PelatihanModel extends Model
     public function get_pelatihan_by_jenis($jenis_pelatihan_kode, $excludeId = null)
     {
         $builder = $this->where('jenis_pelatihan_kode', $jenis_pelatihan_kode)
-            ->where('status', 1) // Tambahkan kondisi status = 1
+            ->where('status', 1)
             ->orderBy('tanggal', 'DESC');
 
         if ($excludeId) {

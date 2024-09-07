@@ -188,7 +188,7 @@
             "autoWidth": false,
             "responsive": true,
             "ajax": {
-                "url": "<?php echo base_url('admin_v2/beritaajax'); ?>", // Sesuaikan dengan route yang benar di CodeIgniter
+                "url": "<?php echo base_url('admin_v2/beritaajax'); ?>",
                 "type": "POST"
             },
             "columns": [{
