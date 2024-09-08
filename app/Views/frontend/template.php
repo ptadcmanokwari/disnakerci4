@@ -94,6 +94,10 @@
             margin-top: 0.5rem;
             font-size: 1.2rem;
         }
+
+        a.btn.btn-success.mx-4.p-2.text-white:hover {
+            color: #ecf0f6 !important;
+        }
     </style>
 </head>
 
@@ -136,8 +140,15 @@
                     </li>
                     <li><a <?= ($current_uris['segment_1'] == 'kontak') ? 'class="active"' : '' ?> href="<?= base_url('kontak'); ?>">Kontak</a></li>
                     <?php if (logged_in()) : ?>
-                        <li><a class="btn btn-danger mx-4 p-2 text-white" href="<?= base_url('logout'); ?>">Logout</a></li>
+                        <?php if (in_groups('administrator')) : ?>
+                            <!-- Jika user yang login adalah admin -->
+                            <li><a class="btn btn-success mx-4 p-2 text-white" href="<?= base_url('admin_v2/dashboard'); ?>">Masuk Panel Admin</a></li>
+                        <?php elseif (in_groups('pencaker')) : ?>
+                            <!-- Jika user yang login adalah pencaker -->
+                            <li><a class="btn btn-success mx-4 p-2 text-white" href="<?= base_url('pencaker/dashboard'); ?>">Masuk Dashboard Pencaker</a></li>
+                        <?php endif; ?>
                     <?php else : ?>
+                        <!-- Jika user belum login -->
                         <li><a class="btn btn-primary mx-4 p-2 text-white" href="<?= base_url('login'); ?>">Masuk</a></li>
                     <?php endif; ?>
                 </ul>

@@ -186,7 +186,7 @@
                                     <td>Tempat, Tanggal Lahir</td>
                                     <td>:</td>
                                     <td class="border-bottom">
-                                        <?php echo ucfirst($pencaker['tempatlahir']) . ", " . date_indo($pencaker['tgllahir']); ?>
+                                        <?php echo ucfirst($pencaker['tempatlahir']) . ", " . tanggal_indo($pencaker['tgllahir']); ?>
                                     </td>
 
                                 </tr>

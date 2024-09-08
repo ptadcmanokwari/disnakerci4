@@ -140,28 +140,49 @@ class Admin extends BaseController
                 }
             }
 
-            // Tentukan kondisi tombol jika keterangan_status kosong atau null
-            $isDisabled = empty($pc['nik']) ? 'disabled' : '';
+            // Tentukan kondisi tombol berdasarkan keterangan_status
+            $vervalDisabled = 'disabled';
+            $kartuDisabled = 'disabled-link';
+            $detailDisabled = 'disabled-link';
+            $deleteDisabled = 'disabled';
 
-            // Tentukan kondisi tombol untuk verifikasi/validasi pencaker
-            $vervalDisabled = ($pc['keterangan_status'] === 'Registrasi' || $isDisabled) ? 'disabled' : '';
+            switch ($pc['keterangan_status']) {
+                case 'Registrasi':
+                    // Semua tombol didisable
+                    $vervalDisabled = 'disabled';
+                    $kartuDisabled = 'disabled-link';
+                    $detailDisabled = 'disabled-link';
+                    $deleteDisabled = 'disabled';
+                    break;
+                case 'Verifikasi':
+                case 'Re-Verifikasi':
+                case 'Validasi':
+                    // Enable Detail dan Hapus, Verifikasi enabled, Kartu AK1 disabled
+                    $vervalDisabled = '';
+                    $kartuDisabled = 'disabled-link';
+                    $detailDisabled = '';
+                    $deleteDisabled = '';
+                    break;
+                case 'Aktif':
+                    // Enable semua kecuali Verifikasi yang didisable
+                    $vervalDisabled = 'disabled';
+                    $kartuDisabled = '';
+                    $detailDisabled = '';
+                    $deleteDisabled = '';
+                    break;
+            }
 
-            // Tentukan kondisi tombol untuk Kartu AK/1
-            $kartuDisabled = ($pc['keterangan_status'] === 'Validasi' && !$isDisabled) ? 'disabled-link' : '';
-
-            // Tentukan kondisi tombol untuk Detail Pencaker
-            $detailDisabled = ($isDisabled) ? 'disabled-link' : '';
-
+            // Tambahkan tombol ke dalam array $data
             $data[] = [
                 "verval" => '<button class="btn btn-secondary btn-sm btn-verval" ' . $vervalDisabled . '
-                title="Verifikasi/Validasi Pencaker"
-                 data-id="' . $pc['id'] . '" 
-                 data-namalengkap="' . $pc['namalengkap'] . '" 
-                 data-nopendaftaran="' . $pc['nopendaftaran'] . '" 
-                 data-toggle="modal" 
-                 data-target="#VerVal">
-                 <i class="bi bi-check-circle-fill"></i>
-             </button>',
+            title="Verifikasi/Validasi Pencaker"
+             data-id="' . $pc['id'] . '" 
+             data-namalengkap="' . $pc['namalengkap'] . '" 
+             data-nopendaftaran="' . $pc['nopendaftaran'] . '" 
+             data-toggle="modal" 
+             data-target="#VerVal">
+             <i class="bi bi-check-circle-fill"></i>
+         </button>',
                 "img" => $gambar,
                 "namalengkap" => $pc['namalengkap'],
                 "nopendaftaran" => $pc['nopendaftaran'],
@@ -176,7 +197,7 @@ class Admin extends BaseController
                <a href="' . base_url('admin_v2/kartu_ak1/' . $pc['id']) . '" target="_blank" class="btn btn-success btn-sm ' . $kartuDisabled . '" title="Kartu AK/1">
                    <i class="bi bi-person-vcard-fill"></i>
                </a>
-               <button class="btn btn-danger btn-sm btn-delete" data-id="' . $pc['id'] . '" ' . $isDisabled . ' title="Hapus Pencaker">
+               <button class="btn btn-danger btn-sm btn-delete" data-id="' . $pc['id'] . '" ' . $deleteDisabled . ' title="Hapus Pencaker">
                    <i class="bi bi-trash"></i>
                </button>
            </div>'
@@ -185,6 +206,7 @@ class Admin extends BaseController
 
         echo json_encode(["data" => $data]);
     }
+
 
     public function detail_pencaker($id_pencaker)
     {
@@ -1552,68 +1574,68 @@ class Admin extends BaseController
 
         // Set some content to display
         $html = '<style>
-                    table {
-                        font-size: 7px;
-                        margin-left: auto;
-                        margin-right: auto;
-                    }
-                    tr.center {
-                        text-align: center;
-                        background-color: #C0C0C0;
-                        font-weight: bold;
-                    }
-                    div.heading {
-                        text-align: center;
-                        font-weight: bold;
-                        font-size: 10px;
-                    }
-                    div.small {
-                        font-size: 7px;
-                        padding-bottom: 5px;
-                    }
-                </style>
-                <div class="heading">DATA PENCARI KERJA KABUPATEN MANOKWARI</div>
-                <div class="small"></div><br>
-                <table width="100%" border="1" cellpadding="5">
-                    <tr class="center">
-                        <th width="22">No.</th>
-                        <th width="80">Nama Lengkap</th>
-                        <th width="19">JK</th>
-                        <th width="82">Nomor Pendaftaran</th>
-                        <th width="80">NIK</th>
-                        <th width="40">Agama</th>
-                        <th width="70">Alamat</th>
-                        <th width="100">Tempat,<br> Tgl. Lahir</th>
-                        <th width="40">Status<br> Menikah</th>
-                        <th width="30">Kode Pos</th>
-                        <th width="22">TB</th>
-                        <th width="22">BB</th>
-                        <th width="25">LJ</th>
-                        <th width="60">Tujuan<br>Perusahaan</th>
-                        <th width="60">Keterampilan<br>Bahasa</th>
-                        <th width="60">Bahasa<br> Lainnya</th>
-                    </tr>';
+                table {
+                    font-size: 7px;
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+                tr.center {
+                    text-align: center;
+                    background-color: #C0C0C0;
+                    font-weight: bold;
+                }
+                div.heading {
+                    text-align: center;
+                    font-weight: bold;
+                    font-size: 10px;
+                }
+                div.small {
+                    font-size: 7px;
+                    padding-bottom: 5px;
+                }
+            </style>
+            <div class="heading">DATA PENCARI KERJA KABUPATEN MANOKWARI</div>
+            <div class="small"></div><br>
+            <table width="100%" border="1" cellpadding="5">
+                <tr class="center">
+                    <th width="22">No.</th>
+                    <th width="80">Nama Lengkap</th>
+                    <th width="19">JK</th>
+                    <th width="82">Nomor Pendaftaran</th>
+                    <th width="80">NIK</th>
+                    <th width="40">Agama</th>
+                    <th width="70">Alamat</th>
+                    <th width="100">Tempat,<br> Tgl. Lahir</th>
+                    <th width="40">Status<br> Menikah</th>
+                    <th width="30">Kode Pos</th>
+                    <th width="22">TB</th>
+                    <th width="22">BB</th>
+                    <th width="25">LJ</th>
+                    <th width="60">Tujuan<br>Perusahaan</th>
+                    <th width="60">Keterampilan<br>Bahasa</th>
+                    <th width="60">Bahasa<br> Lainnya</th>
+                </tr>';
 
         $no = 1;
         foreach ($pencari_kerja as $pk) {
             $html .= '<tr>
-                        <td align="center">' . $no . '</td>
-                        <td align="center">' . $pk['namalengkap'] . '</td>
-                        <td align="center">' . $pk['jenkel'] . '</td>
-                        <td align="center">' . $pk['nopendaftaran'] . '</td>
-                        <td align="center">' . $pk['nik'] . '</td>
-                        <td align="center">' . $pk['agama'] . '</td>
-                        <td align="center">' . $pk['alamat'] . '</td>
-                        <td align="center">' . $pk['tempatlahir'] . ', ' . date('d F Y', strtotime($pk['tgllahir'])) . '</td>
-                        <td align="center">' . $pk['statusnikah'] . '</td>
-                        <td align="center">' . $pk['kodepos'] . '</td>
-                        <td align="center">' . $pk['tinggibadan']  . '</td>
-                        <td align="center">' . $pk['beratbadan'] . '</td>
-                        <td align="center">' . $pk['lokasi_jabatan'] . '</td>
-                        <td align="center">' . $pk['tujuan_perusahaan'] . '</td>
-                        <td align="center">' . $pk['keterampilan_bahasa'] . '</td>
-                        <td align="center">' . $pk['bahasa_lainnya'] . '</td>
-                    </tr>';
+                    <td align="center">' . $no . '</td>
+                    <td align="center">' . $pk['namalengkap'] . '</td>
+                    <td align="center">' . $pk['jenkel'] . '</td>
+                    <td align="center">' . $pk['nopendaftaran'] . '</td>
+                    <td align="center">' . $pk['nik'] . '</td>
+                    <td align="center">' . $pk['agama'] . '</td>
+                    <td align="center">' . $pk['alamat'] . '</td>
+                    <td align="center">' . $pk['tempatlahir'] . ', ' . date('d F Y', strtotime($pk['tgllahir'])) . '</td>
+                    <td align="center">' . $pk['statusnikah'] . '</td>
+                    <td align="center">' . $pk['kodepos'] . '</td>
+                    <td align="center">' . $pk['tinggibadan']  . '</td>
+                    <td align="center">' . $pk['beratbadan'] . '</td>
+                    <td align="center">' . $pk['lokasi_jabatan'] . '</td>
+                    <td align="center">' . $pk['tujuan_perusahaan'] . '</td>
+                    <td align="center">' . $pk['keterampilan_bahasa'] . '</td>
+                    <td align="center">' . $pk['bahasa_lainnya'] . '</td>
+                </tr>';
             $no++;
         }
 
@@ -1624,7 +1646,11 @@ class Admin extends BaseController
 
         // Close and output PDF document
         $pdf->Output('DATA PENCARI KERJA KABUPATEN MANOKWARI.pdf', 'I');
+
+        // Terminate the script after PDF output to prevent further execution
+        exit();
     }
+
 
     public function exportExcel()
     {
