@@ -40,4 +40,11 @@ class GaleriModel extends Model
             ->where('status', 1) // Misalkan hanya menampilkan galeri yang aktif
             ->findAll();
     }
+
+    public function getCategoriesByHalaman($halaman)
+    {
+        return $this->where('halaman', $halaman)
+            ->distinct()
+            ->findColumn('kategori');
+    }
 }

@@ -96,7 +96,7 @@
                         <td>TANGGAL PENDAFTARAN</td>
                         <td>:</td>
                         <td class="fw-bold">
-                            <?php echo isset($user['created_at']) ? date_indo($user['created_at']) : '-'; ?>
+                            <?php echo isset($user['created_at']) ? strtoupper(tanggal_indo($user['created_at'])) : '-'; ?>
                         </td>
                     </tr>
                     <tr>
@@ -125,7 +125,7 @@
                                 <td>Tempat, Tanggal Lahir</td>
                                 <td>:</td>
                                 <td class="fw-bold">
-                                    <?php echo strtoupper($pencaker['tempatlahir']) . ", " . $pencaker['tgllahir']; ?>
+                                    <?php echo strtoupper($pencaker['tempatlahir']) . ", " . strtoupper(tanggal_indo($pencaker['tgllahir'])); ?>
                                 </td>
                             </tr>
                             <tr>
@@ -161,7 +161,7 @@
                             <tr>
                                 <td>Email</td>
                                 <td>:</td>
-                                <td class="fw-bold"><?php echo $user['email']; ?></td>
+                                <td class="fw-bold"><?php echo strtoupper($user['email']); ?></td>
                             </tr>
                             <tr>
                                 <td>Kode Pos</td>

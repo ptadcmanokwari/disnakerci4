@@ -172,11 +172,12 @@ class Admin extends BaseController
                     break;
             }
 
+            $idHashed = base64_encode($pc['id']); // Encode ID
             // Tambahkan tombol ke dalam array $data
             $data[] = [
                 "verval" => '<button class="btn btn-secondary btn-sm btn-verval" ' . $vervalDisabled . '
             title="Verifikasi/Validasi Pencaker"
-             data-id="' . $pc['id'] . '" 
+             data-id="' . $idHashed . '" 
              data-namalengkap="' . $pc['namalengkap'] . '" 
              data-nopendaftaran="' . $pc['nopendaftaran'] . '" 
              data-toggle="modal" 
@@ -191,13 +192,13 @@ class Admin extends BaseController
                 "email" =>  $pc['email'],
                 "keterangan_status" => $pc['keterangan_status'],
                 "aksi" => '<div class="btn-group" role="group" aria-label="Actions">
-               <a href="' . base_url('admin_v2/detail_pencaker/' . $pc['id']) . '" target="_blank" class="btn btn-info btn-sm ' . $detailDisabled . '" title="Detail Pencaker">
+               <a href="' . base_url('admin_v2/detail_pencaker/' . $idHashed) . '" target="_blank" class="btn btn-info btn-sm ' . $detailDisabled . '" title="Detail Pencaker">
                    <i class="bi bi-search"></i>
                </a>
-               <a href="' . base_url('admin_v2/kartu_ak1/' . $pc['id']) . '" target="_blank" class="btn btn-success btn-sm ' . $kartuDisabled . '" title="Kartu AK/1">
+               <a href="' . base_url('admin_v2/kartu_ak1/' . $idHashed) . '" target="_blank" class="btn btn-success btn-sm ' . $kartuDisabled . '" title="Kartu AK/1">
                    <i class="bi bi-person-vcard-fill"></i>
                </a>
-               <button class="btn btn-danger btn-sm btn-delete" data-id="' . $pc['id'] . '" ' . $deleteDisabled . ' title="Hapus Pencaker">
+               <button class="btn btn-danger btn-sm btn-delete" data-id="' . $idHashed . '" ' . $deleteDisabled . ' title="Hapus Pencaker">
                    <i class="bi bi-trash"></i>
                </button>
            </div>'
@@ -208,8 +209,9 @@ class Admin extends BaseController
     }
 
 
-    public function detail_pencaker($id_pencaker)
+    public function detail_pencaker($hashed_id)
     {
+        $id_pencaker = base64_decode($hashed_id); // Decode hashed ID
         $pencakerModel = new PencakerModel();
         $pencaker = $pencakerModel->find($id_pencaker);
         $pendidikan = $pencakerModel->getpendidikanpencaker($id_pencaker);
@@ -234,8 +236,9 @@ class Admin extends BaseController
         return $this->loadView('admin/review_pencaker', $data);
     }
 
-    public function kartu_ak1($id_pencaker)
+    public function kartu_ak1($hashed_id)
     {
+        $id_pencaker = base64_decode($hashed_id); // Decode hashed ID
         $pencakerModel = new PencakerModel();
         $pencaker = $pencakerModel->find($id_pencaker);
         $pendidikan = $pencakerModel->getpendidikanpencaker($id_pencaker);
@@ -1808,6 +1811,21 @@ class Admin extends BaseController
         return $this->loadView('admin/galeri', $data);
     }
 
+    public function getCategoriesByHalaman($halaman)
+    {
+        $galeriModel = new GaleriModel();
+        $categories = $galeriModel->getCategoriesByHalaman($halaman);
+
+        return $this->response->setJSON($categories);
+    }
+
+    public function getAllCategories()
+    {
+        $galeriModel = new GaleriModel();
+        $categories = $galeriModel->getUniqueCategories(); // Mengambil semua kategori yang unik
+        return $this->response->setJSON($categories);
+    }
+
     public function save_galeri()
     {
         $validation = \Config\Services::validation();
@@ -1816,27 +1834,24 @@ class Admin extends BaseController
             'file' => 'uploaded[file]|is_image[file]',
             'kategori' => 'required',
             'status' => 'required|in_list[0,1]',
-            'halaman' => 'required',  // Validasi untuk halaman
+            'halaman' => 'required',
         ]);
 
         if (!$validation->withRequest($this->request)->run()) {
             return $this->response->setJSON(['success' => false, 'errors' => $validation->getErrors()]);
         }
 
-        // Proses file upload
         $file = $this->request->getFile('file');
 
         if ($file->isValid() && !$file->hasMoved()) {
             $newName = $file->getRandomName();
             $file->move(FCPATH . 'uploads/galeri/', $newName);
 
-            // Simpan ke database
             $galeri = new GaleriModel();
             $kategori = $this->request->getPost('kategori');
             $kategoriBaru = $this->request->getPost('kategori_baru');
 
             if ($kategori === 'lainnya' && !empty($kategoriBaru)) {
-                // Mengganti spasi dengan underscore pada kategori baru
                 $kategori = str_replace(' ', '_', $kategoriBaru);
             }
 
@@ -1845,12 +1860,11 @@ class Admin extends BaseController
                 'kategori' => $kategori,
                 'gambar' => $newName,
                 'status' => $this->request->getPost('status'),
-                'halaman' => $this->request->getPost('halaman'),  // Menyimpan nilai halaman
+                'halaman' => $this->request->getPost('halaman'),
                 'users_id' => user()->id,
             ];
             $galeri->save($data);
 
-            // Rekam aktivitas
             $activityModel = new ActivitylogsModel();
             $activityMessage = sprintf(
                 'User #%d mengunggah galeri baru dengan deskripsi: "%s"',
@@ -1864,6 +1878,7 @@ class Admin extends BaseController
             return $this->response->setJSON(['success' => false, 'errors' => 'File upload failed.']);
         }
     }
+
 
     public function update_status_galeri()
     {

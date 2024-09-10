@@ -357,7 +357,6 @@
                     e.preventDefault();
                     e.stopPropagation();
 
-                    // Lanjutkan jika tidak ada error
                     if (addDropzone.getQueuedFiles().length > 0) {
                         var canvas = cropper.getCroppedCanvas();
                         canvas.toBlob(function(blob) {
@@ -401,7 +400,7 @@
                             if (result.isConfirmed) {
                                 $('#addGaleriBaruModal').modal('hide');
                                 resetModal();
-                                location.reload();
+                                window.location.reload();
                             }
                         });
                     } else {
@@ -423,47 +422,41 @@
             }
         });
 
-
         function resetModal() {
-            var deskripsi = document.getElementById('deskripsi');
-            var edit_deskripsi = document.getElementById('edit_deskripsi');
-            var kategori = document.getElementById('kategori');
-            var kategori_baru = document.getElementById('kategori_baru');
-            var edit_kategori = document.getElementById('edit_kategori');
+            // Reset nilai input teks
+            document.querySelector('#deskripsi').value = '';
+            document.querySelector('#kategori').value = '';
+            document.querySelector('#kategori_baru').value = '';
 
-            if (deskripsi) {
-                deskripsi.value = '';
+            // Reset radio button
+            var radios = document.querySelectorAll('input[name="halaman"]');
+            radios.forEach(function(radio) {
+                radio.checked = false;
+            });
+
+            // Sembunyikan elemen kategori_baru
+            var kategoriBaruContainer = document.querySelector('#inputLainnya'); // Ganti dengan ID yang sesuai
+            if (kategoriBaruContainer) {
+                kategoriBaruContainer.style.display = 'none';
             }
-            if (edit_deskripsi) {
-                edit_deskripsi.value = '';
-            }
-            if (kategori) {
-                kategori.value = '';
-            }
-            if (kategori_baru) {
-                kategori_baru.value = '';
-            }
-            if (edit_kategori) {
-                edit_kategori.value = '';
-            }
+
+            // Hapus semua file di Dropzone
             if (addDropzone) {
-                addDropzone.removeAllFiles();
+                addDropzone.removeAllFiles(true);
             }
+
             // Hapus Cropper jika ada
             if (cropper) {
                 cropper.destroy();
                 cropper = null;
             }
 
-            $('#edit-gambar-preview').attr('src', '');
-
-            // Sembunyikan Cropper container
-            var croperUpdate = document.getElementById('updateGaleriCropper');
-            croperUpdate.style.display = 'none';
-
-            var cropperTambah = document.getElementById('addGaleriCropper');
-            cropperTambah.style.display = 'none';
+            // Reset gambar dan Cropper container
+            document.querySelector('#addGaleriImage').src = '';
+            document.querySelector('#addGaleriCropper').style.display = 'none';
         }
+
+
 
         $(document).on('click', '.btn-delete', function() {
             var id = $(this).data('id');
@@ -500,31 +493,80 @@
             });
         });
 
+        document.getElementById('filterHalaman').addEventListener('change', function() {
+            var selectedHalaman = this.value;
+
+            if (selectedHalaman !== "Semua") {
+                var url = `<?= base_url('admin_v2/getCategoriesByHalaman') ?>/${selectedHalaman}`;
+
+                fetch(url)
+                    .then(response => response.json())
+                    .then(categories => {
+                        var filterKategori = document.getElementById('filterKategori');
+                        filterKategori.innerHTML = ''; // Kosongkan dropdown kategori
+
+                        // Tambahkan opsi "Semua"
+                        var optionAll = document.createElement('option');
+                        optionAll.value = 'Semua';
+                        optionAll.text = 'Semua';
+                        filterKategori.appendChild(optionAll);
+
+                        // Isi dropdown kategori dengan data dari server
+                        categories.forEach(function(category) {
+                            var option = document.createElement('option');
+                            option.value = category;
+                            option.text = category.replace('_', ' ');
+                            filterKategori.appendChild(option);
+                        });
+
+                        // Menampilkan gambar yang sesuai dengan kategori yang baru
+                        filterImages(selectedHalaman, filterKategori.value);
+                    })
+                    .catch(error => console.error('Error:', error));
+            } else {
+                // Reset dropdown kategori jika halaman "Semua" dipilih
+                var filterKategori = document.getElementById('filterKategori');
+                filterKategori.innerHTML = '<option value="Semua">Semua</option>';
+
+                // Mengambil semua kategori jika halaman "Semua" dipilih
+                fetch(`<?= base_url('admin_v2/getAllCategories') ?>`)
+                    .then(response => response.json())
+                    .then(categories => {
+                        categories.forEach(function(category) {
+                            var option = document.createElement('option');
+                            option.value = category;
+                            option.text = category.replace('_', ' ');
+                            filterKategori.appendChild(option);
+                        });
+
+                        // Menampilkan semua gambar
+                        filterImages('Semua', 'Semua');
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+        });
+
         document.getElementById('filterKategori').addEventListener('change', function() {
             var selectedCategory = this.value;
+            var selectedHalaman = document.getElementById('filterHalaman').value;
+            filterImages(selectedHalaman, selectedCategory);
+        });
+
+        function filterImages(selectedHalaman, selectedCategory) {
             var galeriItems = document.querySelectorAll('.galeri-item');
 
             galeriItems.forEach(function(item) {
-                if (selectedCategory === "Semua" || item.getAttribute('data-kategori') === selectedCategory) {
+                var itemHalaman = item.getAttribute('data-halaman');
+                var itemKategori = item.getAttribute('data-kategori');
+
+                if ((selectedHalaman === "Semua" || itemHalaman === selectedHalaman) &&
+                    (selectedCategory === "Semua" || itemKategori === selectedCategory)) {
                     item.style.display = "block";
                 } else {
                     item.style.display = "none";
                 }
             });
-        });
-
-        document.getElementById('filterHalaman').addEventListener('change', function() {
-            var selectedHalaman = this.value;
-            var halamanItems = document.querySelectorAll('.galeri-item');
-
-            halamanItems.forEach(function(item) {
-                if (selectedHalaman === "Semua" || item.getAttribute('data-halaman') === selectedHalaman) {
-                    item.style.display = "block";
-                } else {
-                    item.style.display = "none";
-                }
-            });
-        });
+        }
 
         var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
         elems.forEach(function(html) {

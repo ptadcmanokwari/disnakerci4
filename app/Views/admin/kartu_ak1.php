@@ -180,30 +180,30 @@
                                 <tr>
                                     <td>Nama Lengkap</td>
                                     <td>:</td>
-                                    <td class="border-bottom"><?php echo $pencaker['namalengkap']; ?></td>
+                                    <td class="border-bottom"><?php echo strtoupper($pencaker['namalengkap']); ?></td>
                                 </tr>
                                 <tr>
                                     <td>Tempat, Tanggal Lahir</td>
                                     <td>:</td>
                                     <td class="border-bottom">
-                                        <?php echo ucfirst($pencaker['tempatlahir']) . ", " . tanggal_indo($pencaker['tgllahir']); ?>
+                                        <?php echo strtoupper($pencaker['tempatlahir']) . ", " . tanggal_indo($pencaker['tgllahir']); ?>
                                     </td>
 
                                 </tr>
                                 <tr>
                                     <td>Jenis Kelamin</td>
                                     <td>:</td>
-                                    <td class="border-bottom"><?php echo ($pencaker['jenkel'] == "L") ? "Laki-laki" : "Perempuan"; ?></td>
+                                    <td class="border-bottom"><?php echo ($pencaker['jenkel'] == "L") ? "LAKI-LAKI" : "PEREMPUAN"; ?></td>
                                 </tr>
                                 <tr>
                                     <td>Status Perkawinan</td>
                                     <td>:</td>
-                                    <td class="border-bottom"><?php echo $pencaker['statusnikah']; ?></td>
+                                    <td class="border-bottom"><?php echo strtoupper($pencaker['statusnikah']); ?></td>
                                 </tr>
                                 <tr>
                                     <td>Agama</td>
                                     <td>:</td>
-                                    <td class="border-bottom"><?php echo $pencaker['agama']; ?></td>
+                                    <td class="border-bottom"><?php echo strtoupper($pencaker['agama']); ?></td>
                                 </tr>
                                 <tr>
                                     <td>Alamat</td>

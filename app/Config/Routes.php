@@ -49,8 +49,9 @@ $routes->post('admin_v2/saveVerifikasi', 'Admin::saveVerifikasi', ['filter' => '
 
 $routes->post('admin_v2/hapus_pencaker', 'Admin::hapus_pencaker', ['filter' => 'role:administrator']);
 $routes->get('admin_v2/hapus_pencaker', 'Admin::hapus_pencaker', ['filter' => 'role:administrator']);
-$routes->get('admin_v2/detail_pencaker/(:num)', 'Admin::detail_pencaker/$1', ['filter' => 'role:administrator']);
-$routes->get('admin_v2/kartu_ak1/(:num)', 'Admin::kartu_ak1/$1', ['filter' => 'role:administrator']);
+$routes->get('admin_v2/kartu_ak1/(:segment)', 'Admin::kartu_ak1/$1', ['filter' => 'role:administrator']);
+$routes->get('admin_v2/detail_pencaker/(:segment)', 'Admin::detail_pencaker/$1', ['filter' => 'role:administrator']);
+
 
 // Profil Pencaker
 $routes->get('admin_v2/update1', 'Admin::update1', ['filter' => 'role:administrator']);
@@ -116,6 +117,8 @@ $routes->get('admin_v2/get_jenis_galeri', 'Admin::get_jenis_galeri', ['filter' =
 
 $routes->post('admin_v2/updateGaleri', 'Admin::updateGaleri', ['filter' => 'role:administrator']);
 $routes->post('admin_v2/deleteGaleri', 'Admin::deleteGaleri', ['filter' => 'role:administrator']);
+$routes->get('admin_v2/getCategoriesByHalaman/(:any)', 'Admin::getCategoriesByHalaman/$1', ['filter' => 'role:administrator']);
+$routes->get('admin_v2/getAllCategories', 'Admin::getAllCategories', ['filter' => 'role:administrator']);
 
 
 // Users

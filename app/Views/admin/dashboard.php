@@ -140,7 +140,7 @@
                             </h3>
                         </div>
                         <div class="card-body">
-                            <table id="example2" class="table table-bordered table-hover">
+                            <table id="pendaftar" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
                                         <th>No.</th>
@@ -176,7 +176,7 @@
                             </h3>
                         </div>
                         <div class="card-body">
-                            <table id="example2" class="table table-bordered table-hover">
+                            <table id="pencakerVerifikasi" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
                                         <th>No.</th>
@@ -323,4 +323,5 @@
         });
     });
 </script>
+
 <?= $this->endSection() ?>
