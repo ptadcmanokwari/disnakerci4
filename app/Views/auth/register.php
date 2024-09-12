@@ -1,5 +1,6 @@
 <?= $this->extend('frontend/template') ?>
 <?= $this->section('content') ?>
+
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <style>
     #btnRegistrasiPencaker {
@@ -17,15 +18,8 @@
 </style>
 <section id="breadcrumbs" class="breadcrumbs">
     <div class="container">
-
         <div class="d-flex justify-content-between align-items-center">
-            <h2>About</h2>
-            <ol>
-                <li><a href="index.html">Home</a></li>
-                <li>About</li>
-            </ol>
         </div>
-
     </div>
 </section>
 
@@ -43,7 +37,6 @@
 
             <div class="col-lg-7 px-4">
                 <div class="row">
-                    <?= view('Myth\Auth\Views\_message_block') ?>
                     <form action="<?= url_to('register') ?>" method="post">
                         <?= csrf_field() ?>
                         <div class="row">
@@ -107,7 +100,6 @@
                                     <input type="password" name="pass_confirm" class="form-control <?php if (session('errors.pass_confirm')) : ?>is-invalid<?php endif ?>" autocomplete="off">
                                 </div>
                             </div>
-
                             <div class="g-recaptcha" data-sitekey="<?= config('MyGoogleRecaptcha')->siteKey ?>"></div>
                             <div class="form-group mt-4 mb-4">
                                 <button type="submit" class="btn btn-primary">Buat Akun Sekarang</button>

@@ -6,7 +6,6 @@
   <h1 class="bold">Panel Login</h1>
 </div>
 <div class="card-body">
-  <!-- <p class="login-box-msg">Masuk dengan Nama Pengguna dan Kata Sandi!</p> -->
   <?= view('Myth\Auth\Views\_message_block') ?>
   <form action="<?= url_to('login') ?>" method="post">
     <div class="input-group mb-3">

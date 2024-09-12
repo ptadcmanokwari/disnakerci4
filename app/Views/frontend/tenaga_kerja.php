@@ -141,9 +141,12 @@
         <div class="row" data-aos="fade-up">
             <div class="col-lg-12 d-flex justify-content-center">
                 <ul id="portfolio-flters">
-                    <li data-filter="*" class="filter-active">Semua</li>
+                    <?php $firstCategory = true; ?>
                     <?php foreach ($galleries as $category => $images) : ?>
-                        <li data-filter=".filter-<?= esc($category); ?>"><?= esc(ucfirst(str_replace('_', ' ', $category))); ?></li>
+                        <li data-filter=".filter-<?= esc($category); ?>" class="<?= $firstCategory ? 'filter-active' : ''; ?>">
+                            <?= esc(ucfirst(str_replace('_', ' ', $category))); ?>
+                        </li>
+                        <?php $firstCategory = false; ?>
                     <?php endforeach; ?>
                 </ul>
             </div>
@@ -152,7 +155,7 @@
         <div class="row portfolio-container" data-aos="fade-up">
             <?php foreach ($galleries as $category => $images) : ?>
                 <?php foreach ($images as $image) : ?>
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-<?= esc($category); ?>">
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-<?= esc($category); ?>" style="display: <?= $category === key($galleries) ? 'block' : 'none'; ?>">
                         <img src="<?= esc($image['url']); ?>" class="img-fluid portfolio-lightbox preview-link">
                         <div class="portfolio-info">
                             <h4><?= esc($image['name']); ?></h4>
@@ -164,4 +167,31 @@
         </div>
     </div>
 </section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var portfolioContainer = document.querySelector('.portfolio-container');
+        if (portfolioContainer) {
+            var portfolioIsotope = new Isotope(portfolioContainer, {
+                itemSelector: '.portfolio-item',
+                layoutMode: 'fitRows',
+                filter: '.filter-<?= key($galleries); ?>' // Set kategori pertama sebagai filter default
+            });
+
+            var portfolioFilters = document.querySelectorAll('#portfolio-flters li');
+            portfolioFilters.forEach(function(filter) {
+                filter.addEventListener('click', function() {
+                    portfolioFilters.forEach(function(el) {
+                        el.classList.remove('filter-active');
+                    });
+                    this.classList.add('filter-active');
+
+                    portfolioIsotope.arrange({
+                        filter: this.getAttribute('data-filter')
+                    });
+                });
+            });
+        }
+    });
+</script>
 <?= $this->endSection() ?>

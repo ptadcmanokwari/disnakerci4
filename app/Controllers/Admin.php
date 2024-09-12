@@ -148,7 +148,6 @@ class Admin extends BaseController
 
             switch ($pc['keterangan_status']) {
                 case 'Registrasi':
-                    // Semua tombol didisable
                     $vervalDisabled = 'disabled';
                     $kartuDisabled = 'disabled-link';
                     $detailDisabled = 'disabled-link';
@@ -157,14 +156,12 @@ class Admin extends BaseController
                 case 'Verifikasi':
                 case 'Re-Verifikasi':
                 case 'Validasi':
-                    // Enable Detail dan Hapus, Verifikasi enabled, Kartu AK1 disabled
                     $vervalDisabled = '';
                     $kartuDisabled = 'disabled-link';
                     $detailDisabled = '';
                     $deleteDisabled = '';
                     break;
                 case 'Aktif':
-                    // Enable semua kecuali Verifikasi yang didisable
                     $vervalDisabled = 'disabled';
                     $kartuDisabled = '';
                     $detailDisabled = '';
@@ -172,12 +169,11 @@ class Admin extends BaseController
                     break;
             }
 
-            $idHashed = base64_encode($pc['id']); // Encode ID
-            // Tambahkan tombol ke dalam array $data
+            $idHashed = base64_encode($pc['id']);
             $data[] = [
                 "verval" => '<button class="btn btn-secondary btn-sm btn-verval" ' . $vervalDisabled . '
             title="Verifikasi/Validasi Pencaker"
-             data-id="' . $idHashed . '" 
+             data-id="' . $pc['id'] . '" 
              data-namalengkap="' . $pc['namalengkap'] . '" 
              data-nopendaftaran="' . $pc['nopendaftaran'] . '" 
              data-toggle="modal" 
@@ -211,7 +207,7 @@ class Admin extends BaseController
 
     public function detail_pencaker($hashed_id)
     {
-        $id_pencaker = base64_decode($hashed_id); // Decode hashed ID
+        $id_pencaker = base64_decode($hashed_id);
         $pencakerModel = new PencakerModel();
         $pencaker = $pencakerModel->find($id_pencaker);
         $pendidikan = $pencakerModel->getpendidikanpencaker($id_pencaker);
@@ -232,13 +228,12 @@ class Admin extends BaseController
             'dokpasfoto' => $dokpasfoto,
         ];
 
-        // return view('admin/review_pencaker', $data);
         return $this->loadView('admin/review_pencaker', $data);
     }
 
     public function kartu_ak1($hashed_id)
     {
-        $id_pencaker = base64_decode($hashed_id); // Decode hashed ID
+        $id_pencaker = base64_decode($hashed_id);
         $pencakerModel = new PencakerModel();
         $pencaker = $pencakerModel->find($id_pencaker);
         $pendidikan = $pencakerModel->getpendidikanpencaker($id_pencaker);
@@ -1650,7 +1645,6 @@ class Admin extends BaseController
         // Close and output PDF document
         $pdf->Output('DATA PENCARI KERJA KABUPATEN MANOKWARI.pdf', 'I');
 
-        // Terminate the script after PDF output to prevent further execution
         exit();
     }
 

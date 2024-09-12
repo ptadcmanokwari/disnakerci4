@@ -101,7 +101,6 @@ $routes->get('admin_v2/get_jenis_pelatihan', 'Admin::get_jenis_pelatihan', ['fil
 $routes->get('admin_v2/activitylogs', 'Admin::activitylogs', ['filter' => 'role:administrator']);
 $routes->get('admin_v2/activitylogsajax', 'Admin::activitylogsajax', ['filter' => 'role:administrator']);
 $routes->post('admin_v2/activitylogsajax', 'Admin::activitylogsajax', ['filter' => 'role:administrator']);
-// $routes->get('admin_v2/getUsers', 'Admin::getUsers', ['filter' => 'role:administrator']);
 $routes->get('admin_v2/getUsersFromLogs', 'Admin::getUsersFromLogs', ['filter' => 'role:administrator']);
 
 // Gallery
@@ -109,14 +108,8 @@ $routes->get('admin_v2/galeri', 'Admin::galeri', ['filter' => 'role:administrato
 $routes->get('admin_v2/galeriajax', 'Admin::galeriajax', ['filter' => 'role:administrator']);
 $routes->post('admin_v2/galeriajax', 'Admin::galeriajax', ['filter' => 'role:administrator']);
 $routes->post('admin_v2/save_galeri', 'Admin::save_galeri', ['filter' => 'role:administrator']);
-$routes->post('admin_v2/update_galeri', 'Admin::update_galeri', ['filter' => 'role:administrator']);
 $routes->post('admin_v2/update_status_galeri', 'Admin::update_status_galeri', ['filter' => 'role:administrator']);
 $routes->post('admin_v2/hapus_galeri', 'Admin::hapus_galeri', ['filter' => 'role:administrator']);
-$routes->get('admin_v2/get_jenis_galeri', 'Admin::get_jenis_galeri', ['filter' => 'role:administrator']);
-
-
-$routes->post('admin_v2/updateGaleri', 'Admin::updateGaleri', ['filter' => 'role:administrator']);
-$routes->post('admin_v2/deleteGaleri', 'Admin::deleteGaleri', ['filter' => 'role:administrator']);
 $routes->get('admin_v2/getCategoriesByHalaman/(:any)', 'Admin::getCategoriesByHalaman/$1', ['filter' => 'role:administrator']);
 $routes->get('admin_v2/getAllCategories', 'Admin::getAllCategories', ['filter' => 'role:administrator']);
 
